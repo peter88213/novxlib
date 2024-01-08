@@ -1,0 +1,6 @@
+/src/locale/
+/test/work/
+/test/tmp/
+/build/
+*.pyc
+*.bak
