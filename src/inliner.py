@@ -84,7 +84,7 @@ def run(sourceFile, targetFile, package, packagePath, copynovxlib=False):
     text = ''
     processedModules = []
     text = inline_module(sourceFile, package, packagePath, text, processedModules, copynovxlib)
-    with open(targetFile, 'w', encoding='utf-8') as f:
+    with open(targetFile, 'w', encoding='utf-8', newline='\n') as f:
         print(f'Writing "{targetFile}"...\n')
         f.write(text)
 
