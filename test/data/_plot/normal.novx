@@ -8,7 +8,7 @@
   <CHAPTERS>
     <CHAPTER id="ch6" type="0" level="2">
       <Title>Chapter 1</Title>
-      <SECTION id="sc1" stageLevel="1" type="3">
+      <SECTION id="sc1" type="3">
         <Title>ACT 1</Title>
       </SECTION>
       <SECTION id="sc15" type="0">
@@ -29,7 +29,7 @@
     </CHAPTER>
     <CHAPTER id="ch7" type="0" level="2">
       <Title>Chapter 3</Title>
-      <SECTION id="sc2" stageLevel="1" type="3">
+      <SECTION id="sc2" type="3">
         <Title>ACT 2</Title>
       </SECTION>
       <SECTION id="sc19" type="0">
@@ -68,7 +68,7 @@
     </CHAPTER>
     <CHAPTER id="ch12" type="0" level="2">
       <Title>Chapter 7</Title>
-      <SECTION id="sc3" stageLevel="1" type="3">
+      <SECTION id="sc3" type="3">
         <Title>ACT 3</Title>
       </SECTION>
       <SECTION id="sc27" type="0">
