@@ -22,12 +22,6 @@ See https://github.com/peter88213/novxlib/blob/main/docs/conventions.md
 - [Eclipse IDE](https://eclipse.org) with [PyDev](https://pydev.org) and *EGit*.
 - Apache Ant is used for building applications
 
-### Documentation tools
-
-- [Eclipse Papyrus](https://www.eclipse.org/papyrus/) Modeling environment for creating Use Case and Class diagrams
-- [PlantUML](https://plantuml.com) for creating Sequence diagrams
-
-
 ## License
 
 This is Open Source software, and *novxlib* is licensed under LGPLv3. See the
