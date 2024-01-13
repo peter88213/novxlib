@@ -91,6 +91,12 @@ CHAPTER > Desc {
 SECTION > Desc {
     background: lavender;
 }
+SECTION[type="2"] > Desc {
+    background: white;
+}
+SECTION[type="3"] > Desc {
+    background: white;
+}
 Notes {
     display: block;
     margin-right: 16em;
