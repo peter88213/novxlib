@@ -86,7 +86,7 @@ There are two options:
 - **$WordCount** - Section word count
 - **$WordsTotal** - Accumulated word count including the current section
 
-- **$Status** - Section editing status (Outline, Draft etc.)
+- **$Status** - Section completion status (Outline, Draft etc.)
 - **$SectionContent** - Section content
 
 - **$Date** - Specific section date (yyyy-mm-dd)
