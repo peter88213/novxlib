@@ -58,15 +58,8 @@ class HtmlPlotList(HtmlReport):
             htmlText.append(create_cell(self.novel.arcs[acId].title, attr=f'style="background: {arcColors[colorIndex]}"'))
         htmlText.append('</tr>')
 
-        # Arc/section rows.
+        # Section rows.
         for chId in self.novel.tree.get_children(CH_ROOT):
-            if self.novel.chapters[chId].chType == 2:
-                # Arc row
-                htmlText.append(f'<tr>')
-                htmlText.append(create_cell(self.novel.chapters[chId].title, attr=f'style="{STYLE_CH_TITLE}"'))
-                for arc in arcs:
-                    htmlText.append(create_cell(''))
-                htmlText.append(f'</tr>')
             for scId in self.novel.tree.get_children(chId):
                 # Section row
                 if self.novel.sections[scId].scType == 0:
@@ -76,7 +69,7 @@ class HtmlPlotList(HtmlReport):
                         colorIndex = i % len(arcColors)
                         if scId in self.novel.arcs[acId].sections:
                             points = []
-                            for ptId in self.novel.turningPoints:
+                            for ptId in self.novel.tree.get_children(acId):
                                 if scId == self.novel.turningPoints[ptId].sectionAssoc:
                                     points.append(self.novel.turningPoints[ptId].title)
                             htmlText.append(create_cell(list_to_string(points), attr=f'style="background: {arcColors[colorIndex]}"'))

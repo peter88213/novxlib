@@ -90,15 +90,8 @@ class OdsWPlotList(OdsWriter):
             odsText.append(create_cell(self.novel.arcs[acId].title, attr=f'table:style-name="ce{j}"', link=f'_plot.odt#{acId}'))
         odsText.append('    </table:table-row>')
 
-        # Arc/section rows.
+        # Section rows.
         for chId in self.novel.tree.get_children(CH_ROOT):
-            if self.novel.chapters[chId].chType == 2:
-                # Arc row
-                odsText.append('   <table:table-row table:style-name="ro2">')
-                odsText.append(create_cell(self.novel.chapters[chId].title, attr='table:style-name="ce0"', link=f'_plot.odt#{chId}'))
-                for acId in arcs:
-                    odsText.append(create_cell(''))
-                odsText.append(f'    </table:table-row>')
             for scId in self.novel.tree.get_children(chId):
                 # Section row
                 if self.novel.sections[scId].scType == 0:
@@ -108,7 +101,7 @@ class OdsWPlotList(OdsWriter):
                         colorIndex = (i % arcColorsTotal) + 1
                         if scId in self.novel.arcs[acId].sections:
                             points = []
-                            for ptId in self.novel.turningPoints:
+                            for ptId in self.novel.tree.get_children(acId):
                                 if scId == self.novel.turningPoints[ptId].sectionAssoc:
                                     points.append(self.novel.turningPoints[ptId].title)
                             odsText.append(create_cell(list_to_string(points), attr=f'table:style-name="ce{colorIndex}" '))
