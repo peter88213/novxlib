@@ -1,4 +1,4 @@
-"""Provide a factory class for a novelibre object to write.
+"""Provide a factory class for a novx file object to write.
 
 Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
@@ -12,7 +12,7 @@ from novxlib.novx_globals import _
 
 
 class ImportTargetFactory(FileFactory):
-    """A factory class that instantiates a novelibre object to write."""
+    """A factory class that instantiates a novx file object to write."""
 
     def make_file_objects(self, sourcePath, **kwargs):
         """Instantiate a target object for conversion to a novelibre project.
