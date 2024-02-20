@@ -22,7 +22,7 @@ class ConverterFf(Converter):
     Class constants:
         EXPORT_SOURCE_CLASSES -- list of NovxFile subclasses from which can be exported.
         EXPORT_TARGET_CLASSES -- list of FileExport subclasses to which export is possible.
-        IMPORT_SOURCE_CLASSES -- list of Novel subclasses from which can be imported.
+        IMPORT_SOURCE_CLASSES -- list of File subclasses from which can be imported.
         IMPORT_TARGET_CLASSES -- list of NovxFile subclasses to which import is possible.
 
     All lists are empty and meant to be overridden by subclasses.

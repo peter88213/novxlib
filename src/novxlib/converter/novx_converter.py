@@ -41,7 +41,7 @@ from novxlib.ods.ods_r_itemlist import OdsRItemList
 class NovxConverter(ConverterFf):
     """A converter for universal import and export.
 
-    Support novelibre projects and most of the Novel subclasses 
+    Support novelibre projects and most of the File subclasses 
     that can be read or written by OpenOffice/LibreOffice.
 
     Overrides the superclass constants EXPORT_SOURCE_CLASSES,

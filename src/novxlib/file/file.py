@@ -14,7 +14,7 @@ from novxlib.novx_globals import _
 
 
 class File(ABC):
-    """Abstract novelibre project file representation.
+    """Abstract novel file representation.
 
     This class represents a file containing a novel with additional 
     attributes and structural information (a full set or a subset
