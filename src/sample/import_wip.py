@@ -1,6 +1,6 @@
 """Import a work in progress. 
 
-Convert html with chapter headings and section dividers to noveltree format.
+Convert html with chapter headings and section dividers to novelibre format.
 
 This is a novxlib sample application.
 
@@ -15,7 +15,7 @@ SUFFIX = ''
 
 
 def run(sourcePath, suffix=''):
-    ui = UiTk('noveltree import/export')
+    ui = UiTk('novelibre import/export')
     converter = NovxConverter()
     converter.ui = ui
     kwargs = {'suffix': suffix}

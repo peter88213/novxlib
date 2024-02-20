@@ -1,4 +1,4 @@
-"""Provide an abstract test case class for noveltree import and export.
+"""Provide an abstract test case class for novelibre import and export.
 
 Import/export standard test routines used for Regression test.
 
@@ -31,7 +31,7 @@ class ImportExportTest(ExportTest):
         self.assertNotEqual(read_file(self._refNovxFile), read_file(self._prfNovxFile))
 
     def test_imp_to_novx(self):
-        """Test ODF import to noveltree, using the YwCnvUi converter class. 
+        """Test ODF import to novelibre, using the YwCnvUi converter class. 
         
         - Overwrite the initial yWriter project file.
         - Compare the generated yWriter project file with the reference file.

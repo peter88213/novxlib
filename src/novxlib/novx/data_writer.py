@@ -1,4 +1,4 @@
-"""Provide a class for noveltree XML data files.
+"""Provide a class for novelibre XML data files.
 
 Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
@@ -15,13 +15,13 @@ import xml.etree.ElementTree as ET
 
 
 class DataWriter(NovxFile):
-    """noveltree XML data files representation.
+    """novelibre XML data files representation.
        
-    noveltree can import or export characters, locations and items as separate
+    novelibre can import or export characters, locations and items as separate
     xml files. This class represents a set of three xml files generated from
-    a noveltree project.
+    a novelibre project.
     """
-    DESCRIPTION = _('noveltree XML data files')
+    DESCRIPTION = _('novelibre XML data files')
     EXTENSION = '.xml'
     SUFFIX = DATA_SUFFIX
 
@@ -52,7 +52,7 @@ class DataWriter(NovxFile):
         Positional argument:
             xmlProject -- NovxFile instance.
             
-        Extract the characters/locations/items xml subtrees from a noveltree project.
+        Extract the characters/locations/items xml subtrees from a novelibre project.
         Generate the xml file paths from the .novx path and write each subtree to an xml file.
         Raise the "Error" exception in case of error. 
         """

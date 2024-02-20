@@ -1,4 +1,4 @@
-"""Provide a factory class for a document object to read and a new noveltree project.
+"""Provide a factory class for a document object to read and a new novelibre project.
 
 Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
@@ -20,7 +20,7 @@ from novxlib.odt.odt_r_outline import OdtROutline
 
 class NewProjectFactory(FileFactory):
     """A factory class that instantiates a document object to read, 
-    and a new noveltree project.
+    and a new novelibre project.
 
     Class constant:
         DO_NOT_IMPORT -- list of suffixes from file classes not meant to be imported.    
@@ -28,7 +28,7 @@ class NewProjectFactory(FileFactory):
     DO_NOT_IMPORT = [XREF_SUFFIX, BRF_SYNOPSIS_SUFFIX]
 
     def make_file_objects(self, sourcePath, **kwargs):
-        """Instantiate a source and a target object for creation of a new noveltree project.
+        """Instantiate a source and a target object for creation of a new novelibre project.
 
         Positional arguments:
             sourcePath: str -- path to the source file to convert.
@@ -68,7 +68,7 @@ class NewProjectFactory(FileFactory):
             raise Error(f'{_("File type is not supported")}: "{norm_path(sourcePath)}".')
 
     def _canImport(self, sourcePath):
-        """Check whether the source file can be imported to noveltree.
+        """Check whether the source file can be imported to novelibre.
         
         Positional arguments: 
             sourcePath: str -- path of the file to be ckecked.

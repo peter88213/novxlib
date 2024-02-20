@@ -1,6 +1,6 @@
 """Import an outline. 
 
-Convert html with chapter and section headings/descriptions to noveltree format.
+Convert html with chapter and section headings/descriptions to novelibre format.
 
 This is a novxlib sample application.
 
@@ -16,7 +16,7 @@ SUFFIX = ''
 
 
 def run(sourcePath, suffix=''):
-    ui = UiTk('noveltree import/export')
+    ui = UiTk('novelibre import/export')
     converter = ConverterFf()
     converter.newProjectFactory = NewProjectFactory([])
     converter.ui = ui

@@ -1,4 +1,4 @@
-"""Provide an abstract test case class for noveltree import.
+"""Provide an abstract test case class for novelibre import.
 
 Import standard test routines used for Regression test.
 
@@ -46,7 +46,7 @@ class ImportTest:
         self._remove_all_tempfiles()
 
     def test_imp_to_novx(self):
-        """Test ODF import to noveltree, using the YwCnvUi converter class. 
+        """Test ODF import to novelibre, using the YwCnvUi converter class. 
         
         Compare the generated yWriter project file with the reference file.
         """

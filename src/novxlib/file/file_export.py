@@ -31,7 +31,7 @@ from novxlib.novx_globals import norm_path
 
 
 class FileExport(File):
-    """Abstract noveltree project file exporter representation.
+    """Abstract novelibre project file exporter representation.
     
     This class is generic and contains no conversion algorithm and no templates.
     """
@@ -119,7 +119,7 @@ class FileExport(File):
         return projectTemplateMapping
 
     def _convert_from_novx(self, text, quick=False, append=False, xml=False):
-        """Return text, converted from noveltree markup to target format.
+        """Return text, converted from novelibre markup to target format.
         
         Positional arguments:
             text -- string to convert.
@@ -419,7 +419,7 @@ class FileExport(File):
 
         #--- Create a comma separated character list.
         try:
-            # Note: Due to a bug, noveltree sections might hold invalid
+            # Note: Due to a bug, novelibre sections might hold invalid
             # viepoint characters
             sChList = []
             for crId in self.novel.sections[scId].characters:

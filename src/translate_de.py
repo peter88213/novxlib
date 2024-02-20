@@ -1,7 +1,7 @@
 """Generate German translation files for GNU gettext.
 
 - Update the project's 'de.po' translation file.
-- Generate the language specific 'noveltree.mo' dictionary.
+- Generate the language specific 'novelibre.mo' dictionary.
 
 Usage: 
 translate_de.py
@@ -24,7 +24,7 @@ File structure:
         └── locale/
             └─ de/
                └─ LC_MESSAGES/
-                  └─ noveltree.mo
+                  └─ novelibre.mo
     
 Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
@@ -36,8 +36,8 @@ import msgfmt
 
 APP_NAME = 'novxlib'
 PO_PATH = '../i18n/de.po'
-MO_PATH = '../i18n/locale/de/LC_MESSAGES/noveltree.mo'
-MO_COPY = '../src/sample/locale/de/LC_MESSAGES/noveltree.mo'
+MO_PATH = '../i18n/locale/de/LC_MESSAGES/novelibre.mo'
+MO_COPY = '../src/sample/locale/de/LC_MESSAGES/novelibre.mo'
 
 if translations.main('de', app=APP_NAME):
     print(f'Writing "{MO_PATH}" ...')

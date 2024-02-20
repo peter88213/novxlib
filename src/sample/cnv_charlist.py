@@ -1,8 +1,8 @@
-"""Import and export noveltree character list. 
+"""Import and export novelibre character list. 
 
 File format: csv (intended for spreadsheet conversion).
-Convert noveltree character list to ods.
-Convert csv to noveltree format.
+Convert novelibre character list to ods.
+Convert csv to novelibre format.
 
 This is a novxlib sample application.
 
@@ -20,7 +20,7 @@ SUFFIX = CHARLIST_SUFFIX
 
 
 def run(sourcePath, suffix=''):
-    ui = UiTk('noveltree import/export')
+    ui = UiTk('novelibre import/export')
     converter = NovxConverter()
     converter.ui = ui
     kwargs = {'suffix': suffix}

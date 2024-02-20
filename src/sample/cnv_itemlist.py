@@ -1,4 +1,4 @@
-"""Import and export noveltree item list. 
+"""Import and export novelibre item list. 
 
 File format: csv (intended for spreadsheet conversion).
 
@@ -16,7 +16,7 @@ SUFFIX = ITEMLIST_SUFFIX
 
 
 def run(sourcePath, suffix=''):
-    ui = UiTk('noveltree import/export')
+    ui = UiTk('novelibre import/export')
     converter = NovxConverter()
     converter.ui = ui
     kwargs = {'suffix': suffix}

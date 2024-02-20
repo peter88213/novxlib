@@ -1,4 +1,4 @@
-"""Provide a class for noveltree cross reference generation.
+"""Provide a class for novelibre cross reference generation.
 
 Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib

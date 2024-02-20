@@ -1,4 +1,4 @@
-"""Provide a class for noveltree section representation.
+"""Provide a class for novelibre section representation.
 
 Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
@@ -19,7 +19,7 @@ NO_WORD_LIMITS = re.compile('\<note\>.*?\<\/note\>|\<comment\>.*?\<\/comment\>|\
 
 
 class Section(BasicElement):
-    """noveltree section representation."""
+    """novelibre section representation."""
     PACING = ['A', 'R', 'C']
     # emulate an enumeration for the section Action/Reaction/Custom type
 

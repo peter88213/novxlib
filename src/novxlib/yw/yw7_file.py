@@ -947,7 +947,7 @@ class Yw7File(File):
             prjChapter.noNumber = kwVarYw7.get('Field_NoNumber', False)
             shortName = kwVarYw7.get('Field_ArcDefinition', '')
 
-            # This is for projects written with noveltree v4.3:
+            # This is for projects written with novelibre v4.3:
             field = kwVarYw7.get('Field_Arc_Definition', None)
             if field is not None:
                 shortName = field
@@ -969,7 +969,7 @@ class Yw7File(File):
                 for scId in scenes:
                     self.novel.tree.append(acId, f'{ARC_POINT_PREFIX}{scId}')
                     self._ywApIds.append(scId)
-                    # this is necessary for turning yWriter scenes into noveltree turning points
+                    # this is necessary for turning yWriter scenes into novelibre turning points
             else:
                 chId = f"{CHAPTER_PREFIX}{xmlChapter.find('ID').text}"
                 self.novel.chapters[chId] = prjChapter

@@ -1,4 +1,4 @@
-"""Convert noveltree chapters and sections to odt format.
+"""Convert novelibre chapters and sections to odt format.
 
 This is a novxlib sample application.
 
@@ -13,7 +13,7 @@ SUFFIX = ''
 
 
 def run(sourcePath, suffix=''):
-    ui = UiTk('noveltree import/export')
+    ui = UiTk('novelibre import/export')
     converter = NovxConverter()
     converter.ui = ui
     kwargs = {'suffix': suffix}

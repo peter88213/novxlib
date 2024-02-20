@@ -3,7 +3,7 @@
 If you want to validate a *.novx* file, you can copy *novx_1_0.dtd*
 into your project directory.
 
-**Note:** Since the *noveltree* application does not validate its project files, 
+**Note:** Since the *novelibre* application does not validate its project files, 
 this DTD is not needed for your daily work. However, it can be useful developing
 of third-party applications and tools that read or write *.novx* files.
 

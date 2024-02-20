@@ -1,6 +1,6 @@
 # novxlib: Read, write, and process novx files with Python
 
-The *novxlib* library provides Python classes to read and write [noveltree](https://github.com/peter88213/noveltree) projects and convert the project data to and from several file formats such as odt, ods, and yw7.
+The *novxlib* library provides Python classes to read and write [novelibre](https://github.com/peter88213/novelibre) projects and convert the project data to and from several file formats such as odt, ods, and yw7.
 
 This repository contains a DTD, a css stylesheet, and several XSL stylesheets for the *.novx* file format.
 

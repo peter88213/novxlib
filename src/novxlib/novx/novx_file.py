@@ -36,14 +36,14 @@ class NovxFile(File):
     """novx file representation.
 
     Public instance variables:
-        tree -- xml element tree of the noveltree project
+        tree -- xml element tree of the novelibre project
         wcLog: dict[str, list[str, str]] -- Daily word count logs.
         wcLogUpdate: dict[str, list[str, str]] -- Word counts missing in the log.
     
     Public properties:
         fileDate: str -- ISO-formatted file date/time (YYYY-MM-DD hh:mm:ss).
     """
-    DESCRIPTION = _('noveltree project')
+    DESCRIPTION = _('novelibre project')
     EXTENSION = '.novx'
 
     MAJOR_VERSION = 1
@@ -104,7 +104,7 @@ class NovxFile(File):
         return count, totalCount
 
     def read(self):
-        """Parse the noveltree xml file and get the instance variables.
+        """Parse the novelibre xml file and get the instance variables.
         
         Raise the "Error" exception in case of error. 
         Overrides the superclass method.
@@ -119,13 +119,13 @@ class NovxFile(File):
             raise Error(f'{_("No valid version found in file")}: "{norm_path(self.filePath)}".')
 
         if majorVersion > self.MAJOR_VERSION:
-            raise Error(_('The project "{}" was created with a newer noveltree version.').format(norm_path(self.filePath)))
+            raise Error(_('The project "{}" was created with a newer novelibre version.').format(norm_path(self.filePath)))
 
         elif majorVersion < self.MAJOR_VERSION:
-            raise Error(_('The project "{}" was created with an outdated noveltree version.').format(norm_path(self.filePath)))
+            raise Error(_('The project "{}" was created with an outdated novelibre version.').format(norm_path(self.filePath)))
 
         elif minorVersion > self.MINOR_VERSION:
-            raise Error(_('The project "{}" was created with a newer noveltree version.').format(norm_path(self.filePath)))
+            raise Error(_('The project "{}" was created with a newer novelibre version.').format(norm_path(self.filePath)))
 
         try:
             locale = xmlRoot.attrib['{http://www.w3.org/XML/1998/namespace}lang']
@@ -484,7 +484,7 @@ class NovxFile(File):
         Raise the "Error" exception in case of error. 
         
         Note: The path is given as an argument rather than using self.filePath. 
-        So this routine can be used for noveltree-generated xml files other than .novx as well. 
+        So this routine can be used for novelibre-generated xml files other than .novx as well. 
         """
         with open(filePath, 'r', encoding='utf-8') as f:
             text = f.read()

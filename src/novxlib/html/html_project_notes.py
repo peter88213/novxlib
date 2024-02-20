@@ -1,7 +1,7 @@
 """Provide a class for HTML project notes report file representation.
 
 Copyright (c) 2024 Peter Triesberger
-For further information see https://github.com/peter88213/noveltree
+For further information see https://github.com/peter88213/novelibre
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
 from novxlib.html.html_report import HtmlReport

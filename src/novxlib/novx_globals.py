@@ -61,7 +61,7 @@ except:
     # Fallback for old Windows versions.
     CURRENT_LANGUAGE = locale.getdefaultlocale()[0][:2]
 try:
-    t = gettext.translation('noveltree', LOCALE_PATH, languages=[CURRENT_LANGUAGE])
+    t = gettext.translation('novelibre', LOCALE_PATH, languages=[CURRENT_LANGUAGE])
     _ = t.gettext
 except:
 

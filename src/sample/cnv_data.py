@@ -17,7 +17,7 @@ SUFFIX = DATA_SUFFIX
 
 
 def run(sourcePath, suffix=''):
-    ui = UiTk('noveltree import/export')
+    ui = UiTk('novelibre import/export')
     converter = NovxExporter()
     converter.ui = ui
     converter.EXPORT_TARGET_CLASSES.append(DataWriter)

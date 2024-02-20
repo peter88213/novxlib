@@ -34,7 +34,7 @@ class Converter:
         # Also indicates successful conversion.
 
     def export_from_novx(self, source, target):
-        """Convert from noveltree project to other file format.
+        """Convert from novelibre project to other file format.
 
         Positional arguments:
             source -- NovxFile subclass instance.
@@ -86,7 +86,7 @@ class Converter:
         - If the conversion fails, newFile is set to None.
         """
         self.ui.set_info(
-            _('Create a noveltree project file from {0}\nNew project: "{1}"').format(source.DESCRIPTION, norm_path(target.filePath)))
+            _('Create a novelibre project file from {0}\nNew project: "{1}"').format(source.DESCRIPTION, norm_path(target.filePath)))
         if os.path.isfile(target.filePath):
             self.ui.set_status(f'!{_("File already exists")}: "{norm_path(target.filePath)}".')
         else:
@@ -107,7 +107,7 @@ class Converter:
                 self.ui.set_status(message)
 
     def import_to_novx(self, source, target):
-        """Convert from any file format to noveltree project.
+        """Convert from any file format to novelibre project.
 
         Positional arguments:
             source -- Any Novel subclass instance.

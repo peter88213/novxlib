@@ -1,17 +1,17 @@
 # Document types
 
-The document types are recognized by a suffix added to the noveltree project name.
+The document types are recognized by a suffix added to the novelibre project name.
 
 _Example_ 
 
-- noveltree project file name = `normal.novx`
+- novelibre project file name = `normal.novx`
 - Exported manuscript file name = `normal_manuscript_tmp.odt`
 
 ## General
 
 -   [Document language](#document-language)
 
-## Export from noveltree
+## Export from novelibre
 
 ### Generate ODT (text document)
 
@@ -35,7 +35,7 @@ _Example_
 -   [Export item list](#export-item-list) -- suffix = `_itemlist_tmp`
 -   [Export section list](#export-section-list) -- suffix = `_sectionlist_tmp`
 
-## Import to an existing noveltree project
+## Import to an existing novelibre project
 
 ### Source: ODT file (text document)
 
@@ -56,7 +56,7 @@ _Example_
 -   [Import section list](#import-section-list) -- suffix = `_sectionlist_tmp`
 -   [Import plot list](#import-plot-list) -- suffix = `_plotlist`
 
-## Create a new noveltree project
+## Create a new novelibre project
 
 ### Source: ODT file (text document)
 
@@ -74,11 +74,11 @@ ODF documents are generally assigned a language that determines spell checking a
 
 #### Document overall
 
-- If a document language (Language code acc. to ISO 639-1 and country code acc. to ISO 3166-2) is detected in the source document during conversion to *noveltree* format, these codes are set as noveltree project variables. 
+- If a document language (Language code acc. to ISO 639-1 and country code acc. to ISO 3166-2) is detected in the source document during conversion to *novelibre* format, these codes are set as novelibre project variables. 
 
-- If language code and country code exist as project variables during conversion from *noveltree* format, they are inserted into the generated ODF document. 
+- If language code and country code exist as project variables during conversion from *novelibre* format, they are inserted into the generated ODF document. 
 
-- If no language and country code exist as project variables when converting from *noveltree* format, language and country code from the operating system settings are entered into the generated ODF document. 
+- If no language and country code exist as project variables when converting from *novelibre* format, language and country code from the operating system settings are entered into the generated ODF document. 
 
 - The language and country codes are checked superficially. If they obviously do not comply with the ISO standards, they are replaced by the values for "No language". These are:
     - Language = zxx
@@ -90,7 +90,7 @@ ODF documents are generally assigned a language that determines spell checking a
 
 ## Export chapters and sections
 
-Write noveltree chapters and sections into a new OpenDocument
+Write novelibre chapters and sections into a new OpenDocument
 text document (odt).
 
 -   The document is placed in the same folder as the project.
@@ -113,7 +113,7 @@ text document (odt).
 
 ## Export chapters and sections for proof reading
 
-Write noveltree chapters and sections into a new OpenDocument
+Write novelibre chapters and sections into a new OpenDocument
 text document (odt) with section markers. File name suffix is
 `_proof_tmp`.
 
@@ -121,7 +121,7 @@ text document (odt) with section markers. File name suffix is
     Sections of the "Unused" type are not exported.
 -   The document contains section `[sc...]` markers. **Do not touch lines
     containing the markers** if you want to be able to write the
-    document back to *noveltree* format.
+    document back to *novelibre* format.
 -   The document contains part, chapter, and section headings. However, changes will not be written back.
 -   Chapters and sections can neither be rearranged nor deleted. 
 -   When editing the document, you can split sections by inserting headings or a section divider:
@@ -139,7 +139,7 @@ text document (odt) with section markers. File name suffix is
 
 ## Export manuscript with invisible section marks
 
-Write noveltree chapters and sections into a new OpenDocument
+Write novelibre chapters and sections into a new OpenDocument
 text document (odt) with sections (to be seen in the Navigator). 
 File name suffix is `_manuscript_tmp`.
 
@@ -164,7 +164,7 @@ File name suffix is `_manuscript_tmp`.
 
 Generate a new OpenDocument text document (odt) containing chapter
 titles and section descriptions that can be edited and written back to
-noveltree format. File name suffix is
+novelibre format. File name suffix is
 `_sections_tmp`.
 
 [Top of page](#top)
@@ -175,7 +175,7 @@ noveltree format. File name suffix is
 
 Generate a new OpenDocument text document (odt) containing chapter
 titles and chapter descriptions that can be edited and written back to
-noveltree format. File name suffix is
+novelibre format. File name suffix is
 `_chapters_tmp`.
 
 [Top of page](#top)
@@ -185,7 +185,7 @@ noveltree format. File name suffix is
 ## Export part descriptions
 
 Generate a new OpenDocument text document (odt) containing part titles
-and part descriptions that can be edited and written back to noveltree
+and part descriptions that can be edited and written back to novelibre
 format. File name suffix is
 `_parts_tmp`.
 
@@ -198,7 +198,7 @@ format. File name suffix is
 
 Generate a new OpenDocument text document (odt) containing
 character descriptions, bio, goals, and notes that can be edited in Office
-Writer and written back to noveltree format. File name suffix is
+Writer and written back to novelibre format. File name suffix is
 `_characters_tmp`.
 
 [Top of page](#top)
@@ -209,7 +209,7 @@ Writer and written back to noveltree format. File name suffix is
 
 Generate a new OpenDocument text document (odt) containing
 location descriptions that can be edited in Office Writer and written
-back to noveltree format. File name suffix is `_locations_tmp`.
+back to novelibre format. File name suffix is `_locations_tmp`.
 
 [Top of page](#top)
 
@@ -219,7 +219,7 @@ back to noveltree format. File name suffix is `_locations_tmp`.
 
 Generate a new OpenDocument text document (odt) containing
 item descriptions that can be edited in Office Writer and written back
-to noveltree format. File name suffix is `_items_tmp`.
+to novelibre format. File name suffix is `_items_tmp`.
 
 [Top of page](#top)
 
@@ -262,7 +262,7 @@ suffix is `_brf_synopsis`.
 
 Generate a new OpenDocument spreadsheet (ods) containing a
 character list that can be edited in Office Calc and written back to
-noveltree format. File name suffix is `_charlist_tmp`.
+novelibre format. File name suffix is `_charlist_tmp`.
 
 You may change the sort order of the rows. You may also add or remove
 rows. New entities must get a unique ID.
@@ -275,7 +275,7 @@ rows. New entities must get a unique ID.
 
 Generate a new OpenDocument spreadsheet (ods) containing a
 location list that can be edited in Office Calc and written back to
-noveltree format. File name suffix is `_loclist_tmp`.
+novelibre format. File name suffix is `_loclist_tmp`.
 
 You may change the sort order of the rows. You may also add or remove
 rows. New entities must get a unique ID.
@@ -287,7 +287,7 @@ rows. New entities must get a unique ID.
 ## Export item list
 
 Generate a new OpenDocument spreadsheet (ods) containing an
-item list that can be edited in Office Calc and written back to noveltree
+item list that can be edited in Office Calc and written back to novelibre
 format. File name suffix is `_itemlist_tmp`.
 
 You may change the sort order of the rows. You may also add or remove
@@ -329,7 +329,7 @@ File name suffix is `_sectionlist_tmp`.
 
 ## Import section list
 
-The following columns can be written back to the noveltree project:
+The following columns can be written back to the novelibre project:
 
 - Title
 - Description

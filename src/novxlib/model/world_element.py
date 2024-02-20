@@ -1,4 +1,4 @@
-"""Provide a generic class for noveltree story world element representation.
+"""Provide a generic class for novelibre story world element representation.
 
 Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib

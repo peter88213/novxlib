@@ -12,7 +12,7 @@ from novxlib.odt.odt_r_chapterdesc import OdtRChapterDesc
 class OdtRPartDesc(OdtRChapterDesc):
     """ODT part summaries file reader.
 
-    Parts are chapters marked in noveltree as beginning of a new section.
+    Parts are chapters marked in novelibre as beginning of a new section.
     Import a synopsis with invisibly tagged part descriptions.
     """
     DESCRIPTION = _('Part descriptions')

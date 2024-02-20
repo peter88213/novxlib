@@ -1,7 +1,7 @@
-"""Import and export noveltree character descriptions for editing. 
+"""Import and export novelibre character descriptions for editing. 
 
-Convert noveltree character descriptions to odt with invisible character tags.
-Convert html with invisible character tags to noveltree format.
+Convert novelibre character descriptions to odt with invisible character tags.
+Convert html with invisible character tags to novelibre format.
 
 This is a novxlib sample application.
 
@@ -19,7 +19,7 @@ SUFFIX = CHARACTERS_SUFFIX
 
 
 def run(sourcePath, suffix=''):
-    ui = UiTk('noveltree import/export')
+    ui = UiTk('novelibre import/export')
     converter = NovxConverter()
     converter.ui = ui
     kwargs = {'suffix': suffix}

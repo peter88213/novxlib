@@ -1,4 +1,4 @@
-"""Modules for reading and writing noveltree project files.
+"""Modules for reading and writing novelibre project files.
 
 Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib

@@ -1,4 +1,4 @@
-"""Provide a class for noveltree character representation.
+"""Provide a class for novelibre character representation.
 
 Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
@@ -8,7 +8,7 @@ from novxlib.model.world_element import WorldElement
 
 
 class Character(WorldElement):
-    """noveltree character representation."""
+    """novelibre character representation."""
     MAJOR_MARKER = 'Major'
     MINOR_MARKER = 'Minor'
 

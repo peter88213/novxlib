@@ -1,4 +1,4 @@
-"""Provide a converter class for universal export from a noveltree project. 
+"""Provide a converter class for universal export from a novelibre project. 
 
 Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
@@ -26,7 +26,7 @@ from novxlib.ods.ods_w_plot_list import OdsWPlotList
 
 
 class NovxExporter(ConverterFf):
-    """A converter for universal export from a noveltree project.
+    """A converter for universal export from a novelibre project.
 
     Instantiate a NovxFile object as sourceFile and a
     Novel subclass object as targetFile for file conversion.

@@ -1,7 +1,7 @@
-"""Import and export noveltree location descriptions for editing. 
+"""Import and export novelibre location descriptions for editing. 
 
-Convert noveltree location descriptions to odt with invisible location tags.
-Convert html with invisible location tags to noveltree format.
+Convert novelibre location descriptions to odt with invisible location tags.
+Convert html with invisible location tags to novelibre format.
 
 This is a novxlib sample application.
 
@@ -19,7 +19,7 @@ SUFFIX = LOCATIONS_SUFFIX
 
 
 def run(sourcePath, suffix=''):
-    ui = UiTk('noveltree import/export')
+    ui = UiTk('novelibre import/export')
     converter = NovxConverter()
     converter.ui = ui
     kwargs = {'suffix': suffix}

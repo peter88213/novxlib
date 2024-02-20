@@ -22,7 +22,7 @@ class FileFactory(ABC):
 
     @abstractmethod
     def make_file_objects(self, sourcePath, **kwargs):
-        """Instantiate a source object for conversion from a noveltree project.
+        """Instantiate a source object for conversion from a novelibre project.
 
         Positional arguments:
             sourcePath: str -- path to the source file to convert.

@@ -1,4 +1,4 @@
-"""Generate cross references for a noveltree project. 
+"""Generate cross references for a novelibre project. 
 
 This is a novxlib sample application.
 
@@ -16,7 +16,7 @@ SUFFIX = XREF_SUFFIX
 
 
 def run(sourcePath, suffix=''):
-    ui = UiTk('noveltree import/export')
+    ui = UiTk('novelibre import/export')
     converter = NovxExporter()
     converter.ui = ui
     kwargs = {'suffix': suffix}

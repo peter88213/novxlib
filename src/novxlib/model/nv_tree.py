@@ -1,4 +1,4 @@
-"""Provide a class for a noveltree project tree substitute.
+"""Provide a class for a novelibre project tree substitute.
 
 Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
@@ -15,7 +15,7 @@ from novxlib.novx_globals import PN_ROOT
 
 
 class NvTree:
-    """noveltree project structure, emulating the ttk.Treeview interface.
+    """novelibre project structure, emulating the ttk.Treeview interface.
     
     This allows independence from the tkinter library.
     """

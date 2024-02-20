@@ -1,4 +1,4 @@
-"""Convert noveltree plot list to odt format.
+"""Convert novelibre plot list to odt format.
 
 This is a novxlib sample application.
 
@@ -16,7 +16,7 @@ SUFFIX = PLOTLIST_SUFFIX
 
 
 def run(sourcePath, suffix=''):
-    ui = UiTk('noveltree import/export')
+    ui = UiTk('novelibre import/export')
     converter = NovxConverter()
     converter.ui = ui
     kwargs = {'suffix': suffix}

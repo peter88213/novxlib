@@ -15,7 +15,7 @@ class ExportTargetFactory(FileFactory):
     """A factory class that instantiates a document object to write."""
 
     def make_file_objects(self, sourcePath, **kwargs):
-        """Instantiate a target object for conversion from a noveltree project.
+        """Instantiate a target object for conversion from a novelibre project.
 
         Positional arguments:
             sourcePath: str -- path to the source file to convert.

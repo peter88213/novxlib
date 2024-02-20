@@ -70,11 +70,11 @@ class ConverterFf(Converter):
         try:
             source, __ = self.exportSourceFactory.make_file_objects(sourcePath, **kwargs)
         except Error:
-            # The source file is not a noveltree project.
+            # The source file is not a novelibre project.
             try:
                 source, __ = self.importSourceFactory.make_file_objects(sourcePath, **kwargs)
             except Error:
-                # A new noveltree project might be required.
+                # A new novelibre project might be required.
                 try:
                     source, target = self.newProjectFactory.make_file_objects(sourcePath, **kwargs)
                 except Error as ex:
@@ -82,7 +82,7 @@ class ConverterFf(Converter):
                 else:
                     self.create_novx(source, target)
             else:
-                # Try to update an existing noveltree project.
+                # Try to update an existing novelibre project.
                 kwargs['suffix'] = source.SUFFIX
                 try:
                     __, target = self.importTargetFactory.make_file_objects(sourcePath, **kwargs)
@@ -91,7 +91,7 @@ class ConverterFf(Converter):
                 else:
                     self.import_to_novx(source, target)
         else:
-            # The source file is a noveltree project.
+            # The source file is a novelibre project.
             try:
                 __, target = self.exportTargetFactory.make_file_objects(sourcePath, **kwargs)
             except Error as ex:

@@ -24,7 +24,7 @@ class MainTk(Ui):
     Public instance variables: 
         title: str -- Application title.
         kwargs -- keyword arguments buffer.
-        model -- noveltree project to work with.
+        model -- novelibre project to work with.
         root -- tk top level window.
         mainMenu -- top level menubar.
         mainWindow -- tk frame in the top level window.
@@ -57,7 +57,7 @@ class MainTk(Ui):
         Extends the superclass constructor.
         """
         super().__init__(title)
-        self._fileTypes = [(_('noveltree project'), '.novx')]
+        self._fileTypes = [(_('novelibre project'), '.novx')]
         self.title = title
         self._statusText = ''
         self.kwargs = kwargs
@@ -103,7 +103,7 @@ class MainTk(Ui):
         return messagebox.askyesno(title, text)
 
     def close_project(self, event=None):
-        """Close the noveltree project without saving and reset the user interface.
+        """Close the novelibre project without saving and reset the user interface.
         
         To be extended by subclasses.
         """
@@ -133,7 +133,7 @@ class MainTk(Ui):
         self.root.quit()
 
     def open_project(self, fileName, tree=None):
-        """Create a noveltree project instance and read the file.
+        """Create a novelibre project instance and read the file.
 
         Positional arguments:
             fileName: str -- project file path.
@@ -293,7 +293,7 @@ class MainTk(Ui):
         self.fileMenu.add_command(label=_('Exit'), accelerator=self._KEY_QUIT_PROGRAM[1], command=self.on_quit)
 
     def _open_project(self, event=None):
-        """Create a noveltree project instance and read the file.
+        """Create a novelibre project instance and read the file.
         
         This non-public method is meant for event handling.
         """

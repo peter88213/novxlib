@@ -35,7 +35,7 @@ td.chtitle {font-weight: bold}
 '''
 
     def _convert_from_novx(self, text, **kwargs):
-        """Return text, converted from *noveltree* markup to target format.
+        """Return text, converted from *novelibre* markup to target format.
         
         Positional arguments:
             text -- string to convert.

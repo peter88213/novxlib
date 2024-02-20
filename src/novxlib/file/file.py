@@ -14,11 +14,11 @@ from novxlib.novx_globals import _
 
 
 class File(ABC):
-    """Abstract noveltree project file representation.
+    """Abstract novelibre project file representation.
 
     This class represents a file containing a novel with additional 
     attributes and structural information (a full set or a subset
-    of the information included in a noveltree project file).
+    of the information included in a novelibre project file).
     """
     DESCRIPTION = _('File')
     EXTENSION = None

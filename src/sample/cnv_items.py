@@ -1,7 +1,7 @@
-"""Import and export noveltree item descriptions for editing. 
+"""Import and export novelibre item descriptions for editing. 
 
-Convert noveltree item descriptions to odt with invisible item tags.
-Convert html with invisible item tags to noveltree format.
+Convert novelibre item descriptions to odt with invisible item tags.
+Convert html with invisible item tags to novelibre format.
 
 This is a novxlib sample application.
 
@@ -19,7 +19,7 @@ SUFFIX = ITEMS_SUFFIX
 
 
 def run(sourcePath, suffix=''):
-    ui = UiTk('noveltree import/export')
+    ui = UiTk('novelibre import/export')
     converter = NovxConverter()
     converter.ui = ui
     kwargs = {'suffix': suffix}

@@ -1,4 +1,4 @@
-"""Regression test for noveltree file processing.
+"""Regression test for novelibre file processing.
 
 Test the conversion of the proofread-manuscript.
 

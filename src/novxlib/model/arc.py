@@ -1,4 +1,4 @@
-"""Provide a class for noveltree arc representation.
+"""Provide a class for novelibre arc representation.
 
 Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib

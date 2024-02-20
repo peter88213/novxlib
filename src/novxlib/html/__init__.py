@@ -1,4 +1,4 @@
-"""Modules for noveltree HTML file export.
+"""Modules for novelibre HTML file export.
 
 Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib

@@ -1,4 +1,4 @@
-"""Provide a converter class for noveltree universal import and export.
+"""Provide a converter class for novelibre universal import and export.
 
 Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
@@ -41,7 +41,7 @@ from novxlib.ods.ods_r_itemlist import OdsRItemList
 class NovxConverter(ConverterFf):
     """A converter for universal import and export.
 
-    Support noveltree projects and most of the Novel subclasses 
+    Support novelibre projects and most of the Novel subclasses 
     that can be read or written by OpenOffice/LibreOffice.
 
     Overrides the superclass constants EXPORT_SOURCE_CLASSES,
@@ -49,7 +49,7 @@ class NovxConverter(ConverterFf):
 
     Class constants:
         CREATE_SOURCE_CLASSES -- list of classes that - additional to HtmlImport
-                        and HtmlOutline - can be exported to a new noveltree project.
+                        and HtmlOutline - can be exported to a new novelibre project.
     """
     EXPORT_SOURCE_CLASSES = [NovxFile]
     EXPORT_TARGET_CLASSES = [OdtWExport,

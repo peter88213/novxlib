@@ -1,4 +1,4 @@
-"""Provide a base class for noveltree element representation.
+"""Provide a base class for novelibre element representation.
 
 Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
@@ -35,7 +35,7 @@ class BasicElement:
             
         General note:
         When merging files, only new elements that are not None will override 
-        existing elements. This allows you to easily update a noveltree project 
+        existing elements. This allows you to easily update a novelibre project 
         from a document that contains only a subset of the data model.
         Keep this in mind when setting the initial values.
         """

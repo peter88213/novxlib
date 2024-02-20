@@ -1,4 +1,4 @@
-"""Import and export noveltree brief synopsis. 
+"""Import and export novelibre brief synopsis. 
 
 This is a novxlib sample application.
 
@@ -16,7 +16,7 @@ SUFFIX = BRF_SYNOPSIS_SUFFIX
 
 
 def run(sourcePath, suffix=''):
-    ui = UiTk('noveltree import/export')
+    ui = UiTk('novelibre import/export')
     converter = NovxExporter()
     converter.ui = ui
     kwargs = {'suffix': suffix}

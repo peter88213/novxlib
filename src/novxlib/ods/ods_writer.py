@@ -267,7 +267,7 @@ class OdsWriter(OdfFile):
     _MIMETYPE = 'application/vnd.oasis.opendocument.spreadsheet'
 
     def _convert_from_novx(self, text, quick=False, append=False, xml=False):
-        """Return text, converted from noveltree markup to target format.
+        """Return text, converted from novelibre markup to target format.
         
         Positional arguments:
             text -- string to convert.

@@ -1,4 +1,4 @@
-"""Provide a factory class for a noveltree object to write.
+"""Provide a factory class for a novelibre object to write.
 
 Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
@@ -12,10 +12,10 @@ from novxlib.novx_globals import _
 
 
 class ImportTargetFactory(FileFactory):
-    """A factory class that instantiates a noveltree object to write."""
+    """A factory class that instantiates a novelibre object to write."""
 
     def make_file_objects(self, sourcePath, **kwargs):
-        """Instantiate a target object for conversion to a noveltree project.
+        """Instantiate a target object for conversion to a novelibre project.
 
         Positional arguments:
             sourcePath: str -- path to the source file to convert.
@@ -42,10 +42,10 @@ class ImportTargetFactory(FileFactory):
         else:
             ywPathBasis = fileName
 
-        # Look for an existing noveltree project to rewrite.
+        # Look for an existing novelibre project to rewrite.
         for fileClass in self._fileClasses:
             if os.path.isfile(f'{ywPathBasis}{fileClass.EXTENSION}'):
                 targetFile = fileClass(f'{ywPathBasis}{fileClass.EXTENSION}', **kwargs)
                 return None, targetFile
 
-        raise Error(f'{_("No noveltree project to write")}.')
+        raise Error(f'{_("No novelibre project to write")}.')

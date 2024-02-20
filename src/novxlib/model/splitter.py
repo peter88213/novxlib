@@ -18,7 +18,7 @@ from novxlib.novx_globals import _
 class Splitter:
     """Helper class for section and chapter splitting.
     
-    When importing sections to noveltree, they may contain manually inserted section and chapter dividers.
+    When importing sections to novelibre, they may contain manually inserted section and chapter dividers.
     The Splitter class updates a Novel instance by splitting such sections and creating new chapters and sections. 
     
     Public class constants:

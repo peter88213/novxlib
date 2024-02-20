@@ -1,4 +1,4 @@
-"""Provide an abstract test case class for noveltree export.
+"""Provide an abstract test case class for novelibre export.
 
 Export standard test routines used for Regression test.
 

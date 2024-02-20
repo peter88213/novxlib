@@ -1,4 +1,4 @@
-"""Provide a base class for ODT documents containing text that is formatted in noveltree.
+"""Provide a base class for ODT documents containing text that is formatted in novelibre.
 
 Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib

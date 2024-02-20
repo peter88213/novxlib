@@ -1,7 +1,7 @@
-"""Import and export noveltree sections for editing. 
+"""Import and export novelibre sections for editing. 
 
-Convert noveltree to odt with visible chapter and section tags.
-Convert html with visible chapter and section tags to noveltree format.
+Convert novelibre to odt with visible chapter and section tags.
+Convert html with visible chapter and section tags to novelibre format.
 
 This is a novxlib sample application.
 
@@ -19,7 +19,7 @@ SUFFIX = PROOF_SUFFIX
 
 
 def run(sourcePath, suffix=''):
-    ui = UiTk('noveltree import/export')
+    ui = UiTk('novelibre import/export')
     converter = NovxConverter()
     converter.ui = ui
     kwargs = {'suffix': suffix}

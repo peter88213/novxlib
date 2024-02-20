@@ -1,4 +1,4 @@
-"""Provide a factory class for a noveltree object to read.
+"""Provide a factory class for a novelibre object to read.
 
 Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
@@ -13,10 +13,10 @@ from novxlib.novx_globals import norm_path
 
 
 class ExportSourceFactory(FileFactory):
-    """A factory class that instantiates a noveltree object to read."""
+    """A factory class that instantiates a novelibre object to read."""
 
     def make_file_objects(self, sourcePath, **kwargs):
-        """Instantiate a source object for conversion from a noveltree project.
+        """Instantiate a source object for conversion from a novelibre project.
 
         Positional arguments:
             sourcePath: str -- path to the source file to convert.

@@ -13,7 +13,7 @@ class ImportSourceFactory(FileFactory):
     """A factory class that instantiates a documente object to read."""
 
     def make_file_objects(self, sourcePath, **kwargs):
-        """Instantiate a source object for conversion to a noveltree project.       
+        """Instantiate a source object for conversion to a novelibre project.       
 
         Positional arguments:
             sourcePath: str -- path to the source file to convert.

@@ -1,4 +1,4 @@
-"""Provide a class for noveltree chapter representation.
+"""Provide a class for novelibre chapter representation.
 
 Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
@@ -8,7 +8,7 @@ from novxlib.model.basic_element import BasicElement
 
 
 class Chapter(BasicElement):
-    """noveltree chapter representation."""
+    """novelibre chapter representation."""
 
     def __init__(self,
             chLevel=None,
@@ -28,7 +28,7 @@ class Chapter(BasicElement):
         # True: Auto-number this chapter
         # False: Do not auto-number this chapter
         self._isTrash = isTrash
-        # True: This chapter is the noveltree project's "trash bin"
+        # True: This chapter is the novelibre project's "trash bin"
         # False: This chapter is not a "trash bin"
 
     @property
