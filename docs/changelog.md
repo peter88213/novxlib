@@ -1,6 +1,10 @@
 # Changelog
 
 
+### v1.2.0
+
+- Make the FileExport filter instance variables "public".
+
 ### v1.1.0
 
 - Provide character age calculation.

@@ -72,13 +72,13 @@ class FileExport(File):
         Extends the superclass constructor.
         """
         super().__init__(filePath, **kwargs)
-        self._sectionFilter = Filter()
-        self._chapterFilter = Filter()
-        self._characterFilter = Filter()
-        self._locationFilter = Filter()
-        self._itemFilter = Filter()
-        self._arcFilter = Filter()
-        self._turningPointFilter = Filter()
+        self.sectionFilter = Filter()
+        self.chapterFilter = Filter()
+        self.characterFilter = Filter()
+        self.locationFilter = Filter()
+        self.itemFilter = Filter()
+        self.arcFilter = Filter()
+        self.turningPointFilter = Filter()
 
     def write(self):
         """Write instance variables to the export file.
@@ -161,7 +161,7 @@ class FileExport(File):
         """
         lines = []
         for acId in self.novel.tree.get_children(AC_ROOT):
-            if self._arcFilter.accept(self, acId):
+            if self.arcFilter.accept(self, acId):
                 if self._arcTemplate:
                     template = Template(self._arcTemplate)
                     lines.append(template.safe_substitute(self._get_arcMapping(acId)))
@@ -208,7 +208,7 @@ class FileExport(File):
         wordsTotal = 0
         for chId in self.novel.tree.get_children(CH_ROOT):
             dispNumber = 0
-            if not self._chapterFilter.accept(self, chId):
+            if not self.chapterFilter.accept(self, chId):
                 continue
 
             # The order counts; be aware that "Todo" and "Notes" chapters are
@@ -292,7 +292,7 @@ class FileExport(File):
             lines = []
         template = Template(self._characterTemplate)
         for crId in self.novel.tree.get_children(CR_ROOT):
-            if self._characterFilter.accept(self, crId):
+            if self.characterFilter.accept(self, crId):
                 lines.append(template.safe_substitute(self._get_characterMapping(crId)))
         return lines
 
@@ -350,7 +350,7 @@ class FileExport(File):
             lines = []
         template = Template(self._itemTemplate)
         for itId in self.novel.tree.get_children(IT_ROOT):
-            if self._itemFilter.accept(self, itId):
+            if self.itemFilter.accept(self, itId):
                 lines.append(template.safe_substitute(self._get_itemMapping(itId)))
         return lines
 
@@ -394,7 +394,7 @@ class FileExport(File):
             lines = []
         template = Template(self._locationTemplate)
         for lcId in self.novel.tree.get_children(LC_ROOT):
-            if self._locationFilter.accept(self, lcId):
+            if self.locationFilter.accept(self, lcId):
                 lines.append(template.safe_substitute(self._get_locationMapping(lcId)))
         return lines
 
@@ -552,7 +552,7 @@ class FileExport(File):
         for scId in self.novel.tree.get_children(chId):
             template = None
             dispNumber = 0
-            if not self._sectionFilter.accept(self, scId):
+            if not self.sectionFilter.accept(self, scId):
                 continue
 
             sectionContent = self.novel.sections[scId].sectionContent
