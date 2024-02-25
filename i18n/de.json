@@ -234,6 +234,8 @@
   "Export plot list (spreadsheet)": "Plot-Liste exportieren (Tabelle)",
   "Export section descriptions for editing": "Abschnittsbeschreibungen zum Bearbeiten exportieren",
   "Export section list (spreadsheet)": "Abschnittsliste exportieren (Tabelle)",
+  "Export synopsis filtered by arc": "Zusammenfassung nach Bogen gefiltert exportieren",
+  "Export synopsis filtered by viewpoint": "Zusammenfassung nach Perspektive gefiltert exportieren",
   "Export to odt": "Zu odt exportieren",
   "Export to yWriter": "Zu yWriter exportieren",
   "Export to yw7": "Zu yw7 exportieren",

@@ -15,7 +15,7 @@ class OdtWExport(OdtWFormatted):
     """
     DESCRIPTION = _('manuscript')
     _fileHeader = f'''$ContentHeader<text:p text:style-name="Title">$Title</text:p>
-<text:p text:style-name="Subtitle">$AuthorName</text:p>
+<text:p text:style-name="Subtitle">$AuthorName</text:p>$Filters
 '''
 
     _partTemplate = '''<text:h text:style-name="Heading_20_1" text:outline-level="1">$Title</text:h>

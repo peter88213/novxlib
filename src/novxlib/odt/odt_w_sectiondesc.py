@@ -18,7 +18,7 @@ class OdtWSectionDesc(OdtWriter):
     SUFFIX = SECTIONS_SUFFIX
 
     _fileHeader = f'''{OdtWriter._CONTENT_XML_HEADER}<text:p text:style-name="Title">$Title</text:p>
-<text:p text:style-name="Subtitle">$AuthorName</text:p>
+<text:p text:style-name="Subtitle">$AuthorName</text:p>$Filters
 '''
 
     _partTemplate = '''<text:section text:style-name="Sect1" text:name="$ID">

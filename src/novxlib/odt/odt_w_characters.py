@@ -18,7 +18,7 @@ class OdtWCharacters(OdtWriter):
     SUFFIX = CHARACTERS_SUFFIX
 
     _fileHeader = f'''{OdtWriter._CONTENT_XML_HEADER}<text:p text:style-name="Title">$Title</text:p>
-<text:p text:style-name="Subtitle">$AuthorName</text:p>
+<text:p text:style-name="Subtitle">$AuthorName</text:p>$Filters
 '''
 
     _characterTemplate = f'''<text:h text:style-name="Heading_20_2" text:outline-level="2">$Title$FullName$AKA</text:h>

@@ -412,6 +412,20 @@ class OdtWriter(OdfFile):
             text = ''
         return text
 
+    def _get_fileHeaderMapping(self):
+        """Return a mapping dictionary for the project section.
+        
+        Extends the superclass method.
+        """
+        fileHeaderMapping = super()._get_fileHeaderMapping()
+        filterMessage = fileHeaderMapping['Filters']
+        if filterMessage:
+            fileHeaderMapping['Filters'] = filterMessage.replace(
+                'First_20_line_20_indent',
+                'Text_20_body'
+                ).replace('<text:p', '\n<text:p')
+        return fileHeaderMapping
+
     def _get_sectionMapping(self, scId, sectionNumber, wordsTotal):
         """Return a mapping dictionary for a section section.
         

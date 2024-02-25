@@ -18,7 +18,7 @@ class OdtWItems(OdtWriter):
     SUFFIX = ITEMS_SUFFIX
 
     _fileHeader = f'''{OdtWriter._CONTENT_XML_HEADER}<text:p text:style-name="Title">$Title</text:p>
-<text:p text:style-name="Subtitle">$AuthorName</text:p>
+<text:p text:style-name="Subtitle">$AuthorName</text:p>$Filters
 '''
 
     _itemTemplate = '''<text:h text:style-name="Heading_20_2" text:outline-level="2">$Title$AKA</text:h>

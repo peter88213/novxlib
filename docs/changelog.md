@@ -4,6 +4,7 @@
 ### v1.2.0
 
 - Make the FileExport filter instance variables "public".
+- Prepare all odt document types for filtering on export.
 
 ### v1.1.0
 
