@@ -19,6 +19,7 @@ class OdtWManuscript(OdtWFormatted):
 
     _fileHeader = f'''$ContentHeader<text:p text:style-name="Title">$Title</text:p>
 <text:p text:style-name="Subtitle">$AuthorName</text:p>
+$Filters
 '''
 
     _partTemplate = '''<text:h text:style-name="Heading_20_1" text:outline-level="1">$Title</text:h>
@@ -37,3 +38,16 @@ $SectionContent
 
     _fileFooter = OdtWFormatted._CONTENT_XML_FOOTER
 
+    def _get_fileHeaderMapping(self):
+        """Return a mapping dictionary for the project section.
+        
+        Extends the superclass method.
+        """
+        fileHeaderMapping = super()._get_fileHeaderMapping()
+        filterMessage = fileHeaderMapping['Filters']
+        if filterMessage:
+            fileHeaderMapping['Filters'] = filterMessage.replace(
+                'First_20_line_20_indent',
+                'Text_20_body'
+                )
+        return fileHeaderMapping

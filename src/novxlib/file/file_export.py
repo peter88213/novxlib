@@ -104,20 +104,6 @@ class FileExport(File):
                 os.replace(f'{self.filePath}.bak', self.filePath)
             raise Error(f'{_("Cannot write file")}: "{norm_path(self.filePath)}".')
 
-    def _get_fileHeaderMapping(self):
-        """Return a mapping dictionary for the project section.
-        
-        This is a template method that can be extended or overridden by subclasses.
-        """
-        projectTemplateMapping = dict(
-            Title=self._convert_from_novx(self.novel.title, quick=True),
-            Desc=self._convert_from_novx(self.novel.desc),
-            AuthorName=self._convert_from_novx(self.novel.authorName, quick=True),
-            Language=self.novel.languageCode,
-            Country=self.novel.countryCode,
-        )
-        return projectTemplateMapping
-
     def _convert_from_novx(self, text, quick=False, append=False, xml=False):
         """Return text, converted from novelibre markup to target format.
         
@@ -309,6 +295,39 @@ class FileExport(File):
         template = Template(self._fileHeader)
         lines.append(template.safe_substitute(self._get_fileHeaderMapping()))
         return lines
+
+    def _get_fileHeaderMapping(self):
+        """Return a mapping dictionary for the project section.
+        
+        This is a template method that can be extended or overridden by subclasses.
+        """
+        filterMessages = []
+        expFilters = [
+            self.chapterFilter,
+            self.sectionFilter,
+            self.characterFilter,
+            self.locationFilter,
+            self.itemFilter,
+            self.arcFilter,
+            self.turningPointFilter,
+            ]
+        for expFilter in expFilters:
+            message = expFilter.get_message(self)
+            if message:
+                filterMessages.append(message)
+            if filterMessages:
+                filters = self._convert_from_novx('\n'.join(filterMessages))
+            else:
+                filters = ''
+        fileHeaderMapping = dict(
+            Title=self._convert_from_novx(self.novel.title, quick=True),
+            Filters=filters,
+            Desc=self._convert_from_novx(self.novel.desc),
+            AuthorName=self._convert_from_novx(self.novel.authorName, quick=True),
+            Language=self.novel.languageCode,
+            Country=self.novel.countryCode,
+        )
+        return fileHeaderMapping
 
     def _get_itemMapping(self, itId):
         """Return a mapping dictionary for an item section.

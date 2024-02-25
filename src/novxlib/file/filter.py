@@ -27,3 +27,6 @@ class Filter:
         """
         return True
 
+    def get_message(self, source):
+        """Return a message about how the document exported from source is filtered."""
+        return ''
