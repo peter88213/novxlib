@@ -19,10 +19,11 @@ class Filter:
         """Check whether an entity matches the filter criteria.
         
         Positional arguments:
-            source -- Novel instance holding the entity to check.
+            source -- File instance holding the entity to check.
             eId -- ID of the entity to check.       
         
         Return True if the entity is not to be filtered out.
         This is a stub to be overridden by subclass methods implementing filters.
         """
         return True
+
