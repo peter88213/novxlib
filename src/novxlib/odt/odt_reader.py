@@ -9,7 +9,10 @@ License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 from abc import ABC
 
 from novxlib.novx_globals import CHAPTER_PREFIX
+from novxlib.novx_globals import Error
 from novxlib.novx_globals import SECTION_PREFIX
+from novxlib.novx_globals import _
+from novxlib.novx_globals import norm_path
 from novxlib.odf.odf_reader import OdfReader
 from novxlib.odt.odt_parser import OdtParser
 
@@ -81,5 +84,8 @@ class OdtReader(OdfReader, ABC):
 
     def read(self):
         parser = OdtParser(self)
-        parser.feed_file(self.filePath)
+        try:
+            parser.feed_file(self.filePath)
+        except:
+            raise Error(f'{_("Cannot parse File")}: {norm_path(self.filePath)}')
 

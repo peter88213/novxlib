@@ -1,6 +1,10 @@
 # Changelog
 
 
+### v1.2.1
+
+- Catch odt parsing errors.
+
 ### v1.2.0
 
 - Make the FileExport filter instance variables "public".
