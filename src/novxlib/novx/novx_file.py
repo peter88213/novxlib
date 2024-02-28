@@ -195,14 +195,14 @@ class NovxFile(File):
             attrib = {'ids':' '.join(prjArc.sections)}
             ET.SubElement(xmlArc, 'Sections', attrib=attrib)
 
-        #--- Turning points.
+        #--- Plot points.
         for tpId in self.novel.tree.get_children(acId):
             xmlPoint = ET.SubElement(xmlArc, 'POINT', attrib={'id':tpId})
-            self._build_turningPoint_branch(xmlPoint, self.novel.turningPoints[tpId])
+            self._build_plotpoint_branch(xmlPoint, self.novel.turningPoints[tpId])
 
         return xmlArc
 
-    def _build_turningPoint_branch(self, xmlPoint, prjTurningPoint):
+    def _build_plotpoint_branch(self, xmlPoint, prjTurningPoint):
         if prjTurningPoint.title:
             ET.SubElement(xmlPoint, 'Title').text = prjTurningPoint.title
         if prjTurningPoint.desc:
@@ -291,7 +291,7 @@ class NovxFile(File):
             xmlItm = ET.SubElement(xmlItems, 'ITEM', attrib={'id':itId})
             self._build_item_branch(xmlItm, self.novel.items[itId])
 
-        #--- Process arcs and turning points.
+        #--- Process arcs and plot points.
         xmlArcs = ET.SubElement(root, 'ARCS')
         for acId in self.novel.tree.get_children(AC_ROOT):
             self._build_arc_branch(xmlArcs, self.novel.arcs[acId], acId)
@@ -508,7 +508,7 @@ class NovxFile(File):
                 self.novel.tree.append(AC_ROOT, acId)
                 for xmlPoint in xmlArc.iterfind('POINT'):
                     tpId = xmlPoint.attrib['id']
-                    self._read_turningPoint(xmlPoint, tpId, acId)
+                    self._read_plotpoint(xmlPoint, tpId, acId)
                     self.novel.tree.append(acId, tpId)
 
                 #--- References
@@ -524,8 +524,8 @@ class NovxFile(File):
         except TypeError:
             pass
 
-    def _read_turningPoint(self, xmlPoint, tpId, acId):
-        """Read data at turning point level from the xml element tree."""
+    def _read_plotpoint(self, xmlPoint, tpId, acId):
+        """Read data at plot point level from the xml element tree."""
         self.novel.turningPoints[tpId] = TurningPoint(on_element_change=self.on_element_change)
         self.novel.turningPoints[tpId].title = get_element_text(xmlPoint, 'Title')
         self.novel.turningPoints[tpId].desc = xml_element_to_text(xmlPoint.find('Desc'))

@@ -251,13 +251,13 @@ class Yw7File(File):
                 index += 1
             return index
 
-        def build_scene_subtree(xmlScene, prjScn, turningPoint=False):
+        def build_scene_subtree(xmlScene, prjScn, plotPoint=False):
             i = 1
             i = set_element(xmlScene, 'Title', prjScn.title, i)
             if prjScn.desc is not None:
                 ET.SubElement(xmlScene, 'Desc').text = prjScn.desc
 
-            if not turningPoint:
+            if not plotPoint:
                 scTags = prjScn.tags
                 # copy of the scene's property
 
@@ -278,7 +278,7 @@ class Yw7File(File):
                 (True, '2'),
                 (True, '0'),
                 )
-            if turningPoint:
+            if plotPoint:
                 scType = 2
             elif prjScn.scType in (0, None):
                 scType = 0
@@ -295,12 +295,12 @@ class Yw7File(File):
                 ET.SubElement(xmlScene, 'Unused').text = '-1'
             if ySceneType is not None:
                 ET.SubElement(xmlSceneFields[scId], 'Field_SceneType').text = ySceneType
-            if turningPoint:
+            if plotPoint:
                 ET.SubElement(xmlScene, 'Status').text = '1'
             elif prjScn.status is not None:
                 ET.SubElement(xmlScene, 'Status').text = str(prjScn.status)
 
-            if turningPoint:
+            if plotPoint:
                 ET.SubElement(xmlScene, 'SceneContent')
                 return
 
@@ -594,9 +594,9 @@ class Yw7File(File):
             xmlSceneFields[scId] = ET.SubElement(xmlScene, 'Fields')
             build_scene_subtree(xmlScene, self.novel.sections[scId])
 
-        #--- Process turning points.
+        #--- Process plot points.
         newScIds = {}
-        # new scene IDs by turning point ID
+        # new scene IDs by plot point ID
         for tpId in self.novel.turningPoints:
             scId = create_id(scIds, prefix=SECTION_PREFIX)
             scIds.append(scId)
@@ -604,7 +604,7 @@ class Yw7File(File):
             xmlScene = ET.SubElement(xmlScenes, 'SCENE')
             ET.SubElement(xmlScene, 'ID').text = scId[2:]
             xmlSceneFields[scId] = ET.SubElement(xmlScene, 'Fields')
-            build_scene_subtree(xmlScene, self.novel.turningPoints[tpId], turningPoint=True)
+            build_scene_subtree(xmlScene, self.novel.turningPoints[tpId], plotPoint=True)
 
         #--- Process chapters.
         chIds = list(self.novel.tree.get_children(CH_ROOT))
@@ -1189,7 +1189,7 @@ class Yw7File(File):
                         break
 
             ywScnAssocs = string_to_list(kwVarYw7.get('Field_SceneAssoc', ''))
-            prjScn.turningPoints = [f'{ARC_POINT_PREFIX}{turningPoint}' for turningPoint in ywScnAssocs]
+            prjScn.turningPoints = [f'{ARC_POINT_PREFIX}{plotPoint}' for plotPoint in ywScnAssocs]
 
             if kwVarYw7.get('Field_CustomAR', None) is not None:
                 prjScn.scPacing = 2
@@ -1309,7 +1309,7 @@ class Yw7File(File):
 
             ywScId = xmlScene.find('ID').text
             if ywScId in self._ywApIds:
-                # it's a turning point
+                # it's a plot point
                 ptId = f"{ARC_POINT_PREFIX}{ywScId}"
                 self.novel.turningPoints[ptId] = TurningPoint(title=prjScn.title,
                                                       desc=prjScn.desc

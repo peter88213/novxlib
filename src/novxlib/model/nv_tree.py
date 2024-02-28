@@ -35,7 +35,7 @@ class NvTree:
         # value : section ID
         self.srtTurningPoints = {}
         # key: arc ID
-        # value : turning point ID
+        # value : plot point ID
 
     def append(self, parent, iid):
         """Creates a new item with identifier iid."""

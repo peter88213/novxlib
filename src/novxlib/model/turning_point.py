@@ -1,4 +1,4 @@
-"""Provide a class for novelibre turning point representation.
+"""Provide a class for novelibre plot point representation.
 
 Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
@@ -8,7 +8,7 @@ from novxlib.model.basic_element import BasicElement
 
 
 class TurningPoint(BasicElement):
-    """Turning point representation."""
+    """Plot point representation."""
 
     def __init__(self,
             sectionAssoc=None,

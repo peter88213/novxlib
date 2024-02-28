@@ -102,7 +102,7 @@ class Section(BasicElement):
         # Back references to Arc.sections
         self.scTurningPoints = {}
         # Back references to TurningPoint.sectionAssoc
-        # key: turning point ID, value: arc ID
+        # key: plot point ID, value: arc ID
 
     @property
     def sectionContent(self):

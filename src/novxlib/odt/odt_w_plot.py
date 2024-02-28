@@ -42,7 +42,7 @@ $Desc
 $Desc
 $TurningPoints
 '''
-    _turningPointTemplate = '''<text:h text:style-name="Heading_20_3" text:outline-level="3"><text:bookmark text:name="$ID"/>$Title</text:h>
+    _plotPointTemplate = '''<text:h text:style-name="Heading_20_3" text:outline-level="3"><text:bookmark text:name="$ID"/>$Title</text:h>
 $Desc
 '''
     _assocSectionTemplate = '''<text:p text:style-name="Text_20_body">$Section: <text:span text:style-name="Emphasis">$SectionTitle</text:span></text:p>    
@@ -71,15 +71,15 @@ $Desc
             self._firstArc = False
         else:
             arcMapping['Heading'] = ''
-        turningPoints = []
+        plotPoints = []
         for tpId in self.novel.tree.get_children(acId):
-            turningPointMapping = dict(
+            plotPointMapping = dict(
                     ID=tpId,
                     Title=self.novel.turningPoints[tpId].title,
                     Desc=self.novel.turningPoints[tpId].desc,
                     )
-            template = Template(self._turningPointTemplate)
-            turningPoints.append(template.safe_substitute(turningPointMapping))
+            template = Template(self._plotPointTemplate)
+            plotPoints.append(template.safe_substitute(plotPointMapping))
             scId = self.novel.turningPoints[tpId].sectionAssoc
             if scId:
                 sectionAssocMapping = dict(
@@ -93,7 +93,7 @@ $Desc
                     SectionsSuffix=SECTIONS_SUFFIX,
                     )
                 template = Template(self._assocSectionTemplate)
-                turningPoints.append(template.safe_substitute(sectionAssocMapping))
-        arcMapping['TurningPoints'] = '\n'.join(turningPoints)
+                plotPoints.append(template.safe_substitute(sectionAssocMapping))
+        arcMapping['TurningPoints'] = '\n'.join(plotPoints)
         return arcMapping
 

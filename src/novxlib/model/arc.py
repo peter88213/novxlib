@@ -12,6 +12,7 @@ class Arc(BasicElement):
 
     def __init__(self,
             shortName=None,
+            sections=None,
             **kwargs):
         """Extends the superclass constructor."""
         super().__init__(**kwargs)
@@ -19,7 +20,7 @@ class Arc(BasicElement):
         self._shortName = shortName
         # str -- name of the arc
 
-        self._sections = None
+        self._sections = sections
         # List of str -- IDs of the sections associated with the arc.
 
     @property

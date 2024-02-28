@@ -1,6 +1,11 @@
 # Changelog
 
 
+### v1.3.0
+
+- Initialize Arc.sections with optional parameter.
+- Refactor: Replace "Turning point" with "Plot point" without affecting the API.
+
 ### v1.2.1
 
 - Catch odt parsing errors.

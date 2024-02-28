@@ -100,11 +100,11 @@ class OdsWPlotList(OdsWriter):
                     for i, acId in enumerate(arcs):
                         colorIndex = (i % arcColorsTotal) + 1
                         if scId in self.novel.arcs[acId].sections:
-                            points = []
+                            plotPoints = []
                             for ptId in self.novel.tree.get_children(acId):
                                 if scId == self.novel.turningPoints[ptId].sectionAssoc:
-                                    points.append(self.novel.turningPoints[ptId].title)
-                            odsText.append(create_cell(list_to_string(points), attr=f'table:style-name="ce{colorIndex}" '))
+                                    plotPoints.append(self.novel.turningPoints[ptId].title)
+                            odsText.append(create_cell(list_to_string(plotPoints), attr=f'table:style-name="ce{colorIndex}" '))
                         else:
                             odsText.append(create_cell(''))
                     odsText.append(f'    </table:table-row>')
