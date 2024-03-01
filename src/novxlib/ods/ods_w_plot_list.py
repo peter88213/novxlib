@@ -62,7 +62,7 @@ class OdsWPlotList(OdsWriter):
         def create_cell(text, attr='', link=''):
             """Return the markup for a table cell with text and attributes."""
             if link:
-                attr = f'{attr} table:formula="of:=HYPERLINK(&quot;file:///{self.projectPath}/{self._convert_from_novx(self.projectName)}{link}&quot;;&quot;{self._convert_from_novx(text)}&quot;)"'
+                attr = f'{attr} table:formula="of:=HYPERLINK(&quot;file:///{self.projectPath}/{self._convert_from_novx(self.projectName)}{link}&quot;;&quot;{self._convert_from_novx(text, isLink=True)}&quot;)"'
                 text = ''
             else:
                 text = f'\n      <text:p>{self._convert_from_novx(text)}</text:p>'

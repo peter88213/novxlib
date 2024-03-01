@@ -1,6 +1,13 @@
 # Changelog
 
 
+### v1.3.1
+
+- Replace the "Segoe UI 10" font with "Calibri 10.5"
+  for ODF document export.
+- Fix a bug where links do not work in the ODS plot list 
+  if scene titles contain false double quotes.
+  
 ### v1.3.0
 
 - Initialize Arc.sections with optional parameter.
