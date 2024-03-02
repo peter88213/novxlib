@@ -4,6 +4,7 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
+import re
 import zipfile
 
 from novxlib.novx_globals import Error
@@ -58,7 +59,14 @@ class OdsParser:
             i = 0
             for cell in row.iterfind('table:table-cell', namespaces):
                 content = ''
-                if cell.find('text:p', namespaces) is not None:
+                odfDate = cell.get(f'{{{namespaces["office"]}}}date-value')
+                odfTime = cell.get(f'{{{namespaces["office"]}}}time-value')
+                if odfDate:
+                    cells.append(odfDate)
+                elif odfTime:
+                    t = re.search('PT(..)H(..)M(..)S', odfTime)
+                    cells.append(f'{t.group(1)}:{t.group(2)}:{t.group(3)}')
+                elif cell.find('text:p', namespaces) is not None:
                     lines = []
                     for paragraph in cell.iterfind('text:p', namespaces):
                         lines.append(''.join(t for t in paragraph.itertext()))
