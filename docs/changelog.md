@@ -1,5 +1,9 @@
 # Changelog
 
+### v1.4.0
+
+- Add date/time information to the section list.
+- Extend the ODS table validation when writing back.  
 
 ### v1.3.1
 
