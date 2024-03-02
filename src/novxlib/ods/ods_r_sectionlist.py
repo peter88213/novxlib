@@ -18,9 +18,12 @@ class OdsRSectionList(OdsReader):
     """ODS section list reader. """
     DESCRIPTION = _('Section list')
     SUFFIX = SECTIONLIST_SUFFIX
-    _rowTitles = ['Section link', 'Section title', 'Section description', 'Tags', 'Section notes', 'A/R',
-                 'Goal', 'Conflict', 'Outcome', 'Section', 'Words total',
-                 'Word count', 'Characters', 'Locations', 'Items']
+    _columnTitles = [
+        'Section link', 'Section title', 'Section description',
+        'Date', 'Time', 'Tags', 'Section notes', 'A/R',
+        'Goal', 'Conflict', 'Outcome', 'Section', 'Words total',
+        'Word count', 'Characters', 'Locations', 'Items'
+        ]
 
     def read(self):
         """Parse the file and get the instance variables.

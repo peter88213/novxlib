@@ -19,7 +19,7 @@ class OdsRItemList(OdsReader):
     """ODS item list reader."""
     DESCRIPTION = _('Item list')
     SUFFIX = ITEMLIST_SUFFIX
-    _rowTitles = ['ID', 'Name', 'Description', 'Aka', 'Tags']
+    _columnTitles = ['ID', 'Name', 'Description', 'Aka', 'Tags']
 
     def read(self):
         """Parse the file and get the instance variables.

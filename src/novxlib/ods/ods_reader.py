@@ -21,7 +21,7 @@ class OdsReader(OdfReader, ABC):
     # overwrites File.EXTENSION
     _SEPARATOR = ','
     # delimits data fields within a record.
-    _rowTitles = []
+    _columnTitles = []
 
     _DIVIDER = FileExport._DIVIDER
 
@@ -49,12 +49,18 @@ class OdsReader(OdfReader, ABC):
         Overrides the superclass method.
         """
         self._rows = []
-        cellsPerRow = len(self._rowTitles)
+        cellsPerRow = len(self._columnTitles)
         parser = OdsParser()
         self._rows = parser.get_rows(self.filePath, cellsPerRow)
         for row in self._rows:
             if len(row) != cellsPerRow:
                 print(row)
                 print(len(row), cellsPerRow)
+                raise Error(f'{_("Wrong table structure")}.')
+
+        for i, colTitle in enumerate(self._columnTitles):
+            if colTitle != self._rows[0][i]:
+                print(f'\n{self._rows[0]}')
+                print(self._columnTitles)
                 raise Error(f'{_("Wrong table structure")}.')
 

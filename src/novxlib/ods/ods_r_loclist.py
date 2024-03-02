@@ -19,7 +19,7 @@ class OdsRLocList(OdsReader):
     """ODS location list reader. """
     DESCRIPTION = _('Location list')
     SUFFIX = LOCLIST_SUFFIX
-    _rowTitles = ['ID', 'Name', 'Description', 'Aka', 'Tags']
+    _columnTitles = ['ID', 'Name', 'Description', 'Aka', 'Tags']
 
     def read(self):
         """Parse the file and get the instance variables.

@@ -19,7 +19,7 @@ class OdsRCharList(OdsReader):
     """ODS character list reader."""
     DESCRIPTION = _('Character list')
     SUFFIX = CHARLIST_SUFFIX
-    _rowTitles = ['ID', 'Name', 'Full name', 'Aka', 'Description', 'Bio', 'Goals', 'Importance', 'Tags', 'Notes']
+    _columnTitles = ['ID', 'Name', 'Full name', 'Aka', 'Description', 'Bio', 'Goals', 'Importance', 'Tags', 'Notes']
 
     def read(self):
         """Parse the file and get the instance variables.

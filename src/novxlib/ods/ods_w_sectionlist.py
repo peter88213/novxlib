@@ -25,6 +25,8 @@ class OdsWSectionList(OdsWriter):
     # Section link
     # Section title
     # Section description
+    # Date
+    # Time
     # Tags
     # Section notes
     # A/R
