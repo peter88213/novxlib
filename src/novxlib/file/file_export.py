@@ -485,10 +485,13 @@ class FileExport(File):
 
         #--- Time.
         if self.novel.sections[scId].time is not None:
-            scTime = self.novel.sections[scId].time.rsplit(':', 1)[0]
+            h, m, s = self.novel.sections[scId].time.split(':')
+            scTime = f'{h}:{m}'
+            odsTime = f'PT{h}H{m}M{s}S'
             # remove seconds
         else:
             scTime = ''
+            odsTime = ''
 
         #--- Create a combined duration information.
         if self.novel.sections[scId].lastsDays is not None and self.novel.sections[scId].lastsDays != '0':
@@ -522,6 +525,7 @@ class FileExport(File):
             SectionContent=self._convert_from_novx(self.novel.sections[scId].sectionContent, append=self.novel.sections[scId].appendToPrev, xml=True),
             Date=scDate,
             Time=scTime,
+            OdsTime=odsTime,
             Day=scDay,
             ScDate=cmbDate,
             LastsDays=lastsDays,

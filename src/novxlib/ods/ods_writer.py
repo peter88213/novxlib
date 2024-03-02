@@ -50,6 +50,22 @@ class OdsWriter(OdfFile):
   <style:style style:name="ta1" style:family="table" style:master-page-name="Default">
    <style:table-properties table:display="true" style:writing-mode="lr-tb"/>
   </style:style>
+  <number:date-style style:name="N36" number:automatic-order="true">
+   <number:day number:style="long"/>
+   <number:text>.</number:text>
+   <number:month number:style="long"/>
+   <number:text>.</number:text>
+   <number:year number:style="long"/>
+  </number:date-style>
+  <number:time-style style:name="N40">
+   <number:hours number:style="long"/>
+   <number:text>:</number:text>
+   <number:minutes number:style="long"/>
+  </number:time-style>
+  <style:style style:name="ce1" style:family="table-cell" style:parent-style-name="Heading" style:data-style-name="N36"/>
+  <style:style style:name="ce2" style:family="table-cell" style:parent-style-name="Default" style:data-style-name="N36"/>
+  <style:style style:name="ce3" style:family="table-cell" style:parent-style-name="Heading" style:data-style-name="N40"/>
+  <style:style style:name="ce4" style:family="table-cell" style:parent-style-name="Default" style:data-style-name="N40"/>
  </office:automatic-styles>
  <office:body>
   <office:spreadsheet>

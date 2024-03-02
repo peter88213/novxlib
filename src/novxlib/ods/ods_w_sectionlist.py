@@ -42,6 +42,8 @@ class OdsWSectionList(OdsWriter):
     <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co4" table:default-cell-style-name="Default"/>
+    <table:table-column table:style-name="co2" table:default-cell-style-name="ce2"/>
+    <table:table-column table:style-name="co1" table:default-cell-style-name="ce4"/>
     <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co4" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
@@ -51,9 +53,9 @@ class OdsWSectionList(OdsWriter):
     <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
-    <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
-    <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
-    <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
+    <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
+    <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
+    <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
@@ -68,6 +70,12 @@ class OdsWSectionList(OdsWriter):
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>Section description</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce1" office:value-type="string">
+      <text:p>Date</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce3" office:value-type="string">
+      <text:p>Time</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>Tags</text:p>
@@ -119,6 +127,12 @@ class OdsWSectionList(OdsWriter):
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>$Desc</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="date" office:date-value="$Date">
+      <text:p>$Date</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="time" office:time-value="$OdsTime">
+      <text:p>$scTime</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>$Tags</text:p>
