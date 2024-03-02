@@ -40,6 +40,12 @@ class OdsRSectionList(OdsReader):
                 i += 1
                 self.novel.sections[scId].desc = cells[i].rstrip()
                 i += 1
+                if cells[i] or self.novel.sections[scId].date:
+                    self.novel.sections[scId].date = cells[i]
+                i += 1
+                if cells[i] or self.novel.sections[scId].time:
+                    self.novel.sections[scId].time = cells[i]
+                i += 1
                 if cells[i] or self.novel.sections[scId].tags:
                     self.novel.sections[scId].tags = string_to_list(cells[i], divider=self._DIVIDER)
                 i += 1
