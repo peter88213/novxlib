@@ -75,7 +75,7 @@ class OdsRSectionList(OdsReader):
             except:
                 pass
             else:
-                self.novel.sections[scId].datetime = scTime
+                self.novel.sections[scId].time = scTime
 
             #--- tags
             try:
