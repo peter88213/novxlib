@@ -20,27 +20,46 @@ class OdsRLocList(OdsReader):
     DESCRIPTION = _('Location list')
     SUFFIX = LOCLIST_SUFFIX
     _columnTitles = ['ID', 'Name', 'Description', 'Aka', 'Tags']
+    _idPrefix = LOCATION_PREFIX
 
     def read(self):
-        """Parse the file and get the instance variables.
+        """Parse the ODS file located at filePath, fetching the location attributes contained.
         
-        Parse the ODS file located at filePath, fetching the location attributes contained.
-        Raise the "Error" exception in case of error. 
         Extends the superclass method.
         """
         super().read()
-        self.novel.tree.delete_children(LC_ROOT)
-        for cells in self._rows:
-            if LOCATION_PREFIX in cells[0]:
-                lcId = re.search(f'({LOCATION_PREFIX}[0-9]+)', cells[0]).group(1)
-                self.novel.tree.append(LC_ROOT, lcId)
-                if not lcId in self.novel.locations:
-                    self.novel.locations[lcId] = WorldElement()
-                if self.novel.locations[lcId].title or cells[1]:
-                    self.novel.locations[lcId].title = cells[1].rstrip()
-                if self.novel.locations[lcId].desc or cells[2]:
-                    self.novel.locations[lcId].desc = cells[2].rstrip()
-                if self.novel.locations[lcId].aka or cells[3]:
-                    self.novel.locations[lcId].aka = cells[3].rstrip()
-                if self.novel.locations[lcId].tags or cells[4]:
-                    self.novel.locations[lcId].tags = string_to_list(cells[4], divider=self._DIVIDER)
+        for lcId in self.novel.locations:
+
+            #--- name
+            try:
+                title = self._columns['Name'][lcId]
+            except:
+                pass
+            else:
+                self.novel.locations[lcId].title = title.rstrip()
+
+            #--- desc
+            try:
+                desc = self._columns['Description'][lcId]
+            except:
+                pass
+            else:
+                self.novel.locations[lcId].desc = desc.rstrip()
+
+            #--- aka
+            try:
+                desc = self._columns['Aka'][lcId]
+            except:
+                pass
+            else:
+                self.novel.locations[lcId].aka = desc.rstrip()
+
+            #--- tags
+            try:
+                tags = self._columns['Tags'][lcId]
+            except:
+                pass
+            else:
+                if tags:
+                    self.novel.locations[lcId].tags = string_to_list(tags, divider=self._DIVIDER)
+

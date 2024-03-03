@@ -574,6 +574,17 @@
     </CHAPTER>
   </CHAPTERS>
   <CHARACTERS>
+    <CHARACTER id="cr1" major="1">
+      <Title>Hal</Title>
+      <FullName>Hal Spacejoke</FullName>
+      <Aka>Spacejockey</Aka>
+      <Bio>
+        <p>Somehow, Hal Spacejoke ended up in the cargo game. With a loan from a dodgy operator and a ship from the wrong side of the nearest junkyard he works the back reaches of the galaxy. A couple of important things about Hal - he's determined to stay on the right side of the law, and he has a strong sense of justice.</p>
+      </Bio>
+      <Goals>
+        <p>Have fun, make money.</p>
+      </Goals>
+    </CHARACTER>
     <CHARACTER id="cr2">
       <Title>Jerling</Title>
       <FullName>Walter Jerling</FullName>
@@ -585,7 +596,7 @@
         <p>One of his companies needs an urgent shipment of parts to complete a set of new robots for the Emperor.</p>
       </Goals>
     </CHARACTER>
-    <CHARACTER id="cr3">
+    <CHARACTER id="cr3" major="1">
       <Title>Clunk</Title>
       <FullName>Clunk XG99</FullName>
       <Aka>XG99</Aka>
@@ -669,17 +680,6 @@
     <CHARACTER id="cr12">
       <Title>Portmaster</Title>
       <FullName>Portmaster Linten</FullName>
-    </CHARACTER>
-    <CHARACTER id="cr1">
-      <Title>Hal</Title>
-      <FullName>Hal Spacejock</FullName>
-      <Aka>Spacejock</Aka>
-      <Bio>
-        <p>Somehow, Hal Spacejock ended up in the cargo game. With a loan from a dodgy operator and a ship from the wrong side of the nearest junkyard he works the back reaches of the galaxy. A couple of important things about Hal - he's determined to stay on the right side of the law, and he has a strong sense of justice.</p>
-      </Bio>
-      <Goals>
-        <p>Have fun, make money.</p>
-      </Goals>
     </CHARACTER>
   </CHARACTERS>
   <LOCATIONS>

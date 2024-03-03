@@ -677,6 +677,13 @@
     </CHARACTER>
   </CHARACTERS>
   <LOCATIONS>
+    <LOCATION id="lc1">
+      <Title>Black Gull</Title>
+      <Aka>Gully</Aka>
+      <Desc>
+        <p>Hal's ship, a brand new freighter he bought from his spare money.</p>
+      </Desc>
+    </LOCATION>
     <LOCATION id="lc2">
       <Title>Lamira Spaceport</Title>
       <Desc>
@@ -691,18 +698,7 @@
     </LOCATION>
     <LOCATION id="lc4">
       <Title>Jerling Enterprises</Title>
-    </LOCATION>
-    <LOCATION id="lc1">
-      <Title>Black Gull</Title>
-      <Desc>
-        <p>Hal's ship, a decrepit old freighter he bought with a dodgy loan</p>
-      </Desc>
-    </LOCATION>
-    <LOCATION id="lc5">
-      <Title>Monolith Burger</Title>
-      <Desc>
-        <p>A cheap, tidy fast food restaurant</p>
-      </Desc>
+      <Tags>Office</Tags>
     </LOCATION>
   </LOCATIONS>
   <ITEMS />

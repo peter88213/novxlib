@@ -22,6 +22,7 @@ class OdsReader(OdfReader, ABC):
     _SEPARATOR = ','
     # delimits data fields within a record.
     _columnTitles = []
+    _idPrefix = '??'
 
     _DIVIDER = FileExport._DIVIDER
 
@@ -37,7 +38,8 @@ class OdsReader(OdfReader, ABC):
         Extends the superclass constructor.
         """
         super().__init__(filePath)
-        self._rows = []
+        self._columns = {}
+        # dict: {column title, {element ID, cell content}}
 
     @abstractmethod
     def read(self):
@@ -51,16 +53,17 @@ class OdsReader(OdfReader, ABC):
         self._rows = []
         cellsPerRow = len(self._columnTitles)
         parser = OdsParser()
-        self._rows = parser.get_rows(self.filePath, cellsPerRow)
-        for row in self._rows:
+        rows = parser.get_rows(self.filePath, cellsPerRow)
+        for row in rows:
             if len(row) != cellsPerRow:
                 print(row)
                 print(len(row), cellsPerRow)
                 raise Error(f'{_("Wrong table structure")}.')
 
-        for i, colTitle in enumerate(self._columnTitles):
-            if colTitle != self._rows[0][i]:
-                print(f'\n{self._rows[0]}')
-                print(self._columnTitles)
-                raise Error(f'{_("Wrong table structure")}.')
+        for title in rows[0]:
+            self._columns[title] = {}
+        for row in rows:
+            if row[0].startswith(self._idPrefix):
+                for i, col in enumerate(self._columns):
+                    self._columns[col][row[0]] = row[i]
 

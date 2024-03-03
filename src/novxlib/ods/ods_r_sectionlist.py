@@ -5,6 +5,7 @@ For further information see https://github.com/peter88213/novxlib
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
 import re
+from datetime import date, time
 
 from novxlib.model.section import Section
 from novxlib.novx_globals import SECTIONLIST_SUFFIX
@@ -24,61 +25,100 @@ class OdsRSectionList(OdsReader):
         'Goal', 'Conflict', 'Outcome', 'Section', 'Words total',
         'Word count', 'Characters', 'Locations', 'Items'
         ]
+    _idPrefix = SECTION_PREFIX
 
     def read(self):
-        """Parse the file and get the instance variables.
+        """Parse the ODS file located at filePath, fetching the Section attributes contained.
         
-        Parse the ODS file located at filePath, fetching the Section attributes contained.
         Extends the superclass method.
         """
         super().read()
-        for cells in self._rows:
-            i = 0
-            if SECTION_PREFIX in cells[i]:
-                scId = re.search(f'({SECTION_PREFIX}[0-9]+)', cells[0]).group(1)
-                if not scId in self.novel.sections:
-                    self.novel.sections[scId] = Section()
-                i += 1
-                self.novel.sections[scId].title = cells[i].rstrip()
-                i += 1
-                self.novel.sections[scId].desc = cells[i].rstrip()
-                i += 1
-                if cells[i] or self.novel.sections[scId].date:
-                    self.novel.sections[scId].date = cells[i]
-                i += 1
-                if cells[i] or self.novel.sections[scId].time:
-                    self.novel.sections[scId].time = cells[i]
-                i += 1
-                if cells[i] or self.novel.sections[scId].tags:
-                    self.novel.sections[scId].tags = string_to_list(cells[i], divider=self._DIVIDER)
-                i += 1
-                if cells[i] or self.novel.sections[scId].notes:
-                    self.novel.sections[scId].notes = cells[i].rstrip()
-                i += 1
-                try:
-                    self.novel.sections[scId].scPacing = Section.PACING.index(cells[i])
-                except ValueError:
-                    pass
-                    # Section pacing type remains None and will be ignored when
-                    # writing back.
-                i += 1
-                if cells[i] or self.novel.sections[scId].goal:
-                    self.novel.sections[scId].goal = cells[i].rstrip()
-                i += 1
-                if cells[i] or self.novel.sections[scId].conflict:
-                    self.novel.sections[scId].conflict = cells[i].rstrip()
-                i += 1
-                if cells[i] or self.novel.sections[scId].outcome:
-                    self.novel.sections[scId].outcome = cells[i].rstrip()
-                i += 1
-                # Don't write back sectionCount
-                i += 1
-                # Don't write back wordCount
-                i += 1
-                # Don't write back section words total
-                i += 1
-                # Can't write back character IDs, because self.characters is None.
-                i += 1
-                # Can't write back location IDs, because self.locations is None.
-                i += 1
-                # Can't write back item IDs, because self.items is None.
+        for scId in self.novel.sections:
+
+            #--- title
+            try:
+                title = self._columns['Section title'][scId]
+            except:
+                pass
+            else:
+                self.novel.sections[scId].title = title.rstrip()
+
+            #--- desc
+            try:
+                desc = self._columns['Section description'][scId]
+            except:
+                pass
+            else:
+                self.novel.sections[scId].desc = desc.rstrip()
+
+            #--- notes
+            try:
+                notes = self._columns['Section notes'][scId]
+            except:
+                pass
+            else:
+                self.novel.sections[scId].notes = notes.rstrip()
+
+            #--- date
+            try:
+                scDate = self._columns['Date'][scId]
+                date.fromisoformat(scDate)
+            except:
+                pass
+            else:
+                self.novel.sections[scId].date = scDate
+
+            #--- time
+            try:
+                scTime = self._columns['Time'][scId]
+                time.fromisoformat(scTime)
+            except:
+                pass
+            else:
+                self.novel.sections[scId].datetime = scTime
+
+            #--- tags
+            try:
+                tags = self._columns['Tags'][scId]
+            except:
+                pass
+            else:
+                if tags:
+                    self.novel.sections[scId].tags = string_to_list(tags, divider=self._DIVIDER)
+
+            #--- A/R/C
+            try:
+                ar = self._columns['A/R'][scId]
+            except:
+                pass
+            else:
+                if ar:
+                    try:
+                        self.novel.sections[scId].scPacing = Section.PACING.index(ar)
+                    except ValueError:
+                        pass
+
+            #--- goal
+            try:
+                goal = self._columns['Goal'][scId]
+            except:
+                pass
+            else:
+                self.novel.sections[scId].goal = goal.rstrip()
+
+            #--- conflict
+            try:
+                conflict = self._columns['Conflict'][scId]
+            except:
+                pass
+            else:
+                self.novel.sections[scId].conflict = conflict.rstrip()
+
+            #--- outcome
+            try:
+                outcome = self._columns['Outcome'][scId]
+            except:
+                pass
+            else:
+                self.novel.sections[scId].outcome = outcome.rstrip()
+

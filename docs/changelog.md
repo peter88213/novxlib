@@ -1,5 +1,9 @@
 # Changelog
 
+### v1.4.1
+
+- More robust ODS file reading.
+
 ### v1.4.0
 
 - Add date/time information to the section list.

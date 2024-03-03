@@ -20,39 +20,90 @@ class OdsRCharList(OdsReader):
     DESCRIPTION = _('Character list')
     SUFFIX = CHARLIST_SUFFIX
     _columnTitles = ['ID', 'Name', 'Full name', 'Aka', 'Description', 'Bio', 'Goals', 'Importance', 'Tags', 'Notes']
+    _idPrefix = CHARACTER_PREFIX
 
     def read(self):
-        """Parse the file and get the instance variables.
-        
-        Parse the ODS file located at filePath, fetching the Character attributes contained.
-        Raise the "Error" exception in case of error. 
+        """Parse the ODS file located at filePath, fetching the Character attributes contained.
+
         Extends the superclass method.
         """
         super().read()
-        self.novel.tree.delete_children(CR_ROOT)
-        for cells in self._rows:
-            if CHARACTER_PREFIX in cells[0]:
-                crId = re.search(f'({CHARACTER_PREFIX}[0-9]+)', cells[0]).group(1)
-                self.novel.tree.append(CR_ROOT, crId)
-                if not crId in self.novel.characters:
-                    self.novel.characters[crId] = Character()
-                if self.novel.characters[crId].title or cells[1]:
-                    self.novel.characters[crId].title = cells[1]
-                if self.novel.characters[crId].fullName or cells[2]:
-                    self.novel.characters[crId].fullName = cells[2]
-                if self.novel.characters[crId].aka or cells[3]:
-                    self.novel.characters[crId].aka = cells[3]
-                if self.novel.characters[crId].desc or cells[4]:
-                    self.novel.characters[crId].desc = cells[4].rstrip()
-                if self.novel.characters[crId].bio or cells[5]:
-                    self.novel.characters[crId].bio = cells[5].rstrip()
-                if self.novel.characters[crId].goals  or cells[6]:
-                    self.novel.characters[crId].goals = cells[6].rstrip()
-                if Character.MAJOR_MARKER in cells[7]:
+
+        for crId in self.novel.characters:
+
+            #--- name
+            try:
+                title = self._columns['Name'][crId]
+            except:
+                pass
+            else:
+                self.novel.characters[crId].title = title.rstrip()
+
+            #--- fullName
+            try:
+                fullName = self._columns['Full name'][crId]
+            except:
+                pass
+            else:
+                self.novel.characters[crId].fullName = fullName.rstrip()
+
+            #--- desc
+            try:
+                desc = self._columns['Description'][crId]
+            except:
+                pass
+            else:
+                self.novel.characters[crId].desc = desc.rstrip()
+
+            #--- aka
+            try:
+                desc = self._columns['Aka'][crId]
+            except:
+                pass
+            else:
+                self.novel.characters[crId].aka = desc.rstrip()
+
+            #--- tags
+            try:
+                tags = self._columns['Tags'][crId]
+            except:
+                pass
+            else:
+                if tags:
+                    self.novel.characters[crId].tags = string_to_list(tags, divider=self._DIVIDER)
+
+            #--- notes
+            try:
+                notes = self._columns['Section notes'][crId]
+            except:
+                pass
+            else:
+                self.novel.characters[crId].notes = notes.rstrip()
+
+            #--- goals
+            try:
+                goals = self._columns['Goals'][crId]
+            except:
+                pass
+            else:
+                self.novel.characters[crId].goals = goals.rstrip()
+
+            #--- bio
+            try:
+                bio = self._columns['Bio'][crId]
+            except:
+                pass
+            else:
+                self.novel.characters[crId].bio = bio.rstrip()
+
+            #--- importance
+            try:
+                importance = self._columns['Importance'][crId]
+            except:
+                pass
+            else:
+                if Character.MAJOR_MARKER in importance:
                     self.novel.characters[crId].isMajor = True
                 else:
                     self.novel.characters[crId].isMajor = False
-                if self.novel.characters[crId].tags or cells[8]:
-                    self.novel.characters[crId].tags = string_to_list(cells[8], divider=self._DIVIDER)
-                if self.novel.characters[crId].notes or cells[9]:
-                    self.novel.characters[crId].notes = cells[9].rstrip()
+

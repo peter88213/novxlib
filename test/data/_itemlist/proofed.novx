@@ -694,25 +694,19 @@
     </LOCATION>
   </LOCATIONS>
   <ITEMS>
+    <ITEM id="it1">
+      <Title>Chessboard</Title>
+      <Aka>My game</Aka>
+      <Desc>
+        <p>Hal's chessboard, source of infinite frustration.</p>
+      </Desc>
+      <Tags>Game;Challenge</Tags>
+    </ITEM>
     <ITEM id="it2">
       <Title>Fire extinguisher</Title>
       <Desc>
         <p>Stolen from a Space Patrol Cruiser, this gadget is a real eye candy.</p>
       </Desc>
-    </ITEM>
-    <ITEM id="it3">
-      <Title>Pocket lint</Title>
-      <Desc>
-        <p>Hal‘s trusty, reliable pocket lint.</p>
-      </Desc>
-    </ITEM>
-    <ITEM id="it1">
-      <Title>Chessboard</Title>
-      <Aka>My game</Aka>
-      <Desc>
-        <p>Hal's chessboard, source of infinite joy.</p>
-      </Desc>
-      <Tags>Game;Challenge</Tags>
     </ITEM>
   </ITEMS>
   <ARCS />

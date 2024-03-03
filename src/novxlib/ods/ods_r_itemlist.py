@@ -20,27 +20,46 @@ class OdsRItemList(OdsReader):
     DESCRIPTION = _('Item list')
     SUFFIX = ITEMLIST_SUFFIX
     _columnTitles = ['ID', 'Name', 'Description', 'Aka', 'Tags']
+    _idPrefix = ITEM_PREFIX
 
     def read(self):
-        """Parse the file and get the instance variables.
-        
-        Parse the ODS file located at filePath, fetching the item attributes contained.
-        Raise the "Error" exception in case of error. 
+        """Parse the ODS file located at filePath, fetching the item attributes contained.
+
         Extends the superclass method.
         """
         super().read()
-        self.novel.tree.delete_children(IT_ROOT)
-        for cells in self._rows:
-            if ITEM_PREFIX in cells[0]:
-                itId = re.search(f'({ITEM_PREFIX}[0-9]+)', cells[0]).group(1)
-                self.novel.tree.append(IT_ROOT, itId)
-                if not itId in self.novel.items:
-                    self.novel.items[itId] = WorldElement()
-                if self.novel.items[itId].title or cells[1]:
-                    self.novel.items[itId].title = cells[1].rstrip()
-                if self.novel.items[itId].desc or cells[2]:
-                    self.novel.items[itId].desc = cells[2].rstrip()
-                if self.novel.items[itId].aka or cells[3]:
-                    self.novel.items[itId].aka = cells[3].rstrip()
-                if self.novel.items[itId].tags or cells[4]:
-                    self.novel.items[itId].tags = string_to_list(cells[4], divider=self._DIVIDER)
+        for itId in self.novel.items:
+
+            #--- name
+            try:
+                title = self._columns['Name'][itId]
+            except:
+                pass
+            else:
+                self.novel.items[itId].title = title.rstrip()
+
+            #--- desc
+            try:
+                desc = self._columns['Description'][itId]
+            except:
+                pass
+            else:
+                self.novel.items[itId].desc = desc.rstrip()
+
+            #--- aka
+            try:
+                desc = self._columns['Aka'][itId]
+            except:
+                pass
+            else:
+                self.novel.items[itId].aka = desc.rstrip()
+
+            #--- tags
+            try:
+                tags = self._columns['Tags'][itId]
+            except:
+                pass
+            else:
+                if tags:
+                    self.novel.items[itId].tags = string_to_list(tags, divider=self._DIVIDER)
+
