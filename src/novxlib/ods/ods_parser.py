@@ -87,7 +87,7 @@ class OdsParser:
                 attribute = cell.get(f'{{{namespaces["table"]}}}number-columns-repeated')
                 if attribute:
                     repeat = int(attribute) - 1
-                    for j in range(repeat):
+                    for __ in range(repeat):
                         if i >= cellsPerRow:
                             # The cell is excess, created by Calc.
                             break
