@@ -1,5 +1,10 @@
 # Changelog
 
+
+### v1.4.2
+
+- Provide translated headers for ODS export.
+
 ### v1.4.1
 
 - More robust ODS file reading.

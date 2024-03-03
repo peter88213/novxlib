@@ -25,7 +25,7 @@ class OdsWCharList(OdsWriter):
     <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co4" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co1" table:number-columns-repeated="1014" table:default-cell-style-name="Default"/>
-     <table:table-row table:style-name="ro1">
+     <table:table-row table:style-name="ro1" table:visibility="collapse">
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>ID</text:p>
      </table:table-cell>
@@ -55,6 +55,39 @@ class OdsWCharList(OdsWriter):
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>Notes</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" table:number-columns-repeated="1014"/>
+    </table:table-row>
+     <table:table-row table:style-name="ro1">
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>ID</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>{_("Name")}</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>{_("Full name")}</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>{_("Aka")}</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>{_("Description")}</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>{_("Bio")}</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>{_("Goals")}</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>{_("Importance")}</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>{_("Tags")}</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>{_("Notes")}</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" table:number-columns-repeated="1014"/>
     </table:table-row>

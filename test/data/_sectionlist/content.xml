@@ -69,6 +69,60 @@
     <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
+    <table:table-row table:style-name="ro1" table:visibility="collapse">
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>Section link</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>Section title</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>Section description</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce1" office:value-type="string">
+      <text:p>Date</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce3" office:value-type="string">
+      <text:p>Time</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>Tags</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>Section notes</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>A/R</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>Goal</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>Conflict</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>Outcome</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>Section</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>Words total</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>Word count</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>Characters</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>Locations</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>Items</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" table:number-columns-repeated="1003"/>
+    </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>Section link</text:p>

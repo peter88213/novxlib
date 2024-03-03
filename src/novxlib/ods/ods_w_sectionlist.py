@@ -63,7 +63,7 @@ class OdsWSectionList(OdsWriter):
     <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
-    <table:table-row table:style-name="ro1">
+    <table:table-row table:style-name="ro1" table:visibility="collapse">
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>Section link</text:p>
      </table:table-cell>
@@ -114,6 +114,60 @@ class OdsWSectionList(OdsWriter):
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>Items</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" table:number-columns-repeated="1003"/>
+    </table:table-row>
+    <table:table-row table:style-name="ro1">
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>{_("Section link")}</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>{_("Section title")}</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>{_("Section description")}</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce1" office:value-type="string">
+      <text:p>{_("Date")}</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="ce3" office:value-type="string">
+      <text:p>{_("Time")}</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>{_("Tags")}</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>{_("Section notes")}</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>{_("A/R")}</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>{_("Goal")}</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>{_("Conflict")}</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>{_("Outcome")}</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>{_("Section")}</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>{_("Words total")}</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>{_("Word count")}</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>{_("Characters")}</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>{_("Locations")}</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>{_("Items")}</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" table:number-columns-repeated="1003"/>
     </table:table-row>
