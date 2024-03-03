@@ -47,11 +47,11 @@ class NovxFile(File):
     EXTENSION = '.novx'
 
     MAJOR_VERSION = 1
-    MINOR_VERSION = 0
+    MINOR_VERSION = 1
     # DTD version.
 
-    XML_HEADER = '''<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE novx SYSTEM "novx_1_0.dtd">
+    XML_HEADER = f'''<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE novx SYSTEM "novx_{MAJOR_VERSION}_{MINOR_VERSION}.dtd">
 <?xml-stylesheet href="novx.css" type="text/css"?>
 '''
 
@@ -422,6 +422,13 @@ class NovxFile(File):
             xmlSection.append(text_to_xml_element('Conflict', prjScn.conflict))
         if prjScn.outcome:
             xmlSection.append(text_to_xml_element('Outcome', prjScn.outcome))
+        if prjScn.plotNotes:
+            xmlPlotNotes = ET.SubElement(xmlSection, 'PlotNotes')
+            for acId in prjScn.plotNotes:
+                if acId in prjScn.scArcs:
+                    xmlArcNotes = text_to_xml_element('ArcNotes', prjScn.plotNotes[acId])
+                    xmlArcNotes.set('id', acId)
+                    xmlPlotNotes.append(xmlArcNotes)
         if prjScn.notes:
             xmlSection.append(text_to_xml_element('Notes', prjScn.notes))
         tagStr = list_to_string(prjScn.tags)
@@ -747,9 +754,20 @@ class NovxFile(File):
         self.novel.sections[scId].lastsDays = get_element_text(xmlSection, 'LastsDays')
         self.novel.sections[scId].lastsHours = get_element_text(xmlSection, 'LastsHours')
         self.novel.sections[scId].lastsMinutes = get_element_text(xmlSection, 'LastsMinutes')
+
+        #--- Goal/Conflict/outcome.
         self.novel.sections[scId].goal = xml_element_to_text(xmlSection.find('Goal'))
         self.novel.sections[scId].conflict = xml_element_to_text(xmlSection.find('Conflict'))
         self.novel.sections[scId].outcome = xml_element_to_text(xmlSection.find('Outcome'))
+
+        #--- Plot notes.
+        xmlPlotNotes = xmlSection.find('PlotNotes')
+        if xmlPlotNotes is not None:
+            plotNotes = {}
+            for xmlArcNote in xmlPlotNotes.iterfind('ArcNotes'):
+                acId = xmlArcNote.get('id', None)
+                plotNotes[acId] = xml_element_to_text(xmlArcNote)
+            self.novel.sections[scId].plotNotes = plotNotes
 
         #--- References
         scCharacters = []

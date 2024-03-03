@@ -36,6 +36,7 @@ class Section(BasicElement):
             goal=None,
             conflict=None,
             outcome=None,
+            plotNotes=None,
             scDate=None,
             scTime=None,
             day=None,
@@ -51,52 +52,32 @@ class Section(BasicElement):
         self._sectionContent = None
         self.wordCount = 0
         # To be updated by the sectionContent setter
+
+        #--- Initialize properties.
         self._scType = scType
-        # 0 = Normal
-        # 1 = Unused
-        # 2 = Level 1 stage
-        # 3 = Level 2 stage
         self._scPacing = scPacing
-        # 0 = Action
-        # 1 = Reaction
-        # 2 = Custom
         self._status = status
-        # 1 - Outline
-        # 2 - Draft
-        # 3 - 1st Edit
-        # 4 - 2nd Edit
-        # 5 - Done
         self._notes = notes
         self._tags = tags
-        # semicolon-separated tags
         self._appendToPrev = appendToPrev
-        # if True, append section to the previous one without section separator
         self._goal = goal
         self._conflict = conflict
         self._outcome = outcome
-
+        self._plotNotes = plotNotes
         try:
             self.weekDay = date.fromisoformat(scDate).weekday()
             self._date = scDate
         except:
             self.weekDay = None
             self._date = None
-            # yyyy-mm-dd
-
         self._time = scTime
-        # hh:mm:ss
-
         self._day = day
         self._lastsMinutes = lastsMinutes
         self._lastsHours = lastsHours
         self._lastsDays = lastsDays
-
         self._characters = characters
-        # list of character IDs
         self._locations = locations
-        # List of location IDs
         self._items = items
-        # List of Item IDs
 
         self.scArcs = []
         # Back references to Arc.sections
@@ -124,6 +105,10 @@ class Section(BasicElement):
 
     @property
     def scType(self):
+        # 0 = Normal
+        # 1 = Unused
+        # 2 = Level 1 stage
+        # 3 = Level 2 stage
         return self._scType
 
     @scType.setter
@@ -134,6 +119,9 @@ class Section(BasicElement):
 
     @property
     def scPacing(self):
+        # 0 = Action
+        # 1 = Reaction
+        # 2 = Custom
         return self._scPacing
 
     @scPacing.setter
@@ -144,6 +132,11 @@ class Section(BasicElement):
 
     @property
     def status(self):
+        # 1 - Outline
+        # 2 - Draft
+        # 3 - 1st Edit
+        # 4 - 2nd Edit
+        # 5 - Done
         return self._status
 
     @status.setter
@@ -164,6 +157,7 @@ class Section(BasicElement):
 
     @property
     def tags(self):
+        # semicolon-separated tags
         return self._tags
 
     @tags.setter
@@ -174,6 +168,7 @@ class Section(BasicElement):
 
     @property
     def appendToPrev(self):
+        # if True, append section to the previous one without section separator
         return self._appendToPrev
 
     @appendToPrev.setter
@@ -213,7 +208,22 @@ class Section(BasicElement):
             self.on_element_change()
 
     @property
+    def plotNotes(self):
+        # Dict of {arc ID: text}
+        try:
+            return dict(self._plotNotes)
+        except TypeError:
+            return None
+
+    @plotNotes.setter
+    def plotNotes(self, newVal):
+        if self._plotNotes != newVal:
+            self._plotNotes = newVal
+            self.on_element_change()
+
+    @property
     def date(self):
+        # yyyy-mm-dd
         return self._date
 
     @date.setter
@@ -234,6 +244,7 @@ class Section(BasicElement):
 
     @property
     def time(self):
+        # hh:mm:ss
         return self._time
 
     @time.setter
@@ -284,6 +295,7 @@ class Section(BasicElement):
 
     @property
     def characters(self):
+        # list of character IDs
         try:
             return self._characters[:]
         except TypeError:
@@ -297,6 +309,7 @@ class Section(BasicElement):
 
     @property
     def locations(self):
+        # List of location IDs
         try:
             return self._locations[:]
         except TypeError:
@@ -310,6 +323,7 @@ class Section(BasicElement):
 
     @property
     def items(self):
+        # List of Item IDs
         try:
             return self._items[:]
         except TypeError:
