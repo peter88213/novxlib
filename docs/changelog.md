@@ -1,5 +1,11 @@
 # Changelog
 
+### v1.5.0
+
+- Update DTD to v1.1: Add section arc notes.
+- Add notes to the section for each associated arc.
+- Provide an ODS Plot grid for export and import.
+- Make the ODS Section list complete and export-only.
 
 ### v1.4.2
 
