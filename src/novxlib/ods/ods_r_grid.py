@@ -20,10 +20,18 @@ class OdsRGrid(OdsReader):
     DESCRIPTION = _('Plot grid')
     SUFFIX = GRID_SUFFIX
     _columnTitles = [
-        'Section link', 'Section title', 'Section description',
-        'Date', 'Time', 'Tags', 'Section notes', 'A/R',
-        'Goal', 'Conflict', 'Outcome', 'Section', 'Words total',
-        'Word count', 'Characters', 'Locations', 'Items'
+        'Link',
+        'Section',
+        'Date',
+        'Time',
+        'Title',
+        'Description',
+        'Tags',
+        'A/R',
+        'Goal',
+        'Conflict',
+        'Outcome',
+        'Notes',
         ]
     _idPrefix = SECTION_PREFIX
 
@@ -34,30 +42,6 @@ class OdsRGrid(OdsReader):
         """
         super().read()
         for scId in self.novel.sections:
-
-            #--- title
-            try:
-                title = self._columns['Section title'][scId]
-            except:
-                pass
-            else:
-                self.novel.sections[scId].title = title.rstrip()
-
-            #--- desc
-            try:
-                desc = self._columns['Section description'][scId]
-            except:
-                pass
-            else:
-                self.novel.sections[scId].desc = desc.rstrip()
-
-            #--- notes
-            try:
-                notes = self._columns['Section notes'][scId]
-            except:
-                pass
-            else:
-                self.novel.sections[scId].notes = notes.rstrip()
 
             #--- date
             try:
@@ -76,6 +60,22 @@ class OdsRGrid(OdsReader):
                 pass
             else:
                 self.novel.sections[scId].time = scTime
+
+            #--- title
+            try:
+                title = self._columns['Title'][scId]
+            except:
+                pass
+            else:
+                self.novel.sections[scId].title = title.rstrip()
+
+            #--- desc
+            try:
+                desc = self._columns['Description'][scId]
+            except:
+                pass
+            else:
+                self.novel.sections[scId].desc = desc.rstrip()
 
             #--- tags
             try:
@@ -121,4 +121,12 @@ class OdsRGrid(OdsReader):
                 pass
             else:
                 self.novel.sections[scId].outcome = outcome.rstrip()
+
+            #--- notes
+            try:
+                notes = self._columns['Notes'][scId]
+            except:
+                pass
+            else:
+                self.novel.sections[scId].notes = notes.rstrip()
 

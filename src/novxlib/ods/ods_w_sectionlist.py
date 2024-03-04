@@ -6,10 +6,10 @@ License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
 from novxlib.novx_globals import SECTIONLIST_SUFFIX
 from novxlib.novx_globals import _
-from novxlib.ods.ods_writer import OdsWriter
+from novxlib.ods.ods_w_grid import OdsWGrid
 
 
-class OdsWSectionList(OdsWriter):
+class OdsWSectionList(OdsWGrid):
     """ODS section list writer."""
 
     DESCRIPTION = _('Section list')
@@ -40,7 +40,7 @@ class OdsWSectionList(OdsWriter):
     # Locations
     # Items
 
-    _fileHeader = f'''{OdsWriter._CONTENT_XML_HEADER}{DESCRIPTION}" table:style-name="ta1" table:print="false">
+    _fileHeader = f'''{OdsWGrid._CONTENT_XML_HEADER}{DESCRIPTION}" table:style-name="ta1" table:print="false">
     <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co4" table:default-cell-style-name="Default"/>
@@ -184,12 +184,8 @@ class OdsWSectionList(OdsWriter):
      <table:table-cell office:value-type="string">
       <text:p>$Desc</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="date" office:date-value="$Date">
-      <text:p>$Date</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="time" office:time-value="$OdsTime">
-      <text:p>$scTime</text:p>
-     </table:table-cell>
+$DateCell     
+$TimeCell
      <table:table-cell office:value-type="string">
       <text:p>$Tags</text:p>
      </table:table-cell>
@@ -229,6 +225,4 @@ class OdsWSectionList(OdsWriter):
     </table:table-row>
 
 '''
-
-    _fileFooter = OdsWriter._CONTENT_XML_FOOTER
 

@@ -4,6 +4,8 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
+from string import Template
+
 from novxlib.novx_globals import GRID_SUFFIX
 from novxlib.novx_globals import _
 from novxlib.ods.ods_writer import OdsWriter
@@ -23,55 +25,37 @@ class OdsWGrid(OdsWriter):
 
     # Header structure:
     # Section link
-    # Section title
-    # Section description
+    # Section
     # Date
     # Time
+    # Section title
+    # Section description
     # Tags
-    # Section notes
     # A/R
     # Goal
     # Conflict
     # Outcome
-    # Section
-    # Words total
-    # Word count
-    # Characters
-    # Locations
-    # Items
+    # Section notes
 
     _fileHeader = f'''{OdsWriter._CONTENT_XML_HEADER}{DESCRIPTION}" table:style-name="ta1" table:print="false">
     <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
-    <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
-    <table:table-column table:style-name="co4" table:default-cell-style-name="Default"/>
+    <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co2" table:default-cell-style-name="ce2"/>
     <table:table-column table:style-name="co1" table:default-cell-style-name="ce4"/>
     <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co4" table:default-cell-style-name="Default"/>
+    <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co4" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co4" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co4" table:default-cell-style-name="Default"/>
-    <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
-    <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
-    <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
-    <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
-    <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
-    <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
-    <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
-    <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
-    <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
-    <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
-    <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
+    <table:table-column table:style-name="co4" table:default-cell-style-name="Default"/>
     <table:table-row table:style-name="ro1" table:visibility="collapse">
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>Section link</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>Section title</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>Section description</text:p>
+      <text:p>Section</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce1" office:value-type="string">
       <text:p>Date</text:p>
@@ -80,10 +64,13 @@ class OdsWGrid(OdsWriter):
       <text:p>Time</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>Tags</text:p>
+      <text:p>Title</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>Section notes</text:p>
+      <text:p>Description</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>Tags</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>A/R</text:p>
@@ -98,22 +85,7 @@ class OdsWGrid(OdsWriter):
       <text:p>Outcome</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>Section</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>Words total</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>Word count</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>Characters</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>Locations</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>Items</text:p>
+      <text:p>Notes</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" table:number-columns-repeated="1003"/>
     </table:table-row>
@@ -122,10 +94,7 @@ class OdsWGrid(OdsWriter):
       <text:p>{_("Section link")}</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>{_("Section title")}</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>{_("Section description")}</text:p>
+      <text:p>{_("Section")}</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce1" office:value-type="string">
       <text:p>{_("Date")}</text:p>
@@ -134,10 +103,13 @@ class OdsWGrid(OdsWriter):
       <text:p>{_("Time")}</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>{_("Tags")}</text:p>
+      <text:p>{_("Title")}</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>{_("Section notes")}</text:p>
+      <text:p>{_("Description")}</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>{_("Tags")}</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>{_("A/R")}</text:p>
@@ -152,22 +124,7 @@ class OdsWGrid(OdsWriter):
       <text:p>{_("Outcome")}</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>{_("Section")}</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>{_("Words total")}</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>{_("Word count")}</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>{_("Characters")}</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>{_("Locations")}</text:p>
-     </table:table-cell>
-     <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>{_("Items")}</text:p>
+      <text:p>{_("Notes")}</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" table:number-columns-repeated="1003"/>
     </table:table-row>
@@ -179,22 +136,18 @@ class OdsWGrid(OdsWriter):
       <text:p>$ID</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
+      <text:p>$SectionNumber</text:p>
+     </table:table-cell>
+$DateCell     
+$TimeCell
+     <table:table-cell office:value-type="string">
       <text:p>$Title</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>$Desc</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="date" office:date-value="$Date">
-      <text:p>$Date</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="time" office:time-value="$OdsTime">
-      <text:p>$scTime</text:p>
-     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>$Tags</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string">
-      <text:p>$Notes</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>$ReactionSection</text:p>
@@ -208,27 +161,42 @@ class OdsWGrid(OdsWriter):
      <table:table-cell office:value-type="string">
       <text:p>$Outcome</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="$SectionNumber">
-      <text:p>$SectionNumber</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="$WordsTotal">
-      <text:p>$WordsTotal</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="$WordCount">
-      <text:p>$WordCount</text:p>
-     </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>$Characters</text:p>
-     </table:table-cell>
-     <table:table-cell office:value-type="string">
-      <text:p>$Locations</text:p>
-     </table:table-cell>
-     <table:table-cell>
-      <text:p>$Items</text:p>
+      <text:p>$Notes</text:p>
      </table:table-cell>
     </table:table-row>
 
 '''
 
     _fileFooter = OdsWriter._CONTENT_XML_FOOTER
+
+    _empty_date = '     <table:table-cell table:style-name="ce2"/>'
+    _valid_date = '''     <table:table-cell office:value-type="date" office:date-value="$Date">
+      <text:p>$Date</text:p>
+     </table:table-cell>'''
+    _empty_time = '     <table:table-cell table:style-name="ce4"/>'
+    _valid_time = '''     <table:table-cell office:value-type="time" office:time-value="$OdsTime">
+      <text:p>$Time</text:p>
+     </table:table-cell>'''
+
+    def _get_sectionMapping(self, scId, sectionNumber, wordsTotal):
+        """Return a mapping dictionary for a section section.
+        
+        Positional arguments:
+            scId: str -- section ID.
+            sectionNumber: int -- section number to be displayed.
+            wordsTotal: int -- accumulated wordcount.
+        
+        Extends the superclass method.
+        """
+        sectionMapping = super()._get_sectionMapping(scId, sectionNumber, wordsTotal)
+        if sectionMapping['Date']:
+            sectionMapping['DateCell'] = Template(self._valid_date).safe_substitute(sectionMapping)
+        else:
+            sectionMapping['DateCell'] = self._empty_date
+        if sectionMapping['Time']:
+            sectionMapping['TimeCell'] = Template(self._valid_time).safe_substitute(sectionMapping)
+        else:
+            sectionMapping['TimeCell'] = self._empty_time
+        return sectionMapping
 
