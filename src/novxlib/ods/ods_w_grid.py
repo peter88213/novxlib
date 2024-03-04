@@ -6,7 +6,7 @@ License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
 from string import Template
 
-from novxlib.novx_globals import GRID_SUFFIX
+from novxlib.novx_globals import GRID_SUFFIX, AC_ROOT
 from novxlib.novx_globals import _
 from novxlib.ods.ods_writer import OdsWriter
 
@@ -28,22 +28,28 @@ class OdsWGrid(OdsWriter):
     # Section
     # Date
     # Time
-    # Section title
-    # Section description
+    # Day
+    # Title
+    # Description
+    # Viewpoint
+    # All arcs
     # Tags
     # A/R
     # Goal
     # Conflict
     # Outcome
-    # Section notes
+    # Notes
 
     _fileHeader = f'''{OdsWriter._CONTENT_XML_HEADER}{DESCRIPTION}" table:style-name="ta1" table:print="false">
     <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co2" table:default-cell-style-name="ce2"/>
     <table:table-column table:style-name="co1" table:default-cell-style-name="ce4"/>
+    <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co4" table:default-cell-style-name="Default"/>
+    <table:table-column table:style-name="co2" table:default-cell-style-name="Default"/>
+$ArcColumns
     <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co4" table:default-cell-style-name="Default"/>
@@ -64,11 +70,18 @@ class OdsWGrid(OdsWriter):
       <text:p>Time</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>Day</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>Title</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>Description</text:p>
      </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>Viewpoint</text:p>
+     </table:table-cell>
+$ArcIdCells
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>Tags</text:p>
      </table:table-cell>
@@ -103,11 +116,18 @@ class OdsWGrid(OdsWriter):
       <text:p>{_("Time")}</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>{_("Day")}</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>{_("Title")}</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>{_("Description")}</text:p>
      </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>{_("Viewpoint")}</text:p>
+     </table:table-cell>
+$ArcTitleCells
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>{_("Tags")}</text:p>
      </table:table-cell>
@@ -115,13 +135,13 @@ class OdsWGrid(OdsWriter):
       <text:p>{_("A/R")}</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>{_("Goal")}</text:p>
+      <text:p>{_("Goal")} / {_("Reaction")}$CustomGoal</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>{_("Conflict")}</text:p>
+      <text:p>{_("Conflict")} / {_("Dilemma")}$CustomConflict</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>{_("Outcome")}</text:p>
+      <text:p>{_("Outcome")} / {_("Choice")}$CustomOutcome</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>{_("Notes")}</text:p>
@@ -141,11 +161,18 @@ class OdsWGrid(OdsWriter):
 $DateCell     
 $TimeCell
      <table:table-cell office:value-type="string">
+      <text:p>$Day</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
       <text:p>$Title</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>$Desc</text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>$Viewpoint</text:p>
+     </table:table-cell>
+$ArcNoteCells
      <table:table-cell office:value-type="string">
       <text:p>$Tags</text:p>
      </table:table-cell>
@@ -170,14 +197,65 @@ $TimeCell
 
     _fileFooter = OdsWriter._CONTENT_XML_FOOTER
 
-    _empty_date = '     <table:table-cell table:style-name="ce2"/>'
-    _valid_date = '''     <table:table-cell office:value-type="date" office:date-value="$Date">
+    _emptyDateCell = '     <table:table-cell table:style-name="ce2"/>'
+    _validDateCell = '''     <table:table-cell office:value-type="date" office:date-value="$Date">
       <text:p>$Date</text:p>
      </table:table-cell>'''
-    _empty_time = '     <table:table-cell table:style-name="ce4"/>'
-    _valid_time = '''     <table:table-cell office:value-type="time" office:time-value="$OdsTime">
+    _emptyTimeCell = '     <table:table-cell table:style-name="ce4"/>'
+    _validTimeCell = '''     <table:table-cell office:value-type="time" office:time-value="$OdsTime">
       <text:p>$Time</text:p>
      </table:table-cell>'''
+
+    _arcNoteCell = '''     <table:table-cell office:value-type="string">
+      <text:p>$ArcNote</text:p>
+     </table:table-cell>'''
+
+    _arcIdCell = '''     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>$ArcId</text:p>
+     </table:table-cell>'''
+
+    _arcTitleCell = '''     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>$ArcTitle</text:p>
+     </table:table-cell>'''
+
+    def _get_fileHeaderMapping(self):
+        """Return a mapping dictionary for the project section.
+        
+        Extends the superclass method.
+        """
+        fileHeaderMapping = super()._get_fileHeaderMapping()
+
+        #--- Cells for the arc notes: one column per arc.
+        arcColumns = []
+        arcIdCells = []
+        arcTitleCells = []
+        for acId in self.novel.tree.get_children(AC_ROOT):
+            arcColumns.append('    <table:table-column table:style-name="co4" table:default-cell-style-name="Default"/>')
+            mapping = dict(
+                ArcId=acId,
+                ArcTitle=self.novel.arcs[acId].title,
+                )
+            arcIdCells.append(Template(self._arcIdCell).safe_substitute(mapping))
+            arcTitleCells.append(Template(self._arcTitleCell).safe_substitute(mapping))
+        fileHeaderMapping['ArcColumns'] = '\n'.join(arcColumns)
+        fileHeaderMapping['ArcIdCells'] = '\n'.join(arcIdCells)
+        fileHeaderMapping['ArcTitleCells'] = '\n'.join(arcTitleCells)
+
+        #--- Custom goal/conflict/outcome titles.
+        if self.novel.customGoal:
+            fileHeaderMapping['CustomGoal'] = f' / {self.novel.customGoal}'
+        else:
+            fileHeaderMapping['CustomGoal'] = ''
+        if self.novel.customConflict:
+            fileHeaderMapping['CustomConflict'] = f' / {self.novel.customConflict}'
+        else:
+            fileHeaderMapping['CustomConflict'] = ''
+        if self.novel.customOutcome:
+            fileHeaderMapping['CustomOutcome'] = f' / {self.novel.customOutcome}'
+        else:
+            fileHeaderMapping['CustomOutcome'] = ''
+
+        return fileHeaderMapping
 
     def _get_sectionMapping(self, scId, sectionNumber, wordsTotal):
         """Return a mapping dictionary for a section section.
@@ -190,13 +268,30 @@ $TimeCell
         Extends the superclass method.
         """
         sectionMapping = super()._get_sectionMapping(scId, sectionNumber, wordsTotal)
+
+        #--- $DateCell: if no section date is given, the whole cell must be empty.
         if sectionMapping['Date']:
-            sectionMapping['DateCell'] = Template(self._valid_date).safe_substitute(sectionMapping)
+            sectionMapping['DateCell'] = Template(self._validDateCell).safe_substitute(sectionMapping)
         else:
-            sectionMapping['DateCell'] = self._empty_date
+            sectionMapping['DateCell'] = self._emptyDateCell
+
+        #--- $TimeCell: if no section time is given, the whole cell must be empty.
         if sectionMapping['Time']:
-            sectionMapping['TimeCell'] = Template(self._valid_time).safe_substitute(sectionMapping)
+            sectionMapping['TimeCell'] = Template(self._validTimeCell).safe_substitute(sectionMapping)
         else:
-            sectionMapping['TimeCell'] = self._empty_time
+            sectionMapping['TimeCell'] = self._emptyTimeCell
+
+        #--- $ArcNoteCells: one per arc.
+        arcNoteCells = []
+        for acId in self.novel.tree.get_children(AC_ROOT):
+            plotNotes = self.novel.sections[scId].plotNotes
+            if plotNotes:
+                arcNote = plotNotes.get(acId, '')
+            else:
+                arcNote = ''
+            mapping = {'ArcNote':arcNote}
+            arcNoteCells.append(Template(self._arcNoteCell).safe_substitute(mapping))
+        sectionMapping['ArcNoteCells'] = '\n'.join(arcNoteCells)
+
         return sectionMapping
 

@@ -8,7 +8,7 @@ import re
 from datetime import date, time
 
 from novxlib.model.section import Section
-from novxlib.novx_globals import GRID_SUFFIX
+from novxlib.novx_globals import GRID_SUFFIX, AC_ROOT
 from novxlib.novx_globals import SECTION_PREFIX
 from novxlib.novx_globals import _
 from novxlib.novx_globals import string_to_list
@@ -24,8 +24,10 @@ class OdsRGrid(OdsReader):
         'Section',
         'Date',
         'Time',
+        'Day',
         'Title',
         'Description',
+        'Viewpoint',
         'Tags',
         'A/R',
         'Goal',
@@ -40,6 +42,8 @@ class OdsRGrid(OdsReader):
         
         Extends the superclass method.
         """
+        for acId in self.novel.tree.get_children(AC_ROOT):
+            self._columnTitles.append(acId)
         super().read()
         for scId in self.novel.sections:
 
@@ -61,13 +65,22 @@ class OdsRGrid(OdsReader):
             else:
                 self.novel.sections[scId].time = scTime
 
+            #--- day
+            try:
+                day = self._columns['Day'][scId]
+                int(day)
+            except:
+                pass
+            else:
+                self.novel.sections[scId].day = day.strip()
+
             #--- title
             try:
                 title = self._columns['Title'][scId]
             except:
                 pass
             else:
-                self.novel.sections[scId].title = title.rstrip()
+                self.novel.sections[scId].title = title.strip()
 
             #--- desc
             try:
@@ -75,7 +88,34 @@ class OdsRGrid(OdsReader):
             except:
                 pass
             else:
-                self.novel.sections[scId].desc = desc.rstrip()
+                self.novel.sections[scId].desc = desc.strip()
+
+            #--- viewpoint
+            try:
+                viewpoint = self._columns['Viewpoint'][scId]
+            except:
+                pass
+            else:
+                viewpoint = viewpoint.strip()
+
+                # Get the vp character ID.
+                vpId = None
+                for crId in self.novel.characters:
+                    if self.novel.characters[crId].title == viewpoint:
+                        vpId = crId
+                        break
+                if vpId is not None:
+                    scCharacters = self.novel.sections[scId].characters
+                    if scCharacters is None:
+                        scCharacters = []
+
+                    # Put the vp charcter ID at the first position.
+                    try:
+                        scCharacters.remove(vpId)
+                    except:
+                        pass
+                    scCharacters.insert(0, vpId)
+                    self.novel.sections[scId].characters = scCharacters
 
             #--- tags
             try:
@@ -104,7 +144,7 @@ class OdsRGrid(OdsReader):
             except:
                 pass
             else:
-                self.novel.sections[scId].goal = goal.rstrip()
+                self.novel.sections[scId].goal = goal.strip()
 
             #--- conflict
             try:
@@ -112,7 +152,7 @@ class OdsRGrid(OdsReader):
             except:
                 pass
             else:
-                self.novel.sections[scId].conflict = conflict.rstrip()
+                self.novel.sections[scId].conflict = conflict.strip()
 
             #--- outcome
             try:
@@ -120,7 +160,7 @@ class OdsRGrid(OdsReader):
             except:
                 pass
             else:
-                self.novel.sections[scId].outcome = outcome.rstrip()
+                self.novel.sections[scId].outcome = outcome.strip()
 
             #--- notes
             try:
@@ -128,5 +168,5 @@ class OdsRGrid(OdsReader):
             except:
                 pass
             else:
-                self.novel.sections[scId].notes = notes.rstrip()
+                self.novel.sections[scId].notes = notes.strip()
 
