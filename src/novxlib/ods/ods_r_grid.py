@@ -1,4 +1,4 @@
-"""Provide a class for ODS section list import.
+"""Provide a class for ODS plot grid import.
 
 Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
@@ -8,17 +8,17 @@ import re
 from datetime import date, time
 
 from novxlib.model.section import Section
-from novxlib.novx_globals import SECTIONLIST_SUFFIX
+from novxlib.novx_globals import GRID_SUFFIX
 from novxlib.novx_globals import SECTION_PREFIX
 from novxlib.novx_globals import _
 from novxlib.novx_globals import string_to_list
 from novxlib.ods.ods_reader import OdsReader
 
 
-class OdsRSectionList(OdsReader):
+class OdsRGrid(OdsReader):
     """ODS section list reader. """
-    DESCRIPTION = _('Section list')
-    SUFFIX = SECTIONLIST_SUFFIX
+    DESCRIPTION = _('Plot grid')
+    SUFFIX = GRID_SUFFIX
     _columnTitles = [
         'Section link', 'Section title', 'Section description',
         'Date', 'Time', 'Tags', 'Section notes', 'A/R',

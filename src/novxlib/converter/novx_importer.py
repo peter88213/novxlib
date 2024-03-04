@@ -15,7 +15,7 @@ from novxlib.odt.odt_r_partdesc import OdtRPartDesc
 from novxlib.odt.odt_r_characters import OdtRCharacters
 from novxlib.odt.odt_r_locations import OdtRLocations
 from novxlib.odt.odt_r_items import OdtRItems
-from novxlib.ods.ods_r_sectionlist import OdsRSectionList
+from novxlib.ods.ods_r_grid import OdsRGrid
 from novxlib.ods.ods_r_charlist import OdsRCharList
 from novxlib.ods.ods_r_loclist import OdsRLocList
 from novxlib.ods.ods_r_itemlist import OdsRItemList
@@ -35,19 +35,20 @@ class NovxImporter(ConverterFf):
                         and HtmlOutline - can be exported to a new novelibre project.
     """
     EXPORT_SOURCE_CLASSES = [NovxFile]
-    IMPORT_SOURCE_CLASSES = [OdtRProof,
-                             OdtRManuscript,
-                             OdtRSectionDesc,
-                             OdtRChapterDesc,
-                             OdtRPartDesc,
-                             OdtRCharacters,
-                             OdtRItems,
-                             OdtRLocations,
-                             OdsRCharList,
-                             OdsRLocList,
-                             OdsRItemList,
-                             OdsRSectionList,
-                             ]
+    IMPORT_SOURCE_CLASSES = [
+        OdtRProof,
+        OdtRManuscript,
+        OdtRSectionDesc,
+        OdtRChapterDesc,
+        OdtRPartDesc,
+        OdtRCharacters,
+        OdtRItems,
+        OdtRLocations,
+        OdsRCharList,
+        OdsRLocList,
+        OdsRItemList,
+        OdsRGrid,
+        ]
     IMPORT_TARGET_CLASSES = [NovxFile]
     CREATE_SOURCE_CLASSES = []
 

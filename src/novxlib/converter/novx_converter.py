@@ -23,6 +23,7 @@ from novxlib.ods.ods_w_charlist import OdsWCharList
 from novxlib.ods.ods_w_loclist import OdsWLocList
 from novxlib.ods.ods_w_itemlist import OdsWItemList
 from novxlib.ods.ods_w_sectionlist import OdsWSectionList
+from novxlib.ods.ods_w_grid import OdsWGrid
 from novxlib.ods.ods_w_plot_list import OdsWPlotList
 from novxlib.odt.odt_r_proof import OdtRProof
 from novxlib.odt.odt_r_manuscript import OdtRManuscript
@@ -32,7 +33,7 @@ from novxlib.odt.odt_r_partdesc import OdtRPartDesc
 from novxlib.odt.odt_r_characters import OdtRCharacters
 from novxlib.odt.odt_r_locations import OdtRLocations
 from novxlib.odt.odt_r_items import OdtRItems
-from novxlib.ods.ods_r_sectionlist import OdsRSectionList
+from novxlib.ods.ods_r_grid import OdsRGrid
 from novxlib.ods.ods_r_charlist import OdsRCharList
 from novxlib.ods.ods_r_loclist import OdsRLocList
 from novxlib.ods.ods_r_itemlist import OdsRItemList
@@ -52,37 +53,40 @@ class NovxConverter(ConverterFf):
                         and HtmlOutline - can be exported to a new novelibre project.
     """
     EXPORT_SOURCE_CLASSES = [NovxFile]
-    EXPORT_TARGET_CLASSES = [OdtWExport,
-                             OdtWProof,
-                             OdtWManuscript,
-                             OdtWBriefSynopsis,
-                             OdtWSectionDesc,
-                             OdtWChapterDesc,
-                             OdtWPartDesc,
-                             OdtWCharacters,
-                             OdtWItems,
-                             OdtWLocations,
-                             OdsWCharList,
-                             OdsWLocList,
-                             OdsWItemList,
-                             OdsWSectionList,
-                             OdsWPlotList,
-                             OdtWXref,
-                             OdtWPlot,
-                             ]
-    IMPORT_SOURCE_CLASSES = [OdtRProof,
-                             OdtRManuscript,
-                             OdtRSectionDesc,
-                             OdtRChapterDesc,
-                             OdtRPartDesc,
-                             OdtRCharacters,
-                             OdtRItems,
-                             OdtRLocations,
-                             OdsRCharList,
-                             OdsRLocList,
-                             OdsRItemList,
-                             OdsRSectionList,
-                             ]
+    EXPORT_TARGET_CLASSES = [
+        OdtWExport,
+        OdtWProof,
+        OdtWManuscript,
+        OdtWBriefSynopsis,
+        OdtWSectionDesc,
+        OdtWChapterDesc,
+        OdtWPartDesc,
+        OdtWCharacters,
+        OdtWItems,
+        OdtWLocations,
+        OdsWCharList,
+        OdsWLocList,
+        OdsWItemList,
+        OdsWSectionList,
+        OdsWGrid,
+        OdsWPlotList,
+        OdtWXref,
+        OdtWPlot,
+        ]
+    IMPORT_SOURCE_CLASSES = [
+        OdtRProof,
+        OdtRManuscript,
+        OdtRSectionDesc,
+        OdtRChapterDesc,
+        OdtRPartDesc,
+        OdtRCharacters,
+        OdtRItems,
+        OdtRLocations,
+        OdsRCharList,
+        OdsRLocList,
+        OdsRItemList,
+        OdsRGrid,
+        ]
     IMPORT_TARGET_CLASSES = [NovxFile]
     CREATE_SOURCE_CLASSES = []
 

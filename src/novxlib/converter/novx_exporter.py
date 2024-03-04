@@ -22,6 +22,7 @@ from novxlib.ods.ods_w_charlist import OdsWCharList
 from novxlib.ods.ods_w_loclist import OdsWLocList
 from novxlib.ods.ods_w_itemlist import OdsWItemList
 from novxlib.ods.ods_w_sectionlist import OdsWSectionList
+from novxlib.ods.ods_w_grid import OdsWGrid
 from novxlib.ods.ods_w_plot_list import OdsWPlotList
 
 
@@ -34,21 +35,23 @@ class NovxExporter(ConverterFf):
     Overrides the superclass constants EXPORT_SOURCE_CLASSES, EXPORT_TARGET_CLASSES.    
     """
     EXPORT_SOURCE_CLASSES = [NovxFile]
-    EXPORT_TARGET_CLASSES = [OdtWProof,
-                             OdtWManuscript,
-                             OdtWBriefSynopsis,
-                             OdtWSectionDesc,
-                             OdtWChapterDesc,
-                             OdtWPartDesc,
-                             OdtWExport,
-                             OdtWCharacters,
-                             OdtWItems,
-                             OdtWLocations,
-                             OdtWXref,
-                             OdtWPlot,
-                             OdsWCharList,
-                             OdsWLocList,
-                             OdsWItemList,
-                             OdsWSectionList,
-                             OdsWPlotList,
-                             ]
+    EXPORT_TARGET_CLASSES = [
+        OdtWProof,
+        OdtWManuscript,
+        OdtWBriefSynopsis,
+        OdtWSectionDesc,
+        OdtWChapterDesc,
+        OdtWPartDesc,
+        OdtWExport,
+        OdtWCharacters,
+        OdtWItems,
+        OdtWLocations,
+        OdtWXref,
+        OdtWPlot,
+        OdsWCharList,
+        OdsWLocList,
+        OdsWItemList,
+        OdsWSectionList,
+        OdsWGrid,
+        OdsWPlotList,
+        ]
