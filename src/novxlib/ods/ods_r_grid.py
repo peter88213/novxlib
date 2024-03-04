@@ -42,10 +42,31 @@ class OdsRGrid(OdsReader):
         
         Extends the superclass method.
         """
-        for acId in self.novel.tree.get_children(AC_ROOT):
+        arcs = self.novel.tree.get_children(AC_ROOT)
+        for acId in arcs:
             self._columnTitles.append(acId)
         super().read()
         for scId in self.novel.sections:
+
+            #--- arc notes
+            for acId in arcs:
+                try:
+                    arcNote = self._columns[acId][scId]
+                except:
+                    pass
+                else:
+                    plotNotes = self.novel.sections[scId].plotNotes
+                    if not plotNotes:
+                        plotNotes = {}
+                    plotNotes[acId] = arcNote.strip()
+                    self.novel.sections[scId].plotNotes = plotNotes
+                    if plotNotes[acId] and not acId in self.novel.sections[scId].scArcs:
+                        scArcs = self.novel.sections[scId].scArcs
+                        scArcs.append(acId)
+                        self.novel.sections[scId].scArcs = scArcs
+                        acSections = self.novel.arcs[acId].sections
+                        acSections.append(scId)
+                        self.novel.arcs[acId].sections = acSections
 
             #--- date
             try:

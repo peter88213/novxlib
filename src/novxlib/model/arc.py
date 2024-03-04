@@ -18,13 +18,11 @@ class Arc(BasicElement):
         super().__init__(**kwargs)
 
         self._shortName = shortName
-        # str -- name of the arc
-
         self._sections = sections
-        # List of str -- IDs of the sections associated with the arc.
 
     @property
     def shortName(self):
+        # str -- name of the arc
         return self._shortName
 
     @shortName.setter
@@ -35,6 +33,7 @@ class Arc(BasicElement):
 
     @property
     def sections(self):
+        # List of str -- IDs of the sections associated with the arc.
         try:
             return self._sections[:]
         except TypeError:
