@@ -1,4 +1,4 @@
-"""Provide a class for novelibre arc representation.
+"""Provide a class for novelibre plot line representation.
 
 Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
@@ -8,7 +8,7 @@ from novxlib.model.basic_element import BasicElement
 
 
 class Arc(BasicElement):
-    """Arc representation."""
+    """Plot line representation."""
 
     def __init__(self,
             shortName=None,
@@ -22,7 +22,7 @@ class Arc(BasicElement):
 
     @property
     def shortName(self):
-        # str -- name of the arc
+        # str -- name of the plot line
         return self._shortName
 
     @shortName.setter
@@ -33,7 +33,7 @@ class Arc(BasicElement):
 
     @property
     def sections(self):
-        # List of str -- IDs of the sections associated with the arc.
+        # List of str -- IDs of the sections associated with the plot line.
         try:
             return self._sections[:]
         except TypeError:

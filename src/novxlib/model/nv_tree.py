@@ -34,7 +34,7 @@ class NvTree:
         # key: chapter ID
         # value : section ID
         self.srtTurningPoints = {}
-        # key: arc ID
+        # key: plot line ID
         # value : plot point ID
 
     def append(self, parent, iid):

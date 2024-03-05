@@ -618,12 +618,12 @@ class Yw7File(File):
                 for scId in self.novel.tree.get_children(chId):
                     ET.SubElement(xmlScnList, 'ScID').text = scId[2:]
 
-        #--- Process arcs.
+        #--- Process plot lines.
         chId = create_id(chIds, prefix=CHAPTER_PREFIX)
         chIds.append(chId)
         xmlChapter = ET.SubElement(xmlChapters, 'CHAPTER')
         ET.SubElement(xmlChapter, 'ID').text = chId[2:]
-        arcPart = Chapter(title=_('Arcs'), chLevel=1)
+        arcPart = Chapter(title=_('Plot lines'), chLevel=1)
         build_chapter_subtree(xmlChapter, arcPart, chType=2)
         for acId in self.novel.tree.get_children(AC_ROOT):
             chId = create_id(chIds, prefix=CHAPTER_PREFIX)
@@ -645,7 +645,7 @@ class Yw7File(File):
                 ET.SubElement(xmlProjectnote, 'ID').text = pnId[2:]
                 build_prjNote_subtree(xmlProjectnote, self.novel.projectNotes[pnId])
 
-        #--- Add arc/scene references.
+        #--- Add plot line/scene references.
         sectionArcs = {}
         sectionAssoc = {}
         for scId in scIds:

@@ -291,7 +291,7 @@ class NovxFile(File):
             xmlItm = ET.SubElement(xmlItems, 'ITEM', attrib={'id':itId})
             self._build_item_branch(xmlItm, self.novel.items[itId])
 
-        #--- Process arcs and plot points.
+        #--- Process plot lines and plot points.
         xmlArcs = ET.SubElement(root, 'ARCS')
         for acId in self.novel.tree.get_children(AC_ROOT):
             self._build_arc_branch(xmlArcs, self.novel.arcs[acId], acId)

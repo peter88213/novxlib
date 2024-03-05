@@ -118,10 +118,10 @@ class FileExport(File):
         return(text)
 
     def _get_arcMapping(self, acId):
-        """Return a mapping dictionary for a arc section.
+        """Return a mapping dictionary for a plot line section.
         
         Positional arguments:
-            acId: str -- arc ID.
+            acId: str -- plot line ID.
         
         This is a template method that can be extended or overridden by subclasses.
         """
@@ -137,11 +137,11 @@ class FileExport(File):
         return arcMapping
 
     def _get_arcs(self):
-        """Process the arcs. 
+        """Process the plot lines. 
         
-        Iterate through the sorted arc list and apply the template, 
-        substituting placeholders according to the arc mapping dictionary.
-        Skip arcs not accepted by the arc filter.
+        Iterate through the sorted plot line list and apply the template, 
+        substituting placeholders according to the plot line mapping dictionary.
+        Skip plot lines not accepted by the plot line filter.
         Return a list of strings.
         This is a template method that can be extended or overridden by subclasses.
         """

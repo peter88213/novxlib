@@ -83,7 +83,7 @@ class Section(BasicElement):
         # Back references to Arc.sections
         self.scTurningPoints = {}
         # Back references to TurningPoint.sectionAssoc
-        # key: plot point ID, value: arc ID
+        # key: plot point ID, value: plot line ID
 
     @property
     def sectionContent(self):
@@ -209,7 +209,7 @@ class Section(BasicElement):
 
     @property
     def plotNotes(self):
-        # Dict of {arc ID: text}
+        # Dict of {plot line ID: text}
         try:
             return dict(self._plotNotes)
         except TypeError:

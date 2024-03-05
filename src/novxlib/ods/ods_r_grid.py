@@ -48,7 +48,7 @@ class OdsRGrid(OdsReader):
         super().read()
         for scId in self.novel.sections:
 
-            #--- arc notes
+            #--- plot line notes
             for acId in arcs:
                 try:
                     arcNote = self._columns[acId][scId]
@@ -130,7 +130,7 @@ class OdsRGrid(OdsReader):
                     if scCharacters is None:
                         scCharacters = []
 
-                    # Put the vp charcter ID at the first position.
+                    # Put the vp character ID at the first position.
                     try:
                         scCharacters.remove(vpId)
                     except:

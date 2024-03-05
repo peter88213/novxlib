@@ -78,7 +78,7 @@ class OdsWPlotList(OdsWriter):
 
         arcs = self.novel.tree.get_children(AC_ROOT)
 
-        # Arc columns.
+        # Plot line columns.
         for acId in arcs:
             odsText.append('<table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>')
 

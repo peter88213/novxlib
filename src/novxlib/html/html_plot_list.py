@@ -44,7 +44,7 @@ class HtmlPlotList(HtmlReport):
             'Plum',
             )
 
-        # Get arcs.
+        # Get plot lines.
         if self.novel.tree.get_children(AC_ROOT) is not None:
             arcs = self.novel.tree.get_children(AC_ROOT)
         else:

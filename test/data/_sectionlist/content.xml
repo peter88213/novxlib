@@ -164,7 +164,7 @@
       <text:p>Words total</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>Word count</text:p>
+      <text:p>Section word count</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>Characters</text:p>

@@ -94,7 +94,7 @@ class Novel(BasicElement):
         # List of non-document languages occurring as section markup.
         # Format: ll-CC, where ll is the language code, and CC is the country code.
         self.arcs = {}
-        # key = arc ID, value = Arc instance.
+        # key = plot line ID, value = Arc instance.
         self.locations = {}
         # key = location ID, value = WorldElement instance.
         self.items = {}

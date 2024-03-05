@@ -32,7 +32,7 @@ class OdsWGrid(OdsWriter):
     # Title
     # Description
     # Viewpoint
-    # All arcs
+    # All plot lines
     # Tags
     # A/R
     # Goal
@@ -225,7 +225,7 @@ $ArcNoteCells
         """
         fileHeaderMapping = super()._get_fileHeaderMapping()
 
-        #--- Cells for the arc notes: one column per arc.
+        #--- Cells for the plot line notes: one column per plot line.
         arcColumns = []
         arcIdCells = []
         arcTitleCells = []
@@ -281,7 +281,7 @@ $ArcNoteCells
         else:
             sectionMapping['TimeCell'] = self._emptyTimeCell
 
-        #--- $ArcNoteCells: one per arc.
+        #--- $ArcNoteCells: one per plot line.
         arcNoteCells = []
         for acId in self.novel.tree.get_children(AC_ROOT):
             plotNotes = self.novel.sections[scId].plotNotes

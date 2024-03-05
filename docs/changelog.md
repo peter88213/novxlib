@@ -6,6 +6,7 @@
 - Add notes to the section for each associated arc.
 - Provide an ODS Plot grid for export and import.
 - Make the ODS Section list export-only.
+- Rewording: Arc -> Plot line.
 
 ### v1.4.2
 

@@ -35,7 +35,7 @@ $Desc
 $Desc
 '''
 
-    _arcHeadingTemplate = f'''<text:h text:style-name="Heading_20_1" text:outline-level="1">{_('Arcs')}</text:h>
+    _arcHeadingTemplate = f'''<text:h text:style-name="Heading_20_1" text:outline-level="1">{_('Plot lines')}</text:h>
 '''
 
     _arcTemplate = '''$Heading<text:h text:style-name="Heading_20_2" text:outline-level="2"><text:bookmark text:name="$ID"/>$Title</text:h>
@@ -53,7 +53,7 @@ $Desc
     _fileFooter = OdtWriter._CONTENT_XML_FOOTER
 
     def write(self):
-        """Initialize "first arc" flag.
+        """Initialize "first plot line" flag.
 
        Extends the superclass constructor.
         """
@@ -61,7 +61,7 @@ $Desc
         super().write()
 
     def _get_arcMapping(self, acId):
-        """Add associated sections to the arc mapping dictionary.
+        """Add associated sections to the plot line mapping dictionary.
         
         Extends the superclass method.
         """

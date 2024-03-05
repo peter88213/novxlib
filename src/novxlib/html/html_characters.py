@@ -1,4 +1,4 @@
-"""Provide a class for HTML charcters report file representation.
+"""Provide a class for HTML characters report file representation.
 
 Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
