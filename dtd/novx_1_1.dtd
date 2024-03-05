@@ -112,9 +112,9 @@
                 <!ELEMENT Goal (p*)>
                 <!ELEMENT Conflict (p*)>
                 <!ELEMENT Outcome (p*)>
-                <!ELEMENT PlotNotes (ArcNotes*)>
-                    <!ELEMENT ArcNotes (p*)>
-                        <!ATTLIST ArcNotes
+                <!ELEMENT PlotNotes (PlotlineNotes*)>
+                    <!ELEMENT PlotlineNotes (p*)>
+                        <!ATTLIST PlotlineNotes
                         id IDREF #REQUIRED
                         >
                 <!ELEMENT Characters EMPTY>

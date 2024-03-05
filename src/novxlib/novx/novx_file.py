@@ -138,7 +138,7 @@ class NovxFile(File):
         self._read_items(xmlRoot)
         self._read_characters(xmlRoot)
         self._read_chapters(xmlRoot)
-        self._read_arcs(xmlRoot)
+        self._read_plotlines(xmlRoot)
         self._read_projectnotes(xmlRoot)
         self.adjust_section_types()
 
@@ -181,7 +181,7 @@ class NovxFile(File):
         self._write_element_tree(self)
         self._postprocess_xml_file(self.filePath)
 
-    def _build_arc_branch(self, xmlArcs, prjArc, acId):
+    def _build_plotline_branch(self, xmlArcs, prjArc, acId):
         xmlArc = ET.SubElement(xmlArcs, 'ARC', attrib={'id':acId})
         if prjArc.title:
             ET.SubElement(xmlArc, 'Title').text = prjArc.title
@@ -294,7 +294,7 @@ class NovxFile(File):
         #--- Process plot lines and plot points.
         xmlArcs = ET.SubElement(root, 'ARCS')
         for acId in self.novel.tree.get_children(AC_ROOT):
-            self._build_arc_branch(xmlArcs, self.novel.arcs[acId], acId)
+            self._build_plotline_branch(xmlArcs, self.novel.arcs[acId], acId)
 
         #--- Process project notes.
         xmlProjectnotes = ET.SubElement(root, 'PROJECTNOTES')
@@ -426,9 +426,9 @@ class NovxFile(File):
             xmlPlotNotes = ET.SubElement(xmlSection, 'PlotNotes')
             for acId in prjScn.plotNotes:
                 if acId in prjScn.scArcs:
-                    xmlArcNotes = text_to_xml_element('ArcNotes', prjScn.plotNotes[acId])
-                    xmlArcNotes.set('id', acId)
-                    xmlPlotNotes.append(xmlArcNotes)
+                    xmlPlotNote = text_to_xml_element('PlotlineNotes', prjScn.plotNotes[acId])
+                    xmlPlotNote.set('id', acId)
+                    xmlPlotNotes.append(xmlPlotNote)
         if prjScn.notes:
             xmlSection.append(text_to_xml_element('Notes', prjScn.notes))
         tagStr = list_to_string(prjScn.tags)
@@ -503,8 +503,8 @@ class NovxFile(File):
         except:
             raise Error(f'{_("Cannot write file")}: "{norm_path(filePath)}".')
 
-    def _read_arcs(self, root):
-        """Read data at chapter level from the xml element tree."""
+    def _read_plotlines(self, root):
+        """Read plotlines from the xml element tree."""
         try:
             for xmlArc in root.find('ARCS'):
                 acId = xmlArc.attrib['id']
@@ -532,7 +532,7 @@ class NovxFile(File):
             pass
 
     def _read_plotpoint(self, xmlPoint, tpId, acId):
-        """Read data at plot point level from the xml element tree."""
+        """Read a plot point from the xml element tree."""
         self.novel.turningPoints[tpId] = TurningPoint(on_element_change=self.on_element_change)
         self.novel.turningPoints[tpId].title = get_element_text(xmlPoint, 'Title')
         self.novel.turningPoints[tpId].desc = xml_element_to_text(xmlPoint.find('Desc'))
@@ -764,7 +764,7 @@ class NovxFile(File):
         xmlPlotNotes = xmlSection.find('PlotNotes')
         if xmlPlotNotes is not None:
             plotNotes = {}
-            for xmlArcNote in xmlPlotNotes.iterfind('ArcNotes'):
+            for xmlArcNote in xmlPlotNotes.iterfind('PlotlineNotes'):
                 acId = xmlArcNote.get('id', None)
                 plotNotes[acId] = xml_element_to_text(xmlArcNote)
             self.novel.sections[scId].plotNotes = plotNotes

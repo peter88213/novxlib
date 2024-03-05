@@ -74,7 +74,7 @@ Tags, Aka, FullName {
     margin-top: 1em;
     margin-bottom: 1em;
 }
-Desc,  Goal, Conflict, Outcome, Bio, Goals {
+Desc,  Goal, Conflict, Outcome, Bio, Goals, PlotlineNotes {
     display: block;
     margin-right: 8em;
     margin-left: 8em;
@@ -84,6 +84,9 @@ Desc,  Goal, Conflict, Outcome, Bio, Goals {
 }
 Goal, Conflict, Outcome {
     background: bisque;
+}
+PlotlineNotes {
+    background: Seashell 
 }
 CHAPTER > Desc {
     background: lightgray;
