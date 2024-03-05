@@ -41,7 +41,7 @@ class OdsWGrid(OdsWriter):
     # Notes
 
     _fileHeader = f'''{OdsWriter._CONTENT_XML_HEADER}{DESCRIPTION}" table:style-name="ta1" table:print="false">
-    <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
+    <table:table-column table:style-name="co1" table:visibility="collapse" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co2" table:default-cell-style-name="ce2"/>
     <table:table-column table:style-name="co1" table:default-cell-style-name="ce4"/>
@@ -58,7 +58,7 @@ $ArcColumns
     <table:table-column table:style-name="co4" table:default-cell-style-name="Default"/>
     <table:table-row table:style-name="ro1" table:visibility="collapse">
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>Section link</text:p>
+      <text:p>ID</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>Section</text:p>
@@ -104,7 +104,7 @@ $ArcIdCells
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>{_("Section link")}</text:p>
+      <text:p>ID</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>{_("Section")}</text:p>
@@ -152,10 +152,10 @@ $ArcTitleCells
 '''
 
     _sectionTemplate = '''   <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///$ProjectPath/$ProjectName$ManuscriptSuffix.odt#$ID%7Cregion&quot;;&quot;$ID&quot;)" office:value-type="string" office:string-value="$ID">
+     <table:table-cell office:value-type="string">
       <text:p>$ID</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="string">
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///$ProjectPath/$ProjectName$ManuscriptSuffix.odt#$ID%7Cregion&quot;;&quot;$SectionNumber&quot;)" office:value-type="string" office:string-value="$SectionNumber">
       <text:p>$SectionNumber</text:p>
      </table:table-cell>
 $DateCell     

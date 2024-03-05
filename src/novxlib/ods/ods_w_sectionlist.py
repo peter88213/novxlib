@@ -158,7 +158,7 @@ class OdsWSectionList(OdsWGrid):
       <text:p>{_("Words total")}</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>{_("Word count")}</text:p>
+      <text:p>{_("Section word count")}</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>{_("Characters")}</text:p>
