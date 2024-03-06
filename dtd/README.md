@@ -1,6 +1,6 @@
 # The novx document type definition
 
-If you want to validate a *.novx* file, you can copy *novx_1_0.dtd*
+If you want to validate a *.novx* file, you can copy *novx_1_1.dtd*
 into your project directory.
 
 **Note:** Since the *novelibre* application does not validate its project files, 
