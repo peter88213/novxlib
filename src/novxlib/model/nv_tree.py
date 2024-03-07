@@ -4,8 +4,8 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
-from novxlib.novx_globals import AC_ROOT
-from novxlib.novx_globals import ARC_PREFIX
+from novxlib.novx_globals import PL_ROOT
+from novxlib.novx_globals import PLOT_LINE_PREFIX
 from novxlib.novx_globals import CHAPTER_PREFIX
 from novxlib.novx_globals import CH_ROOT
 from novxlib.novx_globals import CR_ROOT
@@ -26,7 +26,7 @@ class NvTree:
             CR_ROOT:[],
             LC_ROOT:[],
             IT_ROOT:[],
-            AC_ROOT:[],
+            PL_ROOT:[],
             PN_ROOT:[],
             }
         # values : listed children's IDs
@@ -43,14 +43,14 @@ class NvTree:
             self.roots[parent].append(iid)
             if parent == CH_ROOT:
                 self.srtSections[iid] = []
-            elif parent == AC_ROOT:
+            elif parent == PL_ROOT:
                 self.srtTurningPoints[iid] = []
         elif parent.startswith(CHAPTER_PREFIX):
             try:
                 self.srtSections[parent].append(iid)
             except:
                 self.srtSections[parent] = [iid]
-        elif parent.startswith(ARC_PREFIX):
+        elif parent.startswith(PLOT_LINE_PREFIX):
             try:
                 self.srtTurningPoints[parent].append(iid)
             except:
@@ -67,11 +67,11 @@ class NvTree:
             self.roots[parent] = []
             if parent == CH_ROOT:
                 self.srtSections = {}
-            elif parent == AC_ROOT:
+            elif parent == PL_ROOT:
                 self.srtTurningPoints = {}
         elif parent.startswith(CHAPTER_PREFIX):
             self.srtSections[parent] = []
-        elif parent.startswith(ARC_PREFIX):
+        elif parent.startswith(PLOT_LINE_PREFIX):
             self.srtTurningPoints[parent] = []
 
     def get_children(self, item):
@@ -82,7 +82,7 @@ class NvTree:
         elif item.startswith(CHAPTER_PREFIX):
             return self.srtSections.get(item, [])
 
-        elif item.startswith(ARC_PREFIX):
+        elif item.startswith(PLOT_LINE_PREFIX):
             return self.srtTurningPoints.get(item, [])
 
     def index(self, item):
@@ -96,14 +96,14 @@ class NvTree:
             self.roots[parent].insert(index, iid)
             if parent == CH_ROOT:
                 self.srtSections[iid] = []
-            elif parent == AC_ROOT:
+            elif parent == PL_ROOT:
                 self.srtTurningPoints[iid] = []
         elif parent.startswith(CHAPTER_PREFIX):
             try:
                 self.srtSections[parent].insert(index, iid)
             except:
                 self.srtSections[parent] = [iid]
-        elif parent.startswith(ARC_PREFIX):
+        elif parent.startswith(PLOT_LINE_PREFIX):
             try:
                 self.srtTurningPoints.insert(index, iid)
             except:
@@ -147,11 +147,11 @@ class NvTree:
             self.roots[item] = newchildren[:]
             if item == CH_ROOT:
                 self.srtSections = {}
-            elif item == AC_ROOT:
+            elif item == PL_ROOT:
                 self.srtTurningPoints = {}
         elif item.startswith(CHAPTER_PREFIX):
             self.srtSections[item] = newchildren[:]
-        elif item.startswith(ARC_PREFIX):
+        elif item.startswith(PLOT_LINE_PREFIX):
             self.srtTurningPoints[item] = newchildren[:]
 
 

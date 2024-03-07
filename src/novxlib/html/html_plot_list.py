@@ -5,7 +5,7 @@ For further information see https://github.com/peter88213/novxlib
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
 from novxlib.html.html_report import HtmlReport
-from novxlib.novx_globals import AC_ROOT
+from novxlib.novx_globals import PL_ROOT
 from novxlib.novx_globals import CH_ROOT
 from novxlib.novx_globals import PLOTLIST_SUFFIX
 from novxlib.novx_globals import _
@@ -35,7 +35,7 @@ class HtmlPlotList(HtmlReport):
 <body>
 <p class=title>{self.novel.title} - {_("Plot")}</p>
 <table>''')
-        arcColors = (
+        plotLineColors = (
             'LightSteelBlue',
             'Gold',
             'Coral',
@@ -45,17 +45,17 @@ class HtmlPlotList(HtmlReport):
             )
 
         # Get plot lines.
-        if self.novel.tree.get_children(AC_ROOT) is not None:
-            arcs = self.novel.tree.get_children(AC_ROOT)
+        if self.novel.tree.get_children(PL_ROOT) is not None:
+            plotLines = self.novel.tree.get_children(PL_ROOT)
         else:
-            arcs = []
+            plotLines = []
 
         # Title row.
         htmlText.append('<tr class="heading">')
         htmlText.append(create_cell(''))
-        for i, acId in enumerate(arcs):
-            colorIndex = i % len(arcColors)
-            htmlText.append(create_cell(self.novel.arcs[acId].title, attr=f'style="background: {arcColors[colorIndex]}"'))
+        for i, plId in enumerate(plotLines):
+            colorIndex = i % len(plotLineColors)
+            htmlText.append(create_cell(self.novel.plotLines[plId].title, attr=f'style="background: {plotLineColors[colorIndex]}"'))
         htmlText.append('</tr>')
 
         # Section rows.
@@ -65,14 +65,14 @@ class HtmlPlotList(HtmlReport):
                 if self.novel.sections[scId].scType == 0:
                     htmlText.append(f'<tr>')
                     htmlText.append(create_cell(self.novel.sections[scId].title))
-                    for i, acId in enumerate(arcs):
-                        colorIndex = i % len(arcColors)
-                        if scId in self.novel.arcs[acId].sections:
-                            points = []
-                            for ptId in self.novel.tree.get_children(acId):
-                                if scId == self.novel.turningPoints[ptId].sectionAssoc:
-                                    points.append(self.novel.turningPoints[ptId].title)
-                            htmlText.append(create_cell(list_to_string(points), attr=f'style="background: {arcColors[colorIndex]}"'))
+                    for i, plId in enumerate(plotLines):
+                        colorIndex = i % len(plotLineColors)
+                        if scId in self.novel.plotLines[plId].sections:
+                            plotPoints = []
+                            for ppId in self.novel.tree.get_children(plId):
+                                if scId == self.novel.plotPoints[ppId].sectionAssoc:
+                                    plotPoints.append(self.novel.plotPoints[ppId].title)
+                            htmlText.append(create_cell(list_to_string(plotPoints), attr=f'style="background: {plotLineColors[colorIndex]}"'))
                         else:
                             htmlText.append(create_cell(''))
                     htmlText.append(f'</tr>')

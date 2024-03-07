@@ -8,7 +8,7 @@ import re
 from datetime import date, time
 
 from novxlib.model.section import Section
-from novxlib.novx_globals import GRID_SUFFIX, AC_ROOT
+from novxlib.novx_globals import GRID_SUFFIX, PL_ROOT
 from novxlib.novx_globals import SECTION_PREFIX
 from novxlib.novx_globals import _
 from novxlib.novx_globals import string_to_list
@@ -42,31 +42,31 @@ class OdsRGrid(OdsReader):
         
         Extends the superclass method.
         """
-        arcs = self.novel.tree.get_children(AC_ROOT)
-        for acId in arcs:
-            self._columnTitles.append(acId)
+        plotLines = self.novel.tree.get_children(PL_ROOT)
+        for plId in plotLines:
+            self._columnTitles.append(plId)
         super().read()
         for scId in self.novel.sections:
 
             #--- plot line notes
-            for acId in arcs:
+            for plId in plotLines:
                 try:
-                    arcNote = self._columns[acId][scId]
+                    plotLineNote = self._columns[plId][scId]
                 except:
                     pass
                 else:
                     plotNotes = self.novel.sections[scId].plotNotes
                     if not plotNotes:
                         plotNotes = {}
-                    plotNotes[acId] = arcNote.strip()
+                    plotNotes[plId] = plotLineNote.strip()
                     self.novel.sections[scId].plotNotes = plotNotes
-                    if plotNotes[acId] and not acId in self.novel.sections[scId].scArcs:
-                        scArcs = self.novel.sections[scId].scArcs
-                        scArcs.append(acId)
-                        self.novel.sections[scId].scArcs = scArcs
-                        acSections = self.novel.arcs[acId].sections
-                        acSections.append(scId)
-                        self.novel.arcs[acId].sections = acSections
+                    if plotNotes[plId] and not plId in self.novel.sections[scId].scPlotLines:
+                        scPlotLines = self.novel.sections[scId].scPlotLines
+                        scPlotLines.append(plId)
+                        self.novel.sections[scId].scPlotLines = scPlotLines
+                        plSections = self.novel.plotLines[plId].sections
+                        plSections.append(scId)
+                        self.novel.plotLines[plId].sections = plSections
 
             #--- date
             try:

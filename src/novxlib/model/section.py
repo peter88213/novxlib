@@ -79,9 +79,9 @@ class Section(BasicElement):
         self._locations = locations
         self._items = items
 
-        self.scArcs = []
-        # Back references to Arc.sections
-        self.scTurningPoints = {}
+        self.scPlotLines = []
+        # Back references to PlotLine.sections
+        self.scPlotPoints = {}
         # Back references to TurningPoint.sectionAssoc
         # key: plot point ID, value: plot line ID
 

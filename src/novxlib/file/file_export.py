@@ -13,7 +13,7 @@ from novxlib.file.file import File
 from novxlib.file.filter import Filter
 from novxlib.model.character import Character
 from novxlib.model.section import Section
-from novxlib.novx_globals import AC_ROOT
+from novxlib.novx_globals import PL_ROOT
 from novxlib.novx_globals import CHARACTERS_SUFFIX
 from novxlib.novx_globals import CH_ROOT
 from novxlib.novx_globals import CR_ROOT
@@ -117,18 +117,18 @@ class FileExport(File):
             text = ''
         return(text)
 
-    def _get_arcMapping(self, acId):
+    def _get_arcMapping(self, plId):
         """Return a mapping dictionary for a plot line section.
         
         Positional arguments:
-            acId: str -- plot line ID.
+            plId: str -- plot line ID.
         
         This is a template method that can be extended or overridden by subclasses.
         """
         arcMapping = dict(
-            ID=acId,
-            Title=self._convert_from_novx(self.novel.arcs[acId].title, quick=True),
-            Desc=self._convert_from_novx(self.novel.arcs[acId].desc),
+            ID=plId,
+            Title=self._convert_from_novx(self.novel.plotLines[plId].title, quick=True),
+            Desc=self._convert_from_novx(self.novel.plotLines[plId].desc),
             ProjectName=self._convert_from_novx(self.projectName, quick=True),
             ProjectPath=self.projectPath,
             Language=self.novel.languageCode,
@@ -146,11 +146,11 @@ class FileExport(File):
         This is a template method that can be extended or overridden by subclasses.
         """
         lines = []
-        for acId in self.novel.tree.get_children(AC_ROOT):
-            if self.arcFilter.accept(self, acId):
+        for plId in self.novel.tree.get_children(PL_ROOT):
+            if self.arcFilter.accept(self, plId):
                 if self._arcTemplate:
                     template = Template(self._arcTemplate)
-                    lines.append(template.safe_substitute(self._get_arcMapping(acId)))
+                    lines.append(template.safe_substitute(self._get_arcMapping(plId)))
         return lines
 
     def _get_chapterMapping(self, chId, chapterNumber):

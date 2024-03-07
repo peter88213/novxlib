@@ -6,7 +6,7 @@ License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
 from string import Template
 
-from novxlib.novx_globals import GRID_SUFFIX, AC_ROOT
+from novxlib.novx_globals import GRID_SUFFIX, PL_ROOT
 from novxlib.novx_globals import _
 from novxlib.ods.ods_writer import OdsWriter
 
@@ -229,11 +229,11 @@ $ArcNoteCells
         arcColumns = []
         arcIdCells = []
         arcTitleCells = []
-        for acId in self.novel.tree.get_children(AC_ROOT):
+        for plId in self.novel.tree.get_children(PL_ROOT):
             arcColumns.append('    <table:table-column table:style-name="co4" table:default-cell-style-name="Default"/>')
             mapping = dict(
-                ArcId=acId,
-                ArcTitle=self.novel.arcs[acId].title,
+                ArcId=plId,
+                ArcTitle=self.novel.plotLines[plId].title,
                 )
             arcIdCells.append(Template(self._arcIdCell).safe_substitute(mapping))
             arcTitleCells.append(Template(self._arcTitleCell).safe_substitute(mapping))
@@ -283,10 +283,10 @@ $ArcNoteCells
 
         #--- $ArcNoteCells: one per plot line.
         arcNoteCells = []
-        for acId in self.novel.tree.get_children(AC_ROOT):
+        for plId in self.novel.tree.get_children(PL_ROOT):
             plotNotes = self.novel.sections[scId].plotNotes
             if plotNotes:
-                arcNote = plotNotes.get(acId, '')
+                arcNote = plotNotes.get(plId, '')
             else:
                 arcNote = ''
             mapping = {'ArcNote':arcNote}

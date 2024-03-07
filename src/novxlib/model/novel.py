@@ -88,13 +88,13 @@ class Novel(BasicElement):
         # key = chapter ID, value = Chapter instance.
         self.sections = {}
         # key = section ID, value = Section instance.
-        self.turningPoints = {}
-        # key = section ID, value = TurningPoint instance.
+        self.plotPoints = {}
+        # key = section ID, value = PlotPoint instance.
         self.languages = None
         # List of non-document languages occurring as section markup.
         # Format: ll-CC, where ll is the language code, and CC is the country code.
-        self.arcs = {}
-        # key = plot line ID, value = Arc instance.
+        self.plotLines = {}
+        # key = plot line ID, value = PlotLine instance.
         self.locations = {}
         # key = location ID, value = WorldElement instance.
         self.items = {}
@@ -343,17 +343,17 @@ class Novel(BasicElement):
                     self._referenceDate = newVal
                     self.on_element_change()
 
-    def update_section_arcs(self):
-        """Set section back references to Arc.sections and TurningPoint.sectionAssoc. """
+    def update_plot_lines(self):
+        """Set section back references to PlotLine.sections and PlotPoint.sectionAssoc. """
         for scId in self.sections:
-            self.sections[scId].scTurningPoints = {}
-            self.sections[scId].scArcs = []
-            for acId in self.arcs:
-                if scId in self.arcs[acId].sections:
-                    self.sections[scId].scArcs.append(acId)
-                    for tpId in self.tree.get_children(acId):
-                        if self.turningPoints[tpId].sectionAssoc == scId:
-                            self.sections[scId].scTurningPoints[tpId] = acId
+            self.sections[scId].scPlotPoints = {}
+            self.sections[scId].scPlotLines = []
+            for plId in self.plotLines:
+                if scId in self.plotLines[plId].sections:
+                    self.sections[scId].scPlotLines.append(plId)
+                    for ppId in self.tree.get_children(plId):
+                        if self.plotPoints[ppId].sectionAssoc == scId:
+                            self.sections[scId].scPlotPoints[ppId] = plId
                             break
 
     def get_languages(self):

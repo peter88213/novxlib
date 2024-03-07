@@ -57,30 +57,30 @@ $Desc
 
        Extends the superclass constructor.
         """
-        self._firstArc = True
+        self._firstPlotLine = True
         super().write()
 
-    def _get_arcMapping(self, acId):
+    def _get_arcMapping(self, plId):
         """Add associated sections to the plot line mapping dictionary.
         
         Extends the superclass method.
         """
-        arcMapping = super()._get_arcMapping(acId)
-        if self._firstArc:
+        arcMapping = super()._get_arcMapping(plId)
+        if self._firstPlotLine:
             arcMapping['Heading'] = self._arcHeadingTemplate
-            self._firstArc = False
+            self._firstPlotLine = False
         else:
             arcMapping['Heading'] = ''
         plotPoints = []
-        for tpId in self.novel.tree.get_children(acId):
+        for ppId in self.novel.tree.get_children(plId):
             plotPointMapping = dict(
-                    ID=tpId,
-                    Title=self.novel.turningPoints[tpId].title,
-                    Desc=self.novel.turningPoints[tpId].desc,
+                    ID=ppId,
+                    Title=self.novel.plotPoints[ppId].title,
+                    Desc=self.novel.plotPoints[ppId].desc,
                     )
             template = Template(self._plotPointTemplate)
             plotPoints.append(template.safe_substitute(plotPointMapping))
-            scId = self.novel.turningPoints[tpId].sectionAssoc
+            scId = self.novel.plotPoints[ppId].sectionAssoc
             if scId:
                 sectionAssocMapping = dict(
                     SectionTitle=self.novel.sections[scId].title,

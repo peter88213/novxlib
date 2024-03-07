@@ -9,14 +9,14 @@ from datetime import time
 import os
 
 from novxlib.file.file import File
-from novxlib.model.arc import Arc
+from novxlib.model.plot_line import PlotLine
 from novxlib.model.basic_element import BasicElement
 from novxlib.model.chapter import Chapter
 from novxlib.model.character import Character
 from novxlib.model.section import Section
-from novxlib.model.turning_point import TurningPoint
+from novxlib.model.plot_point import PlotPoint
 from novxlib.model.world_element import WorldElement
-from novxlib.novx_globals import AC_ROOT
+from novxlib.novx_globals import PL_ROOT
 from novxlib.novx_globals import CH_ROOT
 from novxlib.novx_globals import CR_ROOT
 from novxlib.novx_globals import Error
@@ -138,8 +138,8 @@ class NovxFile(File):
         self._read_items(xmlRoot)
         self._read_characters(xmlRoot)
         self._read_chapters(xmlRoot)
-        self._read_plotlines(xmlRoot)
-        self._read_projectnotes(xmlRoot)
+        self._read_plot_lines(xmlRoot)
+        self._read_project_notes(xmlRoot)
         self.adjust_section_types()
 
         #--- Read the word count log.
@@ -181,38 +181,38 @@ class NovxFile(File):
         self._write_element_tree(self)
         self._postprocess_xml_file(self.filePath)
 
-    def _build_plotline_branch(self, xmlArcs, prjArc, acId):
-        xmlArc = ET.SubElement(xmlArcs, 'ARC', attrib={'id':acId})
-        if prjArc.title:
-            ET.SubElement(xmlArc, 'Title').text = prjArc.title
-        if prjArc.shortName:
-            ET.SubElement(xmlArc, 'ShortName').text = prjArc.shortName
-        if prjArc.desc:
-            xmlArc.append(text_to_xml_element('Desc', prjArc.desc))
+    def _build_plot_line_branch(self, xmlPlotLines, prjPlotLine, plId):
+        xmlPlotLine = ET.SubElement(xmlPlotLines, 'ARC', attrib={'id':plId})
+        if prjPlotLine.title:
+            ET.SubElement(xmlPlotLine, 'Title').text = prjPlotLine.title
+        if prjPlotLine.shortName:
+            ET.SubElement(xmlPlotLine, 'ShortName').text = prjPlotLine.shortName
+        if prjPlotLine.desc:
+            xmlPlotLine.append(text_to_xml_element('Desc', prjPlotLine.desc))
 
         #--- References
-        if prjArc.sections:
-            attrib = {'ids':' '.join(prjArc.sections)}
-            ET.SubElement(xmlArc, 'Sections', attrib=attrib)
+        if prjPlotLine.sections:
+            attrib = {'ids':' '.join(prjPlotLine.sections)}
+            ET.SubElement(xmlPlotLine, 'Sections', attrib=attrib)
 
         #--- Plot points.
-        for tpId in self.novel.tree.get_children(acId):
-            xmlPoint = ET.SubElement(xmlArc, 'POINT', attrib={'id':tpId})
-            self._build_plotpoint_branch(xmlPoint, self.novel.turningPoints[tpId])
+        for ppId in self.novel.tree.get_children(plId):
+            xmlPlotPoint = ET.SubElement(xmlPlotLine, 'POINT', attrib={'id':ppId})
+            self._build_plot_point_branch(xmlPlotPoint, self.novel.plotPoints[ppId])
 
-        return xmlArc
+        return xmlPlotLine
 
-    def _build_plotpoint_branch(self, xmlPoint, prjTurningPoint):
-        if prjTurningPoint.title:
-            ET.SubElement(xmlPoint, 'Title').text = prjTurningPoint.title
-        if prjTurningPoint.desc:
-            xmlPoint.append(text_to_xml_element('Desc', prjTurningPoint.desc))
-        if prjTurningPoint.notes:
-            xmlPoint.append(text_to_xml_element('Notes', prjTurningPoint.notes))
+    def _build_plot_point_branch(self, xmlPlotPoint, prjPlotPoint):
+        if prjPlotPoint.title:
+            ET.SubElement(xmlPlotPoint, 'Title').text = prjPlotPoint.title
+        if prjPlotPoint.desc:
+            xmlPlotPoint.append(text_to_xml_element('Desc', prjPlotPoint.desc))
+        if prjPlotPoint.notes:
+            xmlPlotPoint.append(text_to_xml_element('Notes', prjPlotPoint.notes))
 
         #--- References.
-        if prjTurningPoint.sectionAssoc:
-            ET.SubElement(xmlPoint, 'Section', attrib={'id': prjTurningPoint.sectionAssoc})
+        if prjPlotPoint.sectionAssoc:
+            ET.SubElement(xmlPlotPoint, 'Section', attrib={'id': prjPlotPoint.sectionAssoc})
 
     def _build_chapter_branch(self, xmlChapters, prjChp, chId):
         xmlChapter = ET.SubElement(xmlChapters, 'CHAPTER', attrib={'id':chId})
@@ -292,15 +292,15 @@ class NovxFile(File):
             self._build_item_branch(xmlItm, self.novel.items[itId])
 
         #--- Process plot lines and plot points.
-        xmlArcs = ET.SubElement(root, 'ARCS')
-        for acId in self.novel.tree.get_children(AC_ROOT):
-            self._build_plotline_branch(xmlArcs, self.novel.arcs[acId], acId)
+        xmlPlotLines = ET.SubElement(root, 'ARCS')
+        for plId in self.novel.tree.get_children(PL_ROOT):
+            self._build_plot_line_branch(xmlPlotLines, self.novel.plotLines[plId], plId)
 
         #--- Process project notes.
-        xmlProjectnotes = ET.SubElement(root, 'PROJECTNOTES')
+        xmlProjectNotes = ET.SubElement(root, 'PROJECTNOTES')
         for pnId in self.novel.tree.get_children(PN_ROOT):
-            xmlProjectnote = ET.SubElement(xmlProjectnotes, 'PROJECTNOTE', attrib={'id':pnId})
-            self._build_projectnotes_branch(xmlProjectnote, self.novel.projectNotes[pnId])
+            xmlProjectNote = ET.SubElement(xmlProjectNotes, 'PROJECTNOTE', attrib={'id':pnId})
+            self._build_project_notes_branch(xmlProjectNote, self.novel.projectNotes[pnId])
 
         #--- Build the word count log.
         if self.wcLog:
@@ -397,11 +397,11 @@ class NovxFile(File):
         if self.novel.referenceDate:
             ET.SubElement(xmlProject, 'ReferenceDate').text = self.novel.referenceDate
 
-    def _build_projectnotes_branch(self, xmlProjectnote, projectNote):
+    def _build_project_notes_branch(self, xmlProjectNote, projectNote):
         if projectNote.title:
-            ET.SubElement(xmlProjectnote, 'Title').text = projectNote.title
+            ET.SubElement(xmlProjectNote, 'Title').text = projectNote.title
         if projectNote.desc:
-            xmlProjectnote.append(text_to_xml_element('Desc', projectNote.desc))
+            xmlProjectNote.append(text_to_xml_element('Desc', projectNote.desc))
 
     def _build_section_branch(self, xmlSection, prjScn):
         if prjScn.scType:
@@ -424,10 +424,10 @@ class NovxFile(File):
             xmlSection.append(text_to_xml_element('Outcome', prjScn.outcome))
         if prjScn.plotNotes:
             xmlPlotNotes = ET.SubElement(xmlSection, 'PlotNotes')
-            for acId in prjScn.plotNotes:
-                if acId in prjScn.scArcs:
-                    xmlPlotNote = text_to_xml_element('PlotlineNotes', prjScn.plotNotes[acId])
-                    xmlPlotNote.set('id', acId)
+            for plId in prjScn.plotNotes:
+                if plId in prjScn.scPlotLines:
+                    xmlPlotNote = text_to_xml_element('PlotlineNotes', prjScn.plotNotes[plId])
+                    xmlPlotNote.set('id', plId)
                     xmlPlotNotes.append(xmlPlotNote)
         if prjScn.notes:
             xmlSection.append(text_to_xml_element('Notes', prjScn.notes))
@@ -503,45 +503,45 @@ class NovxFile(File):
         except:
             raise Error(f'{_("Cannot write file")}: "{norm_path(filePath)}".')
 
-    def _read_plotlines(self, root):
+    def _read_plot_lines(self, root):
         """Read plotlines from the xml element tree."""
         try:
-            for xmlArc in root.find('ARCS'):
-                acId = xmlArc.attrib['id']
-                self.novel.arcs[acId] = Arc(on_element_change=self.on_element_change)
-                self.novel.arcs[acId].title = get_element_text(xmlArc, 'Title')
-                self.novel.arcs[acId].desc = xml_element_to_text(xmlArc.find('Desc'))
-                self.novel.arcs[acId].shortName = get_element_text(xmlArc, 'ShortName')
-                self.novel.tree.append(AC_ROOT, acId)
-                for xmlPoint in xmlArc.iterfind('POINT'):
-                    tpId = xmlPoint.attrib['id']
-                    self._read_plotpoint(xmlPoint, tpId, acId)
-                    self.novel.tree.append(acId, tpId)
+            for xmlPlotLine in root.find('ARCS'):
+                plId = xmlPlotLine.attrib['id']
+                self.novel.plotLines[plId] = PlotLine(on_element_change=self.on_element_change)
+                self.novel.plotLines[plId].title = get_element_text(xmlPlotLine, 'Title')
+                self.novel.plotLines[plId].desc = xml_element_to_text(xmlPlotLine.find('Desc'))
+                self.novel.plotLines[plId].shortName = get_element_text(xmlPlotLine, 'ShortName')
+                self.novel.tree.append(PL_ROOT, plId)
+                for xmlPlotPoint in xmlPlotLine.iterfind('POINT'):
+                    ppId = xmlPlotPoint.attrib['id']
+                    self._read_plot_point(xmlPlotPoint, ppId, plId)
+                    self.novel.tree.append(plId, ppId)
 
                 #--- References
                 acSections = []
-                xmlSections = xmlArc.find('Sections')
+                xmlSections = xmlPlotLine.find('Sections')
                 if xmlSections is not None:
                     scIds = xmlSections.get('ids', None)
                     for scId in string_to_list(scIds, divider=' '):
                         if scId and scId in self.novel.sections:
                             acSections.append(scId)
-                            self.novel.sections[scId].scArcs.append(acId)
-                self.novel.arcs[acId].sections = acSections
+                            self.novel.sections[scId].scPlotLines.append(plId)
+                self.novel.plotLines[plId].sections = acSections
         except TypeError:
             pass
 
-    def _read_plotpoint(self, xmlPoint, tpId, acId):
+    def _read_plot_point(self, xmlPoint, ppId, plId):
         """Read a plot point from the xml element tree."""
-        self.novel.turningPoints[tpId] = TurningPoint(on_element_change=self.on_element_change)
-        self.novel.turningPoints[tpId].title = get_element_text(xmlPoint, 'Title')
-        self.novel.turningPoints[tpId].desc = xml_element_to_text(xmlPoint.find('Desc'))
-        self.novel.turningPoints[tpId].notes = xml_element_to_text(xmlPoint.find('Notes'))
+        self.novel.plotPoints[ppId] = PlotPoint(on_element_change=self.on_element_change)
+        self.novel.plotPoints[ppId].title = get_element_text(xmlPoint, 'Title')
+        self.novel.plotPoints[ppId].desc = xml_element_to_text(xmlPoint.find('Desc'))
+        self.novel.plotPoints[ppId].notes = xml_element_to_text(xmlPoint.find('Notes'))
         xmlSectionAssoc = xmlPoint.find('Section')
         if xmlSectionAssoc is not None:
             scId = xmlSectionAssoc.get('id', None)
-            self.novel.turningPoints[tpId].sectionAssoc = scId
-            self.novel.sections[scId].scTurningPoints[tpId] = acId
+            self.novel.plotPoints[ppId].sectionAssoc = scId
+            self.novel.sections[scId].scPlotPoints[ppId] = plId
 
     def _read_chapters(self, root, partType=0):
         """Read data at chapter level from the xml element tree."""
@@ -661,14 +661,14 @@ class NovxFile(File):
             self.novel.wordTarget = int(xmlProject.find('WordTarget').text)
         self.novel.referenceDate = get_element_text(xmlProject, 'ReferenceDate')
 
-    def _read_projectnotes(self, root):
+    def _read_project_notes(self, root):
         """Read project notes from the xml element tree."""
         try:
-            for xmlProjectnote in root.find('PROJECTNOTES'):
-                pnId = xmlProjectnote.attrib['id']
+            for xmlProjectNote in root.find('PROJECTNOTES'):
+                pnId = xmlProjectNote.attrib['id']
                 self.novel.projectNotes[pnId] = BasicElement()
-                self.novel.projectNotes[pnId].title = get_element_text(xmlProjectnote, 'Title')
-                self.novel.projectNotes[pnId].desc = xml_element_to_text(xmlProjectnote.find('Desc'))
+                self.novel.projectNotes[pnId].title = get_element_text(xmlProjectNote, 'Title')
+                self.novel.projectNotes[pnId].desc = xml_element_to_text(xmlProjectNote.find('Desc'))
                 self.novel.tree.append(PN_ROOT, pnId)
         except TypeError:
             pass
@@ -764,9 +764,9 @@ class NovxFile(File):
         xmlPlotNotes = xmlSection.find('PlotNotes')
         if xmlPlotNotes is not None:
             plotNotes = {}
-            for xmlArcNote in xmlPlotNotes.iterfind('PlotlineNotes'):
-                acId = xmlArcNote.get('id', None)
-                plotNotes[acId] = xml_element_to_text(xmlArcNote)
+            for xmlPlotLineNote in xmlPlotNotes.iterfind('PlotlineNotes'):
+                plId = xmlPlotLineNote.get('id', None)
+                plotNotes[plId] = xml_element_to_text(xmlPlotLineNote)
             self.novel.sections[scId].plotNotes = plotNotes
 
         #--- References

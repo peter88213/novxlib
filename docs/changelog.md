@@ -1,5 +1,11 @@
 # Changelog
 
+### v2.0.0
+
+- Fix a regression from v1.5.0 where faulty plot lists are generated. 
+- Refactor the code for novelibre v3.0 API.
+- Remove the yw7 file format support.
+
 ### v1.5.0
 
 - Update DTD to v1.1: Add section arc notes.
