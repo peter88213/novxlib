@@ -157,7 +157,7 @@ class Splitter:
                                      sectionSplitCount,
                                      title,
                                      desc,
-                                     line.startswith(self.APPENDED_SCENE_SEPARATOR),
+                                     plainLine.startswith(self.APPENDED_SCENE_SEPARATOR),
                                      )
                         novel.tree.append(chId, newScId)
                         scId = newScId

@@ -1,5 +1,11 @@
 # Changelog
 
+
+### v2.0.1
+
+- Fix a bug where imported sections are split at the 
+  "####" mark, but not appended as they should. 
+
 ### v2.0.0
 
 - Fix a regression from v1.5.0 where faulty plot lists are generated. 
