@@ -67,11 +67,11 @@ class Section(BasicElement):
         try:
             newDate = date.fromisoformat(scDate)
             self._weekDay = newDate.weekday()
-            self._LocaleDate = newDate.strftime('%x')
+            self._localeDate = newDate.strftime('%x')
             self._date = scDate
         except:
             self._weekDay = None
-            self._LocaleDate = None
+            self._localeDate = None
             self._date = None
         self._time = scTime
         self._day = day
@@ -231,8 +231,6 @@ class Section(BasicElement):
 
     @date.setter
     def date(self, newVal):
-        if not newVal:
-            newVal = None
         if self._date != newVal:
             if not newVal:
                 self._date = None
@@ -248,9 +246,9 @@ class Section(BasicElement):
                     # date and week day remain unchanged
                 else:
                     try:
-                        self._LocaleDate = newDate.strftime('%x')
+                        self._localeDate = newDate.strftime('%x')
                     except:
-                        self._LocaleDate = newVal
+                        self._localeDate = newVal
                     self._date = newVal
                     self.on_element_change()
 
@@ -262,7 +260,7 @@ class Section(BasicElement):
     @property
     def localeDate(self):
         # the preferred date representation for the current locale
-        return self._LocaleDate
+        return self._localeDate
 
     @property
     def time(self):
