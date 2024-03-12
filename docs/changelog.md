@@ -1,6 +1,14 @@
 # Changelog
 
 
+### v2.1.0
+
+Provide local date format for display
+
+- Make Section.weekDay a property.
+- New property Section.localeDate
+- Reset date and day to None instead to empty string.
+
 ### v2.0.1
 
 - Fix a bug where imported sections are split at the 
