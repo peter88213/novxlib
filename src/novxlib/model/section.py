@@ -65,10 +65,13 @@ class Section(BasicElement):
         self._outcome = outcome
         self._plotNotes = plotNotes
         try:
-            self.weekDay = date.fromisoformat(scDate).weekday()
+            newDate = date.fromisoformat(scDate)
+            self._weekDay = newDate.weekday()
+            self._LocaleDate = newDate.strftime('%x')
             self._date = scDate
         except:
-            self.weekDay = None
+            self._weekDay = None
+            self._LocaleDate = None
             self._date = None
         self._time = scTime
         self._day = day
@@ -228,19 +231,38 @@ class Section(BasicElement):
 
     @date.setter
     def date(self, newVal):
+        if not newVal:
+            newVal = None
         if self._date != newVal:
             if not newVal:
                 self._date = None
-                self.weekDay = None
+                self._weekDay = None
+                self._localeDate = None
+                self.on_element_change()
             else:
                 try:
-                    self.weekDay = date.fromisoformat(newVal).weekday()
+                    newDate = date.fromisoformat(newVal)
+                    self._weekDay = newDate.weekday()
                 except:
                     pass
                     # date and week day remain unchanged
                 else:
+                    try:
+                        self._LocaleDate = newDate.strftime('%x')
+                    except:
+                        self._LocaleDate = newVal
                     self._date = newVal
                     self.on_element_change()
+
+    @property
+    def weekDay(self):
+        # the number of the day ot the week
+        return self._weekDay
+
+    @property
+    def localeDate(self):
+        # the preferred date representation for the current locale
+        return self._LocaleDate
 
     @property
     def time(self):
@@ -391,7 +413,7 @@ class Section(BasicElement):
                 self.date = date.isoformat(refDate + deltaDays)
                 self._day = None
             except:
-                self.date = ''
+                self.date = None
                 return False
 
         return True
@@ -408,11 +430,10 @@ class Section(BasicElement):
             try:
                 sectionDate = date.fromisoformat(self._date)
                 referenceDate = date.fromisoformat(referenceDate)
-                self.day = str((sectionDate - referenceDate).days)
-                self._date = None
-                self.weekDay = None
+                self._day = str((sectionDate - referenceDate).days)
+                self.date = None
             except:
-                self.day = ''
+                self._day = None
                 return False
 
         return True

@@ -9,6 +9,8 @@ import sys
 import gettext
 import locale
 
+locale.setlocale(locale.LC_TIME, "")
+
 ROOT_PREFIX = 'rt'
 CHAPTER_PREFIX = 'ch'
 PLOT_LINE_PREFIX = 'ac'
