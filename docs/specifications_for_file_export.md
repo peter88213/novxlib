@@ -93,7 +93,7 @@ There are two options:
 - **$Time** - Time section begins: (hh:mm)
 - **$Day** - Day section begins 
 - 
-- **$ScDate** - Date or day
+- **$ScDate** - Date or day (localized)
 
 - **$LastsDays** - Amount of time section lasts: days
 - **$LastsHours** - Amount of time section lasts: hours
