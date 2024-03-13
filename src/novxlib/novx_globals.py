@@ -4,12 +4,11 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
-import os
-import sys
+from calendar import day_name, month_name
 import gettext
 import locale
-
-locale.setlocale(locale.LC_TIME, "")
+import os
+import sys
 
 ROOT_PREFIX = 'rt'
 CHAPTER_PREFIX = 'ch'
@@ -57,6 +56,7 @@ class Error(Exception):
 
 
 #--- Initialize localization.
+locale.setlocale(locale.LC_TIME, "")
 LOCALE_PATH = f'{os.path.dirname(sys.argv[0])}/locale/'
 try:
     CURRENT_LANGUAGE = locale.getlocale()[0][:2]
@@ -71,30 +71,8 @@ except:
     def _(message):
         return message
 
-WEEKDAYS = [
-    _('Monday'),
-    _('Tuesday'),
-    _('Wednesday'),
-    _('Thursday'),
-    _('Friday'),
-    _('Saturday'),
-    _('Sunday')
-    ]
-
-MONTHS = [
-    _('January'),
-    _('February'),
-    _('March'),
-    _('April'),
-    _('May'),
-    _('June'),
-    _('July'),
-    _('August'),
-    _('September'),
-    _('October'),
-    _('November'),
-    _('December'),
-    ]
+WEEKDAYS = day_name
+MONTHS = month_name
 
 
 def norm_path(path):

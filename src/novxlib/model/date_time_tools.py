@@ -5,14 +5,7 @@ For further information see https://github.com/peter88213/
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
 from datetime import datetime
-
-
-def isleap(year):
-    """Return True for leap years, False for non-leap years.
-    
-    Copied from the standard calendar module.
-    """
-    return year % 4 == 0 and (year % 100 != 0 or year % 400 == 0)
+from calendar import isleap
 
 
 def difference_in_years(startDate, endDate):

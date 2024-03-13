@@ -1,6 +1,11 @@
 # Changelog
 
 
+### v3.0.1
+
+- Provide weekday names and month names for all languages.
+- Use the isleap() function from the standard calendar module.
+
 ### v3.0.0
 
 Provide local date format for display
