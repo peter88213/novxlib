@@ -8,6 +8,7 @@ Provide local date format for display
 - Make Section.weekDay a property.
 - New property Section.localeDate
 - Reset date and day to None instead to empty string.
+- Use localized date and "Day" translation for the "ScDate" file export placeholder.
 
 ### v2.0.1
 

@@ -473,12 +473,12 @@ class FileExport(File):
         if self.novel.sections[scId].date is not None and self.novel.sections[scId].date != Section.NULL_DATE:
             scDay = ''
             scDate = self.novel.sections[scId].date
-            cmbDate = self.novel.sections[scId].date
+            cmbDate = self.novel.sections[scId].localeDate
         else:
             scDate = ''
             if self.novel.sections[scId].day is not None:
                 scDay = self.novel.sections[scId].day
-                cmbDate = f'Day {self.novel.sections[scId].day}'
+                cmbDate = f'{_("Day")} {self.novel.sections[scId].day}'
             else:
                 scDay = ''
                 cmbDate = ''
