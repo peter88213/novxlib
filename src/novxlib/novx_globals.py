@@ -81,6 +81,21 @@ WEEKDAYS = [
     _('Sunday')
     ]
 
+MONTHS = [
+    _('January'),
+    _('February'),
+    _('March'),
+    _('April'),
+    _('May'),
+    _('June'),
+    _('July'),
+    _('August'),
+    _('September'),
+    _('October'),
+    _('November'),
+    _('December'),
+    ]
+
 
 def norm_path(path):
     if path is None:

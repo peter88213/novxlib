@@ -13,7 +13,6 @@ from novxlib.file.file import File
 from novxlib.file.filter import Filter
 from novxlib.model.character import Character
 from novxlib.model.section import Section
-from novxlib.novx_globals import PL_ROOT
 from novxlib.novx_globals import CHARACTERS_SUFFIX
 from novxlib.novx_globals import CH_ROOT
 from novxlib.novx_globals import CR_ROOT
@@ -23,8 +22,11 @@ from novxlib.novx_globals import IT_ROOT
 from novxlib.novx_globals import LC_ROOT
 from novxlib.novx_globals import LOCATIONS_SUFFIX
 from novxlib.novx_globals import MANUSCRIPT_SUFFIX
+from novxlib.novx_globals import MONTHS
+from novxlib.novx_globals import PL_ROOT
 from novxlib.novx_globals import PN_ROOT
 from novxlib.novx_globals import SECTIONS_SUFFIX
+from novxlib.novx_globals import WEEKDAYS
 from novxlib.novx_globals import _
 from novxlib.novx_globals import list_to_string
 from novxlib.novx_globals import norm_path
@@ -472,10 +474,18 @@ class FileExport(File):
         #--- Date or day.
         if self.novel.sections[scId].date is not None and self.novel.sections[scId].date != Section.NULL_DATE:
             scDay = ''
-            scDate = self.novel.sections[scId].date
+            isoDate = self.novel.sections[scId].date
             cmbDate = self.novel.sections[scId].localeDate
+            yearStr, monthStr, dayStr = isoDate.split('-')
+            dtMonth = MONTHS[int(monthStr) - 1]
+            dtWeekday = WEEKDAYS[self.novel.sections[scId].weekDay]
         else:
-            scDate = ''
+            isoDate = ''
+            yearStr = ''
+            monthStr = ''
+            dayStr = ''
+            dtMonth = ''
+            dtWeekday = ''
             if self.novel.sections[scId].day is not None:
                 scDay = self.novel.sections[scId].day
                 cmbDate = f'{_("Day")} {self.novel.sections[scId].day}'
@@ -523,11 +533,16 @@ class FileExport(File):
             WordsTotal=wordsTotal,
             Status=int(self.novel.sections[scId].status),
             SectionContent=self._convert_from_novx(self.novel.sections[scId].sectionContent, append=self.novel.sections[scId].appendToPrev, xml=True),
-            Date=scDate,
+            Date=isoDate,
             Time=scTime,
             OdsTime=odsTime,
             Day=scDay,
             ScDate=cmbDate,
+            DateYear=yearStr,
+            DateMonth=monthStr,
+            DateDay=dayStr,
+            DateWeekday=dtWeekday,
+            MonthName=dtMonth,
             LastsDays=lastsDays,
             LastsHours=lastsHours,
             LastsMinutes=lastsMinutes,
@@ -643,8 +658,8 @@ class FileExport(File):
         lines = []
         template = Template(self._projectNoteTemplate)
         for pnId in self.novel.tree.get_children(PN_ROOT):
-            map = self._get_prjNoteMapping(pnId)
-            lines.append(template.safe_substitute(map))
+            pnMap = self._get_prjNoteMapping(pnId)
+            lines.append(template.safe_substitute(pnMap))
         return lines
 
     def _get_text(self):

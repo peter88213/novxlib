@@ -91,9 +91,16 @@ There are two options:
 
 - **$Date** - Specific section date (yyyy-mm-dd)
 - **$Time** - Time section begins: (hh:mm)
+- **$OdsTime** - Time section begins: (PThhHmmMssS)
 - **$Day** - Day section begins 
 - 
 - **$ScDate** - Date or day (localized)
+
+- **$DateYear** - Year
+- **$DateMonth** - Month (number) 
+- **$DateDay** - Day (number)
+- **$DateWeekday** - Day of the week (name)
+- **$MonthName** - Month (name)
 
 - **$LastsDays** - Amount of time section lasts: days
 - **$LastsHours** - Amount of time section lasts: hours

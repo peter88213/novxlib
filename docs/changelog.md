@@ -1,7 +1,7 @@
 # Changelog
 
 
-### v2.1.0
+### v3.0.0
 
 Provide local date format for display
 
@@ -9,6 +9,8 @@ Provide local date format for display
 - New property Section.localeDate
 - Reset date and day to None instead to empty string.
 - Use localized date and "Day" translation for the "ScDate" file export placeholder.
+- Add date-related placeholders for the section export.
+- Restore the novx to shortcode conversion parser.
 
 ### v2.0.1
 
