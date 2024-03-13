@@ -93,7 +93,7 @@ There are two options:
 - **$Time** - Time section begins: (hh:mm)
 - **$OdsTime** - Time section begins: (PThhHmmMssS)
 - **$Day** - Day section begins 
-- 
+ 
 - **$ScDate** - Date or day (localized)
 
 - **$DateYear** - Year
