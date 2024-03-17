@@ -40,8 +40,6 @@ class NovxFile(File):
         wcLog: dict[str, list[str, str]] -- Daily word count logs.
         wcLogUpdate: dict[str, list[str, str]] -- Word counts missing in the log.
     
-    Public properties:
-        fileDate: str -- ISO-formatted file date/time (YYYY-MM-DD hh:mm:ss).
     """
     DESCRIPTION = _('novelibre project')
     EXTENSION = '.novx'
