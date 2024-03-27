@@ -301,48 +301,36 @@ rows. New entities must get a unique ID.
 
 Generate a new OpenDocument spreadsheet (ods) listing the following:
 
-- Hyperlink to the manuscript's section section
-- Section title
-- Section description
-- Tags
-- Section notes
-- A/R
-- Goal
-- Conflict
-- Outcome
-- Sequential section number
-- Words total
-- Word count
-- Status
-- Characters
-- Locations
-- Items
+1. Section ID (hidden)
+2. Section number (link to manuscript)
+3. Title
+4. Description
+5. Viewpoint
+6. Date
+7. Time
+8. Day
+9. Duration
+10. Tags
+11. Section notes
+12. A/R
+13. Goal
+14. Conflict
+15. Outcome
+16. Status
+17. Words total
+18. Word count
+19. Characters
+20. Locations
+21. Items
 
 Only "normal" sections get a row in the section list. 
 Sections of the "Unused" type are omitted.
 
-File name suffix is `_sectionlist_tmp`.
+File name suffix is `_sectionlist`.
 
 [Top of page](#top)
 
 ------------------------------------------------------------------------
 
-## Import section list
-
-The following columns can be written back to the novelibre project:
-
-- Title
-- Description
-- Tags (comma-separated)
-- Section notes
-- A/R (action/reaction section)
-- Goal
-- Conflict
-- Outcome
-- Status ('Outline', 'Draft', '1st Edit', '2nd Edit', 'Done')
-
-[Top of page](#top)
-
-------------------------------------------------------------------------
 
 

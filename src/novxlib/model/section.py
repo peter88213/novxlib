@@ -6,7 +6,7 @@ License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
 from datetime import datetime, date, timedelta
 import re
-
+from novxlib.novx_globals import _
 from novxlib.model.basic_element import BasicElement
 
 #--- Regular expressions for counting words and characters like in LibreOffice.
@@ -21,7 +21,17 @@ NO_WORD_LIMITS = re.compile('\<note\>.*?\<\/note\>|\<comment\>.*?\<\/comment\>|\
 class Section(BasicElement):
     """novelibre section representation."""
     PACING = ['A', 'R', 'C']
-    # emulate an enumeration for the section Action/Reaction/Custom type
+    # emulating an enumeration for the section Action/Reaction/Custom type
+
+    STATUS = [
+        None,
+        _('Outline'),
+        _('Draft'),
+        _('1st Edit'),
+        _('2nd Edit'),
+        _('Done')
+        ]
+    # emulating an enumeration for the section completion status
 
     NULL_DATE = '0001-01-01'
     NULL_TIME = '00:00:00'

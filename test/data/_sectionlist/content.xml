@@ -47,18 +47,22 @@
  <office:body>
   <office:spreadsheet>
    <table:table table:name="Section list" table:style-name="ta1" table:print="false">
+    <table:table-column table:style-name="co1" table:visibility="collapse" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co4" table:default-cell-style-name="Default"/>
+    <table:table-column table:style-name="co2" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co2" table:default-cell-style-name="ce2"/>
     <table:table-column table:style-name="co1" table:default-cell-style-name="ce4"/>
+    <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
+    <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co4" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co4" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co4" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co4" table:default-cell-style-name="Default"/>
-    <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
+    <table:table-column table:style-name="co2" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
@@ -71,19 +75,31 @@
     <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
     <table:table-row table:style-name="ro1" table:visibility="collapse">
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>Section link</text:p>
+      <text:p>ID</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>Section title</text:p>
+      <text:p>Section</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>Section description</text:p>
+      <text:p>Title</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>Description</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>Viewpoint</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce1" office:value-type="string">
       <text:p>Date</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce3" office:value-type="string">
       <text:p>Time</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>Day</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>Duration</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>Tags</text:p>
@@ -104,7 +120,7 @@
       <text:p>Outcome</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>Section</text:p>
+      <text:p>Status</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>Words total</text:p>
@@ -125,19 +141,31 @@
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>Section link</text:p>
+      <text:p>ID</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>Section title</text:p>
+      <text:p>Section</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>Section description</text:p>
+      <text:p>Title</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>Description</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>Viewpoint</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce1" office:value-type="string">
       <text:p>Date</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce3" office:value-type="string">
       <text:p>Time</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>Day</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>Duration</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>Tags</text:p>
@@ -158,7 +186,7 @@
       <text:p>Outcome</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>Section</text:p>
+      <text:p>Status</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>Words total</text:p>
@@ -179,8 +207,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc1%7Cregion&quot;;&quot;sc1&quot;)" office:value-type="string" office:string-value="sc1">
+     <table:table-cell office:value-type="string">
       <text:p>sc1</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc1%7Cregion&quot;;&quot;1&quot;)" office:value-type="string" office:string-value="1">
+      <text:p>1</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Meet Hal, threatened by Vurdi</text:p>
@@ -192,8 +223,17 @@
 <text:p>During the scuffle, Hal manages to tell Vurdi that he accepted a cargo job earlier in the day, and will use the proceeds to settle his debts. Vurdi is suspicious, but calls Brutus off and gives Hal 24 hours.</text:p>
 <text:p>After Vurdi leaves, Hal discusses things with the Black Gull&apos;s onboard computer (the Navcom), reviewing the cargo jobs he&apos;s been offered. He chooses the one which sounds less risky than the others, a freight job offered by the Jerling corporation. The Navcom objects, reminding Hal that he turned it down earlier because he thought it involved stolen goods. Hal doesn&apos;t care - he can&apos;t afford to be choosy any more.</text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Hal</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p>1</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Exposition</text:p>
      </table:table-cell>
@@ -212,8 +252,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="1">
-      <text:p>1</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="375">
       <text:p>375</text:p>
@@ -233,8 +273,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc2%7Cregion&quot;;&quot;sc2&quot;)" office:value-type="string" office:string-value="sc2">
+     <table:table-cell office:value-type="string">
       <text:p>sc2</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc2%7Cregion&quot;;&quot;2&quot;)" office:value-type="string" office:string-value="2">
+      <text:p>2</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Jerling buys team. Discusses Seraph.</text:p>
@@ -247,8 +290,17 @@
 <text:p>Carina explains that they can&apos;t risk their own ships, they wouldn&apos;t be covered by insurance and anyway, none of their pilots will fly into the danger zone. They tried to hire a freelancer but none of them wanted the job either - they were all warned off by a Spacers Guild bulletin. Jerling asks why they didn&apos;t try non-Guild pilots, Carina explains that they could only locate one and he turned it down because he was convinced it was a stolen goods racket. Jerling is annoyed that his staff hid the problem from him. Carina explains that they didn&apos;t want to worry him.  Jerling says they should have come to him before, this is important, if they lose preferred supplier status his business is at risk, and worse still the Hinchfigs will gain on him.</text:p>
 <text:p>Jerling asks Carina to call the idiot, the one who thought it was stolen goods. Before the assistant makes the call, she discovers that there&apos;s a message from the &apos;idiot&apos; already - he wants the job. Carina tries to pursuade Jerling that others can deal with the issue but Jerling&apos;s fired up and won&apos;t let go, it&apos;s his pet project.</text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Jerling</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -267,8 +319,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="2">
-      <text:p>2</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="442">
       <text:p>442</text:p>
@@ -288,8 +340,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc3%7Cregion&quot;;&quot;sc3&quot;)" office:value-type="string" office:string-value="sc3">
+     <table:table-cell office:value-type="string">
       <text:p>sc3</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc3%7Cregion&quot;;&quot;3&quot;)" office:value-type="string" office:string-value="3">
+      <text:p>3</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Hal takes a call from Jerling</text:p>
@@ -298,8 +353,17 @@
       <text:p>Back with Hal, Jerling&apos;s call comes through and the businessman explains about his cargo, reassures Hal it&apos;s not stolen goods, then explains he has a pilot at the Lamira Spaceport (the same location as Hal) who needs a lift to Seraph IV. If Hal can take him, the pilot will return the favour by landing Hal&apos;s ship when they arrive at the destination.</text:p>
 <text:p>Hal says he doesn&apos;t need help, Jerling explains that the landing is at night, with no guidance. This makes Hal suspicious about the job again, but he decides that nothing could be worse than another session with Brutus. Jerling reassures him that the pilot can handle everything and reminds him that delivery is to his premises on Forg. Hal agrees to the job, starts to ask for an advance but Jerling disconnects.</text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Hal</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -318,8 +382,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="3">
-      <text:p>3</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="530">
       <text:p>530</text:p>
@@ -339,8 +403,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc4%7Cregion&quot;;&quot;sc4&quot;)" office:value-type="string" office:string-value="sc4">
+     <table:table-cell office:value-type="string">
       <text:p>sc4</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc4%7Cregion&quot;;&quot;4&quot;)" office:value-type="string" office:string-value="4">
+      <text:p>4</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Clunk arrives</text:p>
@@ -350,8 +417,17 @@
 <text:p>Hal closes the airlock in its face, runs to the flight deck and calls Jerling. He protests that an old robot like that can&apos;t possibly land his valuable ship. Jerling explains that the robot is an experienced pilot. After some discussion, Hal accepts the situation. He goes back to the airlock, lets Clunk in but sends him to the cargo hold.</text:p>
 <text:p>Hal prepares the ship for takeoff, but ground control won&apos;t let him leave. The Port Commander wants to see him in person. Hal leaves the ship, putting Clunk in charge.</text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Hal</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -370,8 +446,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="4">
-      <text:p>4</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="597">
       <text:p>597</text:p>
@@ -391,8 +467,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc5%7Cregion&quot;;&quot;sc5&quot;)" office:value-type="string" office:string-value="sc5">
+     <table:table-cell office:value-type="string">
       <text:p>sc5</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc5%7Cregion&quot;;&quot;5&quot;)" office:value-type="string" office:string-value="5">
+      <text:p>5</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Hal going to port control</text:p>
@@ -404,8 +483,17 @@
 <text:p>While the robot is busy mending the pipes, Hal leaps into the vehicle and starts it up. The robot spots him and pursues. The vehicle accelerates, but the robot manages to grab hold and swing itself aboard. Hal wiggles the joystick and the wild movements throw the robot from side to side, battering it against the sides of the tray. One last violent twist of the controls hurls the robot from the back of the vehicle, and it cartwheels through the grass before coming to a halt in a sparking, smoking huddle.</text:p>
 <text:p>Hal drives off, oblivious to the flames starting to flicker around the fallen robot.</text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Hal</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -424,8 +512,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="5">
-      <text:p>5</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="773">
       <text:p>773</text:p>
@@ -445,8 +533,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc6%7Cregion&quot;;&quot;sc6&quot;)" office:value-type="string" office:string-value="sc6">
+     <table:table-cell office:value-type="string">
       <text:p>sc6</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc6%7Cregion&quot;;&quot;6&quot;)" office:value-type="string" office:string-value="6">
+      <text:p>6</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Clunk checking computer for Incubots.</text:p>
@@ -455,8 +546,17 @@
       <text:p>Aboard the Black Gull, Clunk is curious. He knows he&apos;s being sent to Incubots on Seraph IV, but nobody has told him why. He searches the Black Gull&apos;s outdated computer for information on the company. (There&apos;s an equivalent to the internet called Galnet, but Hal can&apos;t afford the fees so his ship has a snapshot about 5 or 6 years old.) Clunk discovers that Incubots makes parts for new robots and replacement parts for older models. He&apos;s relieved, because Jerling&apos;s staff were vague about the reason for his trip, and it&apos;s fairly common for Jerling&apos;s older, obsolete robots to be sent to out-of-the-way planets, never to return. Now it seems he&apos;s to be upgraded, which is good news because he&apos;s got long list of worn parts which need replacements.</text:p>
 <text:p>Sitting at the console, Clunk uses the Black Gull&apos;s simulation mode to practice a couple of landings, then veers off and dreams he&apos;s flying the ship to a mythical robot planet.</text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Clunk</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -475,8 +575,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="6">
-      <text:p>6</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="898">
       <text:p>898</text:p>
@@ -496,8 +596,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc7%7Cregion&quot;;&quot;sc7&quot;)" office:value-type="string" office:string-value="sc7">
+     <table:table-cell office:value-type="string">
       <text:p>sc7</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc7%7Cregion&quot;;&quot;7&quot;)" office:value-type="string" office:string-value="7">
+      <text:p>7</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Hal talking to the Portmaster</text:p>
@@ -507,8 +610,17 @@
 <text:p>The Portmaster invites him into his office, and Hal discovers there are overdue landing fees, stamp duty, fuel, snacks, etc etc to pay for. The Port of Lamira is going to auction Hal&apos;s ship to recover debts. Hal protests that he has a job which will cover the fees, but the Portmaster doesn&apos;t believe him.</text:p>
 <text:p>Hal decides to call his brand new best buddy Clunk, thinking the robot can ask Jerling for an advance on his fee.</text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Hal</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -527,8 +639,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="7">
-      <text:p>7</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="987">
       <text:p>987</text:p>
@@ -548,8 +660,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc8%7Cregion&quot;;&quot;sc8&quot;)" office:value-type="string" office:string-value="sc8">
+     <table:table-cell office:value-type="string">
       <text:p>sc8</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc8%7Cregion&quot;;&quot;8&quot;)" office:value-type="string" office:string-value="8">
+      <text:p>8</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Clunk takes call from Hal. Calls Jerling. Fire.</text:p>
@@ -558,8 +673,17 @@
       <text:p>Clunk tells Hal that Jerling won&apos;t advance any money, but Hal tells him to ask anyway. Clunk calls Jerling, who won&apos;t advance any money. Clunk mentions that he&apos;s found out what Incubots is all about, Jerling hangs up quickly.</text:p>
 <text:p>Clunk notices smoke in the air. He runs to the airlock and discovers the landing field is on fire.</text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Clunk</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -578,8 +702,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="8">
-      <text:p>8</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1061">
       <text:p>1061</text:p>
@@ -599,8 +723,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc9%7Cregion&quot;;&quot;sc9&quot;)" office:value-type="string" office:string-value="sc9">
+     <table:table-cell office:value-type="string">
       <text:p>sc9</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc9%7Cregion&quot;;&quot;9&quot;)" office:value-type="string" office:string-value="9">
+      <text:p>9</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Clunk calls, the landing field is on fire. Hal tells him to sit tight.</text:p>
@@ -609,8 +736,17 @@
       <text:p>Hal is sitting with the Portmaster, waiting for a call from Clunk to say he&apos;s got the advance from Jerling. Instead, Clunk calls to say that raging flames are threatening the ship. Hal tells him to sit tight, and leaps up to go to the rescue. The Portmaster stops him - you&apos;re not fooling me, sonny, I&apos;ve heard every excuse in the book. Hal protests, but the Portmaster is firm. He says the maintenance robot working near the Black Gull would have called in if anything was wrong.</text:p>
 <text:p>Then the control tower calls to say the landing field is on fire around the Black Gull.</text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Hal</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -629,8 +765,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="9">
-      <text:p>9</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1217">
       <text:p>1217</text:p>
@@ -650,8 +786,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc10%7Cregion&quot;;&quot;sc10&quot;)" office:value-type="string" office:string-value="sc10">
+     <table:table-cell office:value-type="string">
       <text:p>sc10</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc10%7Cregion&quot;;&quot;10&quot;)" office:value-type="string" office:string-value="10">
+      <text:p>10</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Clunk fighting the fire, ends up face-down</text:p>
@@ -661,8 +800,17 @@
 <text:p>He finds the source of the fire - the maintenance robot which Hal disabled. Clunk drags it out of the area, then returns and uses the fire extinguisher on the flames.</text:p>
 <text:p>Clunk&apos;s battery starts to run low. He continues. As the fire extinguisher begins to run low, the fuel pipes explode near the back of the ship. A piece of debris hits Clunk in the head and he falls to the ground, stunned.</text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Clunk</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Pinch Point</text:p>
      </table:table-cell>
@@ -681,8 +829,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="10">
-      <text:p>10</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -702,8 +850,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc12%7Cregion&quot;;&quot;sc12&quot;)" office:value-type="string" office:string-value="sc12">
+     <table:table-cell office:value-type="string">
       <text:p>sc12</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc12%7Cregion&quot;;&quot;11&quot;)" office:value-type="string" office:string-value="11">
+      <text:p>11</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Hal gets to the ship and lifts off.</text:p>
@@ -711,8 +862,17 @@
      <table:table-cell office:value-type="string">
       <text:p>Arriving at the Black Gull, Hal sees the prone robot in the burnt-out grass. (It&apos;s Clunk, but he assumes it&apos;s the one he disabled)  Goes aboard, seals the ship and gets the engines going. Discovers the winch has been lowered, presses the button to raise it. Prepares ship for takeoff and takes his seat.</text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Hal</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -731,8 +891,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="11">
-      <text:p>11</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -752,8 +912,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc15%7Cregion&quot;;&quot;sc15&quot;)" office:value-type="string" office:string-value="sc15">
+     <table:table-cell office:value-type="string">
       <text:p>sc15</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc15%7Cregion&quot;;&quot;12&quot;)" office:value-type="string" office:string-value="12">
+      <text:p>12</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Hal finds Clunk on rope, falls out after him.</text:p>
@@ -764,8 +927,17 @@
 <text:p>Hal gets the ship to hover 4,000 metres above the landing field, then goes outside on the landing platform to help. Throws Clunk a line and starts to pull the robot in, but a departing ship roars past, rocking the Black Gull and hurling Hal over the side of the platform. He ends up dangling from the safety cord, which is tied to the robot&apos;s leg.</text:p>
 <text:p>Clunk&apos;s batteries are failing, and he can&apos;t hang on much longer.</text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Hal</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -784,8 +956,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="12">
-      <text:p>12</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -805,8 +977,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc17%7Cregion&quot;;&quot;sc17&quot;)" office:value-type="string" office:string-value="sc17">
+     <table:table-cell office:value-type="string">
       <text:p>sc17</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc17%7Cregion&quot;;&quot;13&quot;)" office:value-type="string" office:string-value="13">
+      <text:p>13</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Climb up rope to safety. Back in ship for hyperspace.</text:p>
@@ -814,8 +989,17 @@
      <table:table-cell office:value-type="string">
       <text:p>Spoiler ends here.</text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Hal</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -834,8 +1018,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="13">
-      <text:p>13</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -855,8 +1039,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc19%7Cregion&quot;;&quot;sc19&quot;)" office:value-type="string" office:string-value="sc19">
+     <table:table-cell office:value-type="string">
       <text:p>sc19</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc19%7Cregion&quot;;&quot;14&quot;)" office:value-type="string" office:string-value="14">
+      <text:p>14</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>In his office. Gordon OKs the deal</text:p>
@@ -864,8 +1051,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Farrell</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -884,8 +1080,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="14">
-      <text:p>14</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -905,8 +1101,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc22%7Cregion&quot;;&quot;sc22&quot;)" office:value-type="string" office:string-value="sc22">
+     <table:table-cell office:value-type="string">
       <text:p>sc22</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc22%7Cregion&quot;;&quot;15&quot;)" office:value-type="string" office:string-value="15">
+      <text:p>15</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Exits the ship to meet Bevan</text:p>
@@ -914,8 +1113,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Hal</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -934,8 +1142,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="15">
-      <text:p>15</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -955,8 +1163,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc25%7Cregion&quot;;&quot;sc25&quot;)" office:value-type="string" office:string-value="sc25">
+     <table:table-cell office:value-type="string">
       <text:p>sc25</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc25%7Cregion&quot;;&quot;16&quot;)" office:value-type="string" office:string-value="16">
+      <text:p>16</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Getting food out. Frozen puddings.</text:p>
@@ -964,8 +1175,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Hal</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -984,8 +1204,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="16">
-      <text:p>16</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -1005,8 +1225,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc27%7Cregion&quot;;&quot;sc27&quot;)" office:value-type="string" office:string-value="sc27">
+     <table:table-cell office:value-type="string">
       <text:p>sc27</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc27%7Cregion&quot;;&quot;17&quot;)" office:value-type="string" office:string-value="17">
+      <text:p>17</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Says goodbye to Clunk</text:p>
@@ -1014,8 +1237,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Hal</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -1034,8 +1266,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="17">
-      <text:p>17</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -1055,8 +1287,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc29%7Cregion&quot;;&quot;sc29&quot;)" office:value-type="string" office:string-value="sc29">
+     <table:table-cell office:value-type="string">
       <text:p>sc29</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc29%7Cregion&quot;;&quot;18&quot;)" office:value-type="string" office:string-value="18">
+      <text:p>18</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Hal depressed. No escape from here.</text:p>
@@ -1064,8 +1299,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Hal</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -1084,8 +1328,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="18">
-      <text:p>18</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -1105,8 +1349,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc31%7Cregion&quot;;&quot;sc31&quot;)" office:value-type="string" office:string-value="sc31">
+     <table:table-cell office:value-type="string">
       <text:p>sc31</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc31%7Cregion&quot;;&quot;19&quot;)" office:value-type="string" office:string-value="19">
+      <text:p>19</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Lighten the ship. Preparing for liftoff.</text:p>
@@ -1114,8 +1361,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Hal</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -1134,8 +1390,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="19">
-      <text:p>19</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -1155,8 +1411,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc34%7Cregion&quot;;&quot;sc34&quot;)" office:value-type="string" office:string-value="sc34">
+     <table:table-cell office:value-type="string">
       <text:p>sc34</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc34%7Cregion&quot;;&quot;20&quot;)" office:value-type="string" office:string-value="20">
+      <text:p>20</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Karl and Terry awaiting Hal. They take a call from their spy, intercept is at the orbiter.</text:p>
@@ -1164,8 +1423,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Farrell</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -1184,8 +1452,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="20">
-      <text:p>20</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -1205,8 +1473,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc38%7Cregion&quot;;&quot;sc38&quot;)" office:value-type="string" office:string-value="sc38">
+     <table:table-cell office:value-type="string">
       <text:p>sc38</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc38%7Cregion&quot;;&quot;21&quot;)" office:value-type="string" office:string-value="21">
+      <text:p>21</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Karl waiting impatiently</text:p>
@@ -1214,8 +1485,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Farrell</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Plot Point</text:p>
      </table:table-cell>
@@ -1234,8 +1514,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="21">
-      <text:p>21</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -1255,8 +1535,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc40%7Cregion&quot;;&quot;sc40&quot;)" office:value-type="string" office:string-value="sc40">
+     <table:table-cell office:value-type="string">
       <text:p>sc40</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc40%7Cregion&quot;;&quot;22&quot;)" office:value-type="string" office:string-value="22">
+      <text:p>22</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Karl and Terry confused about &apos;Chunk&apos;</text:p>
@@ -1264,8 +1547,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Farrell</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -1284,8 +1576,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="22">
-      <text:p>22</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -1305,8 +1597,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc43%7Cregion&quot;;&quot;sc43&quot;)" office:value-type="string" office:string-value="sc43">
+     <table:table-cell office:value-type="string">
       <text:p>sc43</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc43%7Cregion&quot;;&quot;23&quot;)" office:value-type="string" office:string-value="23">
+      <text:p>23</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Clunk slips out the back.</text:p>
@@ -1314,8 +1609,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Clunk</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -1334,8 +1638,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="23">
-      <text:p>23</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -1355,8 +1659,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc45%7Cregion&quot;;&quot;sc45&quot;)" office:value-type="string" office:string-value="sc45">
+     <table:table-cell office:value-type="string">
       <text:p>sc45</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc45%7Cregion&quot;;&quot;24&quot;)" office:value-type="string" office:string-value="24">
+      <text:p>24</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Karl and Terry waiting.</text:p>
@@ -1364,8 +1671,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Farrell</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -1384,8 +1700,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="24">
-      <text:p>24</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -1405,8 +1721,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc47%7Cregion&quot;;&quot;sc47&quot;)" office:value-type="string" office:string-value="sc47">
+     <table:table-cell office:value-type="string">
       <text:p>sc47</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc47%7Cregion&quot;;&quot;25&quot;)" office:value-type="string" office:string-value="25">
+      <text:p>25</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Clunk in orbit</text:p>
@@ -1414,8 +1733,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Clunk</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -1434,8 +1762,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="25">
-      <text:p>25</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -1455,8 +1783,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc49%7Cregion&quot;;&quot;sc49&quot;)" office:value-type="string" office:string-value="sc49">
+     <table:table-cell office:value-type="string">
       <text:p>sc49</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc49%7Cregion&quot;;&quot;26&quot;)" office:value-type="string" office:string-value="26">
+      <text:p>26</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Clunk uses cylinder</text:p>
@@ -1464,8 +1795,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Clunk</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -1484,8 +1824,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="26">
-      <text:p>26</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -1505,8 +1845,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc51%7Cregion&quot;;&quot;sc51&quot;)" office:value-type="string" office:string-value="sc51">
+     <table:table-cell office:value-type="string">
       <text:p>sc51</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc51%7Cregion&quot;;&quot;27&quot;)" office:value-type="string" office:string-value="27">
+      <text:p>27</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Terry places the &apos;bomb&apos;</text:p>
@@ -1514,8 +1857,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Terry</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -1534,8 +1886,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="27">
-      <text:p>27</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -1555,8 +1907,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc53%7Cregion&quot;;&quot;sc53&quot;)" office:value-type="string" office:string-value="sc53">
+     <table:table-cell office:value-type="string">
       <text:p>sc53</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc53%7Cregion&quot;;&quot;28&quot;)" office:value-type="string" office:string-value="28">
+      <text:p>28</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Hal buys food</text:p>
@@ -1564,8 +1919,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Hal</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -1584,8 +1948,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="28">
-      <text:p>28</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -1605,8 +1969,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc55%7Cregion&quot;;&quot;sc55&quot;)" office:value-type="string" office:string-value="sc55">
+     <table:table-cell office:value-type="string">
       <text:p>sc55</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc55%7Cregion&quot;;&quot;29&quot;)" office:value-type="string" office:string-value="29">
+      <text:p>29</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Karl leaves a note, takes Clunk.</text:p>
@@ -1614,8 +1981,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Farrell</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -1634,8 +2010,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="29">
-      <text:p>29</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -1655,8 +2031,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc57%7Cregion&quot;;&quot;sc57&quot;)" office:value-type="string" office:string-value="sc57">
+     <table:table-cell office:value-type="string">
       <text:p>sc57</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc57%7Cregion&quot;;&quot;30&quot;)" office:value-type="string" office:string-value="30">
+      <text:p>30</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Hal about to hyperspace.</text:p>
@@ -1664,8 +2043,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Hal</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -1684,8 +2072,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="30">
-      <text:p>30</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -1705,8 +2093,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc60%7Cregion&quot;;&quot;sc60&quot;)" office:value-type="string" office:string-value="sc60">
+     <table:table-cell office:value-type="string">
       <text:p>sc60</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc60%7Cregion&quot;;&quot;31&quot;)" office:value-type="string" office:string-value="31">
+      <text:p>31</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Hal gets real Jerling&apos;s call. Has to get cargo and robot back.</text:p>
@@ -1714,8 +2105,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Hal</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -1734,8 +2134,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="31">
-      <text:p>31</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -1755,8 +2155,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc62%7Cregion&quot;;&quot;sc62&quot;)" office:value-type="string" office:string-value="sc62">
+     <table:table-cell office:value-type="string">
       <text:p>sc62</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc62%7Cregion&quot;;&quot;32&quot;)" office:value-type="string" office:string-value="32">
+      <text:p>32</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Hal sets course for Forg.</text:p>
@@ -1764,8 +2167,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Hal</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -1784,8 +2196,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="32">
-      <text:p>32</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -1805,8 +2217,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc64%7Cregion&quot;;&quot;sc64&quot;)" office:value-type="string" office:string-value="sc64">
+     <table:table-cell office:value-type="string">
       <text:p>sc64</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc64%7Cregion&quot;;&quot;33&quot;)" office:value-type="string" office:string-value="33">
+      <text:p>33</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Land on Forg, in rubbish.</text:p>
@@ -1814,8 +2229,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Hal</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -1834,8 +2258,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="33">
-      <text:p>33</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -1855,8 +2279,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc66%7Cregion&quot;;&quot;sc66&quot;)" office:value-type="string" office:string-value="sc66">
+     <table:table-cell office:value-type="string">
       <text:p>sc66</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc66%7Cregion&quot;;&quot;34&quot;)" office:value-type="string" office:string-value="34">
+      <text:p>34</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Hal rents a car in Jerling&apos;s name and heads towards Forgberg and the Casino.</text:p>
@@ -1864,8 +2291,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Hal</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -1884,8 +2320,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="34">
-      <text:p>34</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -1905,8 +2341,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc68%7Cregion&quot;;&quot;sc68&quot;)" office:value-type="string" office:string-value="sc68">
+     <table:table-cell office:value-type="string">
       <text:p>sc68</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc68%7Cregion&quot;;&quot;35&quot;)" office:value-type="string" office:string-value="35">
+      <text:p>35</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Hal after almost running Clunk down. Picks him up.</text:p>
@@ -1914,8 +2353,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Hal</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -1934,8 +2382,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="35">
-      <text:p>35</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -1955,8 +2403,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc71%7Cregion&quot;;&quot;sc71&quot;)" office:value-type="string" office:string-value="sc71">
+     <table:table-cell office:value-type="string">
       <text:p>sc71</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc71%7Cregion&quot;;&quot;36&quot;)" office:value-type="string" office:string-value="36">
+      <text:p>36</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Find car, go to find clothes.</text:p>
@@ -1964,8 +2415,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Hal</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -1984,8 +2444,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="36">
-      <text:p>36</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -2005,8 +2465,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc74%7Cregion&quot;;&quot;sc74&quot;)" office:value-type="string" office:string-value="sc74">
+     <table:table-cell office:value-type="string">
       <text:p>sc74</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc74%7Cregion&quot;;&quot;37&quot;)" office:value-type="string" office:string-value="37">
+      <text:p>37</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Hal sells Clunk</text:p>
@@ -2014,8 +2477,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Hal</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -2034,8 +2506,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="37">
-      <text:p>37</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -2055,8 +2527,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc77%7Cregion&quot;;&quot;sc77&quot;)" office:value-type="string" office:string-value="sc77">
+     <table:table-cell office:value-type="string">
       <text:p>sc77</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc77%7Cregion&quot;;&quot;38&quot;)" office:value-type="string" office:string-value="38">
+      <text:p>38</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Hal annoyed at Clunk for buying only the best.</text:p>
@@ -2064,8 +2539,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Hal</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -2084,8 +2568,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="38">
-      <text:p>38</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -2105,8 +2589,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc79%7Cregion&quot;;&quot;sc79&quot;)" office:value-type="string" office:string-value="sc79">
+     <table:table-cell office:value-type="string">
       <text:p>sc79</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc79%7Cregion&quot;;&quot;39&quot;)" office:value-type="string" office:string-value="39">
+      <text:p>39</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Clunk gambling. Fight with human couple.</text:p>
@@ -2114,8 +2601,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Clunk</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -2134,8 +2630,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="39">
-      <text:p>39</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -2155,8 +2651,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc81%7Cregion&quot;;&quot;sc81&quot;)" office:value-type="string" office:string-value="sc81">
+     <table:table-cell office:value-type="string">
       <text:p>sc81</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc81%7Cregion&quot;;&quot;40&quot;)" office:value-type="string" office:string-value="40">
+      <text:p>40</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Sitting on the steps, battered and bruised. Limo arrives for Karl.</text:p>
@@ -2164,8 +2663,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Hal</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -2184,8 +2692,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="40">
-      <text:p>40</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -2205,8 +2713,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc84%7Cregion&quot;;&quot;sc84&quot;)" office:value-type="string" office:string-value="sc84">
+     <table:table-cell office:value-type="string">
       <text:p>sc84</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc84%7Cregion&quot;;&quot;41&quot;)" office:value-type="string" office:string-value="41">
+      <text:p>41</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Clunk travelling on the back of Karl&apos;s limo</text:p>
@@ -2214,8 +2725,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Clunk</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -2234,8 +2754,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="41">
-      <text:p>41</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -2255,8 +2775,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc86%7Cregion&quot;;&quot;sc86&quot;)" office:value-type="string" office:string-value="sc86">
+     <table:table-cell office:value-type="string">
       <text:p>sc86</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc86%7Cregion&quot;;&quot;42&quot;)" office:value-type="string" office:string-value="42">
+      <text:p>42</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Clunk sees Hal catching up again. Limo stops.</text:p>
@@ -2264,8 +2787,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Clunk</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -2284,8 +2816,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="42">
-      <text:p>42</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -2305,8 +2837,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc89%7Cregion&quot;;&quot;sc89&quot;)" office:value-type="string" office:string-value="sc89">
+     <table:table-cell office:value-type="string">
       <text:p>sc89</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc89%7Cregion&quot;;&quot;43&quot;)" office:value-type="string" office:string-value="43">
+      <text:p>43</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Clunk uploads the Navcom into the ship.</text:p>
@@ -2314,8 +2849,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Clunk</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -2334,8 +2878,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="43">
-      <text:p>43</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -2355,8 +2899,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc92%7Cregion&quot;;&quot;sc92&quot;)" office:value-type="string" office:string-value="sc92">
+     <table:table-cell office:value-type="string">
       <text:p>sc92</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc92%7Cregion&quot;;&quot;44&quot;)" office:value-type="string" office:string-value="44">
+      <text:p>44</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>The shop robots want Clunk to escape with them. Mention Hal&apos;s capture.</text:p>
@@ -2364,8 +2911,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Clunk</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -2384,8 +2940,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="44">
-      <text:p>44</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -2405,8 +2961,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc94%7Cregion&quot;;&quot;sc94&quot;)" office:value-type="string" office:string-value="sc94">
+     <table:table-cell office:value-type="string">
       <text:p>sc94</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc94%7Cregion&quot;;&quot;45&quot;)" office:value-type="string" office:string-value="45">
+      <text:p>45</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Clunk steals armoured car, drives it into the house.</text:p>
@@ -2414,8 +2973,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Clunk</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -2434,8 +3002,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="45">
-      <text:p>45</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -2455,8 +3023,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc96%7Cregion&quot;;&quot;sc96&quot;)" office:value-type="string" office:string-value="sc96">
+     <table:table-cell office:value-type="string">
       <text:p>sc96</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc96%7Cregion&quot;;&quot;46&quot;)" office:value-type="string" office:string-value="46">
+      <text:p>46</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Karl and Terry take the limo</text:p>
@@ -2464,8 +3035,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Farrell</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -2484,8 +3064,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="46">
-      <text:p>46</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -2505,8 +3085,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc98%7Cregion&quot;;&quot;sc98&quot;)" office:value-type="string" office:string-value="sc98">
+     <table:table-cell office:value-type="string">
       <text:p>sc98</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc98%7Cregion&quot;;&quot;47&quot;)" office:value-type="string" office:string-value="47">
+      <text:p>47</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Karl and Terry overtake and head for Spaceport. Looking for Volante.</text:p>
@@ -2514,8 +3097,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Farrell</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -2534,8 +3126,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="47">
-      <text:p>47</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -2555,8 +3147,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc101%7Cregion&quot;;&quot;sc101&quot;)" office:value-type="string" office:string-value="sc101">
+     <table:table-cell office:value-type="string">
       <text:p>sc101</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc101%7Cregion&quot;;&quot;48&quot;)" office:value-type="string" office:string-value="48">
+      <text:p>48</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Hal and Clunk fleeing in Gull</text:p>
@@ -2564,8 +3159,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Hal</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -2584,8 +3188,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="48">
-      <text:p>48</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -2605,8 +3209,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc103%7Cregion&quot;;&quot;sc103&quot;)" office:value-type="string" office:string-value="sc103">
+     <table:table-cell office:value-type="string">
       <text:p>sc103</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc103%7Cregion&quot;;&quot;49&quot;)" office:value-type="string" office:string-value="49">
+      <text:p>49</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Clunk wants to throw stuff at the flyer</text:p>
@@ -2614,8 +3221,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Hal</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -2634,8 +3250,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="49">
-      <text:p>49</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -2655,8 +3271,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc105%7Cregion&quot;;&quot;sc105&quot;)" office:value-type="string" office:string-value="sc105">
+     <table:table-cell office:value-type="string">
       <text:p>sc105</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc105%7Cregion&quot;;&quot;50&quot;)" office:value-type="string" office:string-value="50">
+      <text:p>50</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Hal fetches the puddings.</text:p>
@@ -2664,8 +3283,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Hal</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -2684,8 +3312,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="50">
-      <text:p>50</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -2705,8 +3333,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc108%7Cregion&quot;;&quot;sc108&quot;)" office:value-type="string" office:string-value="sc108">
+     <table:table-cell office:value-type="string">
       <text:p>sc108</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc108%7Cregion&quot;;&quot;51&quot;)" office:value-type="string" office:string-value="51">
+      <text:p>51</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Hal yells at Jerling, then cargo arrives on truck.</text:p>
@@ -2714,8 +3345,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Hal</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -2734,8 +3374,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="51">
-      <text:p>51</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -2755,8 +3395,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc110%7Cregion&quot;;&quot;sc110&quot;)" office:value-type="string" office:string-value="sc110">
+     <table:table-cell office:value-type="string">
       <text:p>sc110</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc110%7Cregion&quot;;&quot;52&quot;)" office:value-type="string" office:string-value="52">
+      <text:p>52</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Clunk outside, depressed.</text:p>
@@ -2764,8 +3407,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Clunk</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -2784,8 +3436,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="52">
-      <text:p>52</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -2805,8 +3457,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc112%7Cregion&quot;;&quot;sc112&quot;)" office:value-type="string" office:string-value="sc112">
+     <table:table-cell office:value-type="string">
       <text:p>sc112</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc112%7Cregion&quot;;&quot;53&quot;)" office:value-type="string" office:string-value="53">
+      <text:p>53</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Karl bursts in, armed.</text:p>
@@ -2814,8 +3469,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Hal</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -2834,8 +3498,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="53">
-      <text:p>53</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -2855,8 +3519,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc114%7Cregion&quot;;&quot;sc114&quot;)" office:value-type="string" office:string-value="sc114">
+     <table:table-cell office:value-type="string">
       <text:p>sc114</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc114%7Cregion&quot;;&quot;54&quot;)" office:value-type="string" office:string-value="54">
+      <text:p>54</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Terry ties Hal in hold, leaves back doors open.</text:p>
@@ -2864,8 +3531,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Hal</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -2884,8 +3560,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="54">
-      <text:p>54</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -2905,8 +3581,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc116%7Cregion&quot;;&quot;sc116&quot;)" office:value-type="string" office:string-value="sc116">
+     <table:table-cell office:value-type="string">
       <text:p>sc116</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc116%7Cregion&quot;;&quot;55&quot;)" office:value-type="string" office:string-value="55">
+      <text:p>55</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Hal dodges Brutus, escapes the hold.</text:p>
@@ -2914,8 +3593,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Hal</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -2934,8 +3622,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="55">
-      <text:p>55</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>
@@ -2955,8 +3643,11 @@
     </table:table-row>
 
    <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc119%7Cregion&quot;;&quot;sc119&quot;)" office:value-type="string" office:string-value="sc119">
+     <table:table-cell office:value-type="string">
       <text:p>sc119</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_manuscript_tmp.odt#sc119%7Cregion&quot;;&quot;56&quot;)" office:value-type="string" office:string-value="56">
+      <text:p>56</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>Black Gull hyperspaces to oblivion</text:p>
@@ -2964,8 +3655,17 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>Farrell</text:p>
+     </table:table-cell>
      <table:table-cell table:style-name="ce2"/>     
      <table:table-cell table:style-name="ce4"/>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p></text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
@@ -2984,8 +3684,8 @@
      <table:table-cell office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="56">
-      <text:p>56</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>2nd Edit</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="1251">
       <text:p>1251</text:p>

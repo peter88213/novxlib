@@ -1,6 +1,12 @@
 # Changelog
 
 
+### v3.1.0
+
+- Add Section.STATUS class constant.
+- Update section list structure.
+- Import tags from Plot Grid even if empty.
+
 ### v3.0.1
 
 - Provide weekday names and month names for all languages.

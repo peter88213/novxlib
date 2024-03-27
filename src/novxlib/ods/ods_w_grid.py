@@ -24,8 +24,8 @@ class OdsWGrid(OdsWriter):
     # co4 8.000cm
 
     # Header structure:
-    # Section link
-    # Section
+    # Section ID (hidden)
+    # Section number (link to manuscript)
     # Date
     # Time
     # Day

@@ -146,6 +146,8 @@ class OdsRGrid(OdsReader):
             else:
                 if tags:
                     self.novel.sections[scId].tags = string_to_list(tags, divider=self._DIVIDER)
+                elif tags is not None:
+                    self.novel.sections[scId].tags = None
 
             #--- A/R/C
             try:

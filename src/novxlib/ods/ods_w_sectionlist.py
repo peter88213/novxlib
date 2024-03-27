@@ -4,6 +4,7 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
+from novxlib.model.section import Section
 from novxlib.novx_globals import SECTIONLIST_SUFFIX
 from novxlib.novx_globals import _
 from novxlib.ods.ods_w_grid import OdsWGrid
@@ -22,18 +23,22 @@ class OdsWSectionList(OdsWGrid):
     # co4 8.000cm
 
     # Header structure:
-    # Section link
-    # Section title
-    # Section description
+    # Section ID (hidden)
+    # Section number (link to manuscript)
+    # Title
+    # Description
+    # Viewpoint
     # Date
     # Time
+    # Day
+    # Duration
     # Tags
     # Section notes
     # A/R
     # Goal
     # Conflict
     # Outcome
-    # Section
+    # Status
     # Words total
     # Word count
     # Characters
@@ -41,18 +46,22 @@ class OdsWSectionList(OdsWGrid):
     # Items
 
     _fileHeader = f'''{OdsWGrid._CONTENT_XML_HEADER}{DESCRIPTION}" table:style-name="ta1" table:print="false">
+    <table:table-column table:style-name="co1" table:visibility="collapse" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co4" table:default-cell-style-name="Default"/>
+    <table:table-column table:style-name="co2" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co2" table:default-cell-style-name="ce2"/>
     <table:table-column table:style-name="co1" table:default-cell-style-name="ce4"/>
+    <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
+    <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co4" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co4" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co4" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co4" table:default-cell-style-name="Default"/>
-    <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
+    <table:table-column table:style-name="co2" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co1" table:default-cell-style-name="Default"/>
     <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
@@ -65,19 +74,31 @@ class OdsWSectionList(OdsWGrid):
     <table:table-column table:style-name="co3" table:default-cell-style-name="Default"/>
     <table:table-row table:style-name="ro1" table:visibility="collapse">
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>Section link</text:p>
+      <text:p>ID</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>Section title</text:p>
+      <text:p>Section</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>Section description</text:p>
+      <text:p>Title</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>Description</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>Viewpoint</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce1" office:value-type="string">
       <text:p>Date</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce3" office:value-type="string">
       <text:p>Time</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>Day</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>Duration</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>Tags</text:p>
@@ -98,7 +119,7 @@ class OdsWSectionList(OdsWGrid):
       <text:p>Outcome</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>Section</text:p>
+      <text:p>Status</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>Words total</text:p>
@@ -119,19 +140,31 @@ class OdsWSectionList(OdsWGrid):
     </table:table-row>
     <table:table-row table:style-name="ro1">
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>{_("Section link")}</text:p>
+      <text:p>ID</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>{_("Section title")}</text:p>
+      <text:p>{_("Section")}</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>{_("Section description")}</text:p>
+      <text:p>{_("Title")}</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>{_("Description")}</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>{_("Viewpoint")}</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce1" office:value-type="string">
       <text:p>{_("Date")}</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ce3" office:value-type="string">
       <text:p>{_("Time")}</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>{_("Day")}</text:p>
+     </table:table-cell>
+     <table:table-cell table:style-name="Heading" office:value-type="string">
+      <text:p>{_("Duration")}</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>{_("Tags")}</text:p>
@@ -152,7 +185,7 @@ class OdsWSectionList(OdsWGrid):
       <text:p>{_("Outcome")}</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>{_("Section")}</text:p>
+      <text:p>{_("Status")}</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>{_("Words total")}</text:p>
@@ -175,8 +208,11 @@ class OdsWSectionList(OdsWGrid):
 '''
 
     _sectionTemplate = '''   <table:table-row table:style-name="ro2">
-     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///$ProjectPath/$ProjectName$ManuscriptSuffix.odt#$ID%7Cregion&quot;;&quot;$ID&quot;)" office:value-type="string" office:string-value="$ID">
+     <table:table-cell office:value-type="string">
       <text:p>$ID</text:p>
+     </table:table-cell>
+     <table:table-cell table:formula="of:=HYPERLINK(&quot;file:///$ProjectPath/$ProjectName$ManuscriptSuffix.odt#$ID%7Cregion&quot;;&quot;$SectionNumber&quot;)" office:value-type="string" office:string-value="$SectionNumber">
+      <text:p>$SectionNumber</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>$Title</text:p>
@@ -184,8 +220,17 @@ class OdsWSectionList(OdsWGrid):
      <table:table-cell office:value-type="string">
       <text:p>$Desc</text:p>
      </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>$Viewpoint</text:p>
+     </table:table-cell>
 $DateCell     
 $TimeCell
+     <table:table-cell office:value-type="string">
+      <text:p>$Day</text:p>
+     </table:table-cell>
+     <table:table-cell office:value-type="string">
+      <text:p>$Duration</text:p>
+     </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>$Tags</text:p>
      </table:table-cell>
@@ -204,8 +249,8 @@ $TimeCell
      <table:table-cell office:value-type="string">
       <text:p>$Outcome</text:p>
      </table:table-cell>
-     <table:table-cell office:value-type="float" office:value="$SectionNumber">
-      <text:p>$SectionNumber</text:p>
+     <table:table-cell office:value-type="string">
+      <text:p>$Status</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="float" office:value="$WordsTotal">
       <text:p>$WordsTotal</text:p>
@@ -226,3 +271,16 @@ $TimeCell
 
 '''
 
+    def _get_sectionMapping(self, scId, sectionNumber, wordsTotal):
+        """Return a mapping dictionary for a section section.
+        
+        Positional arguments:
+            scId: str -- section ID.
+            sectionNumber: int -- section number to be displayed.
+            wordsTotal: int -- accumulated wordcount.
+        
+        Extends the superclass method.
+        """
+        sectionMapping = super()._get_sectionMapping(scId, sectionNumber, wordsTotal)
+        sectionMapping['Status'] = Section.STATUS[sectionMapping['Status']]
+        return sectionMapping
