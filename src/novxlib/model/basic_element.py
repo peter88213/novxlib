@@ -4,6 +4,7 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
+import os
 
 
 class BasicElement:
@@ -23,7 +24,8 @@ class BasicElement:
     def __init__(self,
             on_element_change=None,
             title=None,
-            desc=None):
+            desc=None,
+            links=None):
         """Set the initial values.
         
         Optional arguments:
@@ -45,6 +47,8 @@ class BasicElement:
             self.on_element_change = on_element_change
         self._title = title
         self._desc = desc
+        self._links = links
+        # dictionary (Key = path:str, value = title:str) -- paths to linked files
 
     @property
     def title(self):
@@ -64,6 +68,22 @@ class BasicElement:
     def desc(self, newVal):
         if self._desc != newVal:
             self._desc = newVal
+            self.on_element_change()
+
+    @property
+    def links(self):
+        try:
+            return self._links.copy()
+        except AttributeError:
+            return None
+
+    @links.setter
+    def links(self, newVal):
+        if self._links != newVal:
+            self._links = newVal
+            for linkPath in newVal:
+                self._links[linkPath] = os.path.split(linkPath)[1]
+                # setting the plain file name as link title
             self.on_element_change()
 
     def do_nothing(self):
