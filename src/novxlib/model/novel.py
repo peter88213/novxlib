@@ -101,7 +101,6 @@ class Novel(BasicElement):
         # key = item ID, value = WorldElement instance.
         self.characters = {}
         # key = character ID, value = Character instance.
-        # The order of the elements does not matter.
         self.projectNotes = {}
         # key = note ID, value = note instance.
         try:

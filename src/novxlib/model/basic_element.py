@@ -10,10 +10,6 @@ import os
 class BasicElement:
     """Basic data model element representation.
 
-    Public properties:
-        title: str -- Element title (name)
-        desc: str -- Element description
-        
     Public instance variables:
         on_element_change -- Points to a callback routine for element changes
         
@@ -27,11 +23,6 @@ class BasicElement:
             desc=None,
             links=None):
         """Set the initial values.
-        
-        Optional arguments:
-            on_element_change -- Points to a callback routine for element changes
-            title: str -- Element title (name)
-            desc: str -- Element description
 
         If on_element_change is None, the do_nothing method will be assigned to it.
             
@@ -48,7 +39,6 @@ class BasicElement:
         self._title = title
         self._desc = desc
         self._links = links
-        # dictionary (Key = path:str, value = title:str) -- paths to linked files
 
     @property
     def title(self):
@@ -72,6 +62,7 @@ class BasicElement:
 
     @property
     def links(self):
+        # dict: (Key:str -- path, value:str -- title) -- paths to linked files
         try:
             return self._links.copy()
         except AttributeError:
