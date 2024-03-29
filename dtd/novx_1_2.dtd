@@ -3,10 +3,10 @@
 		version NMTOKEN #FIXED "1.2"
 		xml:lang NMTOKEN "zxx"
 		>
-	<!ELEMENT PROJECT (Title?, Author?, Desc?, 
+	<!ELEMENT PROJECT (Title?, Desc?, Link*, Author?, 
 		ChapterHeadingPrefix?, ChapterHeadingSuffix?, PartHeadingPrefix?, PartHeadingSuffix?, 
 		CustomGoal?, CustomConflict?, CustomOutcome?, CustomChrBio?, CustomChrGoals?, 
-		WordCountStart?, WordTarget?, ReferenceDate?, Link*)>
+		WordCountStart?, WordTarget?, ReferenceDate?)>
 		<!ATTLIST PROJECT 
 			renumberChapters (0 | 1) "0" 
 			renumberParts (0 | 1) "0" 
@@ -40,6 +40,10 @@
 					<!ELEMENT date (#PCDATA)>
 				<!ELEMENT ul (li*)>
 					<!ELEMENT li (p*)>
+      <!ELEMENT Link (Title?)>
+         <!ATTLIST Link
+            path NMTOKEN #REQUIRED
+            >
 		<!ELEMENT Author (#PCDATA)>
         <!ELEMENT ChapterHeadingPrefix (#PCDATA)>
         <!ELEMENT ChapterHeadingSuffix (#PCDATA)>
@@ -55,8 +59,8 @@
         <!ELEMENT ReferenceDate (#PCDATA)>
 
 	<!ELEMENT CHARACTERS (CHARACTER*)>
-		<!ELEMENT CHARACTER (Title?, FullName?, Aka?, Desc?, 
-			Bio?, Goals?, Notes?, Tags?, BirthDate?, DeathDate?, Link*)>
+		<!ELEMENT CHARACTER (Title?, Desc?, Link*, Notes?, Tags?, Aka?, 
+		   FullName?, Bio?, Goals?, BirthDate?, DeathDate?)>
 			<!ATTLIST CHARACTER 
 				id ID #REQUIRED
 				major (0 | 1) "0" 
@@ -69,23 +73,20 @@
 	        <!ELEMENT Tags (#PCDATA)>
 	        <!ELEMENT BirthDate (#PCDATA)>
 	        <!ELEMENT DeathDate (#PCDATA)>
-	        <!ELEMENT Link (Title?)>
-				<!ATTLIST Link
-					path NMTOKEN #REQUIRED
-					>
 	<!ELEMENT LOCATIONS (LOCATION*)>
-		<!ELEMENT LOCATION (Title?, Aka?, Desc?, Tags?, Link*)>
+		<!ELEMENT LOCATION (Title?, Desc?, Link*, Notes?, Tags?, Aka?)>
 			<!ATTLIST LOCATION 
 				id ID #REQUIRED
 				>
 	<!ELEMENT ITEMS (ITEM*)>
-		<!ELEMENT ITEM (Title?, Aka?, Desc?, Tags?, Link*)>
+		<!ELEMENT ITEM (Title?, Desc?, Link*, Notes?, Tags?, Aka?)>
 			<!ATTLIST ITEM 
 				id ID #REQUIRED
 				>
 
 	<!ELEMENT CHAPTERS (CHAPTER*)>
-		<!ELEMENT CHAPTER (Title?, Desc?, Link*, SECTION*)>
+		<!ELEMENT CHAPTER (Title?, Desc?, Link*, 
+		   SECTION*)>
 			<!ATTLIST CHAPTER 
 				id ID #REQUIRED
 				type (0 | 1 | 2 | 3) "0"
@@ -93,10 +94,10 @@
 				isTrash (0 | 1) "0" 
 				noNumber (0 | 1) "0"
 				> 
-			<!ELEMENT SECTION (Title?, Desc?, Goal?, Conflict?, Outcome?, 
-			   PlotNotes?, Notes?, Tags?, 
+			<!ELEMENT SECTION (Title?, Desc?, Link*, Notes?, Tags?, 
+			   Goal?, Conflict?, Outcome?, PlotNotes?, 
 				( Date? | Day? ), Time?, LastsDays?, LastsHours?, LastsMinutes?, 
-				Link*, Characters?, Locations?, Items?, Content?) >
+				Characters?, Locations?, Items?, Content?) >
 				<!ATTLIST SECTION 
 					id ID #REQUIRED 
 					type (0 | 1 | 2 | 3) "0" 
@@ -132,7 +133,8 @@
                 		>
                 <!ELEMENT Content (p | ul)*>
 	<!ELEMENT ARCS (ARC*)>
-		<!ELEMENT ARC (Title?, ShortName?, Desc?, Sections?, Link*, POINT*)>            
+		<!ELEMENT ARC (Title?, Desc?, Link*, Notes?, 
+		   ShortName?, Sections?, POINT*)>            
 			<!ATTLIST ARC 
 				id ID #REQUIRED
 				>
@@ -141,7 +143,8 @@
 				<!ATTLIST Sections 
 					ids IDREFS #REQUIRED
 					>
-			<!ELEMENT POINT (Title?, Desc?, Notes?, Section?, Link*)>
+			<!ELEMENT POINT (Title?, Desc?, Link*, Notes?, 
+			   Section?)>
 				<!ATTLIST POINT 
 					id ID #REQUIRED
 					>
