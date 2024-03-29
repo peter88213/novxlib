@@ -4,10 +4,10 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
-from novxlib.model.basic_element import BasicElement
+from novxlib.model.basic_element_notes import BasicElementNotes
 
 
-class Chapter(BasicElement):
+class Chapter(BasicElementNotes):
     """novelibre chapter representation."""
 
     def __init__(self,

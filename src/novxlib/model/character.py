@@ -13,7 +13,6 @@ class Character(WorldElement):
     MINOR_MARKER = 'Minor'
 
     def __init__(self,
-            notes=None,
             bio=None,
             goals=None,
             fullName=None,
@@ -23,23 +22,12 @@ class Character(WorldElement):
             **kwargs):
         """Extends the superclass constructor."""
         super().__init__(**kwargs)
-        self._notes = notes
         self._bio = bio
         self._goals = goals
         self._fullName = fullName
         self._isMajor = isMajor
         self._birthDate = birthDate
         self._deathDate = deathDate
-
-    @property
-    def notes(self):
-        return self._notes
-
-    @notes.setter
-    def notes(self, newVal):
-        if self._notes != newVal:
-            self._notes = newVal
-            self.on_element_change()
 
     @property
     def bio(self):

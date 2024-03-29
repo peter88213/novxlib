@@ -7,7 +7,7 @@ License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 from datetime import datetime, date, timedelta
 import re
 from novxlib.novx_globals import _
-from novxlib.model.basic_element import BasicElement
+from novxlib.model.basic_element_tags import BasicElementTags
 
 #--- Regular expressions for counting words and characters like in LibreOffice.
 # See: https://help.libreoffice.org/latest/en-GB/text/swriter/guide/words_count.html
@@ -18,7 +18,7 @@ NO_WORD_LIMITS = re.compile('\<note\>.*?\<\/note\>|\<comment\>.*?\<\/comment\>|\
 # this is to be replaced by empty strings when counting words
 
 
-class Section(BasicElement):
+class Section(BasicElementTags):
     """novelibre section representation."""
     PACING = ['A', 'R', 'C']
     # emulating an enumeration for the section Action/Reaction/Custom type
@@ -40,8 +40,6 @@ class Section(BasicElement):
             scType=None,
             scPacing=None,
             status=None,
-            notes=None,
-            tags=None,
             appendToPrev=None,
             goal=None,
             conflict=None,
@@ -67,8 +65,6 @@ class Section(BasicElement):
         self._scType = scType
         self._scPacing = scPacing
         self._status = status
-        self._notes = notes
-        self._tags = tags
         self._appendToPrev = appendToPrev
         self._goal = goal
         self._conflict = conflict
@@ -156,27 +152,6 @@ class Section(BasicElement):
     def status(self, newVal):
         if self._status != newVal:
             self._status = newVal
-            self.on_element_change()
-
-    @property
-    def notes(self):
-        return self._notes
-
-    @notes.setter
-    def notes(self, newVal):
-        if self._notes != newVal:
-            self._notes = newVal
-            self.on_element_change()
-
-    @property
-    def tags(self):
-        # semicolon-separated tags
-        return self._tags
-
-    @tags.setter
-    def tags(self, newVal):
-        if self._tags != newVal:
-            self._tags = newVal
             self.on_element_change()
 
     @property

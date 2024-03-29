@@ -4,20 +4,18 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
-from novxlib.model.basic_element import BasicElement
+from novxlib.model.basic_element_tags import BasicElementTags
 
 
-class WorldElement(BasicElement):
+class WorldElement(BasicElementTags):
     """Story world element representation (may be location or item)."""
 
     def __init__(self,
             aka=None,
-            tags=None,
             **kwargs):
         """Extends the superclass constructor"""
         super().__init__(**kwargs)
         self._aka = aka
-        self._tags = tags
 
     @property
     def aka(self):
@@ -27,16 +25,5 @@ class WorldElement(BasicElement):
     def aka(self, newVal):
         if self._aka != newVal:
             self._aka = newVal
-            self.on_element_change()
-
-    @property
-    def tags(self):
-        return self._tags
-
-    @tags.setter
-    def tags(self, newVal):
-        # str: semicolon-separated tags
-        if self._tags != newVal:
-            self._tags = newVal
             self.on_element_change()
 
