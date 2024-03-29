@@ -1,5 +1,20 @@
 # Changelog
 
+### v3.2.0
+
+Store notes with all elements except project notes (#7).
+Store links with all elements (#8).
+
+- Update DTD version to 1.2.
+- Add "Notes" to the FileExport mapping dictionaries (#7).
+
+Change the model class hierarchy.
+
+- New class: BasicElementNotes(BasicElement)
+- New class: BasicElementTags(BasicElementNotes)
+- WorldElement gets notes.
+
+Refactor the NovxFile read and write methods.
 
 ### v3.1.0
 
