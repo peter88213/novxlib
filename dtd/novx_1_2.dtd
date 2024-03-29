@@ -3,10 +3,14 @@
 		version NMTOKEN #FIXED "1.2"
 		xml:lang NMTOKEN "zxx"
 		>
-	<!ELEMENT PROJECT (Title?, Desc?, Link*, Author?, 
-		ChapterHeadingPrefix?, ChapterHeadingSuffix?, PartHeadingPrefix?, PartHeadingSuffix?, 
-		CustomGoal?, CustomConflict?, CustomOutcome?, CustomChrBio?, CustomChrGoals?, 
-		WordCountStart?, WordTarget?, ReferenceDate?)>
+	<!ELEMENT PROJECT (Title?, Desc?, Link*, 
+	   Author?, 
+		ChapterHeadingPrefix?, ChapterHeadingSuffix?, 
+		PartHeadingPrefix?, PartHeadingSuffix?, 
+		CustomGoal?, CustomConflict?, CustomOutcome?, 
+		CustomChrBio?, CustomChrGoals?, 
+		WordCountStart?, WordTarget?, 
+		ReferenceDate?)>
 		<!ATTLIST PROJECT 
 			renumberChapters (0 | 1) "0" 
 			renumberParts (0 | 1) "0" 
@@ -95,9 +99,11 @@
 				noNumber (0 | 1) "0"
 				> 
 			<!ELEMENT SECTION (Title?, Desc?, Link*, Notes?, Tags?, 
-			   Goal?, Conflict?, Outcome?, PlotNotes?, 
+			   Goal?, Conflict?, Outcome?, 
+			   PlotNotes?, 
 				( Date? | Day? ), Time?, LastsDays?, LastsHours?, LastsMinutes?, 
-				Characters?, Locations?, Items?, Content?) >
+				Characters?, Locations?, Items?, 
+				Content?) >
 				<!ATTLIST SECTION 
 					id ID #REQUIRED 
 					type (0 | 1 | 2 | 3) "0" 

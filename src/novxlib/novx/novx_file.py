@@ -179,32 +179,10 @@ class NovxFile(File):
         self._write_element_tree(self)
         self._postprocess_xml_file(self.filePath)
 
-    def _build_plot_line_branch(self, xmlPlotLines, prjPlotLine, plId):
-        xmlPlotLine = ET.SubElement(xmlPlotLines, 'ARC', attrib={'id':plId})
-        if prjPlotLine.title:
-            ET.SubElement(xmlPlotLine, 'Title').text = prjPlotLine.title
-        if prjPlotLine.shortName:
-            ET.SubElement(xmlPlotLine, 'ShortName').text = prjPlotLine.shortName
-        if prjPlotLine.desc:
-            xmlPlotLine.append(text_to_xml_element('Desc', prjPlotLine.desc))
-
-        #--- References.
-        if prjPlotLine.sections:
-            attrib = {'ids':' '.join(prjPlotLine.sections)}
-            ET.SubElement(xmlPlotLine, 'Sections', attrib=attrib)
-
-        #--- Links.
-        self._set_links(xmlPlotLine, prjPlotLine)
-
-        #--- Plot points.
-        for ppId in self.novel.tree.get_children(plId):
-            xmlPlotPoint = ET.SubElement(xmlPlotLine, 'POINT', attrib={'id':ppId})
-            self._build_plot_point_branch(xmlPlotPoint, self.novel.plotPoints[ppId])
-
-        return xmlPlotLine
-
     def _build_chapter_branch(self, xmlChapters, prjChp, chId):
         xmlChapter = ET.SubElement(xmlChapters, 'CHAPTER', attrib={'id':chId})
+
+        #--- Attributes.
         if prjChp.chType:
             xmlChapter.set('type', str(prjChp.chType))
         if prjChp.chLevel == 1:
@@ -213,45 +191,53 @@ class NovxFile(File):
             xmlChapter.set('isTrash', '1')
         if prjChp.noNumber:
             xmlChapter.set('noNumber', '1')
-        if prjChp.title:
-            ET.SubElement(xmlChapter, 'Title').text = prjChp.title
-        if prjChp.desc:
-            xmlChapter.append(text_to_xml_element('Desc', prjChp.desc))
-        self._set_links(xmlChapter, prjChp)
+
+        #--- Inherited elements.
+        self._set_base_data(xmlChapter, prjChp)
+        self._set_notes(xmlChapter, prjChp)
+
+        #--- Section branch.
         for scId in self.novel.tree.get_children(chId):
             xmlSection = ET.SubElement(xmlChapter, 'SECTION', attrib={'id':scId})
             self._build_section_branch(xmlSection, self.novel.sections[scId])
+
         return xmlChapter
 
     def _build_character_branch(self, xmlCrt, prjCrt):
+
+        #--- Attributes.
         if prjCrt.isMajor:
             xmlCrt.set('major', '1')
-        if prjCrt.title:
-            ET.SubElement(xmlCrt, 'Title').text = prjCrt.title
+
+        #--- Inherited elements.
+        self._set_base_data(xmlCrt, prjCrt)
+        self._set_notes(xmlCrt, prjCrt)
+        self._set_tags(xmlCrt, prjCrt)
+        self._set_aka(xmlCrt, prjCrt)
+
+        #--- Full name.
         if prjCrt.fullName:
             ET.SubElement(xmlCrt, 'FullName').text = prjCrt.fullName
-        if prjCrt.aka:
-            ET.SubElement(xmlCrt, 'Aka').text = prjCrt.aka
-        if prjCrt.desc:
-            xmlCrt.append(text_to_xml_element('Desc', prjCrt.desc))
+
+        #--- Bio.
         if prjCrt.bio:
             xmlCrt.append(text_to_xml_element('Bio', prjCrt.bio))
+
+        #--- Goals.
         if prjCrt.goals:
             xmlCrt.append(text_to_xml_element('Goals', prjCrt.goals))
-        if prjCrt.notes:
-            xmlCrt.append(text_to_xml_element('Notes', prjCrt.notes))
-        tagStr = list_to_string(prjCrt.tags)
-        if tagStr:
-            ET.SubElement(xmlCrt, 'Tags').text = tagStr
+
+        #--- Birth date.
         if prjCrt.birthDate:
             ET.SubElement(xmlCrt, 'BirthDate').text = prjCrt.birthDate
+
+        #--- Death date.
         if prjCrt.deathDate:
             ET.SubElement(xmlCrt, 'DeathDate').text = prjCrt.deathDate
-        self._set_links(xmlCrt, prjCrt)
 
     def _build_element_tree(self, root):
-        #--- Process project attributes.
 
+        #--- Process project properties.
         xmlProject = ET.SubElement(root, 'PROJECT')
         self._build_project_branch(xmlProject)
 
@@ -308,41 +294,57 @@ class NovxFile(File):
                 ET.SubElement(xmlWc, 'WithUnused').text = self.wcLog[wc][1]
 
     def _build_item_branch(self, xmlItm, prjItm):
-        if prjItm.title:
-            ET.SubElement(xmlItm, 'Title').text = prjItm.title
-        if prjItm.aka:
-            ET.SubElement(xmlItm, 'Aka').text = prjItm.aka
-        if prjItm.desc:
-            xmlItm.append(text_to_xml_element('Desc', prjItm.desc))
-        tagStr = list_to_string(prjItm.tags)
-        if tagStr:
-            ET.SubElement(xmlItm, 'Tags').text = tagStr
-        self._set_links(xmlItm, prjItm)
+
+        #--- Inherited elements.
+        self._set_base_data(xmlItm, prjItm)
+        self._set_notes(xmlItm, prjItm)
+        self._set_tags(xmlItm, prjItm)
+        self._set_aka(xmlItm, prjItm)
 
     def _build_location_branch(self, xmlLoc, prjLoc):
-        if prjLoc.title:
-            ET.SubElement(xmlLoc, 'Title').text = prjLoc.title
-        if prjLoc.aka:
-            ET.SubElement(xmlLoc, 'Aka').text = prjLoc.aka
-        if prjLoc.desc:
-            xmlLoc.append(text_to_xml_element('Desc', prjLoc.desc))
-        tagStr = list_to_string(prjLoc.tags)
-        if tagStr:
-            ET.SubElement(xmlLoc, 'Tags').text = tagStr
-        self._set_links(xmlLoc, prjLoc)
+
+        #--- Inherited elements.
+        self._set_base_data(xmlLoc, prjLoc)
+        self._set_notes(xmlLoc, prjLoc)
+        self._set_tags(xmlLoc, prjLoc)
+        self._set_aka(xmlLoc, prjLoc)
+
+    def _build_plot_line_branch(self, xmlPlotLines, prjPlotLine, plId):
+        xmlPlotLine = ET.SubElement(xmlPlotLines, 'ARC', attrib={'id':plId})
+
+        #--- Inherited elements.
+        self._set_base_data(xmlPlotLine, prjPlotLine)
+        self._set_notes(xmlPlotLine, prjPlotLine)
+
+        #--- Short name.
+        if prjPlotLine.shortName:
+            ET.SubElement(xmlPlotLine, 'ShortName').text = prjPlotLine.shortName
+
+        #--- Section references.
+        if prjPlotLine.sections:
+            attrib = {'ids':' '.join(prjPlotLine.sections)}
+            ET.SubElement(xmlPlotLine, 'Sections', attrib=attrib)
+
+        #--- Plot points.
+        for ppId in self.novel.tree.get_children(plId):
+            xmlPlotPoint = ET.SubElement(xmlPlotLine, 'POINT', attrib={'id':ppId})
+            self._build_plot_point_branch(xmlPlotPoint, self.novel.plotPoints[ppId])
+
+        return xmlPlotLine
 
     def _build_plot_point_branch(self, xmlPlotPoint, prjPlotPoint):
-        if prjPlotPoint.title:
-            ET.SubElement(xmlPlotPoint, 'Title').text = prjPlotPoint.title
-        if prjPlotPoint.desc:
-            xmlPlotPoint.append(text_to_xml_element('Desc', prjPlotPoint.desc))
-        if prjPlotPoint.notes:
-            xmlPlotPoint.append(text_to_xml_element('Notes', prjPlotPoint.notes))
+
+        #--- Inherited elements.
+        self._set_base_data(xmlPlotPoint, prjPlotPoint)
+        self._set_notes(xmlPlotPoint, prjPlotPoint)
+
+        #--- Section association.
         if prjPlotPoint.sectionAssoc:
             ET.SubElement(xmlPlotPoint, 'Section', attrib={'id': prjPlotPoint.sectionAssoc})
-        self._set_links(xmlPlotPoint, prjPlotPoint)
 
     def _build_project_branch(self, xmlProject):
+
+        #--- Attributes.
         if self.novel.renumberChapters:
             xmlProject.set('renumberChapters', '1')
         if self.novel.renumberParts:
@@ -358,46 +360,57 @@ class NovxFile(File):
         if self.novel.workPhase is not None:
             xmlProject.set('workPhase', str(self.novel.workPhase))
 
-        if self.novel.title:
-            ET.SubElement(xmlProject, 'Title').text = self.novel.title
+        #--- Inherited elements.
+        self._set_base_data(xmlProject, self.novel)
+
+        #--- Author.
         if self.novel.authorName:
             ET.SubElement(xmlProject, 'Author').text = self.novel.authorName
-        if self.novel.desc:
-            xmlProject.append(text_to_xml_element('Desc', self.novel.desc))
+
+        #--- Chapter heading prefix/suffix.
         if self.novel.chapterHeadingPrefix:
             ET.SubElement(xmlProject, 'ChapterHeadingPrefix').text = self.novel.chapterHeadingPrefix
         if self.novel.chapterHeadingSuffix:
             ET.SubElement(xmlProject, 'ChapterHeadingSuffix').text = self.novel.chapterHeadingSuffix
+
+        #--- Part heading prefix/suffix.
         if self.novel.partHeadingPrefix:
             ET.SubElement(xmlProject, 'PartHeadingPrefix').text = self.novel.partHeadingPrefix
         if self.novel.partHeadingSuffix:
             ET.SubElement(xmlProject, 'PartHeadingSuffix').text = self.novel.partHeadingSuffix
+
+        #--- Custom Goal/Conflict/Outcome.
         if self.novel.customGoal:
             ET.SubElement(xmlProject, 'CustomGoal').text = self.novel.customGoal
         if self.novel.customConflict:
             ET.SubElement(xmlProject, 'CustomConflict').text = self.novel.customConflict
         if self.novel.customOutcome:
             ET.SubElement(xmlProject, 'CustomOutcome').text = self.novel.customOutcome
+
+        #--- Custom Character Bio/Goals.
         if self.novel.customChrBio:
             ET.SubElement(xmlProject, 'CustomChrBio').text = self.novel.customChrBio
         if self.novel.customChrGoals:
             ET.SubElement(xmlProject, 'CustomChrGoals').text = self.novel.customChrGoals
+
+        #--- Word count start/Word target.
         if self.novel.wordCountStart:
             ET.SubElement(xmlProject, 'WordCountStart').text = str(self.novel.wordCountStart)
         if self.novel.wordTarget:
             ET.SubElement(xmlProject, 'WordTarget').text = str(self.novel.wordTarget)
+
+        #--- Reference date.
         if self.novel.referenceDate:
             ET.SubElement(xmlProject, 'ReferenceDate').text = self.novel.referenceDate
-        self._set_links(xmlProject, self.novel)
 
     def _build_project_notes_branch(self, xmlProjectNote, projectNote):
-        if projectNote.title:
-            ET.SubElement(xmlProjectNote, 'Title').text = projectNote.title
-        if projectNote.desc:
-            xmlProjectNote.append(text_to_xml_element('Desc', projectNote.desc))
-        self._set_links(xmlProjectNote, projectNote)
+
+        #--- Inherited elements.
+        self._set_base_data(xmlProjectNote, projectNote)
 
     def _build_section_branch(self, xmlSection, prjScn):
+
+        #--- Attributes.
         if prjScn.scType:
             xmlSection.set('type', str(prjScn.scType))
         if prjScn.status > 1:
@@ -406,16 +419,21 @@ class NovxFile(File):
             xmlSection.set('pacing', str(prjScn.scPacing))
         if prjScn.appendToPrev:
             xmlSection.set('append', '1')
-        if prjScn.title:
-            ET.SubElement(xmlSection, 'Title').text = prjScn.title
-        if prjScn.desc:
-            xmlSection.append(text_to_xml_element('Desc', prjScn.desc))
+
+        #--- Inherited elements.
+        self._set_base_data(xmlSection, prjScn)
+        self._set_notes(xmlSection, prjScn)
+        self._set_tags(xmlSection, prjScn)
+
+        #--- Goal/Conflict/Outcome.
         if prjScn.goal:
             xmlSection.append(text_to_xml_element('Goal', prjScn.goal))
         if prjScn.conflict:
             xmlSection.append(text_to_xml_element('Conflict', prjScn.conflict))
         if prjScn.outcome:
             xmlSection.append(text_to_xml_element('Outcome', prjScn.outcome))
+
+        #--- Plot notes.
         if prjScn.plotNotes:
             xmlPlotNotes = ET.SubElement(xmlSection, 'PlotNotes')
             for plId in prjScn.plotNotes:
@@ -423,11 +441,6 @@ class NovxFile(File):
                     xmlPlotNote = text_to_xml_element('PlotlineNotes', prjScn.plotNotes[plId])
                     xmlPlotNote.set('id', plId)
                     xmlPlotNotes.append(xmlPlotNote)
-        if prjScn.notes:
-            xmlSection.append(text_to_xml_element('Notes', prjScn.notes))
-        tagStr = list_to_string(prjScn.tags)
-        if tagStr:
-            ET.SubElement(xmlSection, 'Tags').text = tagStr
 
         #--- Date/Day and Time.
         if prjScn.date:
@@ -445,10 +458,7 @@ class NovxFile(File):
         if prjScn.lastsMinutes and prjScn.lastsMinutes != '0':
             ET.SubElement(xmlSection, 'LastsMinutes').text = prjScn.lastsMinutes
 
-        #--- Links.
-        self._set_links(xmlSection, prjScn)
-
-        #--- References.
+        #--- Characters/Locations/Items references.
         if prjScn.characters:
             attrib = {'ids':' '.join(prjScn.characters)}
             ET.SubElement(xmlSection, 'Characters', attrib=attrib)
@@ -800,11 +810,28 @@ class NovxFile(File):
                     scItems.append(itId)
         self.novel.sections[scId].items = scItems
 
-    def _set_links(self, xmlElement, prjElement):
+    def _set_aka(self, xmlElement, prjElement):
+        if prjElement.aka:
+            ET.SubElement(xmlElement, 'Aka').text = prjElement.aka
+
+    def _set_base_data(self, xmlElement, prjElement):
+        if prjElement.title:
+            ET.SubElement(xmlElement, 'Title').text = prjElement.title
+        if prjElement.desc:
+            xmlElement.append(text_to_xml_element('Desc', prjElement.desc))
         if prjElement.links:
             for path in prjElement.links:
                 xmlLink = ET.SubElement(xmlElement, 'Link')
                 xmlLink.set('path', path)
+
+    def _set_notes(self, xmlElement, prjElement):
+        if prjElement.notes:
+            xmlElement.append(text_to_xml_element('Notes', prjElement.notes))
+
+    def _set_tags(self, xmlElement, prjElement):
+        tagStr = list_to_string(prjElement.tags)
+        if tagStr:
+            ET.SubElement(xmlElement, 'Tags').text = tagStr
 
     def _strip_spaces(self, lines):
         """Local helper method.

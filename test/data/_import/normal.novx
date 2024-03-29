@@ -4,12 +4,12 @@
 <novx version="1.2" xml:lang="en-AU">
   <PROJECT>
     <Title>Hal Spacejock book one - Sample yWriter Project</Title>
-    <Author>Simon Haynes</Author>
     <Desc>
       <p>An incompetent, accident-prone pilot is given one last chance to save his ship. An ageing robot is trusted with a midnight landing in a deserted field. And a desperate businessman is prepared to sacrifice both of them to get what he wants...</p>
       <p />
       <p>Combining relentless action with non-stop laughs, Hal Spacejock explodes onto the science fiction scene with the subtlety of a meteor strike and the hushed reverence of a used car salesman.</p>
     </Desc>
+    <Author>Simon Haynes</Author>
   </PROJECT>
   <CHAPTERS>
     <CHAPTER id="ch1" level="1">
