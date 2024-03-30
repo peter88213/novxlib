@@ -62,7 +62,7 @@ class BasicElement:
 
     @property
     def links(self):
-        # dict: (Key:str -- path, value:str -- title) -- paths to linked files
+        # dict: (Key:str -- relative path, value:str -- full path)
         try:
             return self._links.copy()
         except AttributeError:
@@ -72,9 +72,6 @@ class BasicElement:
     def links(self, newVal):
         if self._links != newVal:
             self._links = newVal
-            for linkPath in newVal:
-                self._links[linkPath] = os.path.split(linkPath)[1]
-                # setting the plain file name as link title
             self.on_element_change()
 
     def do_nothing(self):

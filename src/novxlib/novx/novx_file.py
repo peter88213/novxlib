@@ -45,7 +45,7 @@ class NovxFile(File):
     EXTENSION = '.novx'
 
     MAJOR_VERSION = 1
-    MINOR_VERSION = 2
+    MINOR_VERSION = 3
     # DTD version.
 
     XML_HEADER = f'''<?xml version="1.0" encoding="utf-8"?>
@@ -495,8 +495,9 @@ class NovxFile(File):
         links = {}
         for xmlLink in parent.iterfind('Link'):
             path = xmlLink.attrib.get('path', None)
+            fullPath = xmlLink.attrib.get('fullPath', None)
             if path:
-                links[path] = None
+                links[path] = fullPath
         return links
 
     def _get_notes(self, xmlElement, prjElement):
@@ -890,6 +891,8 @@ class NovxFile(File):
             for path in prjElement.links:
                 xmlLink = ET.SubElement(xmlElement, 'Link')
                 xmlLink.set('path', path)
+                if prjElement.links[path]:
+                    xmlLink.set('fullPath', prjElement.links[path])
 
     def _set_notes(self, xmlElement, prjElement):
         if prjElement.notes:
