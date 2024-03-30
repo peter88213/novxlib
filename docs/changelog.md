@@ -1,5 +1,13 @@
 # Changelog
 
+### v3.3.0
+
+Store links with a fallback path (#10).
+
+- Update DTD version to 1.3
+- Update the BasicElements.links setter method.
+- Read and write the additional full link path in NovxFile.
+
 ### v3.2.0
 
 Store notes with all elements except project notes (#7).
