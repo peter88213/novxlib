@@ -77,7 +77,7 @@
      <table:table-cell  office:value-type="string">
       <text:p></text:p>
      </table:table-cell>
-     <table:table-cell table:style-name="ce6" table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_plot.odt#ac5&quot;;&quot;A-Storyline&quot;)" office:value-type="string">
+     <table:table-cell table:style-name="ce6" table:formula="of:=HYPERLINK(&quot;file:///C:/Users/Peter/git/novxlib/test/tmp/yw7%20Sample%20Project_plotlines_tmp.odt#ac5&quot;;&quot;A-Storyline&quot;)" office:value-type="string">
      </table:table-cell>
     </table:table-row>
    <table:table-row table:style-name="ro2">

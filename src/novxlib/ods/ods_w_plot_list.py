@@ -8,6 +8,7 @@ from novxlib.novx_globals import PL_ROOT
 from novxlib.novx_globals import CH_ROOT
 from novxlib.novx_globals import MANUSCRIPT_SUFFIX
 from novxlib.novx_globals import PLOTLIST_SUFFIX
+from novxlib.novx_globals import PLOTLINES_SUFFIX
 from novxlib.novx_globals import _
 from novxlib.novx_globals import list_to_string
 from novxlib.ods.ods_writer import OdsWriter
@@ -96,7 +97,7 @@ class OdsWPlotList(OdsWriter):
                     create_cell(
                     self.novel.plotLines[plId].title,
                     attr=f'table:style-name="ce{colorIndex}"',
-                    link=f'_plot.odt#{plId}'
+                    link=f'{PLOTLINES_SUFFIX}.odt#{plId}'
                     )
                 )
         odsText.append('    </table:table-row>')

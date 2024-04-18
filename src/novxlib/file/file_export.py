@@ -626,11 +626,12 @@ class FileExport(File):
                 template = Template(self._sectionTemplate)
                 if firstSectionInChapter and self._firstSectionTemplate:
                     template = Template(self._firstSectionTemplate)
-            if not (firstSectionInChapter or self.novel.sections[scId].appendToPrev):
+            if not (firstSectionInChapter or self.novel.sections[scId].appendToPrev or self.novel.sections[scId].scType > 1):
                 lines.append(self._sectionDivider)
             if template is not None:
                 lines.append(template.safe_substitute(self._get_sectionMapping(scId, dispNumber, wordsTotal)))
-            firstSectionInChapter = False
+            if self.novel.sections[scId].scType < 2:
+                firstSectionInChapter = False
         return lines, sectionNumber, wordsTotal
 
     def _get_prjNoteMapping(self, pnId):

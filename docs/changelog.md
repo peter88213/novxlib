@@ -1,5 +1,12 @@
 # Changelog
 
+### v3.4.1
+
+- Update plot line hyperlinks in the plotlist.
+- Add plot line hyperlinks to the plot grid.
+- Do not insert section dividers when using stage templates in file export.
+- Update test data.
+
 ### v3.4.0
 
 New document types:

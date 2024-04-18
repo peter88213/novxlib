@@ -32,7 +32,6 @@ class OdtWManuscript(OdtWFormatted):
 $SectionContent
 </text:section>
 '''
-
     _sectionDivider = '<text:p text:style-name="Heading_20_4">* * *</text:p>\n'
 
     _fileFooter = OdtWFormatted._CONTENT_XML_FOOTER

@@ -6,7 +6,9 @@ License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
 from string import Template
 
-from novxlib.novx_globals import GRID_SUFFIX, PL_ROOT
+from novxlib.novx_globals import GRID_SUFFIX
+from novxlib.novx_globals import PLOTLINES_SUFFIX
+from novxlib.novx_globals import PL_ROOT
 from novxlib.novx_globals import _
 from novxlib.ods.ods_writer import OdsWriter
 
@@ -214,7 +216,7 @@ $ArcNoteCells
       <text:p>$ArcId</text:p>
      </table:table-cell>'''
 
-    _arcTitleCell = '''     <table:table-cell table:style-name="Heading" office:value-type="string">
+    _arcTitleCell = '''     <table:table-cell $Link table:style-name="Heading" office:value-type="string">
       <text:p>$ArcTitle</text:p>
      </table:table-cell>'''
 
@@ -234,6 +236,7 @@ $ArcNoteCells
             mapping = dict(
                 ArcId=plId,
                 ArcTitle=self.novel.plotLines[plId].title,
+                Link=f'table:formula="of:=HYPERLINK(&quot;file:///{self.projectPath}/{self._convert_from_novx(self.projectName)}{PLOTLINES_SUFFIX}.odt#{plId}&quot;;&quot;{self._convert_from_novx(self.novel.plotLines[plId].title, isLink=True)}&quot;)"',
                 )
             arcIdCells.append(Template(self._arcIdCell).safe_substitute(mapping))
             arcTitleCells.append(Template(self._arcTitleCell).safe_substitute(mapping))
