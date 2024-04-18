@@ -1,5 +1,12 @@
 # Changelog
 
+### v3.4.0
+
+New document types:
+
+- Story structure export and import.
+- Plot line descriptions export and import.
+
 ### v3.3.0
 
 Store links with a fallback path (#10).

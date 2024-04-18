@@ -1,4 +1,4 @@
-"""Provide a class for ODT plot description export, and the filter classes needed.
+"""Provide a class for ODT plot line descriptions export.
 
 Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
@@ -7,45 +7,40 @@ License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 from string import Template
 
 from novxlib.novx_globals import MANUSCRIPT_SUFFIX
-from novxlib.novx_globals import PLOT_SUFFIX
+from novxlib.novx_globals import PLOTLINES_SUFFIX
 from novxlib.novx_globals import SECTIONS_SUFFIX
 from novxlib.novx_globals import _
 from novxlib.odt.odt_writer import OdtWriter
 
 
-class OdtWPlot(OdtWriter):
-    """ODT plot description file representation.
+class OdtWPlotlines(OdtWriter):
+    """ODT plot lines description file representation.
 
-    Export a plot description with story structure and arcs.
+    Export descriptions of plot lines and plot points.
     """
-    DESCRIPTION = _('Plot description')
-    SUFFIX = PLOT_SUFFIX
+    DESCRIPTION = _('Plot lines')
+    SUFFIX = PLOTLINES_SUFFIX
 
     _fileHeader = f'''{OdtWriter._CONTENT_XML_HEADER}<text:p text:style-name="Title">$Title</text:p>
 <text:p text:style-name="Subtitle">$AuthorName</text:p>
-
-<text:h text:style-name="Heading_20_1" text:outline-level="1">{_('Story structure')}</text:h>
-'''
-
-    _stage1Template = '''<text:h text:style-name="Heading_20_1" text:outline-level="1"><text:bookmark text:name="$ID"/>$Title</text:h>
-$Desc
-'''
-
-    _stage2Template = '''<text:h text:style-name="Heading_20_2" text:outline-level="2"><text:bookmark text:name="$ID"/>$Title</text:h>
-$Desc
 '''
 
     _arcHeadingTemplate = f'''<text:h text:style-name="Heading_20_1" text:outline-level="1">{_('Plot lines')}</text:h>
 '''
 
     _arcTemplate = '''$Heading<text:h text:style-name="Heading_20_2" text:outline-level="2"><text:bookmark text:name="$ID"/>$Title</text:h>
+<text:section text:style-name="Sect1" text:name="$ID">
 $Desc
+</text:section>
 $TurningPoints
 '''
     _plotPointTemplate = '''<text:h text:style-name="Heading_20_3" text:outline-level="3"><text:bookmark text:name="$ID"/>$Title</text:h>
+<text:section text:style-name="Sect1" text:name="$ID">
 $Desc
+</text:section>
 '''
-    _assocSectionTemplate = '''<text:p text:style-name="Text_20_body">$Section: <text:span text:style-name="Emphasis">$SectionTitle</text:span></text:p>    
+    _assocSectionTemplate = '''<text:p text:style-name="Text_20_body" />
+<text:p text:style-name="Text_20_body">$Section: <text:span text:style-name="Emphasis">$SectionTitle</text:span></text:p>    
 <text:p text:style-name="Text_20_body">→ <text:a xlink:href="../$ProjectName$SectionsSuffix.odt#$scID%7Cregion">$Description</text:a></text:p>
 <text:p text:style-name="Text_20_body">→ <text:a xlink:href="../$ProjectName$ManuscriptSuffix.odt#$scID%7Cregion">$Manuscript</text:a></text:p>
 '''
@@ -76,7 +71,7 @@ $Desc
             plotPointMapping = dict(
                     ID=ppId,
                     Title=self.novel.plotPoints[ppId].title,
-                    Desc=self.novel.plotPoints[ppId].desc,
+                    Desc=self._convert_from_novx(self.novel.plotPoints[ppId].desc),
                     )
             template = Template(self._plotPointTemplate)
             plotPoints.append(template.safe_substitute(plotPointMapping))

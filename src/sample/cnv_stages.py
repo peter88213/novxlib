@@ -1,6 +1,4 @@
-"""Import and export novelibre plot structure. 
-
-File format: csv (intended for spreadsheet conversion).
+"""Import and export novelibre story structure. 
 
 This is a novxlib sample application.
 
@@ -11,10 +9,10 @@ License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 import sys
 
 from novxlib.converter.novx_converter import NovxConverter
-from novxlib.novx_globals import PLOTLIST_SUFFIX
+from novxlib.novx_globals import STAGES_SUFFIX
 from novxlib.ui.ui_tk import UiTk
 
-SUFFIX = PLOTLIST_SUFFIX
+SUFFIX = STAGES_SUFFIX
 
 
 def run(sourcePath, suffix=''):

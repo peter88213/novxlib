@@ -10,6 +10,8 @@ from abc import ABC
 
 from novxlib.novx_globals import CHAPTER_PREFIX
 from novxlib.novx_globals import Error
+from novxlib.novx_globals import PLOT_LINE_PREFIX
+from novxlib.novx_globals import PLOT_POINT_PREFIX
 from novxlib.novx_globals import SECTION_PREFIX
 from novxlib.novx_globals import _
 from novxlib.novx_globals import norm_path
@@ -45,6 +47,8 @@ class OdtReader(OdfReader, ABC):
         self._lines = []
         self._scId = None
         self._chId = None
+        self._plId = None
+        self._ppId = None
         self._skip_data = False
 
     def handle_data(self, data):
@@ -79,6 +83,10 @@ class OdtReader(OdfReader, ABC):
                     self._scId = attrs[0][1]
                 elif attrs[0][1].startswith(CHAPTER_PREFIX):
                     self._chId = attrs[0][1]
+                elif attrs[0][1].startswith(PLOT_LINE_PREFIX):
+                    self._plId = attrs[0][1]
+                elif attrs[0][1].startswith(PLOT_POINT_PREFIX):
+                    self._ppId = attrs[0][1]
         elif tag == 's':
             self._lines.append(' ')
 

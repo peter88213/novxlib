@@ -1,4 +1,4 @@
-"""Convert novelibre plot description to odt format.
+"""Import and export novelibre plot lines. 
 
 This is a novxlib sample application.
 
@@ -9,10 +9,10 @@ License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 import sys
 
 from novxlib.converter.novx_converter import NovxConverter
-from novxlib.novx_globals import PLOT_SUFFIX
+from novxlib.novx_globals import PLOTLINES_SUFFIX
 from novxlib.ui.ui_tk import UiTk
 
-SUFFIX = PLOT_SUFFIX
+SUFFIX = PLOTLINES_SUFFIX
 
 
 def run(sourcePath, suffix=''):
