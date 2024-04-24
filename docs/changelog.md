@@ -1,5 +1,9 @@
 # Changelog
 
+### v3.5.2
+
+- Have Converter set the default locale when creating a new project.
+
 ### v3.5.1
 
 - Indent the novx files up to the content paragraph level, but not inline elements within paragraphs.
