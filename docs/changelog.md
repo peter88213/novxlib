@@ -1,5 +1,9 @@
 # Changelog
 
+### v3.5.1
+
+- Indent the novx files up to the content paragraph level, but not inline elements within paragraphs.
+
 ### v3.5.0
 
 No longer pretty-print the novx xml files.

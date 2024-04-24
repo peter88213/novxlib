@@ -9,25 +9,26 @@ from datetime import time
 import os
 
 from novxlib.file.file import File
-from novxlib.model.plot_line import PlotLine
 from novxlib.model.basic_element import BasicElement
 from novxlib.model.chapter import Chapter
 from novxlib.model.character import Character
-from novxlib.model.section import Section
+from novxlib.model.plot_line import PlotLine
 from novxlib.model.plot_point import PlotPoint
+from novxlib.model.section import Section
 from novxlib.model.world_element import WorldElement
-from novxlib.novx_globals import PL_ROOT
 from novxlib.novx_globals import CH_ROOT
 from novxlib.novx_globals import CR_ROOT
 from novxlib.novx_globals import Error
 from novxlib.novx_globals import IT_ROOT
 from novxlib.novx_globals import LC_ROOT
+from novxlib.novx_globals import PL_ROOT
 from novxlib.novx_globals import PN_ROOT
 from novxlib.novx_globals import _
 from novxlib.novx_globals import list_to_string
 from novxlib.novx_globals import norm_path
 from novxlib.novx_globals import string_to_list
 from novxlib.xml.etree_tools import *
+from novxlib.xml.xml_indent import indent
 import xml.etree.ElementTree as ET
 
 
@@ -173,8 +174,9 @@ class NovxFile(File):
                 }
         xmlRoot = ET.Element('novx', attrib=attrib)
         self._build_element_tree(xmlRoot)
-        # indent(xmlRoot)
-        # CAUTION: indenting discards blanks between inline tagged passages
+        indent(xmlRoot)
+        # CAUTION: make sure not to indent inline elements within paragraphs
+
         self.xmlTree = ET.ElementTree(xmlRoot)
         self._write_element_tree(self)
         self._postprocess_xml_file(self.filePath)
