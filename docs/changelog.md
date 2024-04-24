@@ -1,5 +1,11 @@
 # Changelog
 
+### v3.5.0
+
+No longer pretty-print the novx xml files.
+
+This fixes a bug where single spaces between emphasized text in section content are lost.
+
 ### v3.4.1
 
 - Update plot line hyperlinks in the plotlist.

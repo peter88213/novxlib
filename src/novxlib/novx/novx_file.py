@@ -28,7 +28,6 @@ from novxlib.novx_globals import list_to_string
 from novxlib.novx_globals import norm_path
 from novxlib.novx_globals import string_to_list
 from novxlib.xml.etree_tools import *
-from novxlib.xml.xml_indent import indent
 import xml.etree.ElementTree as ET
 
 
@@ -174,7 +173,8 @@ class NovxFile(File):
                 }
         xmlRoot = ET.Element('novx', attrib=attrib)
         self._build_element_tree(xmlRoot)
-        indent(xmlRoot)
+        # indent(xmlRoot)
+        # CAUTION: indenting discards blanks between inline tagged passages
         self.xmlTree = ET.ElementTree(xmlRoot)
         self._write_element_tree(self)
         self._postprocess_xml_file(self.filePath)
