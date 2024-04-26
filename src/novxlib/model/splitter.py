@@ -148,17 +148,19 @@ class Splitter:
                             desc = ''
                     if plainLine.startswith(self.SCENE_SEPARATOR):
                         # Split the section.
-                        novel.sections[scId].sectionContent = ''.join(newLines)
+                        if inSection:
+                            novel.sections[scId].sectionContent = ''.join(newLines)
                         newLines = []
                         sectionSplitCount += 1
                         newScId = create_id(novel.sections, prefix=SECTION_PREFIX)
-                        create_section(newScId,
-                                     novel.sections[scId],
-                                     sectionSplitCount,
-                                     title,
-                                     desc,
-                                     plainLine.startswith(self.APPENDED_SCENE_SEPARATOR),
-                                     )
+                        create_section(
+                            newScId,
+                            novel.sections[scId],
+                            sectionSplitCount,
+                            title,
+                            desc,
+                            plainLine.startswith(self.APPENDED_SCENE_SEPARATOR),
+                            )
                         novel.tree.append(chId, newScId)
                         scId = newScId
                         sectionsSplit = True

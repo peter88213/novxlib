@@ -1,5 +1,9 @@
 # Changelog
 
+### v3.5.3
+
+- Fix a bug where scenes might get lost during splitting, if split markers are not placed as intended. 
+
 ### v3.5.2
 
 - Have Converter set the default locale when creating a new project.
