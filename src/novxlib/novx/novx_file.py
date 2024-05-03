@@ -921,6 +921,9 @@ class NovxFile(File):
     def _write_element_tree(self, xmlProject):
         """Write back the xml element tree to a .novx xml file located at filePath.
         
+        If a novx file already exists, rename it for backup.
+        If writing the file fails, restore the backup copy, if any.
+        
         Raise the "Error" exception in case of error. 
         """
         backedUp = False
