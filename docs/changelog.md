@@ -1,5 +1,9 @@
 # Changelog
 
+### v3.5.4
+
+- Slightly refactor the XML indent helper function. 
+
 ### v3.5.3
 
 - Fix a bug where scenes might get lost during splitting, if split markers are not placed as intended. 
