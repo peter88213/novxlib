@@ -7,16 +7,14 @@ License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 
 
 def indent(elem, level=0):
-    """xml pretty printer
+    """xml pretty printer for the novx file format.
     
-    Indent the xml tree up to the novx content paragraph level,
-    but not inline elements within paragraphs.
+    Indent the xml tree up to the novx content paragraph level.
+    Do not indent inline elements within paragraphs.
 
-    Kudos to to Fredrik Lundh. 
-    Source: http://effbot.org/zone/element-lib.htm#prettyprint
+    Based on a code example by Fredrik Lundh. 
     """
-    MAX_LEVEL = 5
-    # this is the content paragraph level
+    PARAGRAPH_LEVEL = 5
 
     i = f'\n{level * "  "}'
     if elem:
@@ -24,7 +22,7 @@ def indent(elem, level=0):
             elem.text = f'{i}  '
         if not elem.tail or not elem.tail.strip():
             elem.tail = i
-        if level < MAX_LEVEL:
+        if level < PARAGRAPH_LEVEL:
             for elem in elem:
                 indent(elem, level + 1)
         if not elem.tail or not elem.tail.strip():
