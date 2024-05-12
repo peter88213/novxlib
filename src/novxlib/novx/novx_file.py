@@ -564,17 +564,9 @@ class NovxFile(File):
         """Read items from the xml element tree."""
         try:
             for xmlItem in root.find('ITEMS'):
-
-                #--- Attributes.
                 itId = xmlItem.attrib['id']
                 self.novel.items[itId] = WorldElement(on_element_change=self.on_element_change)
-
-                #--- Inherited properties.
-                self._get_base_data(xmlItem, self.novel.items[itId])
-                self._get_notes(xmlItem, self.novel.items[itId])
-                self._get_tags(xmlItem, self.novel.items[itId])
-                self._get_aka(xmlItem, self.novel.items[itId])
-
+                self.novel.items[itId].read_xml(xmlItem)
                 self.novel.tree.append(IT_ROOT, itId)
         except TypeError:
             pass
@@ -583,17 +575,9 @@ class NovxFile(File):
         """Read locations from the xml element tree."""
         try:
             for xmlLocation in root.find('LOCATIONS'):
-
-                #--- Attributes.
                 lcId = xmlLocation.attrib['id']
                 self.novel.locations[lcId] = WorldElement(on_element_change=self.on_element_change)
-
-                #--- Inherited properties.
-                self._get_base_data(xmlLocation, self.novel.locations[lcId])
-                self._get_notes(xmlLocation, self.novel.locations[lcId])
-                self._get_tags(xmlLocation, self.novel.locations[lcId])
-                self._get_aka(xmlLocation, self.novel.locations[lcId])
-
+                self.novel.locations[lcId].read_xml(xmlLocation)
                 self.novel.tree.append(LC_ROOT, lcId)
         except TypeError:
             pass
