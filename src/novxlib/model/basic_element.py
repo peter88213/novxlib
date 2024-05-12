@@ -105,6 +105,32 @@ class BasicElement:
         else:
             return default
 
+    def _get_link_dict(self, parent):
+        """Return a dictionary of links.
+        
+        If the element doesn't exist, return an empty dictionary.
+        """
+        links = {}
+        for xmlLink in parent.iterfind('Link'):
+            path = xmlLink.attrib.get('path', None)
+            fullPath = xmlLink.attrib.get('fullPath', None)
+            if path:
+                links[path] = fullPath
+        return links
+
+    def _strip_spaces(self, lines):
+        """Local helper method.
+
+        Positional argument:
+            lines -- list of strings
+
+        Return lines with leading and trailing spaces removed.
+        """
+        stripped = []
+        for line in lines:
+            stripped.append(line.strip())
+        return stripped
+
     def _text_to_xml_element(self, tag, text):
         """Return an ElementTree element named "tag" with paragraph subelements.
         
