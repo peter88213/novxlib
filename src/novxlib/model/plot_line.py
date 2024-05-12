@@ -4,7 +4,10 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
+import xml.etree.ElementTree as ET
 from novxlib.model.basic_element_notes import BasicElementNotes
+from novxlib.novx_globals import list_to_string
+from novxlib.novx_globals import string_to_list
 
 
 class PlotLine(BasicElementNotes):
@@ -45,3 +48,22 @@ class PlotLine(BasicElementNotes):
             self._sections = newVal
             self.on_element_change()
 
+    def read_xml(self, xmlElement):
+        super().read_xml(xmlElement)
+        self.shortName = self._get_element_text(xmlElement, 'ShortName')
+        plSections = []
+        xmlSections = xmlElement.find('Sections')
+        if xmlSections is not None:
+            scIds = xmlSections.get('ids', None)
+            for scId in string_to_list(scIds, divider=' '):
+                if scId is not None:
+                    plSections.append(scId)
+        self.sections = plSections
+
+    def write_xml(self, xmlElement):
+        super().write_xml(xmlElement)
+        if self.shortName:
+            ET.SubElement(xmlElement, 'ShortName').text = self.shortName
+        if self.sections:
+            attrib = {'ids':' '.join(self.sections)}
+            ET.SubElement(xmlElement, 'Sections', attrib=attrib)

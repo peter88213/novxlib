@@ -89,3 +89,9 @@ class Character(WorldElement):
             self._deathDate = newVal
             self.on_element_change()
 
+    def read_xml(self, xmlElement):
+        super().read_xml(xmlElement)
+
+    def write_xml(self, xmlElement):
+        super().write_xml(xmlElement)
+

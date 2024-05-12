@@ -417,3 +417,8 @@ class Novel(BasicElement):
         self._countryCode = 'none'
         self.on_element_change()
 
+    def read_xml(self, xmlElement):
+        super().read_xml(xmlElement)
+
+    def write_xml(self, xmlElement):
+        super().write_xml(xmlElement)

@@ -421,3 +421,8 @@ class Section(BasicElementTags):
 
         return True
 
+    def read_xml(self, xmlElement):
+        super().read_xml(xmlElement)
+
+    def write_xml(self, xmlElement):
+        super().write_xml(xmlElement)

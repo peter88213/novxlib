@@ -295,36 +295,10 @@ class NovxFile(File):
 
     def _build_plot_line_branch(self, xmlPlotLines, prjPlotLine, plId):
         xmlPlotLine = ET.SubElement(xmlPlotLines, 'ARC', attrib={'id':plId})
-
-        #--- Inherited properties.
-        self._set_base_data(xmlPlotLine, prjPlotLine)
-        self._set_notes(xmlPlotLine, prjPlotLine)
-
-        #--- Short name.
-        if prjPlotLine.shortName:
-            ET.SubElement(xmlPlotLine, 'ShortName').text = prjPlotLine.shortName
-
-        #--- Section references.
-        if prjPlotLine.sections:
-            attrib = {'ids':' '.join(prjPlotLine.sections)}
-            ET.SubElement(xmlPlotLine, 'Sections', attrib=attrib)
-
-        #--- Plot points.
+        prjPlotLine.write_xml(xmlPlotLine)
         for ppId in self.novel.tree.get_children(plId):
             xmlPlotPoint = ET.SubElement(xmlPlotLine, 'POINT', attrib={'id':ppId})
-            self._build_plot_point_branch(xmlPlotPoint, self.novel.plotPoints[ppId])
-
-        return xmlPlotLine
-
-    def _build_plot_point_branch(self, xmlPlotPoint, prjPlotPoint):
-
-        #--- Inherited properties.
-        self._set_base_data(xmlPlotPoint, prjPlotPoint)
-        self._set_notes(xmlPlotPoint, prjPlotPoint)
-
-        #--- Section association.
-        if prjPlotPoint.sectionAssoc:
-            ET.SubElement(xmlPlotPoint, 'Section', attrib={'id': prjPlotPoint.sectionAssoc})
+            self.novel.plotPoints[ppId].write_xml(xmlPlotPoint)
 
     def _build_project_branch(self, xmlProject):
 
@@ -628,30 +602,19 @@ class NovxFile(File):
         """Read plotlines from the xml element tree."""
         try:
             for xmlPlotLine in root.find('ARCS'):
-
-                #--- Attributes.
                 plId = xmlPlotLine.attrib['id']
                 self.novel.plotLines[plId] = PlotLine(on_element_change=self.on_element_change)
+                self.novel.plotLines[plId].read_xml(xmlPlotLine)
 
-                #--- Inherited properties.
-                self._get_base_data(xmlPlotLine, self.novel.plotLines[plId])
-                self._get_notes(xmlPlotLine, self.novel.plotLines[plId])
+                # Verify sections and create backlinks.
+                plSections = []
+                for scId in self.novel.plotLines[plId].sections:
+                    if scId in self.novel.sections:
+                        self.novel.sections[scId].scPlotLines.append(plId)
+                        plSections.append(scId)
+                self.novel.plotLines[plId].sections = plSections
 
-                #--- Short name.
-                self.novel.plotLines[plId].shortName = get_element_text(xmlPlotLine, 'ShortName')
-
-                #--- Section references.
-                acSections = []
-                xmlSections = xmlPlotLine.find('Sections')
-                if xmlSections is not None:
-                    scIds = xmlSections.get('ids', None)
-                    for scId in string_to_list(scIds, divider=' '):
-                        if scId and scId in self.novel.sections:
-                            acSections.append(scId)
-                            self.novel.sections[scId].scPlotLines.append(plId)
-                self.novel.plotLines[plId].sections = acSections
-
-                #--- Plot points.
+                # Plot points.
                 self.novel.tree.append(PL_ROOT, plId)
                 for xmlPlotPoint in xmlPlotLine.iterfind('POINT'):
                     ppId = xmlPlotPoint.attrib['id']
@@ -661,19 +624,17 @@ class NovxFile(File):
         except TypeError:
             pass
 
-    def _read_plot_point(self, xmlPoint, ppId, plId):
+    def _read_plot_point(self, xmlPlotPoint, ppId, plId):
         """Read a plot point from the xml element tree."""
         self.novel.plotPoints[ppId] = PlotPoint(on_element_change=self.on_element_change)
+        self.novel.plotPoints[ppId].read_xml(xmlPlotPoint)
 
-        #--- Inherited properties.
-        self._get_base_data(xmlPoint, self.novel.plotPoints[ppId])
-
-        #--- Section association.
-        xmlSectionAssoc = xmlPoint.find('Section')
-        if xmlSectionAssoc is not None:
-            scId = xmlSectionAssoc.get('id', None)
-            self.novel.plotPoints[ppId].sectionAssoc = scId
+        # Verify section and create backlink.
+        scId = self.novel.plotPoints[ppId].sectionAssoc
+        if scId in self.novel.sections:
             self.novel.sections[scId].scPlotPoints[ppId] = plId
+        else:
+            self.novel.plotPoints[ppId].sectionAssoc = None
 
     def _read_project(self, root):
         """Read data at project level from the xml element tree."""

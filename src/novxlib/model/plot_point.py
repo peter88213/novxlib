@@ -4,6 +4,7 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
+import xml.etree.ElementTree as ET
 from novxlib.model.basic_element_notes import BasicElementNotes
 
 
@@ -29,3 +30,13 @@ class PlotPoint(BasicElementNotes):
             self._sectionAssoc = newVal
             self.on_element_change()
 
+    def read_xml(self, xmlElement):
+        super().read_xml(xmlElement)
+        xmlSectionAssoc = xmlElement.find('Section')
+        if xmlSectionAssoc is not None:
+            self.sectionAssoc = xmlSectionAssoc.get('id', None)
+
+    def write_xml(self, xmlElement):
+        super().write_xml(xmlElement)
+        if self.sectionAssoc:
+            ET.SubElement(xmlElement, 'Section', attrib={'id': self.sectionAssoc})

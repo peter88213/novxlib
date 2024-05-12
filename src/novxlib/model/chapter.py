@@ -70,3 +70,9 @@ class Chapter(BasicElementNotes):
         if self._isTrash != newVal:
             self._isTrash = newVal
             self.on_element_change()
+
+    def read_xml(self, xmlElement):
+        super().read_xml(xmlElement)
+
+    def write_xml(self, xmlElement):
+        super().write_xml(xmlElement)
