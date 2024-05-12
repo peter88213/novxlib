@@ -12,10 +12,10 @@ from abc import ABC, abstractmethod
 class FileFactory(ABC):
     """Base class for conversion object factory classes."""
 
-    def __init__(self, fileClasses=[]):
+    def __init__(self, fileClasses):
         """Write the parameter to a "private" instance variable.
 
-        Optional arguments:
+        Positional arguments:
             _fileClasses -- list of classes from which an instance can be returned.
         """
         self._fileClasses = fileClasses
