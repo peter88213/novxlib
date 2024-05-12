@@ -34,7 +34,10 @@ class BasicElementTags(BasicElementNotes):
     def read_xml(self, xmlElement):
         super().read_xml(xmlElement)
         tags = string_to_list(self._get_element_text(xmlElement, 'Tags'))
-        self.tags = self._strip_spaces(tags)
+        strippedTags = []
+        for tag in tags:
+            strippedTags.append(tag.strip())
+        self.tags = strippedTags
 
     def write_xml(self, xmlElement):
         super().write_xml(xmlElement)

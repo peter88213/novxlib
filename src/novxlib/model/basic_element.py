@@ -95,13 +95,13 @@ class BasicElement:
                 if self.links[path]:
                     xmlLink.set('fullPath', self.links[path])
 
-    def _get_element_text(self, parent, tag, default=None):
+    def _get_element_text(self, xmlElement, tag, default=None):
         """Return the text field of an XML element.
         
         If the element doesn't exist, return default.
         """
-        if parent.find(tag) is not None:
-            return parent.find(tag).text
+        if xmlElement.find(tag) is not None:
+            return xmlElement.find(tag).text
         else:
             return default
 
@@ -117,19 +117,6 @@ class BasicElement:
             if path:
                 links[path] = fullPath
         return links
-
-    def _strip_spaces(self, lines):
-        """Local helper method.
-
-        Positional argument:
-            lines -- list of strings
-
-        Return lines with leading and trailing spaces removed.
-        """
-        stripped = []
-        for line in lines:
-            stripped.append(line.strip())
-        return stripped
 
     def _text_to_xml_element(self, tag, text):
         """Return an ElementTree element named "tag" with paragraph subelements.
