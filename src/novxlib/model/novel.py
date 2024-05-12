@@ -7,6 +7,7 @@ License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 from datetime import date
 import locale
 import re
+import xml.etree.ElementTree as ET
 
 from novxlib.model.basic_element import BasicElement
 
@@ -419,6 +420,100 @@ class Novel(BasicElement):
 
     def read_xml(self, xmlElement):
         super().read_xml(xmlElement)
+        self.renumberChapters = xmlElement.get('renumberChapters', None) == '1'
+        self.renumberParts = xmlElement.get('renumberParts', None) == '1'
+        self.renumberWithinParts = xmlElement.get('renumberWithinParts', None) == '1'
+        self.romanChapterNumbers = xmlElement.get('romanChapterNumbers', None) == '1'
+        self.romanPartNumbers = xmlElement.get('romanPartNumbers', None) == '1'
+        self.saveWordCount = xmlElement.get('saveWordCount', None) == '1'
+        workPhase = xmlElement.get('workPhase', None)
+        if workPhase in ('1', '2', '3', '4', '5'):
+            self.workPhase = int(workPhase)
+        else:
+            self.workPhase = None
+
+        # Author.
+        self.authorName = self._get_element_text(xmlElement, 'Author')
+
+        # Chapter heading prefix/suffix.
+        self.chapterHeadingPrefix = self._get_element_text(xmlElement, 'ChapterHeadingPrefix')
+        self.chapterHeadingSuffix = self._get_element_text(xmlElement, 'ChapterHeadingSuffix')
+
+        # Part heading prefix/suffix.
+        self.partHeadingPrefix = self._get_element_text(xmlElement, 'PartHeadingPrefix')
+        self.partHeadingSuffix = self._get_element_text(xmlElement, 'PartHeadingSuffix')
+
+        # Custom Goal/Conflict/Outcome.
+        self.customGoal = self._get_element_text(xmlElement, 'CustomGoal')
+        self.customConflict = self._get_element_text(xmlElement, 'CustomConflict')
+        self.customOutcome = self._get_element_text(xmlElement, 'CustomOutcome')
+
+        # Custom Character Bio/Goals.
+        self.customChrBio = self._get_element_text(xmlElement, 'CustomChrBio')
+        self.customChrGoals = self._get_element_text(xmlElement, 'CustomChrGoals')
+
+        # Word count start/Word target.
+        if xmlElement.find('WordCountStart') is not None:
+            self.wordCountStart = int(xmlElement.find('WordCountStart').text)
+        if xmlElement.find('WordTarget') is not None:
+            self.wordTarget = int(xmlElement.find('WordTarget').text)
+
+        # Reference date.
+        self.referenceDate = self._get_element_text(xmlElement, 'ReferenceDate')
 
     def write_xml(self, xmlElement):
         super().write_xml(xmlElement)
+        if self.renumberChapters:
+            xmlElement.set('renumberChapters', '1')
+        if self.renumberParts:
+            xmlElement.set('renumberParts', '1')
+        if self.renumberWithinParts:
+            xmlElement.set('renumberWithinParts', '1')
+        if self.romanChapterNumbers:
+            xmlElement.set('romanChapterNumbers', '1')
+        if self.romanPartNumbers:
+            xmlElement.set('romanPartNumbers', '1')
+        if self.saveWordCount:
+            xmlElement.set('saveWordCount', '1')
+        if self.workPhase is not None:
+            xmlElement.set('workPhase', str(self.workPhase))
+
+        # Author.
+        if self.authorName:
+            ET.SubElement(xmlElement, 'Author').text = self.authorName
+
+        # Chapter heading prefix/suffix.
+        if self.chapterHeadingPrefix:
+            ET.SubElement(xmlElement, 'ChapterHeadingPrefix').text = self.chapterHeadingPrefix
+        if self.chapterHeadingSuffix:
+            ET.SubElement(xmlElement, 'ChapterHeadingSuffix').text = self.chapterHeadingSuffix
+
+        # Part heading prefix/suffix.
+        if self.partHeadingPrefix:
+            ET.SubElement(xmlElement, 'PartHeadingPrefix').text = self.partHeadingPrefix
+        if self.partHeadingSuffix:
+            ET.SubElement(xmlElement, 'PartHeadingSuffix').text = self.partHeadingSuffix
+
+        # Custom Goal/Conflict/Outcome.
+        if self.customGoal:
+            ET.SubElement(xmlElement, 'CustomGoal').text = self.customGoal
+        if self.customConflict:
+            ET.SubElement(xmlElement, 'CustomConflict').text = self.customConflict
+        if self.customOutcome:
+            ET.SubElement(xmlElement, 'CustomOutcome').text = self.customOutcome
+
+        # Custom Character Bio/Goals.
+        if self.customChrBio:
+            ET.SubElement(xmlElement, 'CustomChrBio').text = self.customChrBio
+        if self.customChrGoals:
+            ET.SubElement(xmlElement, 'CustomChrGoals').text = self.customChrGoals
+
+        # Word count start/Word target.
+        if self.wordCountStart:
+            ET.SubElement(xmlElement, 'WordCountStart').text = str(self.wordCountStart)
+        if self.wordTarget:
+            ET.SubElement(xmlElement, 'WordTarget').text = str(self.wordTarget)
+
+        # Reference date.
+        if self.referenceDate:
+            ET.SubElement(xmlElement, 'ReferenceDate').text = self.referenceDate

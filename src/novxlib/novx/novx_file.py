@@ -24,7 +24,6 @@ from novxlib.novx_globals import PL_ROOT
 from novxlib.novx_globals import PN_ROOT
 from novxlib.novx_globals import _
 from novxlib.novx_globals import norm_path
-from novxlib.xml.etree_tools import *
 from novxlib.xml.xml_indent import indent
 import xml.etree.ElementTree as ET
 
@@ -191,7 +190,7 @@ class NovxFile(File):
 
     def _build_project(self, root):
         xmlProject = ET.SubElement(root, 'PROJECT')
-        self._build_project_branch(xmlProject)
+        self.novel.write_xml(xmlProject)
 
     def _build_chapters_and_sections(self, root):
         xmlChapters = ET.SubElement(root, 'CHAPTERS')
@@ -228,67 +227,6 @@ class NovxFile(File):
         xmlProjectNotes = ET.SubElement(root, 'PROJECTNOTES')
         for pnId in self.novel.tree.get_children(PN_ROOT):
             self.novel.projectNotes[pnId].write_xml(ET.SubElement(xmlProjectNotes, 'PROJECTNOTE', attrib={'id':pnId}))
-
-    def _build_project_branch(self, xmlProject):
-
-        #--- Attributes.
-        if self.novel.renumberChapters:
-            xmlProject.set('renumberChapters', '1')
-        if self.novel.renumberParts:
-            xmlProject.set('renumberParts', '1')
-        if self.novel.renumberWithinParts:
-            xmlProject.set('renumberWithinParts', '1')
-        if self.novel.romanChapterNumbers:
-            xmlProject.set('romanChapterNumbers', '1')
-        if self.novel.romanPartNumbers:
-            xmlProject.set('romanPartNumbers', '1')
-        if self.novel.saveWordCount:
-            xmlProject.set('saveWordCount', '1')
-        if self.novel.workPhase is not None:
-            xmlProject.set('workPhase', str(self.novel.workPhase))
-
-        #--- Inherited properties.
-        self._set_base_data(xmlProject, self.novel)
-
-        #--- Author.
-        if self.novel.authorName:
-            ET.SubElement(xmlProject, 'Author').text = self.novel.authorName
-
-        #--- Chapter heading prefix/suffix.
-        if self.novel.chapterHeadingPrefix:
-            ET.SubElement(xmlProject, 'ChapterHeadingPrefix').text = self.novel.chapterHeadingPrefix
-        if self.novel.chapterHeadingSuffix:
-            ET.SubElement(xmlProject, 'ChapterHeadingSuffix').text = self.novel.chapterHeadingSuffix
-
-        #--- Part heading prefix/suffix.
-        if self.novel.partHeadingPrefix:
-            ET.SubElement(xmlProject, 'PartHeadingPrefix').text = self.novel.partHeadingPrefix
-        if self.novel.partHeadingSuffix:
-            ET.SubElement(xmlProject, 'PartHeadingSuffix').text = self.novel.partHeadingSuffix
-
-        #--- Custom Goal/Conflict/Outcome.
-        if self.novel.customGoal:
-            ET.SubElement(xmlProject, 'CustomGoal').text = self.novel.customGoal
-        if self.novel.customConflict:
-            ET.SubElement(xmlProject, 'CustomConflict').text = self.novel.customConflict
-        if self.novel.customOutcome:
-            ET.SubElement(xmlProject, 'CustomOutcome').text = self.novel.customOutcome
-
-        #--- Custom Character Bio/Goals.
-        if self.novel.customChrBio:
-            ET.SubElement(xmlProject, 'CustomChrBio').text = self.novel.customChrBio
-        if self.novel.customChrGoals:
-            ET.SubElement(xmlProject, 'CustomChrGoals').text = self.novel.customChrGoals
-
-        #--- Word count start/Word target.
-        if self.novel.wordCountStart:
-            ET.SubElement(xmlProject, 'WordCountStart').text = str(self.novel.wordCountStart)
-        if self.novel.wordTarget:
-            ET.SubElement(xmlProject, 'WordTarget').text = str(self.novel.wordTarget)
-
-        #--- Reference date.
-        if self.novel.referenceDate:
-            ET.SubElement(xmlProject, 'ReferenceDate').text = self.novel.referenceDate
 
     def _build_word_count_log(self, root):
         if self.wcLog:
@@ -421,51 +359,7 @@ class NovxFile(File):
     def _read_project(self, root):
         """Read data at project level from the xml element tree."""
         xmlProject = root.find('PROJECT')
-
-        #--- Attributes.
-        self.novel.renumberChapters = xmlProject.get('renumberChapters', None) == '1'
-        self.novel.renumberParts = xmlProject.get('renumberParts', None) == '1'
-        self.novel.renumberWithinParts = xmlProject.get('renumberWithinParts', None) == '1'
-        self.novel.romanChapterNumbers = xmlProject.get('romanChapterNumbers', None) == '1'
-        self.novel.romanPartNumbers = xmlProject.get('romanPartNumbers', None) == '1'
-        self.novel.saveWordCount = xmlProject.get('saveWordCount', None) == '1'
-        workPhase = xmlProject.get('workPhase', None)
-        if workPhase in ('1', '2', '3', '4', '5'):
-            self.novel.workPhase = int(workPhase)
-        else:
-            self.novel.workPhase = None
-
-        #--- Inherited properties.
-        self._get_base_data(xmlProject, self.novel)
-
-        #--- Author.
-        self.novel.authorName = get_element_text(xmlProject, 'Author')
-
-        #--- Chapter heading prefix/suffix.
-        self.novel.chapterHeadingPrefix = get_element_text(xmlProject, 'ChapterHeadingPrefix')
-        self.novel.chapterHeadingSuffix = get_element_text(xmlProject, 'ChapterHeadingSuffix')
-
-        #--- Part heading prefix/suffix.
-        self.novel.partHeadingPrefix = get_element_text(xmlProject, 'PartHeadingPrefix')
-        self.novel.partHeadingSuffix = get_element_text(xmlProject, 'PartHeadingSuffix')
-
-        #--- Custom Goal/Conflict/Outcome.
-        self.novel.customGoal = get_element_text(xmlProject, 'CustomGoal')
-        self.novel.customConflict = get_element_text(xmlProject, 'CustomConflict')
-        self.novel.customOutcome = get_element_text(xmlProject, 'CustomOutcome')
-
-        #--- Custom Character Bio/Goals.
-        self.novel.customChrBio = get_element_text(xmlProject, 'CustomChrBio')
-        self.novel.customChrGoals = get_element_text(xmlProject, 'CustomChrGoals')
-
-        #--- Word count start/Word target.
-        if xmlProject.find('WordCountStart') is not None:
-            self.novel.wordCountStart = int(xmlProject.find('WordCountStart').text)
-        if xmlProject.find('WordTarget') is not None:
-            self.novel.wordTarget = int(xmlProject.find('WordTarget').text)
-
-        #--- Reference date.
-        self.novel.referenceDate = get_element_text(xmlProject, 'ReferenceDate')
+        self.novel.read_xml(xmlProject)
 
     def _read_project_notes(self, root):
         """Read project notes from the xml element tree."""
@@ -526,34 +420,4 @@ class NovxFile(File):
             if backedUp:
                 os.replace(f'{xmlProject.filePath}.bak', xmlProject.filePath)
             raise Error(f'{_("Cannot write file")}: "{norm_path(xmlProject.filePath)}".')
-
-    def _get_base_data(self, xmlElement, prjElement):
-        prjElement.title = get_element_text(xmlElement, 'Title')
-        prjElement.desc = xml_element_to_text(xmlElement.find('Desc'))
-        prjElement.links = self._get_link_dict(xmlElement)
-
-    def _get_link_dict(self, parent):
-        """Return a dictionary of links.
-        
-        If the element doesn't exist, return an empty dictionary.
-        """
-        links = {}
-        for xmlLink in parent.iterfind('Link'):
-            path = xmlLink.attrib.get('path', None)
-            fullPath = xmlLink.attrib.get('fullPath', None)
-            if path:
-                links[path] = fullPath
-        return links
-
-    def _set_base_data(self, xmlElement, prjElement):
-        if prjElement.title:
-            ET.SubElement(xmlElement, 'Title').text = prjElement.title
-        if prjElement.desc:
-            xmlElement.append(text_to_xml_element('Desc', prjElement.desc))
-        if prjElement.links:
-            for path in prjElement.links:
-                xmlLink = ET.SubElement(xmlElement, 'Link')
-                xmlLink.set('path', path)
-                if prjElement.links[path]:
-                    xmlLink.set('fullPath', prjElement.links[path])
 
