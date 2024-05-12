@@ -73,6 +73,26 @@ class Chapter(BasicElementNotes):
 
     def read_xml(self, xmlElement):
         super().read_xml(xmlElement)
+        typeStr = xmlElement.get('type', '0')
+        if typeStr in ('0', '1'):
+            self.chType = int(typeStr)
+        else:
+            self.chType = 1
+        chLevel = xmlElement.get('level', None)
+        if chLevel == '1':
+            self.chLevel = 1
+        else:
+            self.chLevel = 2
+        self.isTrash = xmlElement.get('isTrash', None) == '1'
+        self.noNumber = xmlElement.get('noNumber', None) == '1'
 
     def write_xml(self, xmlElement):
         super().write_xml(xmlElement)
+        if self.chType:
+            xmlElement.set('type', str(self.chType))
+        if self.chLevel == 1:
+            xmlElement.set('level', '1')
+        if self.isTrash:
+            xmlElement.set('isTrash', '1')
+        if self.noNumber:
+            xmlElement.set('noNumber', '1')

@@ -105,13 +105,13 @@ class BasicElement:
         else:
             return default
 
-    def _get_link_dict(self, parent):
+    def _get_link_dict(self, xmlElement):
         """Return a dictionary of links.
         
         If the element doesn't exist, return an empty dictionary.
         """
         links = {}
-        for xmlLink in parent.iterfind('Link'):
+        for xmlLink in xmlElement.iterfind('Link'):
             path = xmlLink.attrib.get('path', None)
             fullPath = xmlLink.attrib.get('fullPath', None)
             if path:
