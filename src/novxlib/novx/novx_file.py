@@ -257,14 +257,12 @@ class NovxFile(File):
         #--- Process locations.
         xmlLocations = ET.SubElement(root, 'LOCATIONS')
         for lcId in self.novel.tree.get_children(LC_ROOT):
-            xmlLoc = ET.SubElement(xmlLocations, 'LOCATION', attrib={'id':lcId})
-            self._build_location_branch(xmlLoc, self.novel.locations[lcId])
+            self.novel.locations[lcId].write_xml(ET.SubElement(xmlLocations, 'LOCATION', attrib={'id':lcId}))
 
         #--- Process items.
         xmlItems = ET.SubElement(root, 'ITEMS')
         for itId in self.novel.tree.get_children(IT_ROOT):
-            xmlItm = ET.SubElement(xmlItems, 'ITEM', attrib={'id':itId})
-            self._build_item_branch(xmlItm, self.novel.items[itId])
+            self.novel.items[itId].write_xml(ET.SubElement(xmlItems, 'ITEM', attrib={'id':itId}))
 
         #--- Process plot lines and plot points.
         xmlPlotLines = ET.SubElement(root, 'ARCS')
@@ -294,22 +292,6 @@ class NovxFile(File):
                 ET.SubElement(xmlWc, 'Date').text = wc
                 ET.SubElement(xmlWc, 'Count').text = self.wcLog[wc][0]
                 ET.SubElement(xmlWc, 'WithUnused').text = self.wcLog[wc][1]
-
-    def _build_item_branch(self, xmlItm, prjItm):
-
-        #--- Inherited properties.
-        self._set_base_data(xmlItm, prjItm)
-        self._set_notes(xmlItm, prjItm)
-        self._set_tags(xmlItm, prjItm)
-        self._set_aka(xmlItm, prjItm)
-
-    def _build_location_branch(self, xmlLoc, prjLoc):
-
-        #--- Inherited properties.
-        self._set_base_data(xmlLoc, prjLoc)
-        self._set_notes(xmlLoc, prjLoc)
-        self._set_tags(xmlLoc, prjLoc)
-        self._set_aka(xmlLoc, prjLoc)
 
     def _build_plot_line_branch(self, xmlPlotLines, prjPlotLine, plId):
         xmlPlotLine = ET.SubElement(xmlPlotLines, 'ARC', attrib={'id':plId})

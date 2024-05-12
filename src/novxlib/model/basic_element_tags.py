@@ -5,6 +5,9 @@ For further information see https://github.com/peter88213/novxlib
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
 from novxlib.model.basic_element_notes import BasicElementNotes
+from novxlib.novx_globals import list_to_string
+from novxlib.novx_globals import string_to_list
+import xml.etree.ElementTree as ET
 
 
 class BasicElementTags(BasicElementNotes):
@@ -27,4 +30,15 @@ class BasicElementTags(BasicElementNotes):
         if self._tags != newVal:
             self._tags = newVal
             self.on_element_change()
+
+    def read_xml(self, xmlElement):
+        super().read_xml(xmlElement)
+        tags = string_to_list(self._get_element_text(xmlElement, 'Tags'))
+        self.tags = self._strip_spaces(tags)
+
+    def write_xml(self, xmlElement):
+        super().write_xml(xmlElement)
+        tagStr = list_to_string(self.tags)
+        if tagStr:
+            ET.SubElement(xmlElement, 'Tags').text = tagStr
 
