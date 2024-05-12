@@ -140,7 +140,7 @@ class NovxFile(File):
         self._read_project_notes(xmlRoot)
         self.adjust_section_types()
 
-        #--- Read the word count log.
+        # Read the word count log.
         xmlWclog = xmlRoot.find('PROGRESS')
         if xmlWclog is not None:
             for xmlWc in xmlWclog.iterfind('WC'):
@@ -167,13 +167,24 @@ class NovxFile(File):
             for wcDate in self.wcLogUpdate:
                 self.wcLog[wcDate] = self.wcLogUpdate[wcDate]
         self.wcLogUpdate = {}
+
         self.adjust_section_types()
+
         self.novel.get_languages()
+
         attrib = {'version':f'{self.MAJOR_VERSION}.{self.MINOR_VERSION}',
                 'xml:lang':f'{self.novel.languageCode}-{self.novel.countryCode}',
                 }
         xmlRoot = ET.Element('novx', attrib=attrib)
-        self._build_element_tree(xmlRoot)
+        self._build_project(xmlRoot)
+        self._build_chapters_and_sections(xmlRoot)
+        self._build_characters(xmlRoot)
+        self._build_locations(xmlRoot)
+        self._build_items(xmlRoot)
+        self._build_plot_lines_and_points(xmlRoot)
+        self._build_project_notes(xmlRoot)
+        self._build_word_count_log(xmlRoot)
+
         indent(xmlRoot)
         # CAUTION: make sure not to indent inline elements within paragraphs
 
@@ -203,102 +214,43 @@ class NovxFile(File):
             xmlSection = ET.SubElement(xmlChapter, 'SECTION', attrib={'id':scId})
             self._build_section_branch(xmlSection, self.novel.sections[scId])
 
-        return xmlChapter
-
-    def _build_character_branch(self, xmlCrt, prjCrt):
-
-        #--- Attributes.
-        if prjCrt.isMajor:
-            xmlCrt.set('major', '1')
-
-        #--- Inherited properties.
-        self._set_base_data(xmlCrt, prjCrt)
-        self._set_notes(xmlCrt, prjCrt)
-        self._set_tags(xmlCrt, prjCrt)
-        self._set_aka(xmlCrt, prjCrt)
-
-        #--- Full name.
-        if prjCrt.fullName:
-            ET.SubElement(xmlCrt, 'FullName').text = prjCrt.fullName
-
-        #--- Bio.
-        if prjCrt.bio:
-            xmlCrt.append(text_to_xml_element('Bio', prjCrt.bio))
-
-        #--- Goals.
-        if prjCrt.goals:
-            xmlCrt.append(text_to_xml_element('Goals', prjCrt.goals))
-
-        #--- Birth date.
-        if prjCrt.birthDate:
-            ET.SubElement(xmlCrt, 'BirthDate').text = prjCrt.birthDate
-
-        #--- Death date.
-        if prjCrt.deathDate:
-            ET.SubElement(xmlCrt, 'DeathDate').text = prjCrt.deathDate
-
-    def _build_element_tree(self, root):
-
-        #--- Process project properties.
+    def _build_project(self, root):
         xmlProject = ET.SubElement(root, 'PROJECT')
         self._build_project_branch(xmlProject)
 
-        #--- Process chapters and sections.
+    def _build_chapters_and_sections(self, root):
         xmlChapters = ET.SubElement(root, 'CHAPTERS')
         for chId in self.novel.tree.get_children(CH_ROOT):
             self._build_chapter_branch(xmlChapters, self.novel.chapters[chId], chId)
 
-        #--- Process characters.
+    def _build_characters(self, root):
         xmlCharacters = ET.SubElement(root, 'CHARACTERS')
         for crId in self.novel.tree.get_children(CR_ROOT):
-            xmlCrt = ET.SubElement(xmlCharacters, 'CHARACTER', attrib={'id':crId})
-            self._build_character_branch(xmlCrt, self.novel.characters[crId])
+            self.novel.characters[crId].write_xml(ET.SubElement(xmlCharacters, 'CHARACTER', attrib={'id':crId}))
 
-        #--- Process locations.
+    def _build_locations(self, root):
         xmlLocations = ET.SubElement(root, 'LOCATIONS')
         for lcId in self.novel.tree.get_children(LC_ROOT):
             self.novel.locations[lcId].write_xml(ET.SubElement(xmlLocations, 'LOCATION', attrib={'id':lcId}))
 
-        #--- Process items.
+    def _build_items(self, root):
         xmlItems = ET.SubElement(root, 'ITEMS')
         for itId in self.novel.tree.get_children(IT_ROOT):
             self.novel.items[itId].write_xml(ET.SubElement(xmlItems, 'ITEM', attrib={'id':itId}))
 
-        #--- Process plot lines and plot points.
+    def _build_plot_lines_and_points(self, root):
         xmlPlotLines = ET.SubElement(root, 'ARCS')
         for plId in self.novel.tree.get_children(PL_ROOT):
-            self._build_plot_line_branch(xmlPlotLines, self.novel.plotLines[plId], plId)
+            xmlPlotLine = ET.SubElement(xmlPlotLines, 'ARC', attrib={'id':plId})
+            self.novel.plotLines[plId].write_xml(xmlPlotLine)
+            for ppId in self.novel.tree.get_children(plId):
+                xmlPlotPoint = ET.SubElement(xmlPlotLine, 'POINT', attrib={'id':ppId})
+                self.novel.plotPoints[ppId].write_xml(xmlPlotPoint)
 
-        #--- Process project notes.
+    def _build_project_notes(self, root):
         xmlProjectNotes = ET.SubElement(root, 'PROJECTNOTES')
         for pnId in self.novel.tree.get_children(PN_ROOT):
-            xmlProjectNote = ET.SubElement(xmlProjectNotes, 'PROJECTNOTE', attrib={'id':pnId})
-            self._build_project_notes_branch(xmlProjectNote, self.novel.projectNotes[pnId])
-
-        #--- Build the word count log.
-        if self.wcLog:
-            xmlWcLog = ET.SubElement(root, 'PROGRESS')
-            wcLastCount = None
-            wcLastTotalCount = None
-            for wc in self.wcLog:
-                if self.novel.saveWordCount:
-                    # Discard entries with unchanged word count.
-                    if self.wcLog[wc][0] == wcLastCount and self.wcLog[wc][1] == wcLastTotalCount:
-                        continue
-
-                    wcLastCount = self.wcLog[wc][0]
-                    wcLastTotalCount = self.wcLog[wc][1]
-                xmlWc = ET.SubElement(xmlWcLog, 'WC')
-                ET.SubElement(xmlWc, 'Date').text = wc
-                ET.SubElement(xmlWc, 'Count').text = self.wcLog[wc][0]
-                ET.SubElement(xmlWc, 'WithUnused').text = self.wcLog[wc][1]
-
-    def _build_plot_line_branch(self, xmlPlotLines, prjPlotLine, plId):
-        xmlPlotLine = ET.SubElement(xmlPlotLines, 'ARC', attrib={'id':plId})
-        prjPlotLine.write_xml(xmlPlotLine)
-        for ppId in self.novel.tree.get_children(plId):
-            xmlPlotPoint = ET.SubElement(xmlPlotLine, 'POINT', attrib={'id':ppId})
-            self.novel.plotPoints[ppId].write_xml(xmlPlotPoint)
+            self.novel.projectNotes[pnId].write_xml(ET.SubElement(xmlProjectNotes, 'PROJECTNOTE', attrib={'id':pnId}))
 
     def _build_project_branch(self, xmlProject):
 
@@ -360,11 +312,6 @@ class NovxFile(File):
         #--- Reference date.
         if self.novel.referenceDate:
             ET.SubElement(xmlProject, 'ReferenceDate').text = self.novel.referenceDate
-
-    def _build_project_notes_branch(self, xmlProjectNote, projectNote):
-
-        #--- Inherited properties.
-        self._set_base_data(xmlProjectNote, projectNote)
 
     def _build_section_branch(self, xmlSection, prjScn):
 
@@ -437,8 +384,23 @@ class NovxFile(File):
             if not sectionContent in ('<p></p>', '<p />'):
                 xmlSection.append(ET.fromstring(f'<Content>{sectionContent}</Content>'))
 
-    def _get_aka(self, xmlElement, prjElement):
-        prjElement.aka = get_element_text(xmlElement, 'Aka')
+    def _build_word_count_log(self, root):
+        if self.wcLog:
+            xmlWcLog = ET.SubElement(root, 'PROGRESS')
+            wcLastCount = None
+            wcLastTotalCount = None
+            for wc in self.wcLog:
+                if self.novel.saveWordCount:
+                    # Discard entries with unchanged word count.
+                    if self.wcLog[wc][0] == wcLastCount and self.wcLog[wc][1] == wcLastTotalCount:
+                        continue
+
+                    wcLastCount = self.wcLog[wc][0]
+                    wcLastTotalCount = self.wcLog[wc][1]
+                xmlWc = ET.SubElement(xmlWcLog, 'WC')
+                ET.SubElement(xmlWc, 'Date').text = wc
+                ET.SubElement(xmlWc, 'Count').text = self.wcLog[wc][0]
+                ET.SubElement(xmlWc, 'WithUnused').text = self.wcLog[wc][1]
 
     def _get_base_data(self, xmlElement, prjElement):
         prjElement.title = get_element_text(xmlElement, 'Title')
@@ -529,33 +491,9 @@ class NovxFile(File):
         """Read characters from the xml element tree."""
         try:
             for xmlCharacter in root.find('CHARACTERS'):
-
-                #--- Attributes.
                 crId = xmlCharacter.attrib['id']
                 self.novel.characters[crId] = Character(on_element_change=self.on_element_change)
-                self.novel.characters[crId].isMajor = xmlCharacter.get('major', None) == '1'
-
-                #--- Inherited properties.
-                self._get_base_data(xmlCharacter, self.novel.characters[crId])
-                self._get_notes(xmlCharacter, self.novel.characters[crId])
-                self._get_tags(xmlCharacter, self.novel.characters[crId])
-                self._get_aka(xmlCharacter, self.novel.characters[crId])
-
-                #--- Full name.
-                self.novel.characters[crId].fullName = get_element_text(xmlCharacter, 'FullName')
-
-                #--- Bio.
-                self.novel.characters[crId].bio = xml_element_to_text(xmlCharacter.find('Bio'))
-
-                #--- Goals.
-                self.novel.characters[crId].goals = xml_element_to_text(xmlCharacter.find('Goals'))
-
-                #--- Birth date.
-                self.novel.characters[crId].birthDate = get_element_text(xmlCharacter, 'BirthDate')
-
-                #--- Death date.
-                self.novel.characters[crId].deathDate = get_element_text(xmlCharacter, 'DeathDate')
-
+                self.novel.characters[crId].read_xml(xmlCharacter)
                 self.novel.tree.append(CR_ROOT, crId)
         except TypeError:
             pass
@@ -675,10 +613,7 @@ class NovxFile(File):
             for xmlProjectNote in root.find('PROJECTNOTES'):
                 pnId = xmlProjectNote.attrib['id']
                 self.novel.projectNotes[pnId] = BasicElement()
-
-                #--- Inherited properties.
-                self._get_base_data(xmlProjectNote, self.novel.projectNotes[pnId])
-
+                self.novel.projectNotes[pnId].read_xml(xmlProjectNote)
                 self.novel.tree.append(PN_ROOT, pnId)
         except TypeError:
             pass

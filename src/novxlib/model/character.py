@@ -5,6 +5,7 @@ For further information see https://github.com/peter88213/novxlib
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
 from novxlib.model.world_element import WorldElement
+import xml.etree.ElementTree as ET
 
 
 class Character(WorldElement):
@@ -91,7 +92,25 @@ class Character(WorldElement):
 
     def read_xml(self, xmlElement):
         super().read_xml(xmlElement)
+        self.isMajor = xmlElement.get('major', None) == '1'
+        self.fullName = self._get_element_text(xmlElement, 'FullName')
+        self.bio = self._xml_element_to_text(xmlElement.find('Bio'))
+        self.goals = self._xml_element_to_text(xmlElement.find('Goals'))
+        self.birthDate = self._get_element_text(xmlElement, 'BirthDate')
+        self.deathDate = self._get_element_text(xmlElement, 'DeathDate')
 
     def write_xml(self, xmlElement):
         super().write_xml(xmlElement)
+        if self.isMajor:
+            xmlElement.set('major', '1')
+        if self.fullName:
+            ET.SubElement(xmlElement, 'FullName').text = self.fullName
+        if self.bio:
+            xmlElement.append(self._text_to_xml_element('Bio', self.bio))
+        if self.goals:
+            xmlElement.append(self._text_to_xml_element('Goals', self.goals))
+        if self.birthDate:
+            ET.SubElement(xmlElement, 'BirthDate').text = self.birthDate
+        if self.deathDate:
+            ET.SubElement(xmlElement, 'DeathDate').text = self.deathDate
 
