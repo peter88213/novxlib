@@ -403,6 +403,7 @@
   "No text available": "Kein Text vorhanden",
   "No updates available.": "Keine Updates verfügbar",
   "No valid version found in file": "Keine gültige Versionsangabe in der Datei gefunden",
+  "No valid xml root element found in file": "Kein gültiges xml-Wurzelelement in der Datei gefunden",
   "No yWriter project to write": "Kein yWriter-Projekt zu schreiben",
   "No {0} file available for this project.": "Keine {0}-Datei für dieses Projekt vorhanden.",
   "No {} file available for this project.": "Keine {}-Datei für dieses Projekt vorhanden.",

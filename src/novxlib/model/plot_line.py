@@ -47,8 +47,8 @@ class PlotLine(BasicElementNotes):
             self._sections = newVal
             self.on_element_change()
 
-    def read_xml(self, xmlElement):
-        super().read_xml(xmlElement)
+    def from_xml(self, xmlElement):
+        super().from_xml(xmlElement)
         self.shortName = self._get_element_text(xmlElement, 'ShortName')
         plSections = []
         xmlSections = xmlElement.find('Sections')
@@ -59,8 +59,8 @@ class PlotLine(BasicElementNotes):
                     plSections.append(scId)
         self.sections = plSections
 
-    def write_xml(self, xmlElement):
-        super().write_xml(xmlElement)
+    def to_xml(self, xmlElement):
+        super().to_xml(xmlElement)
         if self.shortName:
             ET.SubElement(xmlElement, 'ShortName').text = self.shortName
         if self.sections:

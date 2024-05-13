@@ -71,8 +71,8 @@ class Chapter(BasicElementNotes):
             self._isTrash = newVal
             self.on_element_change()
 
-    def read_xml(self, xmlElement):
-        super().read_xml(xmlElement)
+    def from_xml(self, xmlElement):
+        super().from_xml(xmlElement)
         typeStr = xmlElement.get('type', '0')
         if typeStr in ('0', '1'):
             self.chType = int(typeStr)
@@ -86,8 +86,8 @@ class Chapter(BasicElementNotes):
         self.isTrash = xmlElement.get('isTrash', None) == '1'
         self.noNumber = xmlElement.get('noNumber', None) == '1'
 
-    def write_xml(self, xmlElement):
-        super().write_xml(xmlElement)
+    def to_xml(self, xmlElement):
+        super().to_xml(xmlElement)
         if self.chType:
             xmlElement.set('type', str(self.chType))
         if self.chLevel == 1:

@@ -78,12 +78,12 @@ class BasicElement:
         """Standard callback routine for element changes."""
         pass
 
-    def read_xml(self, xmlElement):
+    def from_xml(self, xmlElement):
         self.title = self._get_element_text(xmlElement, 'Title')
         self.desc = self._xml_element_to_text(xmlElement.find('Desc'))
         self.links = self._get_link_dict(xmlElement)
 
-    def write_xml(self, xmlElement):
+    def to_xml(self, xmlElement):
         if self.title:
             ET.SubElement(xmlElement, 'Title').text = self.title
         if self.desc:

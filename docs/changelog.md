@@ -1,5 +1,11 @@
 # Changelog
 
+### v3.6.0
+
+- Refactor, moving the XML read/write routines from NovxFile to the model elements.
+- Refactor, adding some novelibre NvModel features to NovxFile.
+- Check the novx xml root tag.
+
 ### v3.5.4
 
 - Slightly refactor the XML indent helper function. 

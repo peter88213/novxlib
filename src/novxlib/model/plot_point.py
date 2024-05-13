@@ -30,13 +30,13 @@ class PlotPoint(BasicElementNotes):
             self._sectionAssoc = newVal
             self.on_element_change()
 
-    def read_xml(self, xmlElement):
-        super().read_xml(xmlElement)
+    def from_xml(self, xmlElement):
+        super().from_xml(xmlElement)
         xmlSectionAssoc = xmlElement.find('Section')
         if xmlSectionAssoc is not None:
             self.sectionAssoc = xmlSectionAssoc.get('id', None)
 
-    def write_xml(self, xmlElement):
-        super().write_xml(xmlElement)
+    def to_xml(self, xmlElement):
+        super().to_xml(xmlElement)
         if self.sectionAssoc:
             ET.SubElement(xmlElement, 'Section', attrib={'id': self.sectionAssoc})

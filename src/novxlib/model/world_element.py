@@ -28,12 +28,12 @@ class WorldElement(BasicElementTags):
             self._aka = newVal
             self.on_element_change()
 
-    def read_xml(self, xmlElement):
-        super().read_xml(xmlElement)
+    def from_xml(self, xmlElement):
+        super().from_xml(xmlElement)
         self.aka = self._get_element_text(xmlElement, 'Aka')
 
-    def write_xml(self, xmlElement):
-        super().write_xml(xmlElement)
+    def to_xml(self, xmlElement):
+        super().to_xml(xmlElement)
         if self.aka:
             ET.SubElement(xmlElement, 'Aka').text = self.aka
 

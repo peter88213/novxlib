@@ -27,12 +27,12 @@ class BasicElementNotes(BasicElement):
             self._notes = newVal
             self.on_element_change()
 
-    def read_xml(self, xmlElement):
-        super().read_xml(xmlElement)
+    def from_xml(self, xmlElement):
+        super().from_xml(xmlElement)
         self.notes = self._xml_element_to_text(xmlElement.find('Notes'))
 
-    def write_xml(self, xmlElement):
-        super().write_xml(xmlElement)
+    def to_xml(self, xmlElement):
+        super().to_xml(xmlElement)
         if self.notes:
             xmlElement.append(self._text_to_xml_element('Notes', self.notes))
 

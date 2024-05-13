@@ -32,9 +32,11 @@ class NovxFile(File):
     """novx file representation.
 
     Public instance variables:
-        tree -- xml element tree of the novelibre project
+        xmlTree -- xml element tree of the novelibre project
         wcLog: dict[str, list[str, str]] -- Daily word count logs.
         wcLogUpdate: dict[str, list[str, str]] -- Word counts missing in the log.
+        timestamp: float -- Time of last file modification (number of seconds since the epoch).
+    
     
     """
     DESCRIPTION = _('novelibre project')
@@ -42,7 +44,7 @@ class NovxFile(File):
 
     MAJOR_VERSION = 1
     MINOR_VERSION = 3
-    # DTD version.
+    # DTD version
 
     XML_HEADER = f'''<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE novx SYSTEM "novx_{MAJOR_VERSION}_{MINOR_VERSION}.dtd">
@@ -63,10 +65,16 @@ class NovxFile(File):
         super().__init__(filePath)
         self.on_element_change = None
         self.xmlTree = None
+
         self.wcLog = {}
         # key: str -- date (iso formatted)
         # value: list -- [word count: str, with unused: str]
+
         self.wcLogUpdate = {}
+        # key: str -- date (iso formatted)
+        # value: list -- [word count: str, with unused: str]
+
+        self.timestamp = None
 
     def adjust_section_types(self):
         """Make sure that nodes with "Unused" parents inherit the type."""
@@ -105,6 +113,9 @@ class NovxFile(File):
         """
         self.xmlTree = ET.parse(self.filePath)
         xmlRoot = self.xmlTree.getroot()
+        if xmlRoot.tag != 'novx':
+            raise Error(f'{_("No valid xml root element found in file")}: "{norm_path(self.filePath)}".')
+
         try:
             majorVersionStr, minorVersionStr = xmlRoot.attrib['version'].split('.')
             majorVersion = int(majorVersionStr)
@@ -135,37 +146,17 @@ class NovxFile(File):
         self._read_plot_lines_and_points(xmlRoot)
         self._read_project_notes(xmlRoot)
         self.adjust_section_types()
-
-        # Read the word count log.
-        xmlWclog = xmlRoot.find('PROGRESS')
-        if xmlWclog is not None:
-            for xmlWc in xmlWclog.iterfind('WC'):
-                wcDate = xmlWc.find('Date').text
-                wcCount = xmlWc.find('Count').text
-                wcTotalCount = xmlWc.find('WithUnused').text
-                if wcDate and wcCount and wcTotalCount:
-                    self.wcLog[wcDate] = [wcCount, wcTotalCount]
+        self._read_word_count_log(xmlRoot)
+        self._get_timestamp()
+        self._keep_word_count()
 
     def write(self):
         """Write instance variables to the novx xml file.
         
-        Update the word count log, write the file, and update the timestamp.
-        Raise the "Error" exception in case of error. 
         Overrides the superclass method.
         """
-        if self.novel.saveWordCount:
-            # Add today's word count and word count on reading, if not logged.
-            newCountInt, newTotalCountInt = self.count_words()
-            newCount = str(newCountInt)
-            newTotalCount = str(newTotalCountInt)
-            today = date.today().isoformat()
-            self.wcLogUpdate[today] = [newCount, newTotalCount]
-            for wcDate in self.wcLogUpdate:
-                self.wcLog[wcDate] = self.wcLogUpdate[wcDate]
-        self.wcLogUpdate = {}
-
+        self._update_word_count_log()
         self.adjust_section_types()
-
         self.novel.get_languages()
 
         attrib = {'version':f'{self.MAJOR_VERSION}.{self.MINOR_VERSION}',
@@ -182,51 +173,52 @@ class NovxFile(File):
         self._build_word_count_log(xmlRoot)
 
         indent(xmlRoot)
-        # CAUTION: make sure not to indent inline elements within paragraphs
+        # using a custom routine, making sure not to indent inline elements within paragraphs
 
         self.xmlTree = ET.ElementTree(xmlRoot)
         self._write_element_tree(self)
         self._postprocess_xml_file(self.filePath)
+        self.timestamp = os.path.getmtime(self.filePath)
 
     def _build_project(self, root):
         xmlProject = ET.SubElement(root, 'PROJECT')
-        self.novel.write_xml(xmlProject)
+        self.novel.to_xml(xmlProject)
 
     def _build_chapters_and_sections(self, root):
         xmlChapters = ET.SubElement(root, 'CHAPTERS')
         for chId in self.novel.tree.get_children(CH_ROOT):
             xmlChapter = ET.SubElement(xmlChapters, 'CHAPTER', attrib={'id':chId})
-            self.novel.chapters[chId].write_xml(xmlChapter)
+            self.novel.chapters[chId].to_xml(xmlChapter)
             for scId in self.novel.tree.get_children(chId):
-                self.novel.sections[scId].write_xml(ET.SubElement(xmlChapter, 'SECTION', attrib={'id':scId}))
+                self.novel.sections[scId].to_xml(ET.SubElement(xmlChapter, 'SECTION', attrib={'id':scId}))
 
     def _build_characters(self, root):
         xmlCharacters = ET.SubElement(root, 'CHARACTERS')
         for crId in self.novel.tree.get_children(CR_ROOT):
-            self.novel.characters[crId].write_xml(ET.SubElement(xmlCharacters, 'CHARACTER', attrib={'id':crId}))
+            self.novel.characters[crId].to_xml(ET.SubElement(xmlCharacters, 'CHARACTER', attrib={'id':crId}))
 
     def _build_locations(self, root):
         xmlLocations = ET.SubElement(root, 'LOCATIONS')
         for lcId in self.novel.tree.get_children(LC_ROOT):
-            self.novel.locations[lcId].write_xml(ET.SubElement(xmlLocations, 'LOCATION', attrib={'id':lcId}))
+            self.novel.locations[lcId].to_xml(ET.SubElement(xmlLocations, 'LOCATION', attrib={'id':lcId}))
 
     def _build_items(self, root):
         xmlItems = ET.SubElement(root, 'ITEMS')
         for itId in self.novel.tree.get_children(IT_ROOT):
-            self.novel.items[itId].write_xml(ET.SubElement(xmlItems, 'ITEM', attrib={'id':itId}))
+            self.novel.items[itId].to_xml(ET.SubElement(xmlItems, 'ITEM', attrib={'id':itId}))
 
     def _build_plot_lines_and_points(self, root):
         xmlPlotLines = ET.SubElement(root, 'ARCS')
         for plId in self.novel.tree.get_children(PL_ROOT):
             xmlPlotLine = ET.SubElement(xmlPlotLines, 'ARC', attrib={'id':plId})
-            self.novel.plotLines[plId].write_xml(xmlPlotLine)
+            self.novel.plotLines[plId].to_xml(xmlPlotLine)
             for ppId in self.novel.tree.get_children(plId):
-                self.novel.plotPoints[ppId].write_xml(ET.SubElement(xmlPlotLine, 'POINT', attrib={'id':ppId}))
+                self.novel.plotPoints[ppId].to_xml(ET.SubElement(xmlPlotLine, 'POINT', attrib={'id':ppId}))
 
     def _build_project_notes(self, root):
         xmlProjectNotes = ET.SubElement(root, 'PROJECTNOTES')
         for pnId in self.novel.tree.get_children(PN_ROOT):
-            self.novel.projectNotes[pnId].write_xml(ET.SubElement(xmlProjectNotes, 'PROJECTNOTE', attrib={'id':pnId}))
+            self.novel.projectNotes[pnId].to_xml(ET.SubElement(xmlProjectNotes, 'PROJECTNOTE', attrib={'id':pnId}))
 
     def _build_word_count_log(self, root):
         if self.wcLog:
@@ -246,13 +238,35 @@ class NovxFile(File):
                 ET.SubElement(xmlWc, 'Count').text = self.wcLog[wc][0]
                 ET.SubElement(xmlWc, 'WithUnused').text = self.wcLog[wc][1]
 
+    def _get_timestamp(self):
+        try:
+            self.timestamp = os.path.getmtime(self.filePath)
+        except:
+            self.timestamp = None
+
+    def _keep_word_count(self):
+        """Keep the actual wordcount, if not logged."""
+        if self.wcLog:
+            actualCountInt, actualTotalCountInt = self.count_words()
+            actualCount = str(actualCountInt)
+            actualTotalCount = str(actualTotalCountInt)
+            latestDate = list(self.wcLog)[-1]
+            latestCount = self.wcLog[latestDate][0]
+            latestTotalCount = self.wcLog[latestDate][1]
+            if actualCount != latestCount or actualTotalCount != latestTotalCount:
+                try:
+                    fileDateIso = date.fromtimestamp(self.timestamp).isoformat()
+                except:
+                    fileDateIso = date.today().isoformat()
+                self.wcLogUpdate[fileDateIso] = [actualCount, actualTotalCount]
+
     def _postprocess_xml_file(self, filePath):
         """Postprocess an xml file created by ElementTree.
         
         Positional argument:
             filePath: str -- path to xml file.
         
-        Read the xml file, put a header on top and fix double-escaped text. 
+        Read the xml file and put a header on top. 
         Overwrite the .novx xml file.
         Raise the "Error" exception in case of error. 
         
@@ -261,8 +275,6 @@ class NovxFile(File):
         """
         with open(filePath, 'r', encoding='utf-8') as f:
             text = f.read()
-        # text = unescape(text)
-        # this is because section content PCDATA is "double escaped"
         try:
             with open(filePath, 'w', encoding='utf-8') as f:
                 f.write(f'{self.XML_HEADER}{text}')
@@ -271,85 +283,88 @@ class NovxFile(File):
 
     def _read_chapters_and_sections(self, root):
         """Read data at chapter level from the xml element tree."""
-        try:
-            for xmlChapter in root.find('CHAPTERS'):
-                chId = xmlChapter.attrib['id']
-                self.novel.chapters[chId] = Chapter(on_element_change=self.on_element_change)
-                self.novel.chapters[chId].read_xml(xmlChapter)
-                self.novel.tree.append(CH_ROOT, chId)
+        xmlChapters = root.find('CHAPTERS')
+        if xmlChapters is None:
+            return
 
-                # Sections.
-                for xmlSection in xmlChapter.iterfind('SECTION'):
-                    scId = xmlSection.attrib['id']
-                    self._read_section(xmlSection, scId)
-                    self.novel.tree.append(chId, scId)
-        except TypeError:
-            pass
+        for xmlChapter in xmlChapters.iterfind('CHAPTER'):
+            chId = xmlChapter.attrib['id']
+            self.novel.chapters[chId] = Chapter(on_element_change=self.on_element_change)
+            self.novel.chapters[chId].from_xml(xmlChapter)
+            self.novel.tree.append(CH_ROOT, chId)
+
+            for xmlSection in xmlChapter.iterfind('SECTION'):
+                scId = xmlSection.attrib['id']
+                self._read_section(xmlSection, scId)
+                self.novel.tree.append(chId, scId)
 
     def _read_characters(self, root):
         """Read characters from the xml element tree."""
-        try:
-            for xmlCharacter in root.find('CHARACTERS'):
-                crId = xmlCharacter.attrib['id']
-                self.novel.characters[crId] = Character(on_element_change=self.on_element_change)
-                self.novel.characters[crId].read_xml(xmlCharacter)
-                self.novel.tree.append(CR_ROOT, crId)
-        except TypeError:
-            pass
+        xmlCharacters = root.find('CHARACTERS')
+        if xmlCharacters is None:
+            return
+
+        for xmlCharacter in xmlCharacters.iterfind('CHARACTER'):
+            crId = xmlCharacter.attrib['id']
+            self.novel.characters[crId] = Character(on_element_change=self.on_element_change)
+            self.novel.characters[crId].from_xml(xmlCharacter)
+            self.novel.tree.append(CR_ROOT, crId)
 
     def _read_items(self, root):
         """Read items from the xml element tree."""
-        try:
-            for xmlItem in root.find('ITEMS'):
-                itId = xmlItem.attrib['id']
-                self.novel.items[itId] = WorldElement(on_element_change=self.on_element_change)
-                self.novel.items[itId].read_xml(xmlItem)
-                self.novel.tree.append(IT_ROOT, itId)
-        except TypeError:
-            pass
+        xmlItems = root.find('ITEMS')
+        if xmlItems is None:
+            return
+
+        for xmlItem in xmlItems.iterfind('ITEM'):
+            itId = xmlItem.attrib['id']
+            self.novel.items[itId] = WorldElement(on_element_change=self.on_element_change)
+            self.novel.items[itId].from_xml(xmlItem)
+            self.novel.tree.append(IT_ROOT, itId)
 
     def _read_locations(self, root):
         """Read locations from the xml element tree."""
-        try:
-            for xmlLocation in root.find('LOCATIONS'):
-                lcId = xmlLocation.attrib['id']
-                self.novel.locations[lcId] = WorldElement(on_element_change=self.on_element_change)
-                self.novel.locations[lcId].read_xml(xmlLocation)
-                self.novel.tree.append(LC_ROOT, lcId)
-        except TypeError:
-            pass
+        xmlLocations = root.find('LOCATIONS')
+        if xmlLocations is None:
+            return
+
+        for xmlLocation in xmlLocations.iterfind('LOCATION'):
+            lcId = xmlLocation.attrib['id']
+            self.novel.locations[lcId] = WorldElement(on_element_change=self.on_element_change)
+            self.novel.locations[lcId].from_xml(xmlLocation)
+            self.novel.tree.append(LC_ROOT, lcId)
 
     def _read_plot_lines_and_points(self, root):
-        """Read plotlines from the xml element tree."""
-        try:
-            for xmlPlotLine in root.find('ARCS'):
-                plId = xmlPlotLine.attrib['id']
-                self.novel.plotLines[plId] = PlotLine(on_element_change=self.on_element_change)
-                self.novel.plotLines[plId].read_xml(xmlPlotLine)
-                self.novel.tree.append(PL_ROOT, plId)
+        """Read plot lines and plot points from the xml element tree."""
+        xmlPlotLines = root.find('ARCS')
+        if xmlPlotLines is None:
+            return
 
-                # Verify sections and create backlinks.
-                plSections = []
-                for scId in self.novel.plotLines[plId].sections:
-                    if scId in self.novel.sections:
-                        self.novel.sections[scId].scPlotLines.append(plId)
-                        plSections.append(scId)
-                self.novel.plotLines[plId].sections = plSections
+        for xmlPlotLine in xmlPlotLines.iterfind('ARC'):
+            plId = xmlPlotLine.attrib['id']
+            self.novel.plotLines[plId] = PlotLine(on_element_change=self.on_element_change)
+            self.novel.plotLines[plId].from_xml(xmlPlotLine)
+            self.novel.tree.append(PL_ROOT, plId)
 
-                # Plot points.
-                for xmlPlotPoint in xmlPlotLine.iterfind('POINT'):
-                    ppId = xmlPlotPoint.attrib['id']
-                    self._read_plot_point(xmlPlotPoint, ppId, plId)
-                    self.novel.tree.append(plId, ppId)
-        except TypeError:
-            pass
+            # Verify sections and create back references.
+            plSections = []
+            for scId in self.novel.plotLines[plId].sections:
+                if scId in self.novel.sections:
+                    self.novel.sections[scId].scPlotLines.append(plId)
+                    plSections.append(scId)
+            self.novel.plotLines[plId].sections = plSections
+
+            for xmlPlotPoint in xmlPlotLine.iterfind('POINT'):
+                ppId = xmlPlotPoint.attrib['id']
+                self._read_plot_point(xmlPlotPoint, ppId, plId)
+                self.novel.tree.append(plId, ppId)
 
     def _read_plot_point(self, xmlPlotPoint, ppId, plId):
         """Read a plot point from the xml element tree."""
         self.novel.plotPoints[ppId] = PlotPoint(on_element_change=self.on_element_change)
-        self.novel.plotPoints[ppId].read_xml(xmlPlotPoint)
+        self.novel.plotPoints[ppId].from_xml(xmlPlotPoint)
 
-        # Verify section and create backlink.
+        # Verify section and create back reference.
         scId = self.novel.plotPoints[ppId].sectionAssoc
         if scId in self.novel.sections:
             self.novel.sections[scId].scPlotPoints[ppId] = plId
@@ -359,23 +374,27 @@ class NovxFile(File):
     def _read_project(self, root):
         """Read data at project level from the xml element tree."""
         xmlProject = root.find('PROJECT')
-        self.novel.read_xml(xmlProject)
+        if xmlProject is None:
+            return
+
+        self.novel.from_xml(xmlProject)
 
     def _read_project_notes(self, root):
         """Read project notes from the xml element tree."""
-        try:
-            for xmlProjectNote in root.find('PROJECTNOTES'):
-                pnId = xmlProjectNote.attrib['id']
-                self.novel.projectNotes[pnId] = BasicElement()
-                self.novel.projectNotes[pnId].read_xml(xmlProjectNote)
-                self.novel.tree.append(PN_ROOT, pnId)
-        except TypeError:
-            pass
+        xmlProjectNotes = root.find('PROJECTNOTES')
+        if xmlProjectNotes is None:
+            return
+
+        for xmlProjectNote in xmlProjectNotes.iterfind('PROJECTNOTE'):
+            pnId = xmlProjectNote.attrib['id']
+            self.novel.projectNotes[pnId] = BasicElement()
+            self.novel.projectNotes[pnId].from_xml(xmlProjectNote)
+            self.novel.tree.append(PN_ROOT, pnId)
 
     def _read_section(self, xmlSection, scId):
         """Read data at section level from the xml element tree."""
         self.novel.sections[scId] = Section(on_element_change=self.on_element_change)
-        self.novel.sections[scId].read_xml(xmlSection)
+        self.novel.sections[scId].from_xml(xmlSection)
 
         # Verify characters.
         scCharacters = []
@@ -397,6 +416,31 @@ class NovxFile(File):
             if itId in self.novel.items:
                 scItems.append(itId)
         self.novel.sections[scId].items = scItems
+
+    def _read_word_count_log(self, xmlRoot):
+        """Read the word count log from the xml element tree."""
+        xmlWclog = xmlRoot.find('PROGRESS')
+        if xmlWclog is None:
+            return
+
+        for xmlWc in xmlWclog.iterfind('WC'):
+            wcDate = xmlWc.find('Date').text
+            wcCount = xmlWc.find('Count').text
+            wcTotalCount = xmlWc.find('WithUnused').text
+            if wcDate and wcCount and wcTotalCount:
+                self.wcLog[wcDate] = [wcCount, wcTotalCount]
+
+    def _update_word_count_log(self):
+        """Add today's word count and word count when reading, if not logged."""
+        if self.novel.saveWordCount:
+            newCountInt, newTotalCountInt = self.count_words()
+            newCount = str(newCountInt)
+            newTotalCount = str(newTotalCountInt)
+            todayIso = date.today().isoformat()
+            self.wcLogUpdate[todayIso] = [newCount, newTotalCount]
+            for wcDate in self.wcLogUpdate:
+                self.wcLog[wcDate] = self.wcLogUpdate[wcDate]
+        self.wcLogUpdate = {}
 
     def _write_element_tree(self, xmlProject):
         """Write back the xml element tree to a .novx xml file located at filePath.

@@ -344,47 +344,6 @@ class Section(BasicElementTags):
             self._items = newVal
             self.on_element_change()
 
-    def get_end_date_time(self):
-        """Return the section end (date, time, day) tuple calculated from start and duration."""
-        endDate = None
-        endTime = None
-        endDay = None
-        # Calculate end date from section section duration.
-        if self.lastsDays:
-            lastsDays = int(self.lastsDays)
-        else:
-            lastsDays = 0
-        if self.lastsHours:
-            lastsSeconds = int(self.lastsHours) * 3600
-        else:
-            lastsSeconds = 0
-        if self.lastsMinutes:
-            lastsSeconds += int(self.lastsMinutes) * 60
-        sectionDuration = timedelta(days=lastsDays, seconds=lastsSeconds)
-        if self.time:
-            if self.date:
-                try:
-                    sectionStart = datetime.fromisoformat(f'{self.date} {self.time}')
-                    sectionEnd = sectionStart + sectionDuration
-                    endDate, endTime = sectionEnd.isoformat().split('T')
-                except:
-                    pass
-            else:
-                try:
-                    if self.day:
-                        dayInt = int(self.day)
-                    else:
-                        dayInt = 0
-                    startDate = (date.min + timedelta(days=dayInt)).isoformat()
-                    sectionStart = datetime.fromisoformat(f'{startDate} {self.time}')
-                    sectionEnd = sectionStart + sectionDuration
-                    endDate, endTime = sectionEnd.isoformat().split('T')
-                    endDay = str((date.fromisoformat(endDate) - date.min).days)
-                    endDate = None
-                except:
-                    pass
-        return endDate, endTime, endDay
-
     def day_to_date(self, referenceDate):
         """Convert day to specific date.
         
@@ -425,8 +384,8 @@ class Section(BasicElementTags):
 
         return True
 
-    def read_xml(self, xmlElement):
-        super().read_xml(xmlElement)
+    def from_xml(self, xmlElement):
+        super().from_xml(xmlElement)
         # Attributes.
         typeStr = xmlElement.get('type', '0')
         if typeStr in ('0', '1', '2', '3'):
@@ -543,8 +502,49 @@ class Section(BasicElementTags):
         else:
             self.sectionContent = '<p></p>'
 
-    def write_xml(self, xmlElement):
-        super().write_xml(xmlElement)
+    def get_end_date_time(self):
+        """Return the section end (date, time, day) tuple calculated from start and duration."""
+        endDate = None
+        endTime = None
+        endDay = None
+        # Calculate end date from section section duration.
+        if self.lastsDays:
+            lastsDays = int(self.lastsDays)
+        else:
+            lastsDays = 0
+        if self.lastsHours:
+            lastsSeconds = int(self.lastsHours) * 3600
+        else:
+            lastsSeconds = 0
+        if self.lastsMinutes:
+            lastsSeconds += int(self.lastsMinutes) * 60
+        sectionDuration = timedelta(days=lastsDays, seconds=lastsSeconds)
+        if self.time:
+            if self.date:
+                try:
+                    sectionStart = datetime.fromisoformat(f'{self.date} {self.time}')
+                    sectionEnd = sectionStart + sectionDuration
+                    endDate, endTime = sectionEnd.isoformat().split('T')
+                except:
+                    pass
+            else:
+                try:
+                    if self.day:
+                        dayInt = int(self.day)
+                    else:
+                        dayInt = 0
+                    startDate = (date.min + timedelta(days=dayInt)).isoformat()
+                    sectionStart = datetime.fromisoformat(f'{startDate} {self.time}')
+                    sectionEnd = sectionStart + sectionDuration
+                    endDate, endTime = sectionEnd.isoformat().split('T')
+                    endDay = str((date.fromisoformat(endDate) - date.min).days)
+                    endDate = None
+                except:
+                    pass
+        return endDate, endTime, endDay
+
+    def to_xml(self, xmlElement):
+        super().to_xml(xmlElement)
         if self.scType:
             xmlElement.set('type', str(self.scType))
         if self.status > 1:

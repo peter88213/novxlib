@@ -418,8 +418,8 @@ class Novel(BasicElement):
         self._countryCode = 'none'
         self.on_element_change()
 
-    def read_xml(self, xmlElement):
-        super().read_xml(xmlElement)
+    def from_xml(self, xmlElement):
+        super().from_xml(xmlElement)
         self.renumberChapters = xmlElement.get('renumberChapters', None) == '1'
         self.renumberParts = xmlElement.get('renumberParts', None) == '1'
         self.renumberWithinParts = xmlElement.get('renumberWithinParts', None) == '1'
@@ -461,8 +461,8 @@ class Novel(BasicElement):
         # Reference date.
         self.referenceDate = self._get_element_text(xmlElement, 'ReferenceDate')
 
-    def write_xml(self, xmlElement):
-        super().write_xml(xmlElement)
+    def to_xml(self, xmlElement):
+        super().to_xml(xmlElement)
         if self.renumberChapters:
             xmlElement.set('renumberChapters', '1')
         if self.renumberParts:

@@ -90,8 +90,8 @@ class Character(WorldElement):
             self._deathDate = newVal
             self.on_element_change()
 
-    def read_xml(self, xmlElement):
-        super().read_xml(xmlElement)
+    def from_xml(self, xmlElement):
+        super().from_xml(xmlElement)
         self.isMajor = xmlElement.get('major', None) == '1'
         self.fullName = self._get_element_text(xmlElement, 'FullName')
         self.bio = self._xml_element_to_text(xmlElement.find('Bio'))
@@ -99,8 +99,8 @@ class Character(WorldElement):
         self.birthDate = self._get_element_text(xmlElement, 'BirthDate')
         self.deathDate = self._get_element_text(xmlElement, 'DeathDate')
 
-    def write_xml(self, xmlElement):
-        super().write_xml(xmlElement)
+    def to_xml(self, xmlElement):
+        super().to_xml(xmlElement)
         if self.isMajor:
             xmlElement.set('major', '1')
         if self.fullName:

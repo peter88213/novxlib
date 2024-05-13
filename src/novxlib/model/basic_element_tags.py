@@ -31,16 +31,16 @@ class BasicElementTags(BasicElementNotes):
             self._tags = newVal
             self.on_element_change()
 
-    def read_xml(self, xmlElement):
-        super().read_xml(xmlElement)
+    def from_xml(self, xmlElement):
+        super().from_xml(xmlElement)
         tags = string_to_list(self._get_element_text(xmlElement, 'Tags'))
         strippedTags = []
         for tag in tags:
             strippedTags.append(tag.strip())
         self.tags = strippedTags
 
-    def write_xml(self, xmlElement):
-        super().write_xml(xmlElement)
+    def to_xml(self, xmlElement):
+        super().to_xml(xmlElement)
         tagStr = list_to_string(self.tags)
         if tagStr:
             ET.SubElement(xmlElement, 'Tags').text = tagStr
