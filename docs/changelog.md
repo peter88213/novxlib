@@ -1,5 +1,10 @@
 # Changelog
 
+
+### v3.6.1
+
+- Refactor, making the list intersection a global function.
+
 ### v3.6.0
 
 - Refactor, moving the XML read/write routines from NovxFile to the model elements.

@@ -24,6 +24,7 @@ from novxlib.novx_globals import PL_ROOT
 from novxlib.novx_globals import PN_ROOT
 from novxlib.novx_globals import _
 from novxlib.novx_globals import norm_path
+from novxlib.novx_globals import intersection
 from novxlib.xml.xml_indent import indent
 import xml.etree.ElementTree as ET
 
@@ -346,13 +347,12 @@ class NovxFile(File):
             self.novel.plotLines[plId].from_xml(xmlPlotLine)
             self.novel.tree.append(PL_ROOT, plId)
 
-            # Verify sections and create back references.
-            plSections = []
+            # Remove dead references.
+            self.novel.plotLines[plId].sections = intersection(self.novel.plotLines[plId].sections, self.novel.sections)
+
+            # Create back references.
             for scId in self.novel.plotLines[plId].sections:
-                if scId in self.novel.sections:
-                    self.novel.sections[scId].scPlotLines.append(plId)
-                    plSections.append(scId)
-            self.novel.plotLines[plId].sections = plSections
+                self.novel.sections[scId].scPlotLines.append(plId)
 
             for xmlPlotPoint in xmlPlotLine.iterfind('POINT'):
                 ppId = xmlPlotPoint.attrib['id']
@@ -396,26 +396,10 @@ class NovxFile(File):
         self.novel.sections[scId] = Section(on_element_change=self.on_element_change)
         self.novel.sections[scId].from_xml(xmlSection)
 
-        # Verify characters.
-        scCharacters = []
-        for crId in self.novel.sections[scId].characters:
-            if crId in self.novel.characters:
-                scCharacters.append(crId)
-        self.novel.sections[scId].characters = scCharacters
-
-        # Verify locations.
-        scLocations = []
-        for lcId in self.novel.sections[scId].locations:
-            if lcId in self.novel.locations:
-                scLocations.append(lcId)
-        self.novel.sections[scId].locations = scLocations
-
-        # Verify items.
-        scItems = []
-        for itId in self.novel.sections[scId].items:
-            if itId in self.novel.items:
-                scItems.append(itId)
-        self.novel.sections[scId].items = scItems
+        # Remove dead references.
+        self.novel.sections[scId].characters = intersection(self.novel.sections[scId].characters, self.novel.characters)
+        self.novel.sections[scId].locations = intersection(self.novel.sections[scId].locations, self.novel.locations)
+        self.novel.sections[scId].items = intersection(self.novel.sections[scId].items, self.novel.items)
 
     def _read_word_count_log(self, xmlRoot):
         """Read the word count log from the xml element tree."""

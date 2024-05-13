@@ -131,3 +131,15 @@ def list_to_string(elements, divider=';'):
     except:
         return ''
 
+
+def intersection(elemList, refList):
+    """Return a list with the intersection of elemList and refList.
+
+    Positional arguments:
+        elemList: list -- List to verify.
+        refList: list -- Reference list.
+    
+    The element order is from elemList.
+    """
+    return [elem for elem in elemList if elem in refList]
+
