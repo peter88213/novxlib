@@ -20,7 +20,7 @@ from novxlib.odt.odt_w_items import OdtWItems
 from novxlib.odt.odt_w_locations import OdtWLocations
 from novxlib.odt.odt_w_manuscript import OdtWManuscript
 from novxlib.odt.odt_w_partdesc import OdtWPartDesc
-from novxlib.odt.odt_w_plot import OdtWPlot
+from novxlib.odt.odt_w_plotlines import OdtWPlotlines
 from novxlib.odt.odt_w_proof import OdtWProof
 from novxlib.odt.odt_w_sectiondesc import OdtWSectionDesc
 from novxlib.odt.odt_w_stages import OdtWStages
@@ -51,9 +51,9 @@ class NovxExporter(ConverterFf):
         OdtWLocations,
         OdtWManuscript,
         OdtWPartDesc,
-        OdtWPlot,
+        OdtWPlotlines,
         OdtWProof,
         OdtWSectionDesc,
         OdtWStages,
         OdtWXref,
-        ]
+    ]

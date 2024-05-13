@@ -142,10 +142,10 @@ class Splitter:
                     if '#' in plainLine:
                         heading = plainLine.strip('# ').split(self.DESC_SEPARATOR)
                         title = heading[0]
-                        try:
+                        desc = ''
+                        if len(heading) > 1:
                             desc = heading[1]
-                        except:
-                            desc = ''
+
                     if plainLine.startswith(self.SCENE_SEPARATOR):
                         # Split the section.
                         if inSection:
@@ -159,8 +159,8 @@ class Splitter:
                             sectionSplitCount,
                             title,
                             desc,
-                            plainLine.startswith(self.APPENDED_SCENE_SEPARATOR),
-                            )
+                            plainLine.startswith(self.APPENDED_SCENE_SEPARATOR)
+                        )
                         novel.tree.append(chId, newScId)
                         scId = newScId
                         sectionsSplit = True

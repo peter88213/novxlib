@@ -43,8 +43,10 @@ class OdtRItems(OdtReader):
         
         Overrides the superclass method.
         """
-        if self._itId is not None:
-            self._lines.append(data)
+        if self._itId is None:
+            return
+
+        self._lines.append(data)
 
     def handle_endtag(self, tag):
         """Recognize the end of the item section and save data.
@@ -54,13 +56,17 @@ class OdtRItems(OdtReader):
 
         Overrides the superclass method.
         """
-        if self._itId is not None:
-            if tag == 'div':
-                self.novel.items[self._itId].desc = ''.join(self._lines).rstrip()
-                self._lines = []
-                self._itId = None
-            elif tag == 'p':
-                self._lines.append('\n')
+        if self._itId is None:
+            return
+
+        if tag == 'div':
+            self.novel.items[self._itId].desc = ''.join(self._lines).rstrip()
+            self._lines = []
+            self._itId = None
+            return
+
+        if tag == 'p':
+            self._lines.append('\n')
 
     def handle_starttag(self, tag, attrs):
         """Identify items.
@@ -78,5 +84,7 @@ class OdtRItems(OdtReader):
                     if not self._itId in self.novel.items:
                         self.novel.tree.append(IT_ROOT, self._itId)
                         self.novel.items[self._itId] = WorldElement()
-        elif tag == 's':
+            return
+
+        if tag == 's':
             self._lines.append(' ')

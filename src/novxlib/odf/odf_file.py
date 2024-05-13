@@ -140,7 +140,7 @@ class OdfFile(FileExport):
         localeMapping = dict(
             Language=self.novel.languageCode,
             Country=self.novel.countryCode,
-            )
+        )
         template = Template(self._STYLES_XML)
         text = template.safe_substitute(localeMapping)
         try:

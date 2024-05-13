@@ -396,21 +396,22 @@ class OdtWriter(OdfFile):
         
         Overrides the superclass method.
         """
-        if text:
-            if not quick:
-                if xml:
-                    self._contentParser.feed(text, self.novel.languages, append)
-                    text = ''.join(self._contentParser.odtLines)
-                else:
-                    lines = text.split('\n')
-                    text = '</text:p><text:p text:style-name="First_20_line_20_indent">'.join(lines)
-                    if append:
-                        text = f'<text:p text:style-name="First_20_line_20_indent">{text}</text:p>'
-                    else:
-                        text = f'<text:p text:style-name="Text_20_body">{text}</text:p>'
-        else:
-            text = ''
-        return text
+        if not text:
+            return ''
+
+        if quick:
+            return text
+
+        if xml:
+            self._contentParser.feed(text, self.novel.languages, append)
+            return ''.join(self._contentParser.odtLines)
+
+        lines = text.split('\n')
+        text = '</text:p><text:p text:style-name="First_20_line_20_indent">'.join(lines)
+        if append:
+            return f'<text:p text:style-name="First_20_line_20_indent">{text}</text:p>'
+
+        return f'<text:p text:style-name="Text_20_body">{text}</text:p>'
 
     def _get_fileHeaderMapping(self):
         """Return a mapping dictionary for the project section.

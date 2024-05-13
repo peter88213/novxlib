@@ -43,8 +43,10 @@ class OdtRLocations(OdtReader):
         
         Overrides the superclass method.
         """
-        if self._lcId is not None:
-            self._lines.append(data)
+        if self._lcId is None:
+            return
+
+        self._lines.append(data)
 
     def handle_endtag(self, tag):
         """Recognize the end of the location section and save data.
@@ -54,13 +56,17 @@ class OdtRLocations(OdtReader):
 
         Overrides the superclass method.
         """
-        if self._lcId is not None:
-            if tag == 'div':
-                self.novel.locations[self._lcId].desc = ''.join(self._lines).rstrip()
-                self._lines = []
-                self._lcId = None
-            elif tag == 'p':
-                self._lines.append('\n')
+        if self._lcId is None:
+            return
+
+        if tag == 'div':
+            self.novel.locations[self._lcId].desc = ''.join(self._lines).rstrip()
+            self._lines = []
+            self._lcId = None
+            return
+
+        if tag == 'p':
+            self._lines.append('\n')
 
     def handle_starttag(self, tag, attrs):
         """Identify locations.
@@ -78,5 +84,7 @@ class OdtRLocations(OdtReader):
                     if not self._lcId in self.novel.locations:
                         self.novel.tree.append(LC_ROOT, self._lcId)
                         self.novel.locations[self._lcId] = WorldElement()
-        elif tag == 's':
+            return
+
+        if tag == 's':
             self._lines.append(' ')

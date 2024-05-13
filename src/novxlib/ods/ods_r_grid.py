@@ -4,8 +4,8 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
-import re
 from datetime import date, time
+import re
 
 from novxlib.model.section import Section
 from novxlib.novx_globals import GRID_SUFFIX, PL_ROOT
@@ -34,7 +34,7 @@ class OdsRGrid(OdsReader):
         'Conflict',
         'Outcome',
         'Notes',
-        ]
+    ]
     _idPrefix = SECTION_PREFIX
 
     def read(self):
@@ -125,16 +125,15 @@ class OdsRGrid(OdsReader):
                     if self.novel.characters[crId].title == viewpoint:
                         vpId = crId
                         break
+
                 if vpId is not None:
                     scCharacters = self.novel.sections[scId].characters
                     if scCharacters is None:
                         scCharacters = []
 
                     # Put the vp character ID at the first position.
-                    try:
+                    if vpId in scCharacters:
                         scCharacters.remove(vpId)
-                    except:
-                        pass
                     scCharacters.insert(0, vpId)
                     self.novel.sections[scId].characters = scCharacters
 

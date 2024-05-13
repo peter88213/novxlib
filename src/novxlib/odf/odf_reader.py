@@ -6,8 +6,8 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
-import os
-from abc import ABC, abstractmethod
+from abc import ABC
+
 from novxlib.file.file import File
 from novxlib.odf.check_odf import odf_is_locked
 

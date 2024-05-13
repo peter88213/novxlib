@@ -40,7 +40,7 @@ class OdsParser:
             office='urn:oasis:names:tc:opendocument:xmlns:office:1.0',
             text='urn:oasis:names:tc:opendocument:xmlns:text:1.0',
             table='urn:oasis:names:tc:opendocument:xmlns:table:1.0',
-            )
+        )
         try:
             with zipfile.ZipFile(filePath, 'r') as odfFile:
                 content = odfFile.read('content.xml')

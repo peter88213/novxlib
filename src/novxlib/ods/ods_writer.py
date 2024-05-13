@@ -12,8 +12,15 @@ from novxlib.odf.odf_file import OdfFile
 class OdsWriter(OdfFile):
     """Generic OpenDocument spreadsheet document writer."""
     EXTENSION = '.ods'
-    _ODF_COMPONENTS = ['META-INF', 'content.xml', 'meta.xml', 'mimetype',
-                      'settings.xml', 'styles.xml', 'META-INF/manifest.xml']
+    _ODF_COMPONENTS = [
+        'META-INF',
+        'content.xml',
+        'meta.xml',
+        'mimetype',
+        'settings.xml',
+        'styles.xml',
+        'META-INF/manifest.xml'
+    ]
 
     # Column width:
     # co1 2.000cm
@@ -296,6 +303,10 @@ class OdsWriter(OdfFile):
         
         Overrides the superclass method.
         """
+        if not text:
+            return ''
+
+        text = text.rstrip()
         ODS_REPLACEMENTS = [
             ('&', '&amp;'),  # must be first!
             ("'", '&apos;'),
@@ -307,10 +318,7 @@ class OdsWriter(OdfFile):
             ODS_REPLACEMENTS.append(('"', '&apos;'))
         else:
             ODS_REPLACEMENTS.append(('"', '&quot;'))
-        try:
-            text = text.rstrip()
-            for yw, od in ODS_REPLACEMENTS:
-                text = text.replace(yw, od)
-        except AttributeError:
-            text = ''
+        for nv, ods in ODS_REPLACEMENTS:
+            text = text.replace(nv, ods)
         return text
+

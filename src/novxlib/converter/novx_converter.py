@@ -76,7 +76,7 @@ class NovxConverter(ConverterFf):
         OdtWSectionDesc,
         OdtWStages,
         OdtWXref,
-        ]
+    ]
     IMPORT_SOURCE_CLASSES = [
         OdsRCharList,
         OdsRGrid,
@@ -92,7 +92,7 @@ class NovxConverter(ConverterFf):
         OdtRProof,
         OdtRSectionDesc,
         OdtRStages,
-        ]
+    ]
     IMPORT_TARGET_CLASSES = [NovxFile]
     CREATE_SOURCE_CLASSES = []
 

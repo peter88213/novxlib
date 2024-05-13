@@ -66,15 +66,23 @@ class OdtROutline(OdtReader):
             self._lines = [f'{text.strip()}\n']
             if self._scId is not None:
                 self.novel.sections[self._scId].desc = text
-            elif self._chId is not None:
+                return
+
+            if self._chId is not None:
                 self.novel.chapters[self._chId].desc = text
-        elif tag in ('h1', 'h2'):
+            return
+
+        if tag in ('h1', 'h2'):
             self.novel.chapters[self._chId].title = text.strip()
             self._lines = []
-        elif tag == 'h3':
+            return
+
+        if tag == 'h3':
             self.novel.sections[self._scId].title = text.strip()
             self._lines = []
-        elif tag == 'title':
+            return
+
+        if tag == 'title':
             self.novel.title = text.strip()
 
     def handle_starttag(self, tag, attrs):
@@ -97,33 +105,48 @@ class OdtROutline(OdtReader):
                 self.novel.chapters[self._chId].chLevel = 1
             else:
                 self.novel.chapters[self._chId].chLevel = 2
-        elif tag == 'h3':
+            return
+
+        if tag == 'h3':
             self._lines = []
             self._scCount += 1
             self._scId = f'{SECTION_PREFIX}{self._scCount}'
-            self.novel.sections[self._scId] = Section(scType=0,
-                                                  scPacing=0,
-                                                  status=1,
-                                                  )
+            self.novel.sections[self._scId] = Section(
+                scType=0,
+                scPacing=0,
+                status=1,
+            )
             self.novel.tree.append(self._chId, self._scId)
             self.novel.sections[self._scId].sectionContent = ''
-        elif tag == 'div':
+            return
+
+        if tag == 'div':
             self._scId = None
             self._chId = None
-        elif tag == 'meta':
+            return
+
+        if tag == 'meta':
             if attrs[0][1] == 'author':
                 self.novel.authorName = attrs[1][1]
+                return
+
             if attrs[0][1] == 'description':
                 self.novel.desc = attrs[1][1]
-        elif tag == 'title':
+            return
+
+        if tag == 'title':
             self._lines = []
-        elif tag == 'body':
+            return
+
+        if tag == 'body':
             for attr in attrs:
                 if attr[0] == 'language':
                     if attr[1]:
                         self.novel.languageCode = attr[1]
-                elif attr[0] == 'country':
+                if attr[0] == 'country':
                     if attr[1]:
                         self.novel.countryCode = attr[1]
-        elif tag == 's':
+            return
+
+        if tag == 's':
             self._lines.append(' ')

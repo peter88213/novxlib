@@ -4,11 +4,11 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/yw-table
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
-from novxlib.novx_globals import PL_ROOT
 from novxlib.novx_globals import CH_ROOT
 from novxlib.novx_globals import MANUSCRIPT_SUFFIX
-from novxlib.novx_globals import PLOTLIST_SUFFIX
 from novxlib.novx_globals import PLOTLINES_SUFFIX
+from novxlib.novx_globals import PLOTLIST_SUFFIX
+from novxlib.novx_globals import PL_ROOT
 from novxlib.novx_globals import _
 from novxlib.novx_globals import list_to_string
 from novxlib.ods.ods_writer import OdsWriter
@@ -73,7 +73,7 @@ class OdsWPlotList(OdsWriter):
         odsText = [
             self._fileHeader,
             '<table:table-column table:style-name="co4" table:default-cell-style-name="Default"/>',
-            ]
+        ]
 
         plotLineColorsTotal = 6
         # total number of the background colors used in the "ce" table cell styles
@@ -94,12 +94,12 @@ class OdsWPlotList(OdsWriter):
         for i, plId in enumerate(plotLines):
             colorIndex = (i % plotLineColorsTotal) + self._CE_OFFSET
             odsText.append(
-                    create_cell(
+                create_cell(
                     self.novel.plotLines[plId].title,
                     attr=f'table:style-name="ce{colorIndex}"',
                     link=f'{PLOTLINES_SUFFIX}.odt#{plId}'
-                    )
                 )
+            )
         odsText.append('    </table:table-row>')
 
         # Section rows.
@@ -112,8 +112,8 @@ class OdsWPlotList(OdsWriter):
                         create_cell(
                             self.novel.sections[scId].title,
                             link=f'{MANUSCRIPT_SUFFIX}.odt#{scId}%7Cregion'
-                            )
                         )
+                    )
                     for i, plId in enumerate(plotLines):
                         colorIndex = (i % plotLineColorsTotal) + self._CE_OFFSET
                         if scId in self.novel.plotLines[plId].sections:
@@ -121,10 +121,12 @@ class OdsWPlotList(OdsWriter):
                             for ppId in self.novel.tree.get_children(plId):
                                 if scId == self.novel.plotPoints[ppId].sectionAssoc:
                                     plotPoints.append(self.novel.plotPoints[ppId].title)
-                            odsText.append(create_cell(
-                                list_to_string(plotPoints),
-                                attr=f'table:style-name="ce{colorIndex}" ')
+                            odsText.append(
+                                create_cell(
+                                    list_to_string(plotPoints),
+                                    attr=f'table:style-name="ce{colorIndex}" '
                                 )
+                            )
                         else:
                             odsText.append(create_cell(''))
                     odsText.append(f'    </table:table-row>')

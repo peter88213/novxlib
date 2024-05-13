@@ -56,8 +56,9 @@ class OdtRImport(OdtRFormatted):
         """
         if self._scId is not None and self._SCENE_DIVIDER in data:
             self._scId = None
-        else:
-            self._lines.append(data)
+            return
+
+        self._lines.append(data)
 
     def handle_endtag(self, tag):
         """Recognize the paragraph's end.
@@ -69,23 +70,33 @@ class OdtRImport(OdtRFormatted):
         """
         if tag == 'p':
             self._lines.append('</p>')
-            if self._scId is not None:
-                sectionText = ''.join(self._lines).rstrip()
-                self.novel.sections[self._scId].sectionContent = sectionText
-                if self.novel.sections[self._scId].wordCount < self._LOW_WORDCOUNT:
-                    self.novel.sections[self._scId].status = 1
-                    # Outline
-                else:
-                    self.novel.sections[self._scId].status = 2
-                    # Draft
-        elif tag in ('em', 'strong', 'comment', 'creator', 'date', 'note', 'note-citation', 'ul', 'li'):
+            if self._scId is None:
+                return
+
+            sectionText = ''.join(self._lines).rstrip()
+            self.novel.sections[self._scId].sectionContent = sectionText
+            if self.novel.sections[self._scId].wordCount < self._LOW_WORDCOUNT:
+                self.novel.sections[self._scId].status = 1
+                # Outline
+            else:
+                self.novel.sections[self._scId].status = 2
+                # Draft
+            return
+
+        if tag in ('em', 'strong', 'comment', 'creator', 'date', 'note', 'note-citation', 'ul', 'li'):
             self._lines.append(f'</{tag}>')
-        elif tag == 'lang':
+            return
+
+        if tag == 'lang':
             self._lines.append('</span>')
-        elif tag in ('h1', 'h2'):
+            return
+
+        if tag in ('h1', 'h2'):
             self.novel.chapters[self._chId].title = ''.join(self._lines)
             self._lines = []
-        elif tag == 'title':
+            return
+
+        if tag == 'title':
             self.novel.title = ''.join(self._lines)
 
     def handle_starttag(self, tag, attrs):
@@ -118,22 +129,27 @@ class OdtRImport(OdtRFormatted):
             except:
                 pass
             self._lines.append(f'<p{attributes}>')
-        elif tag in('em', 'strong', 'comment', 'creator', 'date', 'note-citation', 'ul', 'li'):
+            return
+
+        if tag in('em', 'strong', 'comment', 'creator', 'date', 'note-citation', 'ul', 'li'):
             self._lines.append(f'<{tag}>')
-        elif tag == 'lang':
-            try:
-                if attrs[0][0] == 'lang':
-                    if not attrs[0][1] in self.novel.languages:
-                        self.novel.languages.append(attrs[0][1])
-                    self._lines.append(f'<span xml:lang="{attrs[0][1]}">')
-            except:
-                pass
-        elif tag == 'note':
+            return
+
+        if tag == 'lang':
+            if attrs[0][0] == 'lang':
+                if not attrs[0][1] in self.novel.languages:
+                    self.novel.languages.append(attrs[0][1])
+                self._lines.append(f'<span xml:lang="{attrs[0][1]}">')
+            return
+
+        if tag == 'note':
             attributes = ''
             for att in attrs:
                 attributes = f'{attributes} {att[0]}="{att[1]}"'
             self._lines.append(f'<note {attributes}>')
-        elif tag in ('h1', 'h2'):
+            return
+
+        if tag in ('h1', 'h2'):
             self._scId = None
             self._lines = []
             self._chCount += 1
@@ -144,17 +160,25 @@ class OdtRImport(OdtRFormatted):
                 self.novel.chapters[self._chId].chLevel = 1
             else:
                 self.novel.chapters[self._chId].chLevel = 2
-        elif tag == 'div':
+            return
+
+        if tag == 'div':
             self._scId = None
             self._chId = None
-        elif tag == 'meta':
+            return
+
+        if tag == 'meta':
             if attrs[0][1] == 'author':
                 self.novel.authorName = attrs[1][1]
             if attrs[0][1] == 'description':
                 self.novel.desc = attrs[1][1]
-        elif tag == 'title':
+            return
+
+        if tag == 'title':
             self._lines = []
-        elif tag == 'body':
+            return
+
+        if tag == 'body':
             for attr in attrs:
                 if attr[0] == 'language':
                     if attr[1]:
@@ -162,7 +186,9 @@ class OdtRImport(OdtRFormatted):
                 elif attr[0] == 'country':
                     if attr[1]:
                         self.novel.countryCode = attr[1]
-        elif tag == 's':
+            return
+
+        if tag == 's':
             self._lines.append(' ')
 
     def read(self):

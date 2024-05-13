@@ -34,7 +34,7 @@ class Section(BasicElementTags):
         _('1st Edit'),
         _('2nd Edit'),
         _('Done')
-        ]
+    ]
     # emulating an enumeration for the section completion status
 
     NULL_DATE = '0001-01-01'
@@ -107,13 +107,12 @@ class Section(BasicElementTags):
         """Set sectionContent updating word count and letter count."""
         if self._sectionContent != text:
             self._sectionContent = text
+            self.wordCount = 0
             if text is not None:
                 text = ADDITIONAL_WORD_LIMITS.sub(' ', text)
                 text = NO_WORD_LIMITS.sub('', text)
                 wordList = text.split()
                 self.wordCount = len(wordList)
-            else:
-                self.wordCount = 0
             self.on_element_change()
 
     @property
@@ -226,20 +225,21 @@ class Section(BasicElementTags):
                 self._weekDay = None
                 self._localeDate = None
                 self.on_element_change()
-            else:
-                try:
-                    newDate = date.fromisoformat(newVal)
-                    self._weekDay = newDate.weekday()
-                except:
-                    pass
-                    # date and week day remain unchanged
-                else:
-                    try:
-                        self._localeDate = newDate.strftime('%x')
-                    except:
-                        self._localeDate = newVal
-                    self._date = newVal
-                    self.on_element_change()
+                return
+
+            try:
+                newDate = date.fromisoformat(newVal)
+                self._weekDay = newDate.weekday()
+            except:
+                return
+                # date and week day remain unchanged
+
+            try:
+                self._localeDate = newDate.strftime('%x')
+            except:
+                self._localeDate = newVal
+            self._date = newVal
+            self.on_element_change()
 
     @property
     def weekDay(self):
@@ -508,14 +508,12 @@ class Section(BasicElementTags):
         endTime = None
         endDay = None
         # Calculate end date from section section duration.
+        lastsDays = 0
         if self.lastsDays:
             lastsDays = int(self.lastsDays)
-        else:
-            lastsDays = 0
+        lastsSeconds = 0
         if self.lastsHours:
             lastsSeconds = int(self.lastsHours) * 3600
-        else:
-            lastsSeconds = 0
         if self.lastsMinutes:
             lastsSeconds += int(self.lastsMinutes) * 60
         sectionDuration = timedelta(days=lastsDays, seconds=lastsSeconds)

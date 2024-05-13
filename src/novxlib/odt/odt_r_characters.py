@@ -44,8 +44,10 @@ class OdtRCharacters(OdtReader):
         
         Overrides the superclass method.
         """
-        if self._section is not None:
-            self._lines.append(data)
+        if self._section is None:
+            return
+
+        self._lines.append(data)
 
     def handle_endtag(self, tag):
         """Recognize the end of the character section and save data.
@@ -55,26 +57,37 @@ class OdtRCharacters(OdtReader):
 
         Overrides the superclass method.
         """
-        if self._crId is not None:
-            if tag == 'div':
-                if self._section == 'desc':
-                    self.novel.characters[self._crId].desc = ''.join(self._lines).rstrip()
-                    self._lines = []
-                    self._section = None
-                elif self._section == 'bio':
-                    self.novel.characters[self._crId].bio = ''.join(self._lines).rstrip()
-                    self._lines = []
-                    self._section = None
-                elif self._section == 'goals':
-                    self.novel.characters[self._crId].goals = ''.join(self._lines).rstrip()
-                    self._lines = []
-                    self._section = None
-                elif self._section == 'notes':
-                    self.novel.characters[self._crId].notes = ''.join(self._lines).rstrip()
-                    self._lines = []
-                    self._section = None
-            elif tag == 'p':
-                self._lines.append('\n')
+        if self._crId is None:
+            return
+
+        if tag == 'div':
+
+            if self._section == 'desc':
+                self.novel.characters[self._crId].desc = ''.join(self._lines).rstrip()
+                self._lines = []
+                self._section = None
+                return
+
+            if self._section == 'bio':
+                self.novel.characters[self._crId].bio = ''.join(self._lines).rstrip()
+                self._lines = []
+                self._section = None
+                return
+
+            if self._section == 'goals':
+                self.novel.characters[self._crId].goals = ''.join(self._lines).rstrip()
+                self._lines = []
+                self._section = None
+                return
+
+            if self._section == 'notes':
+                self.novel.characters[self._crId].notes = ''.join(self._lines).rstrip()
+                self._lines = []
+                self._section = None
+            return
+
+        if tag == 'p':
+            self._lines.append('\n')
 
     def handle_starttag(self, tag, attrs):
         """Identify characters with subsections.
@@ -87,17 +100,26 @@ class OdtRCharacters(OdtReader):
         """
         if tag == 'div':
             if attrs[0][0] == 'id':
+
                 if attrs[0][1].startswith('desc'):
                     self._crId = f"{CHARACTER_PREFIX}{re.search('[0-9]+', attrs[0][1]).group()}"
                     if not self._crId in self.novel.characters:
                         self.novel.tree.append(CR_ROOT, self._crId)
                         self.novel.characters[self._crId] = Character()
                     self._section = 'desc'
-                elif attrs[0][1].startswith('bio'):
+                    return
+
+                if attrs[0][1].startswith('bio'):
                     self._section = 'bio'
-                elif attrs[0][1].startswith('goals'):
+                    return
+
+                if attrs[0][1].startswith('goals'):
                     self._section = 'goals'
-                elif attrs[0][1].startswith('notes'):
+                    return
+
+                if attrs[0][1].startswith('notes'):
                     self._section = 'notes'
-        elif tag == 's':
+            return
+
+        if tag == 's':
             self._lines.append(' ')

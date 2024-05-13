@@ -23,8 +23,8 @@ from novxlib.novx_globals import LC_ROOT
 from novxlib.novx_globals import PL_ROOT
 from novxlib.novx_globals import PN_ROOT
 from novxlib.novx_globals import _
-from novxlib.novx_globals import norm_path
 from novxlib.novx_globals import intersection
+from novxlib.novx_globals import norm_path
 from novxlib.xml.xml_indent import indent
 import xml.etree.ElementTree as ET
 
@@ -160,9 +160,10 @@ class NovxFile(File):
         self.adjust_section_types()
         self.novel.get_languages()
 
-        attrib = {'version':f'{self.MAJOR_VERSION}.{self.MINOR_VERSION}',
-                'xml:lang':f'{self.novel.languageCode}-{self.novel.countryCode}',
-                }
+        attrib = {
+            'version':f'{self.MAJOR_VERSION}.{self.MINOR_VERSION}',
+            'xml:lang':f'{self.novel.languageCode}-{self.novel.countryCode}',
+        }
         xmlRoot = ET.Element('novx', attrib=attrib)
         self._build_project(xmlRoot)
         self._build_chapters_and_sections(xmlRoot)

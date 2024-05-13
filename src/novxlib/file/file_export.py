@@ -443,35 +443,31 @@ class FileExport(File):
             tags = ''
 
         #--- Create a comma separated character list.
-        try:
-            # Note: Due to a bug, novelibre sections might hold invalid
-            # viepoint characters
+        sectionChars = ''
+        viewpointChar = ''
+        if self.novel.sections[scId].characters is not None:
             sChList = []
             for crId in self.novel.sections[scId].characters:
                 sChList.append(self.novel.characters[crId].title)
             sectionChars = list_to_string(sChList, divider=self._DIVIDER)
-            viewpointChar = sChList[0]
-        except:
-            sectionChars = ''
-            viewpointChar = ''
+            if sChList:
+                viewpointChar = sChList[0]
 
         #--- Create a comma separated location list.
+        sectionLocs = ''
         if self.novel.sections[scId].locations is not None:
             sLcList = []
             for lcId in self.novel.sections[scId].locations:
                 sLcList.append(self.novel.locations[lcId].title)
             sectionLocs = list_to_string(sLcList, divider=self._DIVIDER)
-        else:
-            sectionLocs = ''
 
         #--- Create a comma separated item list.
+        sectionItems = ''
         if self.novel.sections[scId].items is not None:
             sItList = []
             for itId in self.novel.sections[scId].items:
                 sItList.append(self.novel.items[itId].title)
             sectionItems = list_to_string(sItList, divider=self._DIVIDER)
-        else:
-            sectionItems = ''
 
         #--- Create A/R marker string.
 
@@ -498,34 +494,33 @@ class FileExport(File):
                 cmbDate = ''
 
         #--- Time.
+        scTime = ''
+        odsTime = ''
         if self.novel.sections[scId].time is not None:
             h, m, s = self.novel.sections[scId].time.split(':')
             scTime = f'{h}:{m}'
             odsTime = f'PT{h}H{m}M{s}S'
             # remove seconds
-        else:
-            scTime = ''
-            odsTime = ''
 
         #--- Create a combined duration information.
+        lastsDays = ''
+        days = ''
         if self.novel.sections[scId].lastsDays is not None and self.novel.sections[scId].lastsDays != '0':
             lastsDays = self.novel.sections[scId].lastsDays
             days = f'{self.novel.sections[scId].lastsDays}d '
-        else:
-            lastsDays = ''
-            days = ''
+
+        lastsHours = ''
+        hours = ''
         if self.novel.sections[scId].lastsHours is not None and self.novel.sections[scId].lastsHours != '0':
             lastsHours = self.novel.sections[scId].lastsHours
             hours = f'{self.novel.sections[scId].lastsHours}h '
-        else:
-            lastsHours = ''
-            hours = ''
+
+        lastsMinutes = ''
+        minutes = ''
         if self.novel.sections[scId].lastsMinutes is not None and self.novel.sections[scId].lastsMinutes != '0':
             lastsMinutes = self.novel.sections[scId].lastsMinutes
             minutes = f'{self.novel.sections[scId].lastsMinutes}min'
-        else:
-            lastsMinutes = ''
-            minutes = ''
+
         duration = f'{days}{hours}{minutes}'
 
         sectionMapping = dict(

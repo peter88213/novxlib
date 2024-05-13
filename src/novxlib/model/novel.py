@@ -7,9 +7,9 @@ License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 from datetime import date
 import locale
 import re
-import xml.etree.ElementTree as ET
 
 from novxlib.model.basic_element import BasicElement
+import xml.etree.ElementTree as ET
 
 LANGUAGE_TAG = re.compile('\<span xml\:lang=\"(.*?)\"\>')
 
@@ -371,20 +371,24 @@ class Novel(BasicElement):
             Positional arguments:
                 text -- novx-formatted string to scan for language codes.
             """
-            if text:
+            if not text:
+                return
+
+            m = LANGUAGE_TAG.search(text)
+            while m:
+                text = text[m.span()[1]:]
+                yield m.group(1)
                 m = LANGUAGE_TAG.search(text)
-                while m:
-                    text = text[m.span()[1]:]
-                    yield m.group(1)
-                    m = LANGUAGE_TAG.search(text)
 
         self.languages = []
         for scId in self.sections:
             text = self.sections[scId].sectionContent
-            if text:
-                for language in languages(text):
-                    if not language in self.languages:
-                        self.languages.append(language)
+            if not text:
+                continue
+
+            for language in languages(text):
+                if not language in self.languages:
+                    self.languages.append(language)
 
     def check_locale(self):
         """Check the document's locale (language code and country code).

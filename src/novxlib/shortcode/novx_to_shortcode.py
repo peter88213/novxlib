@@ -12,7 +12,7 @@ class NovxToShortcode(sax.ContentHandler):
     NOTE_TYPES = {
         'footnote':'@fn',
         'endnote':'@en',
-        }
+    }
 
     def __init__(self):
         super().__init__()

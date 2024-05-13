@@ -25,8 +25,10 @@ class OdtRChapterDesc(OdtReader):
         
         Overrides the superclass method.
         """
-        if self._chId is not None:
-            self._lines.append(data)
+        if self._chId is None:
+            return
+
+        self._lines.append(data)
 
     def handle_endtag(self, tag):
         """Recognize the end of the chapter section and save data.
@@ -36,15 +38,21 @@ class OdtRChapterDesc(OdtReader):
 
         Overrides the superclass method.
         """
-        if self._chId is not None:
-            if tag == 'div':
-                self.novel.chapters[self._chId].desc = ''.join(self._lines).rstrip()
-                self._lines = []
-                self._chId = None
-            elif tag == 'p':
-                self._lines.append('\n')
-            elif tag == 'h1' or tag == 'h2':
-                if not self.novel.chapters[self._chId].title:
-                    self.novel.chapters[self._chId].title = ''.join(self._lines)
-                self._lines = []
+        if self._chId is None:
+            return
+
+        if tag == 'div':
+            self.novel.chapters[self._chId].desc = ''.join(self._lines).rstrip()
+            self._lines = []
+            self._chId = None
+            return
+
+        if tag == 'p':
+            self._lines.append('\n')
+            return
+
+        if tag == 'h1' or tag == 'h2':
+            if not self.novel.chapters[self._chId].title:
+                self.novel.chapters[self._chId].title = ''.join(self._lines)
+            self._lines = []
 

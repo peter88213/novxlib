@@ -237,7 +237,7 @@ $ArcNoteCells
                 ArcId=plId,
                 ArcTitle=self.novel.plotLines[plId].title,
                 Link=f'table:formula="of:=HYPERLINK(&quot;file:///{self.projectPath}/{self._convert_from_novx(self.projectName)}{PLOTLINES_SUFFIX}.odt#{plId}&quot;;&quot;{self._convert_from_novx(self.novel.plotLines[plId].title, isLink=True)}&quot;)"',
-                )
+            )
             arcIdCells.append(Template(self._arcIdCell).safe_substitute(mapping))
             arcTitleCells.append(Template(self._arcTitleCell).safe_substitute(mapping))
         fileHeaderMapping['ArcColumns'] = '\n'.join(arcColumns)
@@ -288,10 +288,9 @@ $ArcNoteCells
         arcNoteCells = []
         for plId in self.novel.tree.get_children(PL_ROOT):
             plotNotes = self.novel.sections[scId].plotNotes
+            arcNote = ''
             if plotNotes:
                 arcNote = plotNotes.get(plId, '')
-            else:
-                arcNote = ''
             mapping = {'ArcNote':arcNote}
             arcNoteCells.append(Template(self._arcNoteCell).safe_substitute(mapping))
         sectionMapping['ArcNoteCells'] = '\n'.join(arcNoteCells)

@@ -40,11 +40,12 @@ td.chtitle {font-weight: bold}
         Positional arguments:
             text -- string to convert.
         
-        Optional arguments:
-            quick: bool -- if True, apply a conversion mode for one-liners without formatting.
-        
         Overrides the superclass method.
         """
+        if not text:
+            return ''
+
+        text = text.rstrip()
         HTML_REPLACEMENTS = [
             ('&', '&amp;'),  # must be first!
             ('"', '&quot;'),
@@ -53,10 +54,7 @@ td.chtitle {font-weight: bold}
             ('<', '&lt;'),
             ('\n', '<p />'),
         ]
-        try:
-            text = text.rstrip()
-            for nv, htm in HTML_REPLACEMENTS:
-                text = text.replace(nv, htm)
-        except AttributeError:
-            text = ''
+        for nv, htm in HTML_REPLACEMENTS:
+            text = text.replace(nv, htm)
         return text
+

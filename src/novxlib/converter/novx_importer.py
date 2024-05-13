@@ -52,7 +52,7 @@ class NovxImporter(ConverterFf):
         OdtRProof,
         OdtRSectionDesc,
         OdtRStages,
-        ]
+    ]
     IMPORT_TARGET_CLASSES = [NovxFile]
     CREATE_SOURCE_CLASSES = []
 

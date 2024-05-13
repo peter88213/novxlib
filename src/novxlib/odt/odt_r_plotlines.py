@@ -25,9 +25,7 @@ class OdtRPlotlines(OdtReader):
         
         Overrides the superclass method.
         """
-        if self._plId is not None:
-            self._lines.append(data)
-        elif self._ppId is not None:
+        if self._plId is not None or self._ppId is not None:
             self._lines.append(data)
 
     def handle_endtag(self, tag):
@@ -44,14 +42,20 @@ class OdtRPlotlines(OdtReader):
                 self.novel.plotLines[self._plId].desc = text.rstrip()
                 self._lines = []
                 self._plId = None
-            elif tag == 'p':
+                return
+
+            if tag == 'p':
                 self._lines.append('\n')
-        elif self._ppId is not None:
+            return
+
+        if self._ppId is not None:
             if tag == 'div':
                 text = ''.join(self._lines)
                 self.novel.plotPoints[self._ppId].desc = text.rstrip()
                 self._lines = []
                 self._ppId = None
-            elif tag == 'p':
+                return
+
+            if tag == 'p':
                 self._lines.append('\n')
 

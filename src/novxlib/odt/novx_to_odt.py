@@ -51,24 +51,40 @@ class NovxToOdt(sax.ContentHandler):
         """
         if name == 'p':
             self.odtLines.append('</text:p>')
-        elif name in ('em', 'strong', 'span'):
+            return
+
+        if name in ('em', 'strong', 'span'):
             self.odtLines.append('</text:span>')
-        elif name == 'li':
+            return
+
+        if name == 'li':
             self.odtLines.append('</text:list-item>')
-        elif name == 'creator':
+            return
+
+        if name == 'creator':
             self.odtLines.append('</dc:creator>')
-        elif name == 'date':
+            return
+
+        if name == 'date':
             self.odtLines.append('</dc:date>')
-        elif name == 'note-citation':
+            return
+
+        if name == 'note-citation':
             self.odtLines.append('</text:note-citation><text:note-body>')
-        elif name == 'ul':
+            return
+
+        if name == 'ul':
             self._list = False
             self._indentParagraph = False
             self.odtLines.append('</text:list>')
-        elif name == 'comment':
+            return
+
+        if name == 'comment':
             self.odtLines.append('</office:annotation>')
             self._comment = False
-        elif name == 'note':
+            return
+
+        if name == 'note':
             self._note = None
             self.odtLines.append('</text:note-body></text:note>')
 
@@ -81,6 +97,7 @@ class NovxToOdt(sax.ContentHandler):
         for attribute in attrs.items():
             attrKey, attrValue = attribute
             xmlAttributes[attrKey] = attrValue
+
         if name == 'p':
             if xmlAttributes.get('style', None) == 'quotations':
                 self.odtLines.append('<text:p text:style-name="Quotations">')
@@ -93,29 +110,49 @@ class NovxToOdt(sax.ContentHandler):
             else:
                 self.odtLines.append('<text:p text:style-name="Text_20_body">')
             self._indentParagraph = False
-        elif name == 'em':
+            return
+
+        if name == 'em':
             self.odtLines.append('<text:span text:style-name="Emphasis">')
-        elif name == 'strong':
+            return
+
+        if name == 'strong':
             self.odtLines.append('<text:span text:style-name="Strong_20_Emphasis">')
-        elif name == 'span':
+            return
+
+        if name == 'span':
             language = xmlAttributes.get('xml:lang', None)
             if language:
                 i = self._languages.index(language) + 1
                 self.odtLines.append(f'<text:span text:style-name="T{i}">')
-        elif name == 'ul':
+            return
+
+        if name == 'ul':
             self._list = True
             self.odtLines.append('<text:list>')
-        elif name == 'comment':
+            return
+
+        if name == 'comment':
             self._comment = True
             self.odtLines.append('<office:annotation>')
-        elif name == 'note':
+            return
+
+        if name == 'note':
             self._note = xmlAttributes.get('class', 'footnote')
             self.odtLines.append(f'<text:note text:note-class="{self._note}">')
-        elif name == 'creator':
+            return
+
+        if name == 'creator':
             self.odtLines.append('<dc:creator>')
-        elif name == 'date':
+            return
+
+        if name == 'date':
             self.odtLines.append('<dc:date>')
-        elif name == 'note-citation':
+            return
+
+        if name == 'note-citation':
             self.odtLines.append('<text:note-citation>')
-        elif name == 'li':
+            return
+
+        if name == 'li':
             self.odtLines.append('<text:list-item>')

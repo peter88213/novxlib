@@ -5,9 +5,9 @@ For further information see https://github.com/peter88213/novxlib
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
 from novxlib.html.html_report import HtmlReport
-from novxlib.novx_globals import PL_ROOT
 from novxlib.novx_globals import CH_ROOT
 from novxlib.novx_globals import PLOTLIST_SUFFIX
+from novxlib.novx_globals import PL_ROOT
 from novxlib.novx_globals import _
 from novxlib.novx_globals import list_to_string
 
@@ -28,7 +28,6 @@ class HtmlPlotList(HtmlReport):
             """Return the markup for a table cell with text and attributes."""
             return f'<td {attr}>{self._convert_from_novx(text)}</td>'
 
-        STYLE_CH_TITLE = 'font-weight: bold; color: red'
         htmlText = [self._fileHeader]
         htmlText.append(f'''<title>{self.novel.title}</title>
 </head>

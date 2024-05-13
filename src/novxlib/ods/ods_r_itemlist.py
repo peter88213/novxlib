@@ -4,12 +4,8 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
-import re
-
-from novxlib.model.world_element import WorldElement
 from novxlib.novx_globals import ITEMLIST_SUFFIX
 from novxlib.novx_globals import ITEM_PREFIX
-from novxlib.novx_globals import IT_ROOT
 from novxlib.novx_globals import _
 from novxlib.novx_globals import string_to_list
 from novxlib.ods.ods_reader import OdsReader

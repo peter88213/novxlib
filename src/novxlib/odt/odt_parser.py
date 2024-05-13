@@ -71,7 +71,7 @@ class OdtParser(sax.ContentHandler):
             fo='urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0',
             dc='http://purl.org/dc/elements/1.1/',
             meta='urn:oasis:names:tc:opendocument:xmlns:meta:1.0'
-            )
+        )
 
         try:
             with zipfile.ZipFile(filePath, 'r') as odfFile:
@@ -144,39 +144,62 @@ class OdtParser(sax.ContentHandler):
                 self._heading = None
             else:
                 self._client.handle_endtag('p')
-        elif name == 'text:span':
+            return
+
+        if name == 'text:span':
             try:
                 spans = self._span.pop()
                 for span in reversed(spans):
                     if span is not None:
                         self._client.handle_endtag(span)
+                return
+
             except:
-                pass
-        elif name == 'text:section':
+                return
+
+        if name == 'text:section':
             self._client.handle_endtag('div')
-        elif name == 'office:annotation':
+            return
+
+        if name == 'office:annotation':
             self._client.handle_endtag('comment')
             self._getData = True
-        elif name == 'dc:creator':
+            return
+
+        if name == 'dc:creator':
             self._client.handle_endtag('creator')
             self._getData = False
-        elif name == 'dc:date':
+            return
+
+        if name == 'dc:date':
             self._client.handle_endtag('date')
             self._getData = False
-        elif name == 'text:note':
+            return
+
+        if name == 'text:note':
             self._client.handle_endtag('note')
             self._getData = True
-        elif name == 'text:note-citation':
+            return
+
+        if name == 'text:note-citation':
             self._client.handle_endtag('note-citation')
             self._getData = False
-        elif name == 'text:h':
+            return
+
+        if name == 'text:h':
             self._client.handle_endtag(self._heading)
             self._heading = None
-        elif name == 'text:list-item':
+            return
+
+        if name == 'text:list-item':
             self._client.handle_endtag('li')
-        elif name == 'text:list':
+            return
+
+        if name == 'text:list':
             self._client.handle_endtag('ul')
-        elif name == 'style:style':
+            return
+
+        if name == 'style:style':
             self._style = None
 
     def startElement(self, name, attrs):
@@ -189,6 +212,7 @@ class OdtParser(sax.ContentHandler):
             attrKey, attrValue = attribute
             xmlAttributes[attrKey] = attrValue
         style = xmlAttributes.get('text:style-name', '')
+
         if name in ('text:p', 'text:h'):
             self._getData = True
             param = []
@@ -216,7 +240,9 @@ class OdtParser(sax.ContentHandler):
                 self._client.handle_starttag('em', [()])
             else:
                 self._paraSpan.append(None)
-        elif name == 'text:span':
+            return
+
+        if name == 'text:span':
             spans = []
             if style in self._emTags:
                 spans.append('em')
@@ -226,64 +252,84 @@ class OdtParser(sax.ContentHandler):
                 self._client.handle_starttag('strong', [()])
             if style in self._languageTags:
                 spans.append('lang')
-                self._client.handle_starttag('lang', [
-                    ('lang', self._languageTags[style])
-                    ])
+                self._client.handle_starttag('lang', [('lang', self._languageTags[style])])
             if not spans:
                 spans.append(None)
             self._span.append(spans)
-        elif name == 'text:section':
-            self._client.handle_starttag('div', [
-                ('id', xmlAttributes['text:name'])
-                ])
-        elif name == 'office:annotation':
+            return
+
+        if name == 'text:section':
+            self._client.handle_starttag('div', [('id', xmlAttributes['text:name'])])
+            return
+
+        if name == 'office:annotation':
             self._client.handle_starttag('comment', [()])
             self._getData = False
-        elif name == 'dc:date':
+            return
+
+        if name == 'dc:date':
             self._client.handle_starttag('date', [()])
             self._getData = True
-        elif name == 'dc:creator':
+            return
+
+        if name == 'dc:creator':
             self._client.handle_starttag('creator', [()])
             self._getData = True
-        elif name == 'text:note':
+            return
+
+        if name == 'text:note':
             self._client.handle_starttag('note', [
                 ('id', xmlAttributes.get('text:id', '')),
                 ('class', xmlAttributes.get('text:note-class', ''))
-                ])
+                ]
+            )
             self._getData = False
-        elif name == 'text:note-citation':
+            return
+
+        if name == 'text:note-citation':
             self._client.handle_starttag('note-citation', [()])
             self._getData = True
-        elif name == 'text:h':
+            return
+
+        if name == 'text:h':
             try:
                 self._heading = f'h{xmlAttributes["text:outline-level"]}'
             except:
                 self._heading = f'h{style[-1]}'
             self._client.handle_starttag(self._heading, [()])
-        elif name == 'text:list-item':
+            return
+
+        if name == 'text:list-item':
             self._client.handle_starttag('li', [()])
-        elif name == 'text:list':
+            return
+
+        if name == 'text:list':
             self._client.handle_starttag('ul', [()])
-        elif name == 'style:style':
+            return
+
+        if name == 'style:style':
             self._style = xmlAttributes.get('style:name', None)
             styleName = xmlAttributes.get('style:parent-style-name', '')
             if styleName.startswith('Heading'):
                 self._headingTags[self._style] = f'h{styleName[-1]}'
             elif styleName == 'Quotations':
                 self._blockquoteTags.append(self._style)
-        elif name == 'style:text-properties':
+            return
+
+        if name == 'style:text-properties':
             if xmlAttributes.get('fo:font-style', None) == 'italic':
                 self._emTags.append(self._style)
             if xmlAttributes.get('fo:font-weight', None) == 'bold':
                 self._strongTags.append(self._style)
             if xmlAttributes.get('fo:language', False):
-                lngCode = xmlAttributes['fo:language']
-                ctrCode = xmlAttributes['fo:country']
-                if ctrCode != 'none':
-                    locale = f'{lngCode}-{ctrCode}'
-                else:
-                    locale = lngCode
+                languageCode = xmlAttributes['fo:language']
+                countryCode = xmlAttributes['fo:country']
+                locale = languageCode
+                if countryCode != 'none':
+                    locale = f'{languageCode}-{countryCode}'
                 self._languageTags[self._style] = locale
-        elif name == 'text:s':
+            return
+
+        if name == 'text:s':
             self._client.handle_starttag('s', [()])
 

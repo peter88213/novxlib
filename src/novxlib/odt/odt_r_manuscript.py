@@ -26,8 +26,10 @@ class OdtRManuscript(OdtRFormatted):
         
         Overrides the superclass method.
         """
-        if self._scId is not None:
-            self._lines.append(data)
+        if self._scId is None:
+            return
+
+        self._lines.append(data)
 
     def handle_endtag(self, tag):
         """Recognize the end of the section section and save data.
@@ -37,22 +39,34 @@ class OdtRManuscript(OdtRFormatted):
 
         Overrides the superclass method.
         """
-        if self._scId is not None:
-            if tag == 'p':
-                self._lines.append('</p>')
-            elif tag in ('em', 'strong', 'comment', 'creator', 'date', 'note', 'note-citation', 'ul', 'li'):
-                self._lines.append(f'</{tag}>')
-            elif tag == 'lang':
-                self._lines.append('</span>')
-            elif tag == 'div':
-                text = ''.join(self._lines)
-                self.novel.sections[self._scId].sectionContent = text
-                self._lines = []
-                self._scId = None
-            elif tag == 'h1':
-                self._lines.append('\n')
-            elif tag == 'h2':
-                self._lines.append('\n')
+        if self._scId is None:
+            return
+
+        if tag == 'p':
+            self._lines.append('</p>')
+            return
+
+        if tag in ('em', 'strong', 'comment', 'creator', 'date', 'note', 'note-citation', 'ul', 'li'):
+            self._lines.append(f'</{tag}>')
+            return
+
+        if tag == 'lang':
+            self._lines.append('</span>')
+            return
+
+        if tag == 'div':
+            text = ''.join(self._lines)
+            self.novel.sections[self._scId].sectionContent = text
+            self._lines = []
+            self._scId = None
+            return
+
+        if tag == 'h1':
+            self._lines.append('\n')
+            return
+
+        if tag == 'h2':
+            self._lines.append('\n')
 
     def handle_starttag(self, tag, attrs):
         """Identify sections and chapters.
@@ -64,43 +78,53 @@ class OdtRManuscript(OdtRFormatted):
         Extends the superclass method by processing inline chapter and section dividers.
         """
         super().handle_starttag(tag, attrs)
-        if self._scId is not None:
-            if tag == 'p':
-                attributes = ''
-                try:
-                    for att in attrs:
-                        attributes = f'{attributes} {att[0]}="{att[1]}"'
-                        if att[0] == 'lang':
-                            if not att[1] in self.novel.languages:
-                                self.novel.languages.append(att[1])
-                except:
-                    pass
-                self._lines.append(f'<p{attributes}>')
-            elif tag in('em', 'strong', 'comment', 'creator', 'date', 'note-citation', 'ul', 'li'):
-                self._lines.append(f'<{tag}>')
-            elif tag == 'lang':
-                try:
-                    if attrs[0][0] == 'lang':
-                        if not attrs[0][1] in self.novel.languages:
-                            self.novel.languages.append(attrs[0][1])
-                        self._lines.append(f'<span xml:lang="{attrs[0][1]}">')
-                except:
-                    pass
-            elif tag == 'h2':
-                self._lines.append(f'{Splitter.CHAPTER_SEPARATOR} ')
-            elif tag == 'h1':
-                self._lines.append(f'{Splitter.PART_SEPARATOR} ')
-            elif tag == 'note':
-                attributes = ''
+
+        if self._scId is None:
+            if tag == 'body':
+                for attr in attrs:
+                    if attr[0] == 'language':
+                        if attr[1]:
+                            self.novel.languageCode = attr[1]
+                    elif attr[0] == 'country':
+                        if attr[1]:
+                            self.novel.countryCode = attr[1]
+            return
+
+        if tag == 'p':
+            attributes = ''
+            try:
                 for att in attrs:
                     attributes = f'{attributes} {att[0]}="{att[1]}"'
-                self._lines.append(f'<note {attributes}>')
-        elif tag == 'body':
-            for attr in attrs:
-                if attr[0] == 'language':
-                    if attr[1]:
-                        self.novel.languageCode = attr[1]
-                elif attr[0] == 'country':
-                    if attr[1]:
-                        self.novel.countryCode = attr[1]
+                    if att[0] == 'lang':
+                        if not att[1] in self.novel.languages:
+                            self.novel.languages.append(att[1])
+            except:
+                pass
+            self._lines.append(f'<p{attributes}>')
+            return
+
+        if tag in('em', 'strong', 'comment', 'creator', 'date', 'note-citation', 'ul', 'li'):
+            self._lines.append(f'<{tag}>')
+            return
+
+        if tag == 'lang':
+            if attrs[0][0] == 'lang':
+                if not attrs[0][1] in self.novel.languages:
+                    self.novel.languages.append(attrs[0][1])
+                self._lines.append(f'<span xml:lang="{attrs[0][1]}">')
+            return
+
+        if tag == 'h2':
+            self._lines.append(f'{Splitter.CHAPTER_SEPARATOR} ')
+            return
+
+        if tag == 'h1':
+            self._lines.append(f'{Splitter.PART_SEPARATOR} ')
+            return
+
+        if tag == 'note':
+            attributes = ''
+            for att in attrs:
+                attributes = f'{attributes} {att[0]}="{att[1]}"'
+            self._lines.append(f'<note {attributes}>')
 
