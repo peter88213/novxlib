@@ -1,7 +1,7 @@
 # Changelog
 
 
-### v3.6.1
+### v3.7.0
 
 - Refactor, making the list intersection a global function.
 
