@@ -107,12 +107,13 @@ class Section(BasicElementTags):
         """Set sectionContent updating word count and letter count."""
         if self._sectionContent != text:
             self._sectionContent = text
-            self.wordCount = 0
             if text is not None:
                 text = ADDITIONAL_WORD_LIMITS.sub(' ', text)
                 text = NO_WORD_LIMITS.sub('', text)
                 wordList = text.split()
                 self.wordCount = len(wordList)
+            else:
+                self.wordCount = 0
             self.on_element_change()
 
     @property
@@ -508,12 +509,14 @@ class Section(BasicElementTags):
         endTime = None
         endDay = None
         # Calculate end date from section section duration.
-        lastsDays = 0
         if self.lastsDays:
             lastsDays = int(self.lastsDays)
-        lastsSeconds = 0
+        else:
+            lastsDays = 0
         if self.lastsHours:
             lastsSeconds = int(self.lastsHours) * 3600
+        else:
+            lastsSeconds = 0
         if self.lastsMinutes:
             lastsSeconds += int(self.lastsMinutes) * 60
         sectionDuration = timedelta(days=lastsDays, seconds=lastsSeconds)

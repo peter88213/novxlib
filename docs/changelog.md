@@ -1,6 +1,10 @@
 # Changelog
 
 
+### v3.7.2
+
+- Refactor: Undo some changes from v3.7.1.
+
 ### v3.7.1
 
 - Fix a regression from v3.6.0 where data export raises an exception when trying to get the timestamp.
