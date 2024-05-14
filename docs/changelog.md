@@ -1,6 +1,12 @@
 # Changelog
 
 
+### v3.7.1
+
+- Fix a regression from v3.6.0 where data export raises an exception when trying to get the timestamp.
+- Fix a suspected bug in the NvTree.insert() method.
+- Refactor: Simplify control structures; return early.
+
 ### v3.7.0
 
 - Refactor, making the list intersection a global function.

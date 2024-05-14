@@ -78,16 +78,25 @@ class OdtReader(OdfReader, ABC):
         For differently structured ODT files  do override this method in a subclass.
         """
         if tag == 'div':
+
             if attrs[0][0] == 'id':
                 if attrs[0][1].startswith(SECTION_PREFIX):
                     self._scId = attrs[0][1]
-                elif attrs[0][1].startswith(CHAPTER_PREFIX):
+                    return
+
+                if attrs[0][1].startswith(CHAPTER_PREFIX):
                     self._chId = attrs[0][1]
-                elif attrs[0][1].startswith(PLOT_LINE_PREFIX):
+                    return
+
+                if attrs[0][1].startswith(PLOT_LINE_PREFIX):
                     self._plId = attrs[0][1]
-                elif attrs[0][1].startswith(PLOT_POINT_PREFIX):
+                    return
+
+                if attrs[0][1].startswith(PLOT_POINT_PREFIX):
                     self._ppId = attrs[0][1]
-        elif tag == 's':
+            return
+
+        if tag == 's':
             self._lines.append(' ')
 
     def read(self):

@@ -139,6 +139,7 @@ class Splitter:
                 # Search section content for dividers.
                 for line in lines:
                     plainLine = re.sub('\<.*?\>', '', line)
+
                     if '#' in plainLine:
                         heading = plainLine.strip('# ').split(self.DESC_SEPARATOR)
                         title = heading[0]
@@ -165,6 +166,7 @@ class Splitter:
                         scId = newScId
                         sectionsSplit = True
                         inSection = True
+
                     elif plainLine.startswith(self.CHAPTER_SEPARATOR):
                         # Start a new chapter.
                         if inSection:
@@ -180,6 +182,7 @@ class Splitter:
                         novel.tree.insert(CH_ROOT, chIndex, newChId)
                         chId = newChId
                         sectionsSplit = True
+
                     elif plainLine.startswith(self.PART_SEPARATOR):
                         # start a new part.
                         if inSection:
@@ -194,6 +197,7 @@ class Splitter:
                         chIndex += 1
                         novel.tree.insert(CH_ROOT, chIndex, newChId)
                         chId = newChId
+
                     elif not inSection:
                         # Append a section without heading to a new chapter or part.
                         newLines.append(line)
@@ -204,8 +208,10 @@ class Splitter:
                         scId = newScId
                         sectionsSplit = True
                         inSection = True
+
                     else:
                         newLines.append(line)
+
                 if inSection:
                     novel.sections[scId].sectionContent = '\n'.join(newLines)
             chIndex += 1

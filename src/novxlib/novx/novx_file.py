@@ -180,7 +180,7 @@ class NovxFile(File):
         self.xmlTree = ET.ElementTree(xmlRoot)
         self._write_element_tree(self)
         self._postprocess_xml_file(self.filePath)
-        self.timestamp = os.path.getmtime(self.filePath)
+        self._get_timestamp()
 
     def _build_project(self, root):
         xmlProject = ET.SubElement(root, 'PROJECT')

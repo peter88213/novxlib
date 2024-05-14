@@ -288,9 +288,10 @@ $ArcNoteCells
         arcNoteCells = []
         for plId in self.novel.tree.get_children(PL_ROOT):
             plotNotes = self.novel.sections[scId].plotNotes
-            arcNote = ''
             if plotNotes:
                 arcNote = plotNotes.get(plId, '')
+            else:
+                arcNote = ''
             mapping = {'ArcNote':arcNote}
             arcNoteCells.append(Template(self._arcNoteCell).safe_substitute(mapping))
         sectionMapping['ArcNoteCells'] = '\n'.join(arcNoteCells)

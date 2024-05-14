@@ -50,7 +50,9 @@ class OdtRProof(OdtRFormatted):
             if f'[{SECTION_PREFIX}' in data:
                 self._scId = f"{SECTION_PREFIX}{re.search('[0-9]+', data).group()}"
                 self._lines = []
-            elif f'[/{SECTION_PREFIX}]' in data:
+                return
+
+            if f'[/{SECTION_PREFIX}]' in data:
                 if self._scId in self.novel.sections:
                     self._lines.pop()
                     # remove the paragraph tag
@@ -59,7 +61,9 @@ class OdtRProof(OdtRFormatted):
                     self._lines = []
                 self._scId = None
                 self._content = False
-            elif self._scId is not None:
+                return
+
+            if self._scId is not None:
                 self._lines.append(data)
         except:
             raise Error(f'{_("Corrupt marker")}: "{data}"')
@@ -75,20 +79,32 @@ class OdtRProof(OdtRFormatted):
         if tag == 'p':
             if self._content:
                 self._lines.append('</p>')
-            elif self._scId:
+                return
+
+            if self._scId:
                 self._content = True
-        elif tag in ('em', 'strong', 'comment', 'creator', 'date', 'note', 'note-citation', 'ul', 'li'):
+            return
+
+        if tag in ('em', 'strong', 'comment', 'creator', 'date', 'note', 'note-citation', 'ul', 'li'):
             self._lines.append(f'</{tag}>')
-        elif tag == 'lang':
+            return
+
+        if tag == 'lang':
             self._lines.append('</span>')
-        elif tag == 'div':
+            return
+
+        if tag == 'div':
             text = ''.join(self._lines)
             self.novel.sections[self._scId].sectionContent = text
             self._lines = []
             self._scId = None
-        elif tag == 'h1':
+            return
+
+        if tag == 'h1':
             self._lines.append('\n')
-        elif tag == 'h2':
+            return
+
+        if tag == 'h2':
             self._lines.append('\n')
 
     def handle_starttag(self, tag, attrs):
@@ -101,6 +117,7 @@ class OdtRProof(OdtRFormatted):
         Overrides the superclass method.
         """
         if self._content:
+
             if tag == 'p':
                 attributes = ''
                 try:
@@ -112,28 +129,39 @@ class OdtRProof(OdtRFormatted):
                 except:
                     pass
                 self._lines.append(f'<p{attributes}>')
-            elif tag in('em', 'strong', 'comment', 'creator', 'date', 'note-citation', 'ul', 'li'):
+                return
+
+            if tag in('em', 'strong', 'comment', 'creator', 'date', 'note-citation', 'ul', 'li'):
                 self._lines.append(f'<{tag}>')
-            elif tag == 'lang':
-                try:
-                    if attrs[0][0] == 'lang':
-                        if not attrs[0][1] in self.novel.languages:
-                            self.novel.languages.append(attrs[0][1])
-                        self._lines.append(f'<span xml:lang="{attrs[0][1]}">')
-                except:
-                    pass
-            elif tag == 'h2':
+                return
+
+            if tag == 'lang':
+                if attrs[0][0] == 'lang':
+                    if not attrs[0][1] in self.novel.languages:
+                        self.novel.languages.append(attrs[0][1])
+                    self._lines.append(f'<span xml:lang="{attrs[0][1]}">')
+                return
+
+            if tag == 'h2':
                 self._lines.append(f'{Splitter.CHAPTER_SEPARATOR} ')
-            elif tag == 'h1':
+                return
+
+            if tag == 'h1':
                 self._lines.append(f'{Splitter.PART_SEPARATOR} ')
-            elif tag == 's':
+                return
+
+            if tag == 's':
                 self._lines.append(' ')
-            elif tag == 'note':
+                return
+
+            if tag == 'note':
                 attributes = ''
                 for att in attrs:
                     attributes = f'{attributes} {att[0]}="{att[1]}"'
                 self._lines.append(f'<note {attributes}>')
-            elif tag == 'body':
+                return
+
+            if tag == 'body':
                 for attr in attrs:
                     if attr[0] == 'language':
                         if attr[1]:

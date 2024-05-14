@@ -4,12 +4,9 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
-import re
-
 from novxlib.model.character import Character
 from novxlib.novx_globals import CHARACTER_PREFIX
 from novxlib.novx_globals import CHARLIST_SUFFIX
-from novxlib.novx_globals import CR_ROOT
 from novxlib.novx_globals import _
 from novxlib.novx_globals import string_to_list
 from novxlib.ods.ods_reader import OdsReader

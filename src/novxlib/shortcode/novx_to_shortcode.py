@@ -55,17 +55,27 @@ class NovxToShortcode(sax.ContentHandler):
             else:
                 self.textList.append('\n')
             self._paragraph = False
-        elif name == 'em':
+            return
+
+        if name == 'em':
             self.textList.append('[/i]')
-        elif name == 'strong':
+            return
+
+        if name == 'strong':
             self.textList.append('[/b]')
-        elif name == 'span':
+            return
+
+        if name == 'span':
             if self._span:
                 self.textList.append(self._span.pop())
-        elif name in ('comment', 'note'):
+            return
+
+        if name in ('comment', 'note'):
             self._comment = False
             self.textList.append('*/')
-        elif name in ('creator', 'date', 'note-citation'):
+            return
+
+        if name in ('creator', 'date', 'note-citation'):
             self._paragraph = True
 
     def startElement(self, name, attrs):
@@ -78,24 +88,38 @@ class NovxToShortcode(sax.ContentHandler):
             attrKey, attrValue = attribute
             xmlAttributes[attrKey] = attrValue
         locale = xmlAttributes.get('xml:lang', None)
+
         if name == 'p':
             self._paragraph = True
             if xmlAttributes.get('style', None) == 'quotations':
                 self.textList.append('> ')
-        elif name == 'em':
+            return
+
+        if name == 'em':
             self.textList.append('[i]')
-        elif name == 'strong':
+            return
+
+        if name == 'strong':
             self.textList.append('[b]')
-        elif name == 'span':
-            if locale is not None:
-                self._span.append(f'[/lang={locale}]')
-                self.textList.append(f'[lang={locale}]')
-        elif name in ('comment', 'note'):
+            return
+
+        if name == 'span':
+            if locale is None:
+                return
+
+            self._span.append(f'[/lang={locale}]')
+            self.textList.append(f'[lang={locale}]')
+            return
+
+        if name in ('comment', 'note'):
             self._comment = True
             self.textList.append('/*')
+
             if name == 'note':
                 noteClass = xmlAttributes.get('class', 'footnote')
                 self.textList.append(f"{self.NOTE_TYPES.get(noteClass, '@fn')} ")
-        elif name in ('creator', 'date', 'note-citation'):
+            return
+
+        if name in ('creator', 'date', 'note-citation'):
             self._paragraph = False
 

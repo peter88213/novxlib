@@ -25,8 +25,10 @@ class OdtRSectionDesc(OdtReader):
         
         Overrides the superclass method.
         """
-        if self._scId is not None:
-            self._lines.append(data)
+        if self._scId is None:
+            return
+
+        self._lines.append(data)
 
     def handle_endtag(self, tag):
         """Recognize the end of the section section and save data.
@@ -42,9 +44,13 @@ class OdtRSectionDesc(OdtReader):
                 self.novel.sections[self._scId].desc = text.rstrip()
                 self._lines = []
                 self._scId = None
-            elif tag == 'p':
+                return
+
+            if tag == 'p':
                 self._lines.append('\n')
-        elif self._chId is not None:
+            return
+
+        if self._chId is not None:
             if tag == 'div':
                 self._chId = None
 

@@ -69,10 +69,10 @@ $Desc
         plotPoints = []
         for ppId in self.novel.tree.get_children(plId):
             plotPointMapping = dict(
-                    ID=ppId,
-                    Title=self.novel.plotPoints[ppId].title,
-                    Desc=self._convert_from_novx(self.novel.plotPoints[ppId].desc),
-                    )
+                ID=ppId,
+                Title=self.novel.plotPoints[ppId].title,
+                Desc=self._convert_from_novx(self.novel.plotPoints[ppId].desc),
+            )
             template = Template(self._plotPointTemplate)
             plotPoints.append(template.safe_substitute(plotPointMapping))
             scId = self.novel.plotPoints[ppId].sectionAssoc
@@ -86,7 +86,7 @@ $Desc
                     scID=scId,
                     ManuscriptSuffix=MANUSCRIPT_SUFFIX,
                     SectionsSuffix=SECTIONS_SUFFIX,
-                    )
+                )
                 template = Template(self._assocSectionTemplate)
                 plotPoints.append(template.safe_substitute(sectionAssocMapping))
         arcMapping['TurningPoints'] = '\n'.join(plotPoints)

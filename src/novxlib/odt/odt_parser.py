@@ -324,9 +324,10 @@ class OdtParser(sax.ContentHandler):
             if xmlAttributes.get('fo:language', False):
                 languageCode = xmlAttributes['fo:language']
                 countryCode = xmlAttributes['fo:country']
-                locale = languageCode
                 if countryCode != 'none':
                     locale = f'{languageCode}-{countryCode}'
+                else:
+                    locale = languageCode
                 self._languageTags[self._style] = locale
             return
 
