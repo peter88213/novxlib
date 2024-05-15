@@ -53,6 +53,10 @@ class OdtParser(sax.ContentHandler):
         self._style = None
         # ODT style being processed.
 
+        self._languageCode = None
+        self._countryCode = None
+        # str: the document's global locale, used for filtering redundant inline tags
+
         self._client = client
 
     def feed_file(self, filePath):
@@ -72,50 +76,9 @@ class OdtParser(sax.ContentHandler):
             dc='http://purl.org/dc/elements/1.1/',
             meta='urn:oasis:names:tc:opendocument:xmlns:meta:1.0'
         )
-
-        try:
-            with zipfile.ZipFile(filePath, 'r') as odfFile:
-                content = odfFile.read('content.xml')
-                styles = odfFile.read('styles.xml')
-                try:
-                    meta = odfFile.read('meta.xml')
-                except KeyError:
-                    # meta.xml may be missing in outlines created with e.g. FreeMind
-                    meta = None
-        except:
-            raise Error(f'{_("Cannot read file")}: "{norm_path(filePath)}".')
-
-        #--- Get language and country from 'styles.xml'.
-        root = ET.fromstring(styles)
-        styles = root.find('office:styles', namespaces)
-        for defaultStyle in styles.iterfind('style:default-style', namespaces):
-            if defaultStyle.get(f'{{{namespaces["style"]}}}family') == 'paragraph':
-                textProperties = defaultStyle.find('style:text-properties', namespaces)
-                self._languageCode = textProperties.get(f'{{{namespaces["fo"]}}}language')
-                self._countryCode = textProperties.get(f'{{{namespaces["fo"]}}}country')
-                self._client.handle_starttag('body', [('language', self._languageCode), ('country', self._countryCode)])
-                break
-
-        #--- Get title, description, and author from 'meta.xml'.
-        if meta:
-            root = ET.fromstring(meta)
-            meta = root.find('office:meta', namespaces)
-            title = meta.find('dc:title', namespaces)
-            if title is not None:
-                if title.text:
-                    self._client.handle_starttag('title', [()])
-                    self._client.handle_data(title.text)
-                    self._client.handle_endtag('title')
-            author = meta.find('meta:initial-creator', namespaces)
-            if author is not None:
-                if author.text:
-                    self._client.handle_starttag('meta', [('', 'author'), ('', author.text)])
-            desc = meta.find('dc:description', namespaces)
-            if desc is not None:
-                if desc.text:
-                    self._client.handle_starttag('meta', [('', 'description'), ('', desc.text)])
-
-        #--- Parse 'content.xml'.
+        styles, meta, content = self._unzip_odt_file(filePath)
+        self._read_styles_xml(styles, namespaces)
+        self._read_meta_xml(meta, namespaces)
         sax.parseString(content, self)
 
     def characters(self, content):
@@ -317,10 +280,13 @@ class OdtParser(sax.ContentHandler):
             return
 
         if name == 'style:text-properties':
+
             if xmlAttributes.get('fo:font-style', None) == 'italic':
                 self._emTags.append(self._style)
+
             if xmlAttributes.get('fo:font-weight', None) == 'bold':
                 self._strongTags.append(self._style)
+
             if xmlAttributes.get('fo:language', False):
                 languageCode = xmlAttributes['fo:language']
                 countryCode = xmlAttributes['fo:country']
@@ -338,4 +304,54 @@ class OdtParser(sax.ContentHandler):
 
         if name == 'text:s':
             self._client.handle_starttag('s', [()])
+
+    def _read_meta_xml(self, meta, namespaces):
+        """Pass title, description, and author from 'meta.xml' to the client."""
+        if meta is None:
+            return
+
+        root = ET.fromstring(meta)
+        meta = root.find('office:meta', namespaces)
+        title = meta.find('dc:title', namespaces)
+        if title is not None:
+            if title.text:
+                self._client.handle_starttag('title', [()])
+                self._client.handle_data(title.text)
+                self._client.handle_endtag('title')
+        author = meta.find('meta:initial-creator', namespaces)
+        if author is not None:
+            if author.text:
+                self._client.handle_starttag('meta', [('', 'author'), ('', author.text)])
+        desc = meta.find('dc:description', namespaces)
+        if desc is not None:
+            if desc.text:
+                self._client.handle_starttag('meta', [('', 'description'), ('', desc.text)])
+
+    def _read_styles_xml(self, styles, namespaces):
+        """Pass language and country from 'styles.xml' to the client."""
+        root = ET.fromstring(styles)
+        styles = root.find('office:styles', namespaces)
+        for defaultStyle in styles.iterfind('style:default-style', namespaces):
+            if defaultStyle.get(f'{{{namespaces["style"]}}}family') == 'paragraph':
+                textProperties = defaultStyle.find('style:text-properties', namespaces)
+                self._languageCode = textProperties.get(f'{{{namespaces["fo"]}}}language')
+                self._countryCode = textProperties.get(f'{{{namespaces["fo"]}}}country')
+                self._client.handle_starttag('body', [('language', self._languageCode), ('country', self._countryCode)])
+                return
+
+    def _unzip_odt_file(self, filePath):
+        """Return three xml strings from the zipped ODT file."""
+        try:
+            with zipfile.ZipFile(filePath, 'r') as odfFile:
+                content = odfFile.read('content.xml')
+                styles = odfFile.read('styles.xml')
+                try:
+                    meta = odfFile.read('meta.xml')
+                except KeyError:
+                    # meta.xml may be missing in outlines created with e.g. FreeMind
+                    meta = None
+                return styles, meta, content
+
+        except:
+            raise Error(f'{_("Cannot read file")}: "{norm_path(filePath)}".')
 

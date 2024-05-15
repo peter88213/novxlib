@@ -41,12 +41,7 @@ class OdsParser:
             text='urn:oasis:names:tc:opendocument:xmlns:text:1.0',
             table='urn:oasis:names:tc:opendocument:xmlns:table:1.0',
         )
-        try:
-            with zipfile.ZipFile(filePath, 'r') as odfFile:
-                content = odfFile.read('content.xml')
-        except:
-            raise Error(f'{_("Cannot read file")}: "{norm_path(filePath)}".')
-
+        content = self._unzip_ods_file(filePath)
         root = ET.fromstring(content)
 
         #--- Parse 'content.xml'.
@@ -98,4 +93,14 @@ class OdsParser:
                 rows.append(cells)
                 # print(cells)
         return rows
+
+    def _unzip_ods_file(self, filePath):
+        """Return an xml string from the zipped ODS file."""
+        try:
+            with zipfile.ZipFile(filePath, 'r') as odfFile:
+                content = odfFile.read('content.xml')
+            return content
+
+        except:
+            raise Error(f'{_("Cannot read file")}: "{norm_path(filePath)}".')
 

@@ -1,6 +1,12 @@
 # Changelog
 
 
+
+### v3.7.4
+
+- When parsing ODT, skip redundant language tags.
+- Refactor the OdtParser and OdsParser classes.
+
 ### v3.7.3
 
 - Do not write xml elements for empty plot notes.
