@@ -126,8 +126,9 @@ class BasicElement:
         text -- string to convert.
         """
         xmlElement = ET.Element(tag)
-        for line in text.split('\n'):
-            ET.SubElement(xmlElement, 'p').text = line
+        if text:
+            for line in text.split('\n'):
+                ET.SubElement(xmlElement, 'p').text = line
         return xmlElement
 
     def _xml_element_to_text(self, xmlElement):

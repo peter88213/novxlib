@@ -1,6 +1,12 @@
 # Changelog
 
 
+### v3.7.3
+
+- Do not write xml elements for empty plot notes.
+- Change the ODT "ViewLayoutColumns" setting to single page.
+- Update css: Render comment as block element.
+
 ### v3.7.2
 
 - Refactor: Undo some changes from v3.7.1.

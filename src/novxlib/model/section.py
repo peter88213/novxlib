@@ -567,10 +567,15 @@ class Section(BasicElementTags):
         if self.plotNotes:
             xmlPlotNotes = ET.SubElement(xmlElement, 'PlotNotes')
             for plId in self.plotNotes:
-                if plId in self.scPlotLines:
-                    xmlPlotNote = self._text_to_xml_element('PlotlineNotes', self.plotNotes[plId])
-                    xmlPlotNote.set('id', plId)
-                    xmlPlotNotes.append(xmlPlotNote)
+                if not plId in self.scPlotLines:
+                    continue
+
+                if not self.plotNotes[plId]:
+                    continue
+
+                xmlPlotNote = self._text_to_xml_element('PlotlineNotes', self.plotNotes[plId])
+                xmlPlotNote.set('id', plId)
+                xmlPlotNotes.append(xmlPlotNote)
 
         # Date/Day and Time.
         if self.date:
