@@ -106,7 +106,7 @@ class OdtWriter(OdfFile):
      <config:config-item config:name="VisibleRight" config:type="int">30506</config:config-item>
      <config:config-item config:name="VisibleBottom" config:type="int">27781</config:config-item>
      <config:config-item config:name="ZoomType" config:type="short">0</config:config-item>
-     <config:config-item config:name="ViewLayoutColumns" config:type="short">0</config:config-item>
+     <config:config-item config:name="ViewLayoutColumns" config:type="short">1</config:config-item>
      <config:config-item config:name="ViewLayoutBookMode" config:type="boolean">false</config:config-item>
      <config:config-item config:name="ZoomFactor" config:type="short">100</config:config-item>
      <config:config-item config:name="IsSelectedFrame" config:type="boolean">false</config:config-item>
