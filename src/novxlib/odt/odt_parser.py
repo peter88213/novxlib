@@ -91,9 +91,9 @@ class OdtParser(sax.ContentHandler):
         for defaultStyle in styles.iterfind('style:default-style', namespaces):
             if defaultStyle.get(f'{{{namespaces["style"]}}}family') == 'paragraph':
                 textProperties = defaultStyle.find('style:text-properties', namespaces)
-                lngCode = textProperties.get(f'{{{namespaces["fo"]}}}language')
-                ctrCode = textProperties.get(f'{{{namespaces["fo"]}}}country')
-                self._client.handle_starttag('body', [('language', lngCode), ('country', ctrCode)])
+                self._languageCode = textProperties.get(f'{{{namespaces["fo"]}}}language')
+                self._countryCode = textProperties.get(f'{{{namespaces["fo"]}}}country')
+                self._client.handle_starttag('body', [('language', self._languageCode), ('country', self._countryCode)])
                 break
 
         #--- Get title, description, and author from 'meta.xml'.
@@ -324,6 +324,11 @@ class OdtParser(sax.ContentHandler):
             if xmlAttributes.get('fo:language', False):
                 languageCode = xmlAttributes['fo:language']
                 countryCode = xmlAttributes['fo:country']
+                if languageCode == self._languageCode:
+                    if countryCode == self._countryCode:
+                        return
+                        # skipping redundant document locale
+
                 if countryCode != 'none':
                     locale = f'{languageCode}-{countryCode}'
                 else:
