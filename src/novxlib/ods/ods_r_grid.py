@@ -5,7 +5,6 @@ For further information see https://github.com/peter88213/novxlib
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
 from datetime import date, time
-import re
 
 from novxlib.model.section import Section
 from novxlib.novx_globals import GRID_SUFFIX, PL_ROOT
@@ -29,7 +28,7 @@ class OdsRGrid(OdsReader):
         'Description',
         'Viewpoint',
         'Tags',
-        'A/R',
+        'Scene',
         'Goal',
         'Conflict',
         'Outcome',
@@ -148,15 +147,15 @@ class OdsRGrid(OdsReader):
                 elif tags is not None:
                     self.novel.sections[scId].tags = None
 
-            #--- A/R/C
+            #--- Scene
             try:
-                ar = self._columns['A/R'][scId]
+                ar = self._columns['Scene'][scId]
             except:
                 pass
             else:
                 if ar:
                     try:
-                        self.novel.sections[scId].scPacing = Section.PACING.index(ar)
+                        self.novel.sections[scId].scene = Section.SCENE.index(ar)
                     except ValueError:
                         pass
 

@@ -44,7 +44,7 @@ class NovxFile(File):
     EXTENSION = '.novx'
 
     MAJOR_VERSION = 1
-    MINOR_VERSION = 3
+    MINOR_VERSION = 4
     # DTD version
 
     XML_HEADER = f'''<?xml version="1.0" encoding="utf-8"?>

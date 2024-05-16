@@ -113,7 +113,7 @@ class OdtROutline(OdtReader):
             self._scId = f'{SECTION_PREFIX}{self._scCount}'
             self.novel.sections[self._scId] = Section(
                 scType=0,
-                scPacing=0,
+                scene=0,
                 status=1,
             )
             self.novel.tree.append(self._chId, self._scId)

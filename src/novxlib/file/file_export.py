@@ -475,8 +475,6 @@ class FileExport(File):
         else:
             sectionItems = ''
 
-        #--- Create A/R marker string.
-
         #--- Date or day.
         if self.novel.sections[scId].date is not None and self.novel.sections[scId].date != Section.NULL_DATE:
             scDay = ''
@@ -556,7 +554,7 @@ class FileExport(File):
             LastsHours=lastsHours,
             LastsMinutes=lastsMinutes,
             Duration=duration,
-            ReactionSection=Section.PACING[self.novel.sections[scId].scPacing],
+            Scene=Section.SCENE[self.novel.sections[scId].scene],
             Goal=self._convert_from_novx(self.novel.sections[scId].goal),
             Conflict=self._convert_from_novx(self.novel.sections[scId].conflict),
             Outcome=self._convert_from_novx(self.novel.sections[scId].outcome),

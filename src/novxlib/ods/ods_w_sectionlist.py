@@ -34,7 +34,7 @@ class OdsWSectionList(OdsWGrid):
     # Duration
     # Tags
     # Section notes
-    # A/R
+    # Scene
     # Goal
     # Conflict
     # Outcome
@@ -107,7 +107,7 @@ class OdsWSectionList(OdsWGrid):
       <text:p>Section notes</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>A/R</text:p>
+      <text:p>Scene</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>Goal</text:p>
@@ -173,7 +173,7 @@ class OdsWSectionList(OdsWGrid):
       <text:p>{_("Section notes")}</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>{_("A/R")}</text:p>
+      <text:p>{_("Scene")}</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>{_("Goal")}</text:p>
@@ -238,7 +238,7 @@ $TimeCell
       <text:p>$Notes</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>$ReactionSection</text:p>
+      <text:p>$Scene</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>$Goal</text:p>

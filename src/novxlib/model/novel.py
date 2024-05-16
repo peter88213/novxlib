@@ -34,6 +34,9 @@ class Novel(BasicElement):
             chapterHeadingSuffix=None,
             partHeadingPrefix=None,
             partHeadingSuffix=None,
+            notApplicableGoal=None,
+            notApplicableConflict=None,
+            notApplicableOutcome=None,
             customGoal=None,
             customConflict=None,
             customOutcome=None,
@@ -79,6 +82,9 @@ class Novel(BasicElement):
         self._chapterHeadingSuffix = chapterHeadingSuffix
         self._partHeadingPrefix = partHeadingPrefix
         self._partHeadingSuffix = partHeadingSuffix
+        self._notApplicableGoal = notApplicableGoal
+        self._notApplicableConflict = notApplicableConflict
+        self._notApplicableOutcome = notApplicableOutcome
         self._customGoal = customGoal
         self._customConflict = customConflict
         self._customOutcome = customOutcome
@@ -271,6 +277,36 @@ class Novel(BasicElement):
     def partHeadingSuffix(self, newVal):
         if self._partHeadingSuffix != newVal:
             self._partHeadingSuffix = newVal
+            self.on_element_change()
+
+    @property
+    def notApplicableGoal(self):
+        return self._notApplicableGoal
+
+    @notApplicableGoal.setter
+    def notApplicableGoal(self, newVal):
+        if self._notApplicableGoal != newVal:
+            self._notApplicableGoal = newVal
+            self.on_element_change()
+
+    @property
+    def notApplicableConflict(self):
+        return self._notApplicableConflict
+
+    @notApplicableConflict.setter
+    def notApplicableConflict(self, newVal):
+        if self._notApplicableConflict != newVal:
+            self._notApplicableConflict = newVal
+            self.on_element_change()
+
+    @property
+    def notApplicableOutcome(self):
+        return self._notApplicableOutcome
+
+    @notApplicableOutcome.setter
+    def notApplicableOutcome(self, newVal):
+        if self._notApplicableOutcome != newVal:
+            self._notApplicableOutcome = newVal
             self.on_element_change()
 
     @property

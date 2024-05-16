@@ -105,7 +105,7 @@ class Splitter:
                 parent.status = 2
             newSection.status = parent.status
             newSection.scType = parent.scType
-            newSection.scPacing = parent.scPacing
+            newSection.scene = parent.scene
             newSection.date = parent.date
             newSection.time = parent.time
             newSection.day = parent.day

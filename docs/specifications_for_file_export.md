@@ -108,7 +108,7 @@ There are two options:
 
 - **Duration** - Combination of days and hours and minutes
 
-- **$ReactionSection** - A(ction) or R(eaction)
+- **$Scene** - N/A or A(ction) or R(eaction) or C(ustom)
 - **$Goal** - The section protagonist's goal, html-formatted
 - **$Conflict** - The section conflict, html-formatted
 - **$Outcome** - The section outcome, html-formatted

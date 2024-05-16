@@ -115,7 +115,7 @@ class OdtRImport(OdtRFormatted):
                 self._scId = f'{SECTION_PREFIX}{self._scCount}'
                 self.novel.sections[self._scId] = Section(title=f'{_("Section")} {self._scCount}',
                                                       scType=0,
-                                                      scPacing=0,
+                                                      scene=0,
                                                       status=1,
                                                       )
                 self.novel.tree.append(self._chId, self._scId)

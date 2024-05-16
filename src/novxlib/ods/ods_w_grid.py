@@ -36,7 +36,7 @@ class OdsWGrid(OdsWriter):
     # Viewpoint
     # All plot lines
     # Tags
-    # A/R
+    # Scene
     # Goal
     # Conflict
     # Outcome
@@ -88,7 +88,7 @@ $ArcIdCells
       <text:p>Tags</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>A/R</text:p>
+      <text:p>Scene</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>Goal</text:p>
@@ -134,7 +134,7 @@ $ArcTitleCells
       <text:p>{_("Tags")}</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>{_("A/R")}</text:p>
+      <text:p>{_("Scene")}</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>{_("Goal")} / {_("Reaction")}$CustomGoal</text:p>
@@ -179,7 +179,7 @@ $ArcNoteCells
       <text:p>$Tags</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>$ReactionSection</text:p>
+      <text:p>$Scene</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p>$Goal</text:p>

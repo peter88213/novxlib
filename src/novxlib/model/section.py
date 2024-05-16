@@ -24,8 +24,12 @@ NO_WORD_LIMITS = re.compile('\<note\>.*?\<\/note\>|\<comment\>.*?\<\/comment\>|\
 
 class Section(BasicElementTags):
     """novelibre section representation."""
+
     PACING = ['A', 'R', 'C']
-    # emulating an enumeration for the section Action/Reaction/Custom type
+    # emulating an enumeration for the scene Action/Reaction/Custom type
+
+    SCENE = ['-', 'A', 'R', 'C']
+    # emulating an enumeration for the scene Action/Reaction/Custom type
 
     STATUS = [
         None,
@@ -42,7 +46,7 @@ class Section(BasicElementTags):
 
     def __init__(self,
             scType=None,
-            scPacing=None,
+            scene=None,
             status=None,
             appendToPrev=None,
             goal=None,
@@ -67,7 +71,7 @@ class Section(BasicElementTags):
 
         # Initialize properties.
         self._scType = scType
-        self._scPacing = scPacing
+        self._scene = scene
         self._status = status
         self._appendToPrev = appendToPrev
         self._goal = goal
@@ -131,16 +135,17 @@ class Section(BasicElementTags):
             self.on_element_change()
 
     @property
-    def scPacing(self):
-        # 0 = Action
-        # 1 = Reaction
-        # 2 = Custom
-        return self._scPacing
+    def scene(self):
+        # 0 = N/A
+        # 1 = Action
+        # 2 = Reaction
+        # 3 = Custom
+        return self._scene
 
-    @scPacing.setter
-    def scPacing(self, newVal):
-        if self._scPacing != newVal:
-            self._scPacing = newVal
+    @scene.setter
+    def scene(self, newVal):
+        if self._scene != newVal:
+            self._scene = newVal
             self.on_element_change()
 
     @property
@@ -398,17 +403,25 @@ class Section(BasicElementTags):
             self.status = int(status)
         else:
             self.status = 1
-        scPacing = xmlElement.get('pacing', 0)
-        if scPacing in ('1', '2'):
-            self.scPacing = int(scPacing)
+        scene = xmlElement.get('scene', 0)
+        if scene in ('1', '2', '3'):
+            self.scene = int(scene)
         else:
-            self.scPacing = 0
+            self.scene = 0
         self.appendToPrev = xmlElement.get('append', None) == '1'
 
         # Goal/Conflict/outcome.
         self.goal = self._xml_element_to_text(xmlElement.find('Goal'))
         self.conflict = self._xml_element_to_text(xmlElement.find('Conflict'))
         self.outcome = self._xml_element_to_text(xmlElement.find('Outcome'))
+
+        # Substitute the deprecated "pacing" attribute.
+        if not self.scene:
+            scPacing = xmlElement.get('pacing', 0)
+            if scPacing in ('1', '2'):
+                self.scene = int(scPacing) + 1
+            elif self.goal or self.conflict or self.outcome:
+                self.scene = 1
 
         # Plot notes.
         xmlPlotNotes = xmlElement.find('PlotNotes')
@@ -550,8 +563,8 @@ class Section(BasicElementTags):
             xmlElement.set('type', str(self.scType))
         if self.status > 1:
             xmlElement.set('status', str(self.status))
-        if self.scPacing > 0:
-            xmlElement.set('pacing', str(self.scPacing))
+        if self.scene > 0:
+            xmlElement.set('scene', str(self.scene))
         if self.appendToPrev:
             xmlElement.set('append', '1')
 
