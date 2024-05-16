@@ -25,11 +25,8 @@ NO_WORD_LIMITS = re.compile('\<note\>.*?\<\/note\>|\<comment\>.*?\<\/comment\>|\
 class Section(BasicElementTags):
     """novelibre section representation."""
 
-    PACING = ['A', 'R', 'C']
-    # emulating an enumeration for the scene Action/Reaction/Custom type
-
-    SCENE = ['-', 'A', 'R', 'C']
-    # emulating an enumeration for the scene Action/Reaction/Custom type
+    SCENE = ['-', 'A', 'R', 'x']
+    # emulating an enumeration for the scene Action/Reaction/Other type
 
     STATUS = [
         None,

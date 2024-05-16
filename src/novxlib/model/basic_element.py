@@ -118,6 +118,8 @@ class BasicElement:
                 xmlFullPath = xmlLink.find('FullPath')
                 if xmlFullPath is not None:
                     fullPath = xmlFullPath.text
+                else:
+                    fullPath = None
             else:
                 # Read deprecated attributes from DTD 1.3.
                 path = xmlLink.attrib.get('path', None)

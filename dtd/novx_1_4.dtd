@@ -7,7 +7,8 @@
 	   Author?, 
 		ChapterHeadingPrefix?, ChapterHeadingSuffix?, 
 		PartHeadingPrefix?, PartHeadingSuffix?, 
-		CustomGoal?, CustomConflict?, CustomOutcome?, 
+      CustomPlotProgress?, CustomCharacterization?, CustomWorldBuilding?, 
+      CustomGoal?, CustomConflict?, CustomOutcome?, 
 		CustomChrBio?, CustomChrGoals?, 
 		WordCountStart?, WordTarget?, 
 		ReferenceDate?)>
@@ -27,8 +28,8 @@
 					style (quotations) #IMPLIED
 					xml:lang NMTOKEN #IMPLIED
 					>
-				<!ELEMENT em (#PCDATA | span | comment | note)*>
-				<!ELEMENT strong (#PCDATA | span | comment | note)*>
+				<!ELEMENT em (#PCDATA | span | comment | note | strong)*>
+				<!ELEMENT strong (#PCDATA | span | comment | note | em)*>
 				<!ELEMENT span (#PCDATA | em | strong | comment | note)*>
 					<!ATTLIST span
 						xml:lang NMTOKEN #REQUIRED
@@ -44,14 +45,17 @@
 					<!ELEMENT date (#PCDATA)>
 				<!ELEMENT ul (li*)>
 					<!ELEMENT li (p*)>
-        <!ELEMENT Link (Title?, Path, FullPath)>
-            <!ELEMENT Path (PCDATA)>
-            <!ELEMENT FullPath (PCDATA)>            
+        <!ELEMENT Link (Title?, Path, FullPath?)>
+            <!ELEMENT Path (#PCDATA)>
+            <!ELEMENT FullPath (#PCDATA)>            
 		<!ELEMENT Author (#PCDATA)>
         <!ELEMENT ChapterHeadingPrefix (#PCDATA)>
         <!ELEMENT ChapterHeadingSuffix (#PCDATA)>
         <!ELEMENT PartHeadingPrefix (#PCDATA)>
         <!ELEMENT PartHeadingSuffix (#PCDATA)>
+        <!ELEMENT CustomPlotProgress (#PCDATA)>
+        <!ELEMENT CustomCharacterization (#PCDATA)>
+        <!ELEMENT CustomWorldBuilding (#PCDATA)>
         <!ELEMENT CustomGoal (#PCDATA)>
         <!ELEMENT CustomConflict (#PCDATA)>
         <!ELEMENT CustomOutcome (#PCDATA)>
@@ -90,7 +94,7 @@
 				>
 
 	<!ELEMENT CHAPTERS (CHAPTER*)>
-		<!ELEMENT CHAPTER (Title?, Desc?, Link*, 
+		<!ELEMENT CHAPTER (Title?, Desc?, Notes?, Link*, 
 		   SECTION*)>
 			<!ATTLIST CHAPTER 
 				id ID #REQUIRED

@@ -34,9 +34,9 @@ class Novel(BasicElement):
             chapterHeadingSuffix=None,
             partHeadingPrefix=None,
             partHeadingSuffix=None,
-            notApplicableGoal=None,
-            notApplicableConflict=None,
-            notApplicableOutcome=None,
+            customPlotProgress=None,
+            customCharacterization=None,
+            customWorldBuilding=None,
             customGoal=None,
             customConflict=None,
             customOutcome=None,
@@ -82,9 +82,9 @@ class Novel(BasicElement):
         self._chapterHeadingSuffix = chapterHeadingSuffix
         self._partHeadingPrefix = partHeadingPrefix
         self._partHeadingSuffix = partHeadingSuffix
-        self._notApplicableGoal = notApplicableGoal
-        self._notApplicableConflict = notApplicableConflict
-        self._notApplicableOutcome = notApplicableOutcome
+        self._customPlotProgress = customPlotProgress
+        self._customCharacterization = customCharacterization
+        self._customWorldBuilding = customWorldBuilding
         self._customGoal = customGoal
         self._customConflict = customConflict
         self._customOutcome = customOutcome
@@ -280,33 +280,33 @@ class Novel(BasicElement):
             self.on_element_change()
 
     @property
-    def notApplicableGoal(self):
-        return self._notApplicableGoal
+    def customPlotProgress(self):
+        return self._customPlotProgress
 
-    @notApplicableGoal.setter
-    def notApplicableGoal(self, newVal):
-        if self._notApplicableGoal != newVal:
-            self._notApplicableGoal = newVal
+    @customPlotProgress.setter
+    def customPlotProgress(self, newVal):
+        if self._customPlotProgress != newVal:
+            self._customPlotProgress = newVal
             self.on_element_change()
 
     @property
-    def notApplicableConflict(self):
-        return self._notApplicableConflict
+    def customCharacterization(self):
+        return self._customCharacterization
 
-    @notApplicableConflict.setter
-    def notApplicableConflict(self, newVal):
-        if self._notApplicableConflict != newVal:
-            self._notApplicableConflict = newVal
+    @customCharacterization.setter
+    def customCharacterization(self, newVal):
+        if self._customCharacterization != newVal:
+            self._customCharacterization = newVal
             self.on_element_change()
 
     @property
-    def notApplicableOutcome(self):
-        return self._notApplicableOutcome
+    def customWorldBuilding(self):
+        return self._customWorldBuilding
 
-    @notApplicableOutcome.setter
-    def notApplicableOutcome(self, newVal):
-        if self._notApplicableOutcome != newVal:
-            self._notApplicableOutcome = newVal
+    @customWorldBuilding.setter
+    def customWorldBuilding(self, newVal):
+        if self._customWorldBuilding != newVal:
+            self._customWorldBuilding = newVal
             self.on_element_change()
 
     @property
@@ -483,6 +483,11 @@ class Novel(BasicElement):
         self.partHeadingPrefix = self._get_element_text(xmlElement, 'PartHeadingPrefix')
         self.partHeadingSuffix = self._get_element_text(xmlElement, 'PartHeadingSuffix')
 
+        # N/A Goal/Conflict/Outcome.
+        self.customPlotProgress = self._get_element_text(xmlElement, 'CustomPlotProgress')
+        self.customCharacterization = self._get_element_text(xmlElement, 'CustomCharacterization')
+        self.customWorldBuilding = self._get_element_text(xmlElement, 'CustomWorldBuilding')
+
         # Custom Goal/Conflict/Outcome.
         self.customGoal = self._get_element_text(xmlElement, 'CustomGoal')
         self.customConflict = self._get_element_text(xmlElement, 'CustomConflict')
@@ -533,6 +538,14 @@ class Novel(BasicElement):
             ET.SubElement(xmlElement, 'PartHeadingPrefix').text = self.partHeadingPrefix
         if self.partHeadingSuffix:
             ET.SubElement(xmlElement, 'PartHeadingSuffix').text = self.partHeadingSuffix
+
+        # Custom Plot progress/Characterization/World building.
+        if self.customPlotProgress:
+            ET.SubElement(xmlElement, 'CustomPlotProgress').text = self.customPlotProgress
+        if self.customCharacterization:
+            ET.SubElement(xmlElement, 'CustomCharacterization').text = self.customCharacterization
+        if self.customWorldBuilding:
+            ET.SubElement(xmlElement, 'CustomWorldBuilding').text = self.customWorldBuilding
 
         # Custom Goal/Conflict/Outcome.
         if self.customGoal:
