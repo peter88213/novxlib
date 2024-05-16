@@ -110,7 +110,7 @@
 					type (0 | 1 | 2 | 3) "0" 
 					status (1 | 2 | 3 | 4 | 5) "1" 
 					pacing (0 | 1 | 2) "0"
-                    append (0 | 1) "0"
+               append (0 | 1) "0"
 					>
                 <!ELEMENT Date (#PCDATA)>
                 <!ELEMENT Time (#PCDATA)>
