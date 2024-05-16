@@ -108,7 +108,7 @@
       <text:p>Section notes</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>A/R</text:p>
+      <text:p>Scene</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>Goal</text:p>
@@ -174,7 +174,7 @@
       <text:p>Section notes</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>A/R</text:p>
+      <text:p>Scene</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>Goal</text:p>
@@ -241,7 +241,7 @@
       <text:p>This is a note. Notice how the N icon shows up when there&apos;s a note attached to a scene.</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -308,7 +308,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -371,7 +371,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -435,7 +435,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -501,7 +501,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -564,7 +564,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -628,7 +628,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -691,7 +691,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -754,7 +754,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -818,7 +818,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -880,7 +880,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -945,7 +945,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -1007,7 +1007,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -1069,7 +1069,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -1131,7 +1131,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -1193,7 +1193,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -1255,7 +1255,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -1317,7 +1317,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -1379,7 +1379,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -1441,7 +1441,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -1503,7 +1503,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -1565,7 +1565,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -1627,7 +1627,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -1689,7 +1689,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -1751,7 +1751,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -1813,7 +1813,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -1875,7 +1875,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -1937,7 +1937,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -1999,7 +1999,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -2061,7 +2061,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -2123,7 +2123,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -2185,7 +2185,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -2247,7 +2247,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -2309,7 +2309,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -2371,7 +2371,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -2433,7 +2433,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -2495,7 +2495,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -2557,7 +2557,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -2619,7 +2619,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -2681,7 +2681,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -2743,7 +2743,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -2805,7 +2805,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -2867,7 +2867,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -2929,7 +2929,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -2991,7 +2991,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -3053,7 +3053,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -3115,7 +3115,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -3177,7 +3177,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -3239,7 +3239,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -3301,7 +3301,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -3363,7 +3363,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -3425,7 +3425,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -3487,7 +3487,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -3549,7 +3549,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -3611,7 +3611,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
@@ -3673,7 +3673,7 @@
       <text:p></text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
-      <text:p>A</text:p>
+      <text:p>-</text:p>
      </table:table-cell>
      <table:table-cell office:value-type="string">
       <text:p></text:p>
