@@ -379,53 +379,6 @@ class Novel(BasicElement):
                     self._referenceDate = newVal
                     self.on_element_change()
 
-    def update_plot_lines(self):
-        """Set section back references to PlotLine.sections and PlotPoint.sectionAssoc. """
-        for scId in self.sections:
-            self.sections[scId].scPlotPoints = {}
-            self.sections[scId].scPlotLines = []
-            for plId in self.plotLines:
-                if scId in self.plotLines[plId].sections:
-                    self.sections[scId].scPlotLines.append(plId)
-                    for ppId in self.tree.get_children(plId):
-                        if self.plotPoints[ppId].sectionAssoc == scId:
-                            self.sections[scId].scPlotPoints[ppId] = plId
-                            break
-
-    def get_languages(self):
-        """Determine the languages used in the document.
-        
-        Populate the self.languages list with all language codes found in the section contents.        
-        Example:
-        - language markup: 'Standard text <span xml:lang="en-AU"]Australian text</span>.'
-        - language code: 'en-AU'
-        """
-
-        def languages(text):
-            """Yield the language codes appearing in text.
-            
-            Positional arguments:
-                text -- novx-formatted string to scan for language codes.
-            """
-            if not text:
-                return
-
-            m = LANGUAGE_TAG.search(text)
-            while m:
-                text = text[m.span()[1]:]
-                yield m.group(1)
-                m = LANGUAGE_TAG.search(text)
-
-        self.languages = []
-        for scId in self.sections:
-            text = self.sections[scId].sectionContent
-            if not text:
-                continue
-
-            for language in languages(text):
-                if not language in self.languages:
-                    self.languages.append(language)
-
     def check_locale(self):
         """Check the document's locale (language code and country code).
         
@@ -506,6 +459,40 @@ class Novel(BasicElement):
         # Reference date.
         self.referenceDate = self._get_element_text(xmlElement, 'ReferenceDate')
 
+    def get_languages(self):
+        """Determine the languages used in the document.
+        
+        Populate the self.languages list with all language codes found in the section contents.        
+        Example:
+        - language markup: 'Standard text <span xml:lang="en-AU"]Australian text</span>.'
+        - language code: 'en-AU'
+        """
+
+        def languages(text):
+            """Yield the language codes appearing in text.
+            
+            Positional arguments:
+                text -- novx-formatted string to scan for language codes.
+            """
+            if not text:
+                return
+
+            m = LANGUAGE_TAG.search(text)
+            while m:
+                text = text[m.span()[1]:]
+                yield m.group(1)
+                m = LANGUAGE_TAG.search(text)
+
+        self.languages = []
+        for scId in self.sections:
+            text = self.sections[scId].sectionContent
+            if not text:
+                continue
+
+            for language in languages(text):
+                if not language in self.languages:
+                    self.languages.append(language)
+
     def to_xml(self, xmlElement):
         super().to_xml(xmlElement)
         if self.renumberChapters:
@@ -570,3 +557,17 @@ class Novel(BasicElement):
         # Reference date.
         if self.referenceDate:
             ET.SubElement(xmlElement, 'ReferenceDate').text = self.referenceDate
+
+    def update_plot_lines(self):
+        """Set section back references to PlotLine.sections and PlotPoint.sectionAssoc. """
+        for scId in self.sections:
+            self.sections[scId].scPlotPoints = {}
+            self.sections[scId].scPlotLines = []
+            for plId in self.plotLines:
+                if scId in self.plotLines[plId].sections:
+                    self.sections[scId].scPlotLines.append(plId)
+                    for ppId in self.tree.get_children(plId):
+                        if self.plotPoints[ppId].sectionAssoc == scId:
+                            self.sections[scId].scPlotPoints[ppId] = plId
+                            break
+
