@@ -415,14 +415,6 @@ class Section(BasicElementTags):
         self.conflict = self._xml_element_to_text(xmlElement.find('Conflict'))
         self.outcome = self._xml_element_to_text(xmlElement.find('Outcome'))
 
-        # Substitute the deprecated "pacing" attribute.
-        if not self.scene:
-            scPacing = xmlElement.get('pacing', 0)
-            if scPacing in ('1', '2'):
-                self.scene = int(scPacing) + 1
-            elif self.goal or self.conflict or self.outcome:
-                self.scene = 1
-
         # Plot notes.
         xmlPlotNotes = xmlElement.find('PlotNotes')
         if xmlPlotNotes is not None:
@@ -515,6 +507,14 @@ class Section(BasicElementTags):
                 self.sectionContent = '<p></p>'
         else:
             self.sectionContent = '<p></p>'
+
+        # Read deprecated attributes from DTD 1.3.
+        if not self.scene:
+            scPacing = xmlElement.get('pacing', 0)
+            if scPacing in ('1', '2'):
+                self.scene = int(scPacing) + 1
+            elif self.goal or self.conflict or self.outcome:
+                self.scene = 1
 
     def get_end_date_time(self):
         """Return the section end (date, time, day) tuple calculated from start and duration."""

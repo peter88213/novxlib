@@ -91,9 +91,9 @@ class BasicElement:
         if self.links:
             for path in self.links:
                 xmlLink = ET.SubElement(xmlElement, 'Link')
-                xmlLink.set('path', path)
+                ET.SubElement(xmlLink, 'Path').text = path
                 if self.links[path]:
-                    xmlLink.set('fullPath', self.links[path])
+                    ET.SubElement(xmlLink, 'FullPath').text = self.links[path]
 
     def _get_element_text(self, xmlElement, tag, default=None):
         """Return the text field of an XML element.
@@ -112,8 +112,16 @@ class BasicElement:
         """
         links = {}
         for xmlLink in xmlElement.iterfind('Link'):
-            path = xmlLink.attrib.get('path', None)
-            fullPath = xmlLink.attrib.get('fullPath', None)
+            xmlPath = xmlLink.find('Path')
+            if xmlPath is not None:
+                path = xmlPath.text
+                xmlFullPath = xmlLink.find('FullPath')
+                if xmlFullPath is not None:
+                    fullPath = xmlFullPath.text
+            else:
+                # Read deprecated attributes from DTD 1.3.
+                path = xmlLink.attrib.get('path', None)
+                fullPath = xmlLink.attrib.get('fullPath', None)
             if path:
                 links[path] = fullPath
         return links
