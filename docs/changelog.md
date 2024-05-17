@@ -2,6 +2,17 @@
 
 
 
+### v4.0.0
+
+- Refactor, changing the API.
+
+#### DTD 1.4
+
+- Fix errors from DTD 1.3.
+- Introduce a new SECTION attribute scene (0: Not a scene, 1: Action scene, 2: Reaction scene, 3: Other scene). 
+- Make the path and full path subelements of Link. This is because the
+values may contain spaces, so they cannot be NMTOKEN attributes.
+
 ### v3.7.4
 
 - When parsing ODT, skip redundant language tags.
