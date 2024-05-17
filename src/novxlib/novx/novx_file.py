@@ -45,7 +45,9 @@ class NovxFile(File):
 
     MAJOR_VERSION = 1
     MINOR_VERSION = 4
-    # DTD version
+    # DTD version;
+    # compatible, if the file's major version number equals MAJOR_VERSION,
+    # and the minor version number is equal or less than MINOR_VERSION
 
     XML_HEADER = f'''<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE novx SYSTEM "novx_{MAJOR_VERSION}_{MINOR_VERSION}.dtd">
@@ -107,32 +109,13 @@ class NovxFile(File):
         return count, totalCount
 
     def read(self):
-        """Parse the novelibre xml file and get the instance variables.
+        """Read and parse the novx file.
         
-        Raise the "Error" exception in case of error. 
         Overrides the superclass method.
         """
         self.xmlTree = ET.parse(self.filePath)
         xmlRoot = self.xmlTree.getroot()
-        if xmlRoot.tag != 'novx':
-            raise Error(f'{_("No valid xml root element found in file")}: "{norm_path(self.filePath)}".')
-
-        try:
-            majorVersionStr, minorVersionStr = xmlRoot.attrib['version'].split('.')
-            majorVersion = int(majorVersionStr)
-            minorVersion = int(minorVersionStr)
-        except:
-            raise Error(f'{_("No valid version found in file")}: "{norm_path(self.filePath)}".')
-
-        if majorVersion > self.MAJOR_VERSION:
-            raise Error(_('The project "{}" was created with a newer novelibre version.').format(norm_path(self.filePath)))
-
-        elif majorVersion < self.MAJOR_VERSION:
-            raise Error(_('The project "{}" was created with an outdated novelibre version.').format(norm_path(self.filePath)))
-
-        elif minorVersion > self.MINOR_VERSION:
-            raise Error(_('The project "{}" was created with a newer novelibre version.').format(norm_path(self.filePath)))
-
+        self._check_xml(xmlRoot)
         try:
             locale = xmlRoot.attrib['{http://www.w3.org/XML/1998/namespace}lang']
             self.novel.languageCode, self.novel.countryCode = locale.split('-')
@@ -152,7 +135,7 @@ class NovxFile(File):
         self._keep_word_count()
 
     def write(self):
-        """Write instance variables to the novx xml file.
+        """Build the xml tree and write the novx file.
         
         Overrides the superclass method.
         """
@@ -223,22 +206,41 @@ class NovxFile(File):
             self.novel.projectNotes[pnId].to_xml(ET.SubElement(xmlProjectNotes, 'PROJECTNOTE', attrib={'id':pnId}))
 
     def _build_word_count_log(self, root):
-        if self.wcLog:
-            xmlWcLog = ET.SubElement(root, 'PROGRESS')
-            wcLastCount = None
-            wcLastTotalCount = None
-            for wc in self.wcLog:
-                if self.novel.saveWordCount:
-                    # Discard entries with unchanged word count.
-                    if self.wcLog[wc][0] == wcLastCount and self.wcLog[wc][1] == wcLastTotalCount:
-                        continue
+        if not self.wcLog:
+            return
 
-                    wcLastCount = self.wcLog[wc][0]
-                    wcLastTotalCount = self.wcLog[wc][1]
-                xmlWc = ET.SubElement(xmlWcLog, 'WC')
-                ET.SubElement(xmlWc, 'Date').text = wc
-                ET.SubElement(xmlWc, 'Count').text = self.wcLog[wc][0]
-                ET.SubElement(xmlWc, 'WithUnused').text = self.wcLog[wc][1]
+        xmlWcLog = ET.SubElement(root, 'PROGRESS')
+        wcLastCount = None
+        wcLastTotalCount = None
+        for wc in self.wcLog:
+            if self.novel.saveWordCount:
+                # Discard entries with unchanged word count.
+                if self.wcLog[wc][0] == wcLastCount and self.wcLog[wc][1] == wcLastTotalCount:
+                    continue
+
+                wcLastCount = self.wcLog[wc][0]
+                wcLastTotalCount = self.wcLog[wc][1]
+            xmlWc = ET.SubElement(xmlWcLog, 'WC')
+            ET.SubElement(xmlWc, 'Date').text = wc
+            ET.SubElement(xmlWc, 'Count').text = self.wcLog[wc][0]
+            ET.SubElement(xmlWc, 'WithUnused').text = self.wcLog[wc][1]
+
+    def _check_xml(self, xmlRoot):
+        """Raise an exception if the xmlRoot element is not compatible with the supported DTD."""
+        if xmlRoot.tag != 'novx':
+            raise Error(f'{_("No valid xml root element found in file")}: "{norm_path(self.filePath)}".')
+        try:
+            majorVersionStr, minorVersionStr = xmlRoot.attrib['version'].split('.')
+            majorVersion = int(majorVersionStr)
+            minorVersion = int(minorVersionStr)
+        except:
+            raise Error(f'{_("No valid version found in file")}: "{norm_path(self.filePath)}".')
+        if majorVersion > self.MAJOR_VERSION:
+            raise Error(_('The project "{}" was created with a newer novelibre version.').format(norm_path(self.filePath)))
+        elif majorVersion < self.MAJOR_VERSION:
+            raise Error(_('The project "{}" was created with an outdated novelibre version.').format(norm_path(self.filePath)))
+        elif minorVersion > self.MINOR_VERSION:
+            raise Error(_('The project "{}" was created with a newer novelibre version.').format(norm_path(self.filePath)))
 
     def _get_timestamp(self):
         try:
@@ -248,19 +250,21 @@ class NovxFile(File):
 
     def _keep_word_count(self):
         """Keep the actual wordcount, if not logged."""
-        if self.wcLog:
-            actualCountInt, actualTotalCountInt = self.count_words()
-            actualCount = str(actualCountInt)
-            actualTotalCount = str(actualTotalCountInt)
-            latestDate = list(self.wcLog)[-1]
-            latestCount = self.wcLog[latestDate][0]
-            latestTotalCount = self.wcLog[latestDate][1]
-            if actualCount != latestCount or actualTotalCount != latestTotalCount:
-                try:
-                    fileDateIso = date.fromtimestamp(self.timestamp).isoformat()
-                except:
-                    fileDateIso = date.today().isoformat()
-                self.wcLogUpdate[fileDateIso] = [actualCount, actualTotalCount]
+        if not self.wcLog:
+            return
+
+        actualCountInt, actualTotalCountInt = self.count_words()
+        actualCount = str(actualCountInt)
+        actualTotalCount = str(actualTotalCountInt)
+        latestDate = list(self.wcLog)[-1]
+        latestCount = self.wcLog[latestDate][0]
+        latestTotalCount = self.wcLog[latestDate][1]
+        if actualCount != latestCount or actualTotalCount != latestTotalCount:
+            try:
+                fileDateIso = date.fromtimestamp(self.timestamp).isoformat()
+            except:
+                fileDateIso = date.today().isoformat()
+            self.wcLogUpdate[fileDateIso] = [actualCount, actualTotalCount]
 
     def _postprocess_xml_file(self, filePath):
         """Postprocess an xml file created by ElementTree.
