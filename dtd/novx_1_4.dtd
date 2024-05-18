@@ -105,7 +105,7 @@
 				> 
 			<!ELEMENT SECTION (Title?, Desc?, Link*, Notes?, Tags?, 
 			   Goal?, Conflict?, Outcome?, 
-			   PlotNotes?, 
+			   PlotlineNotes*, 
 				( Date? | Day? ), Time?, LastsDays?, LastsHours?, LastsMinutes?, 
 				Characters?, Locations?, Items?, 
 				Content?) >
@@ -125,11 +125,10 @@
                 <!ELEMENT Goal (p*)>
                 <!ELEMENT Conflict (p*)>
                 <!ELEMENT Outcome (p*)>
-                <!ELEMENT PlotNotes (PlotlineNotes*)>
-                    <!ELEMENT PlotlineNotes (p*)>
-                        <!ATTLIST PlotlineNotes
-                        id IDREF #REQUIRED
-                        >
+                <!ELEMENT PlotlineNotes (p*)>
+                  <!ATTLIST PlotlineNotes
+                     id IDREF #REQUIRED
+                     >
                 <!ELEMENT Characters EMPTY>
                 	<!ATTLIST Characters
                 		ids IDREFS #REQUIRED
@@ -167,6 +166,9 @@
 	
     <!ELEMENT PROJECTNOTES (PROJECTNOTE*)>
 		<!ELEMENT PROJECTNOTE (Title?, Desc?, Link*)>
+         <!ATTLIST PROJECTNOTE 
+            id ID #REQUIRED
+            >
 	
     <!ELEMENT PROGRESS (WC*)>
 		<!ELEMENT WC (Date, Count, WithUnused)>

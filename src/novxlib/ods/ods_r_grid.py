@@ -50,22 +50,22 @@ class OdsRGrid(OdsReader):
             #--- plot line notes
             for plId in plotLines:
                 try:
-                    plotLineNote = self._columns[plId][scId]
+                    odsPlotLineNotes = self._columns[plId][scId]
                 except:
-                    pass
-                else:
-                    plotNotes = self.novel.sections[scId].plotNotes
-                    if not plotNotes:
-                        plotNotes = {}
-                    plotNotes[plId] = plotLineNote.strip()
-                    self.novel.sections[scId].plotNotes = plotNotes
-                    if plotNotes[plId] and not plId in self.novel.sections[scId].scPlotLines:
-                        scPlotLines = self.novel.sections[scId].scPlotLines
-                        scPlotLines.append(plId)
-                        self.novel.sections[scId].scPlotLines = scPlotLines
-                        plSections = self.novel.plotLines[plId].sections
-                        plSections.append(scId)
-                        self.novel.plotLines[plId].sections = plSections
+                    continue
+
+                plotlineNotes = self.novel.sections[scId].plotlineNotes
+                if not plotlineNotes:
+                    plotlineNotes = {}
+                plotlineNotes[plId] = odsPlotLineNotes.strip()
+                self.novel.sections[scId].plotlineNotes = plotlineNotes
+                if plotlineNotes[plId] and not plId in self.novel.sections[scId].scPlotLines:
+                    scPlotLines = self.novel.sections[scId].scPlotLines
+                    scPlotLines.append(plId)
+                    self.novel.sections[scId].scPlotLines = scPlotLines
+                    plSections = self.novel.plotLines[plId].sections
+                    plSections.append(scId)
+                    self.novel.plotLines[plId].sections = plSections
 
             #--- date
             try:

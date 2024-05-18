@@ -2,7 +2,7 @@
 
 
 
-### v4.0.0
+### v4.0.1
 
 - Refactor, changing the API.
 
@@ -10,6 +10,7 @@
 
 - Fix errors from DTD 1.3.
 - Introduce a new SECTION attribute scene (0: Not a scene, 1: Action scene, 2: Reaction scene, 3: Other scene). 
+- Remove the PlotNotes element and promote PlotlineNotes.
 - Make the path and full path subelements of Link. This is because the
 values may contain spaces, so they cannot be NMTOKEN attributes.
 

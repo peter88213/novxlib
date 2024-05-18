@@ -287,9 +287,9 @@ $ArcNoteCells
         #--- $ArcNoteCells: one per plot line.
         arcNoteCells = []
         for plId in self.novel.tree.get_children(PL_ROOT):
-            plotNotes = self.novel.sections[scId].plotNotes
-            if plotNotes:
-                arcNote = plotNotes.get(plId, '')
+            plotlineNotes = self.novel.sections[scId].plotlineNotes
+            if plotlineNotes:
+                arcNote = plotlineNotes.get(plId, '')
             else:
                 arcNote = ''
             mapping = {'ArcNote':arcNote}
