@@ -27,8 +27,8 @@
 					style (quotations) #IMPLIED
 					xml:lang NMTOKEN #IMPLIED
 					>
-				<!ELEMENT em (#PCDATA | span | comment | note)*>
-				<!ELEMENT strong (#PCDATA | span | comment | note)*>
+            <!ELEMENT em (#PCDATA | span | comment | note | strong)*>
+            <!ELEMENT strong (#PCDATA | span | comment | note | em)*>
 				<!ELEMENT span (#PCDATA | em | strong | comment | note)*>
 					<!ATTLIST span
 						xml:lang NMTOKEN #REQUIRED
@@ -46,8 +46,8 @@
 					<!ELEMENT li (p*)>
       <!ELEMENT Link (Title?)>
          <!ATTLIST Link
-            path NMTOKEN #REQUIRED
-            fullPath NMTOKEN #REQUIRED
+            path CDATA #REQUIRED
+            fullPath CDATA #IMPLIEED
             >
 		<!ELEMENT Author (#PCDATA)>
         <!ELEMENT ChapterHeadingPrefix (#PCDATA)>
@@ -90,7 +90,7 @@
 				>
 
 	<!ELEMENT CHAPTERS (CHAPTER*)>
-		<!ELEMENT CHAPTER (Title?, Desc?, Link*, 
+      <!ELEMENT CHAPTER (Title?, Desc?, Notes?, Link*, 
 		   SECTION*)>
 			<!ATTLIST CHAPTER 
 				id ID #REQUIRED
@@ -161,6 +161,9 @@
 						>
 	<!ELEMENT PROJECTNOTES (PROJECTNOTE*)>
 		<!ELEMENT PROJECTNOTE (Title?, Desc?, Link*)>
+         <!ATTLIST PROJECTNOTE 
+            id ID #REQUIRED
+            >
 	<!ELEMENT PROGRESS (WC*)>
 		<!ELEMENT WC (Date, Count, WithUnused)>
 			<!ELEMENT Count (#PCDATA)>
