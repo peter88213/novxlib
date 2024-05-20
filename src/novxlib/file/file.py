@@ -25,19 +25,6 @@ class File(ABC):
     SUFFIX = None
     # To be extended by subclass methods.
 
-    PRJ_KWVAR = [
-        'Field_ChapterHeadingPrefix',
-        'Field_ChapterHeadingSuffix',
-        'Field_PartHeadingPrefix',
-        'Field_PartHeadingSuffix',
-        'Field_CustomGoal',
-        'Field_CustomConflict',
-        'Field_CustomOutcome',
-        'Field_CustomChrBio',
-        'Field_CustomChrGoals',
-        ]
-    # Keyword variables for custom fields in the .novx XML file.
-
     def __init__(self, filePath, **kwargs):
         """Initialize instance variables.
 
