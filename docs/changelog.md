@@ -1,6 +1,9 @@
 # Changelog
 
 
+### v4.0.2
+
+- Fix a bug where the Section "scene" attribute is falisfied when being read from XML. 
 
 ### v4.0.1
 

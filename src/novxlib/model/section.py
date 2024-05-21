@@ -405,6 +405,13 @@ class Section(BasicElementTags):
             self.scene = int(scene)
         else:
             self.scene = 0
+
+        if not self.scene:
+            # looking for deprecated attribute from DTD 1.3
+            scPacing = xmlElement.get('pacing', None)
+            if scPacing in ('1', '2'):
+                self.scene = int(scPacing) + 1
+
         self.appendToPrev = xmlElement.get('append', None) == '1'
 
         # Goal/Conflict/outcome.
@@ -506,14 +513,6 @@ class Section(BasicElementTags):
                 self.sectionContent = '<p></p>'
         else:
             self.sectionContent = '<p></p>'
-
-        # Read deprecated attributes from DTD 1.3.
-        if not self.scene:
-            scPacing = xmlElement.get('pacing', 0)
-            if scPacing in ('1', '2'):
-                self.scene = int(scPacing) + 1
-            elif self.goal or self.conflict or self.outcome:
-                self.scene = 1
 
     def get_end_date_time(self):
         """Return the section end (date, time, day) tuple calculated from start and duration."""
