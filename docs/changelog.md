@@ -1,5 +1,8 @@
 # Changelog
 
+### v4.1.0
+
+- Add novxService class.
 
 ### v4.0.2
 
