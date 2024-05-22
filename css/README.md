@@ -6,7 +6,7 @@
 **Note:** Depending on your web browser and your operating system, 
 the *content type* resp. *MIME type* of *.novx* files must be
 registered as *"text/xml"*. Under Windows, yo can do this by
-running the **<home>\.novelibre\add_novelibre.reg** script.
+running the **<home>\.novx\add_novelibre.reg** script.
 
 ![Screenshot](screenshot.jpg)
 
