@@ -7,6 +7,10 @@ into your project directory.
 this DTD is not needed for your daily work. However, it can be useful developing
 of third-party applications and tools that read or write *.novx* files.
 
+### Documentation
+
+See the [novxlib documentation](https://peter88213.github.io/novxlib-docs/the_novx_file_format.html).
+
 
 ### Versioning
 
