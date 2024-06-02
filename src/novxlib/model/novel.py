@@ -51,33 +51,14 @@ class Novel(BasicElement):
         self._wordTarget = wordTarget
         self._wordCountStart = wordCountStart
         self._languageCode = languageCode
-        # Language code acc. to ISO 639-1.
         self._countryCode = countryCode
-        # Country code acc. to ISO 3166-2.
         self._renumberChapters = renumberChapters
-        # True: Auto-number chapters
-        # False: Do not auto-number chapters
         self._renumberParts = renumberParts
-        # True: Auto-number parts
-        # False: Do not auto-number parts
         self._renumberWithinParts = renumberWithinParts
-        # True: When auto-numbering chapters, start with 1 at each part beginning
-        # False: When auto-numbering chapters, ignore parts
         self._romanChapterNumbers = romanChapterNumbers
-        # True: Use Roman chapter numbers when auto-numbering
-        # False: Use Arabic chapter numbers when auto-numbering
         self._romanPartNumbers = romanPartNumbers
-        # True: Use Roman part numbers when auto-numbering
-        # False: Use Arabic part numbers when auto-numbering
         self._saveWordCount = saveWordCount
-        # True: Save daily word count log
-        # False: Do not save daily word count log
         self._workPhase = workPhase
-        # 1 - Outline
-        # 2 - Draft
-        # 3 - 1st Edit
-        # 4 - 2nd Edit
-        # 5 - Done
         self._chapterHeadingPrefix = chapterHeadingPrefix
         self._chapterHeadingSuffix = chapterHeadingSuffix
         self._partHeadingPrefix = partHeadingPrefix
@@ -151,6 +132,7 @@ class Novel(BasicElement):
 
     @property
     def languageCode(self):
+        # Language code acc. to ISO 639-1.
         return self._languageCode
 
     @languageCode.setter
@@ -161,6 +143,7 @@ class Novel(BasicElement):
 
     @property
     def countryCode(self):
+        # Country code acc. to ISO 3166-2.
         return self._countryCode
 
     @countryCode.setter
@@ -171,6 +154,8 @@ class Novel(BasicElement):
 
     @property
     def renumberChapters(self):
+        # True: Auto-number chapters
+        # False: Do not auto-number chapters
         return self._renumberChapters
 
     @renumberChapters.setter
@@ -181,6 +166,8 @@ class Novel(BasicElement):
 
     @property
     def renumberParts(self):
+        # True: Auto-number parts
+        # False: Do not auto-number parts
         return self._renumberParts
 
     @renumberParts.setter
@@ -191,6 +178,8 @@ class Novel(BasicElement):
 
     @property
     def renumberWithinParts(self):
+        # True: When auto-numbering chapters, start with 1 at each part beginning
+        # False: When auto-numbering chapters, ignore parts
         return self._renumberWithinParts
 
     @renumberWithinParts.setter
@@ -201,6 +190,8 @@ class Novel(BasicElement):
 
     @property
     def romanChapterNumbers(self):
+        # True: Use Roman chapter numbers when auto-numbering
+        # False: Use Arabic chapter numbers when auto-numbering
         return self._romanChapterNumbers
 
     @romanChapterNumbers.setter
@@ -211,6 +202,8 @@ class Novel(BasicElement):
 
     @property
     def romanPartNumbers(self):
+        # True: Use Roman part numbers when auto-numbering
+        # False: Use Arabic part numbers when auto-numbering
         return self._romanPartNumbers
 
     @romanPartNumbers.setter
@@ -221,6 +214,8 @@ class Novel(BasicElement):
 
     @property
     def saveWordCount(self):
+        # True: Save daily word count log
+        # False: Do not save daily word count log
         return self._saveWordCount
 
     @saveWordCount.setter
@@ -231,6 +226,12 @@ class Novel(BasicElement):
 
     @property
     def workPhase(self):
+        # None - Undefined
+        # 1 - Outline
+        # 2 - Draft
+        # 3 - 1st Edit
+        # 4 - 2nd Edit
+        # 5 - Done
         return self._workPhase
 
     @workPhase.setter

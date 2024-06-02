@@ -133,10 +133,10 @@ class Section(BasicElementTags):
 
     @property
     def scene(self):
-        # 0 = N/A
-        # 1 = Action
-        # 2 = Reaction
-        # 3 = Custom
+        # 0 = not a scene
+        # 1 = action scene
+        # 2 = reaction scene
+        # 3 = other scene
         return self._scene
 
     @scene.setter
@@ -162,7 +162,8 @@ class Section(BasicElementTags):
 
     @property
     def appendToPrev(self):
-        # if True, append section to the previous one without section separator
+        # True - append this section to the previous one without a section separator
+        # False - put a section separator between this section and the previous one
         return self._appendToPrev
 
     @appendToPrev.setter
