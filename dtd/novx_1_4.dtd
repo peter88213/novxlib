@@ -98,7 +98,7 @@
 		   SECTION*)>
 			<!ATTLIST CHAPTER 
 				id ID #REQUIRED
-				type (0 | 1 | 2 | 3) "0"
+				type (0 | 1) "0"
 				level (1 | 2) "2"
 				isTrash (0 | 1) "0" 
 				noNumber (0 | 1) "0"

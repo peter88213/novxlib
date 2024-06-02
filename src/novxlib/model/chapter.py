@@ -19,20 +19,14 @@ class Chapter(BasicElementNotes):
         """Extends the superclass constructor."""
         super().__init__(**kwargs)
         self._chLevel = chLevel
-        # 1 = part level
-        # 2 = regular chapter level
         self._chType = chType
-        # 0 = Normal
-        # 1 = Unused
         self._noNumber = noNumber
-        # True: Auto-number this chapter
-        # False: Do not auto-number this chapter
         self._isTrash = isTrash
-        # True: This chapter is the novelibre project's "trash bin"
-        # False: This chapter is not a "trash bin"
 
     @property
     def chLevel(self):
+        # 1 = Part level.
+        # 2 = Regular chapter level.
         return self._chLevel
 
     @chLevel.setter
@@ -43,6 +37,8 @@ class Chapter(BasicElementNotes):
 
     @property
     def chType(self):
+        # 0 = Normal.
+        # 1 = Unused.
         return self._chType
 
     @chType.setter
@@ -53,6 +49,8 @@ class Chapter(BasicElementNotes):
 
     @property
     def noNumber(self):
+        # True: Exclude this chapter from auto-numbering.
+        # False: Auto-number this chapter, if applicable.
         return self._noNumber
 
     @noNumber.setter
@@ -63,6 +61,8 @@ class Chapter(BasicElementNotes):
 
     @property
     def isTrash(self):
+        # True: This chapter is the novelibre project's "trash bin"
+        # False: This is a chapter or part.
         return self._isTrash
 
     @isTrash.setter

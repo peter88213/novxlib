@@ -62,6 +62,8 @@ class Character(WorldElement):
 
     @property
     def isMajor(self):
+        # True: Major character.
+        # False: Minor character.
         return self._isMajor
 
     @isMajor.setter
