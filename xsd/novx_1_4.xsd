@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="novx_1_4.dtd" xmlns:wmh="http://www.wmhelp.com/2003/eGenerator" elementFormDefault="qualified" targetNamespace="novx_1_4.dtd">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="novx_1_4.dtd" elementFormDefault="qualified" targetNamespace="novx_1_4.dtd">
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
   <xs:element name="novx">
     <xs:complexType>
       <xs:sequence>
@@ -13,7 +14,7 @@
         <xs:element ref="PROGRESS" minOccurs="0"/>
       </xs:sequence>
       <xs:attribute name="version" type="xs:string" fixed="1.4"/>
-      <xs:attribute name="xml:lang" type="xs:string" default="zxx"/>
+      <xs:attribute ref="xml:lang" default="zxx"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="PROJECT">
@@ -125,7 +126,7 @@
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
-      <xs:attribute name="xml:lang" type="xs:string"/>
+      <xs:attribute ref="xml:lang"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="em">
@@ -156,7 +157,7 @@
         <xs:element ref="comment"/>
         <xs:element ref="note"/>
       </xs:choice>
-      <xs:attribute name="xml:lang" type="xs:string" use="required"/>
+      <xs:attribute ref="xml:lang" use="required"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="note">
