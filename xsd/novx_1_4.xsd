@@ -1,0 +1,586 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="novx_1_4.dtd" xmlns:wmh="http://www.wmhelp.com/2003/eGenerator" elementFormDefault="qualified" targetNamespace="novx_1_4.dtd">
+  <xs:element name="novx">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="PROJECT"/>
+        <xs:element ref="CHAPTERS"/>
+        <xs:element ref="CHARACTERS"/>
+        <xs:element ref="LOCATIONS"/>
+        <xs:element ref="ITEMS"/>
+        <xs:element ref="ARCS"/>
+        <xs:element ref="PROJECTNOTES"/>
+        <xs:element ref="PROGRESS" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="version" type="xs:string" fixed="1.4"/>
+      <xs:attribute name="xml:lang" type="xs:string" default="zxx"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PROJECT">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Title" minOccurs="0"/>
+        <xs:element ref="Desc" minOccurs="0"/>
+        <xs:element ref="Link" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="Author" minOccurs="0"/>
+        <xs:element ref="ChapterHeadingPrefix" minOccurs="0"/>
+        <xs:element ref="ChapterHeadingSuffix" minOccurs="0"/>
+        <xs:element ref="PartHeadingPrefix" minOccurs="0"/>
+        <xs:element ref="PartHeadingSuffix" minOccurs="0"/>
+        <xs:element ref="CustomPlotProgress" minOccurs="0"/>
+        <xs:element ref="CustomCharacterization" minOccurs="0"/>
+        <xs:element ref="CustomWorldBuilding" minOccurs="0"/>
+        <xs:element ref="CustomGoal" minOccurs="0"/>
+        <xs:element ref="CustomConflict" minOccurs="0"/>
+        <xs:element ref="CustomOutcome" minOccurs="0"/>
+        <xs:element ref="CustomChrBio" minOccurs="0"/>
+        <xs:element ref="CustomChrGoals" minOccurs="0"/>
+        <xs:element ref="WordCountStart" minOccurs="0"/>
+        <xs:element ref="WordTarget" minOccurs="0"/>
+        <xs:element ref="ReferenceDate" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="renumberChapters" default="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="renumberParts" default="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="renumberWithinParts" default="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="romanChapterNumbers" default="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="romanPartNumbers" default="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="saveWordCount" default="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="workPhase" default="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+            <xs:enumeration value="2"/>
+            <xs:enumeration value="3"/>
+            <xs:enumeration value="4"/>
+            <xs:enumeration value="5"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Title" type="xs:string"/>
+  <xs:element name="Desc">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="p" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="p">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="em"/>
+        <xs:element ref="strong"/>
+        <xs:element ref="span"/>
+        <xs:element ref="comment"/>
+        <xs:element ref="note"/>
+      </xs:choice>
+      <xs:attribute name="style">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="quotations"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="xml:lang" type="xs:string"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="em">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="span"/>
+        <xs:element ref="comment"/>
+        <xs:element ref="note"/>
+        <xs:element ref="strong"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="strong">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="span"/>
+        <xs:element ref="comment"/>
+        <xs:element ref="note"/>
+        <xs:element ref="em"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="span">
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="em"/>
+        <xs:element ref="strong"/>
+        <xs:element ref="comment"/>
+        <xs:element ref="note"/>
+      </xs:choice>
+      <xs:attribute name="xml:lang" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="note">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="note-citation"/>
+        <xs:element ref="p" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:string" use="required"/>
+      <xs:attribute name="class" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="footnote"/>
+            <xs:enumeration value="endnote"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="note-citation" type="xs:string"/>
+  <xs:element name="comment">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="creator"/>
+        <xs:element ref="date"/>
+        <xs:element ref="p" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="creator" type="xs:string"/>
+  <xs:element name="date" type="xs:string"/>
+  <xs:element name="ul">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="li" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="li">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="p" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Link">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Title" minOccurs="0"/>
+        <xs:element ref="Path"/>
+        <xs:element ref="FullPath" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Path" type="xs:string"/>
+  <xs:element name="FullPath" type="xs:string"/>
+  <xs:element name="Author" type="xs:string"/>
+  <xs:element name="ChapterHeadingPrefix" type="xs:string"/>
+  <xs:element name="ChapterHeadingSuffix" type="xs:string"/>
+  <xs:element name="PartHeadingPrefix" type="xs:string"/>
+  <xs:element name="PartHeadingSuffix" type="xs:string"/>
+  <xs:element name="CustomPlotProgress" type="xs:string"/>
+  <xs:element name="CustomCharacterization" type="xs:string"/>
+  <xs:element name="CustomWorldBuilding" type="xs:string"/>
+  <xs:element name="CustomGoal" type="xs:string"/>
+  <xs:element name="CustomConflict" type="xs:string"/>
+  <xs:element name="CustomOutcome" type="xs:string"/>
+  <xs:element name="CustomChrBio" type="xs:string"/>
+  <xs:element name="CustomChrGoals" type="xs:string"/>
+  <xs:element name="WordCountStart" type="xs:string"/>
+  <xs:element name="WordTarget" type="xs:string"/>
+  <xs:element name="ReferenceDate" type="xs:string"/>
+  <xs:element name="CHARACTERS">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="CHARACTER" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CHARACTER">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Title" minOccurs="0"/>
+        <xs:element ref="Desc" minOccurs="0"/>
+        <xs:element ref="Link" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="Notes" minOccurs="0"/>
+        <xs:element ref="Tags" minOccurs="0"/>
+        <xs:element ref="Aka" minOccurs="0"/>
+        <xs:element ref="FullName" minOccurs="0"/>
+        <xs:element ref="Bio" minOccurs="0"/>
+        <xs:element ref="Goals" minOccurs="0"/>
+        <xs:element ref="BirthDate" minOccurs="0"/>
+        <xs:element ref="DeathDate" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:string" use="required"/>
+      <xs:attribute name="major" default="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FullName" type="xs:string"/>
+  <xs:element name="Aka" type="xs:string"/>
+  <xs:element name="Bio">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="p" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Goals">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="p" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Notes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="p" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Tags" type="xs:string"/>
+  <xs:element name="BirthDate" type="xs:string"/>
+  <xs:element name="DeathDate" type="xs:string"/>
+  <xs:element name="LOCATIONS">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="LOCATION" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LOCATION">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Title" minOccurs="0"/>
+        <xs:element ref="Desc" minOccurs="0"/>
+        <xs:element ref="Link" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="Notes" minOccurs="0"/>
+        <xs:element ref="Tags" minOccurs="0"/>
+        <xs:element ref="Aka" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ITEMS">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ITEM" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ITEM">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Title" minOccurs="0"/>
+        <xs:element ref="Desc" minOccurs="0"/>
+        <xs:element ref="Link" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="Notes" minOccurs="0"/>
+        <xs:element ref="Tags" minOccurs="0"/>
+        <xs:element ref="Aka" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CHAPTERS">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="CHAPTER" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CHAPTER">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Title" minOccurs="0"/>
+        <xs:element ref="Desc" minOccurs="0"/>
+        <xs:element ref="Notes" minOccurs="0"/>
+        <xs:element ref="Link" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="SECTION" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:string" use="required"/>
+      <xs:attribute name="type" default="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="level" default="2">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="1"/>
+            <xs:enumeration value="2"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="isTrash" default="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="noNumber" default="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SECTION">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Title" minOccurs="0"/>
+        <xs:element ref="Desc" minOccurs="0"/>
+        <xs:element ref="Link" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="Notes" minOccurs="0"/>
+        <xs:element ref="Tags" minOccurs="0"/>
+        <xs:element ref="Goal" minOccurs="0"/>
+        <xs:element ref="Conflict" minOccurs="0"/>
+        <xs:element ref="Outcome" minOccurs="0"/>
+        <xs:element ref="PlotlineNotes" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:choice>
+          <xs:element ref="Date" minOccurs="0"/>
+          <xs:element ref="Day" minOccurs="0"/>
+        </xs:choice>
+        <xs:element ref="Time" minOccurs="0"/>
+        <xs:element ref="LastsDays" minOccurs="0"/>
+        <xs:element ref="LastsHours" minOccurs="0"/>
+        <xs:element ref="LastsMinutes" minOccurs="0"/>
+        <xs:element ref="Characters" minOccurs="0"/>
+        <xs:element ref="Locations" minOccurs="0"/>
+        <xs:element ref="Items" minOccurs="0"/>
+        <xs:element ref="Content" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:string" use="required"/>
+      <xs:attribute name="type" default="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+            <xs:enumeration value="2"/>
+            <xs:enumeration value="3"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="status" default="1">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="1"/>
+            <xs:enumeration value="2"/>
+            <xs:enumeration value="3"/>
+            <xs:enumeration value="4"/>
+            <xs:enumeration value="5"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="scene" default="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+            <xs:enumeration value="2"/>
+            <xs:enumeration value="3"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="append" default="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Date" type="xs:string"/>
+  <xs:element name="Time" type="xs:string"/>
+  <xs:element name="Day" type="xs:string"/>
+  <xs:element name="LastsDays" type="xs:string"/>
+  <xs:element name="LastsHours" type="xs:string"/>
+  <xs:element name="LastsMinutes" type="xs:string"/>
+  <xs:element name="Goal">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="p" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Conflict">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="p" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Outcome">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="p" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PlotlineNotes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="p" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Characters">
+    <xs:complexType>
+      <xs:attribute name="ids" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Locations">
+    <xs:complexType>
+      <xs:attribute name="ids" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Items">
+    <xs:complexType>
+      <xs:attribute name="ids" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Content">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="p"/>
+        <xs:element ref="ul"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ARCS">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ARC" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ARC">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Title" minOccurs="0"/>
+        <xs:element ref="Desc" minOccurs="0"/>
+        <xs:element ref="Link" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="Notes" minOccurs="0"/>
+        <xs:element ref="ShortName" minOccurs="0"/>
+        <xs:element ref="Sections" minOccurs="0"/>
+        <xs:element ref="POINT" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ShortName" type="xs:string"/>
+  <xs:element name="Sections">
+    <xs:complexType>
+      <xs:attribute name="ids" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="POINT">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Title" minOccurs="0"/>
+        <xs:element ref="Desc" minOccurs="0"/>
+        <xs:element ref="Link" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="Notes" minOccurs="0"/>
+        <xs:element ref="Section" minOccurs="0"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Section">
+    <xs:complexType>
+      <xs:attribute name="id" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PROJECTNOTES">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="PROJECTNOTE" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PROJECTNOTE">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Title" minOccurs="0"/>
+        <xs:element ref="Desc" minOccurs="0"/>
+        <xs:element ref="Link" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PROGRESS">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="WC" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="WC">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Date"/>
+        <xs:element ref="Count"/>
+        <xs:element ref="WithUnused"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Count" type="xs:string"/>
+  <xs:element name="WithUnused" type="xs:string"/>
+</xs:schema>
