@@ -4,13 +4,18 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
-from datetime import datetime, date, timedelta
+from datetime import datetime
+from datetime import date
+from datetime import timedelta
 from datetime import time
 import re
 
 from novxlib.model.basic_element_tags import BasicElementTags
 from novxlib.novx_globals import _
 from novxlib.novx_globals import string_to_list
+from novxlib.novx_globals import verified_date
+from novxlib.novx_globals import verified_int_string
+from novxlib.novx_globals import verified_time
 import xml.etree.ElementTree as ET
 
 # Regular expressions for counting words and characters like in LibreOffice.
@@ -433,35 +438,17 @@ class Section(BasicElementTags):
 
         # Date/Day and Time.
         if xmlElement.find('Date') is not None:
-            dateStr = xmlElement.find('Date').text
-            try:
-                date.fromisoformat(dateStr)
-            except:
-                self.date = None
-            else:
-                self.date = dateStr
+            self.date = verified_date(xmlElement.find('Date').text)
         elif xmlElement.find('Day') is not None:
-            dayStr = xmlElement.find('Day').text
-            try:
-                int(dayStr)
-            except ValueError:
-                self.day = None
-            else:
-                self.day = dayStr
+            self.day = verified_int_string(xmlElement.find('Day').text)
 
         if xmlElement.find('Time') is not None:
-            timeStr = xmlElement.find('Time').text
-            try:
-                time.fromisoformat(timeStr)
-            except:
-                self.time = None
-            else:
-                self.time = timeStr
+            self.time = verified_time(xmlElement.find('Time').text)
 
         # Duration.
-        self.lastsDays = self._get_element_text(xmlElement, 'LastsDays')
-        self.lastsHours = self._get_element_text(xmlElement, 'LastsHours')
-        self.lastsMinutes = self._get_element_text(xmlElement, 'LastsMinutes')
+        self.lastsDays = verified_int_string(self._get_element_text(xmlElement, 'LastsDays'))
+        self.lastsHours = verified_int_string(self._get_element_text(xmlElement, 'LastsHours'))
+        self.lastsMinutes = verified_int_string(self._get_element_text(xmlElement, 'LastsMinutes'))
 
         # Characters references.
         scCharacters = []

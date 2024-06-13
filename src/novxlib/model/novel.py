@@ -8,6 +8,7 @@ from datetime import date
 import locale
 import re
 
+from novxlib.novx_globals import verified_date
 from novxlib.model.basic_element import BasicElement
 import xml.etree.ElementTree as ET
 
@@ -458,7 +459,7 @@ class Novel(BasicElement):
             self.wordTarget = int(xmlElement.find('WordTarget').text)
 
         # Reference date.
-        self.referenceDate = self._get_element_text(xmlElement, 'ReferenceDate')
+        self.referenceDate = verified_date(self._get_element_text(xmlElement, 'ReferenceDate'))
 
     def get_languages(self):
         """Determine the languages used in the document.

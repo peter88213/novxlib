@@ -25,6 +25,8 @@ from novxlib.novx_globals import PN_ROOT
 from novxlib.novx_globals import _
 from novxlib.novx_globals import intersection
 from novxlib.novx_globals import norm_path
+from novxlib.novx_globals import verified_date
+from novxlib.novx_globals import verified_int_string
 from novxlib.xml.xml_indent import indent
 import xml.etree.ElementTree as ET
 
@@ -122,15 +124,18 @@ class NovxFile(File):
         except:
             pass
         self.novel.tree.reset()
-        self._read_project(xmlRoot)
-        self._read_locations(xmlRoot)
-        self._read_items(xmlRoot)
-        self._read_characters(xmlRoot)
-        self._read_chapters_and_sections(xmlRoot)
-        self._read_plot_lines_and_points(xmlRoot)
-        self._read_project_notes(xmlRoot)
-        self.adjust_section_types()
-        self._read_word_count_log(xmlRoot)
+        try:
+            self._read_project(xmlRoot)
+            self._read_locations(xmlRoot)
+            self._read_items(xmlRoot)
+            self._read_characters(xmlRoot)
+            self._read_chapters_and_sections(xmlRoot)
+            self._read_plot_lines_and_points(xmlRoot)
+            self._read_project_notes(xmlRoot)
+            self.adjust_section_types()
+            self._read_word_count_log(xmlRoot)
+        except Exception as ex:
+            raise Error(f"{_('Corrupt project data')} ({str(ex)})")
         self._get_timestamp()
         self._keep_word_count()
 
@@ -413,9 +418,9 @@ class NovxFile(File):
             return
 
         for xmlWc in xmlWclog.iterfind('WC'):
-            wcDate = xmlWc.find('Date').text
-            wcCount = xmlWc.find('Count').text
-            wcTotalCount = xmlWc.find('WithUnused').text
+            wcDate = verified_date(xmlWc.find('Date').text)
+            wcCount = verified_int_string(xmlWc.find('Count').text)
+            wcTotalCount = verified_int_string(xmlWc.find('WithUnused').text)
             if wcDate and wcCount and wcTotalCount:
                 self.wcLog[wcDate] = [wcCount, wcTotalCount]
 

@@ -5,6 +5,7 @@ For further information see https://github.com/peter88213/novxlib
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
 from novxlib.model.world_element import WorldElement
+from novxlib.novx_globals import verified_date
 import xml.etree.ElementTree as ET
 
 
@@ -98,8 +99,8 @@ class Character(WorldElement):
         self.fullName = self._get_element_text(xmlElement, 'FullName')
         self.bio = self._xml_element_to_text(xmlElement.find('Bio'))
         self.goals = self._xml_element_to_text(xmlElement.find('Goals'))
-        self.birthDate = self._get_element_text(xmlElement, 'BirthDate')
-        self.deathDate = self._get_element_text(xmlElement, 'DeathDate')
+        self.birthDate = verified_date(self._get_element_text(xmlElement, 'BirthDate'))
+        self.deathDate = verified_date(self._get_element_text(xmlElement, 'DeathDate'))
 
     def to_xml(self, xmlElement):
         super().to_xml(xmlElement)

@@ -4,7 +4,10 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
-from calendar import day_name, month_name
+from calendar import day_name
+from calendar import month_name
+from datetime import date
+from datetime import time
 import gettext
 import locale
 import os
@@ -142,4 +145,31 @@ def intersection(elemList, refList):
     The element order is from elemList.
     """
     return [elem for elem in elemList if elem in refList]
+
+
+def verified_date(dateStr):
+    """Return a verified iso dateStr or None."""
+    if dateStr is not None:
+        date.fromisoformat(dateStr)
+        # raising an exception if dateStr is not an iso-formatted date
+    return dateStr
+
+
+def verified_int_string(intStr):
+    """Return a string representing a number or None."""
+    if intStr is not None:
+        int(intStr)
+        # raising an exception if intStr does not represent a number
+    return intStr
+
+
+def verified_time(timeStr):
+    """Return a verified iso timeStr or None."""
+    if  timeStr is not None:
+        time.fromisoformat(timeStr)
+        # raising an exception if timeStr is not an iso-formatted time
+        while timeStr.count(':') < 2:
+            timeStr = f'{timeStr}:00'
+            # adding minutes or seconds, if missing
+    return timeStr
 
