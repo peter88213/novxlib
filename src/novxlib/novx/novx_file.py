@@ -15,13 +15,20 @@ from novxlib.model.plot_line import PlotLine
 from novxlib.model.plot_point import PlotPoint
 from novxlib.model.section import Section
 from novxlib.model.world_element import WorldElement
+from novxlib.novx_globals import CHAPTER_PREFIX
+from novxlib.novx_globals import CHARACTER_PREFIX
 from novxlib.novx_globals import CH_ROOT
 from novxlib.novx_globals import CR_ROOT
 from novxlib.novx_globals import Error
+from novxlib.novx_globals import ITEM_PREFIX
 from novxlib.novx_globals import IT_ROOT
 from novxlib.novx_globals import LC_ROOT
+from novxlib.novx_globals import LOCATION_PREFIX
+from novxlib.novx_globals import PLOT_LINE_PREFIX
+from novxlib.novx_globals import PLOT_POINT_PREFIX
 from novxlib.novx_globals import PL_ROOT
 from novxlib.novx_globals import PN_ROOT
+from novxlib.novx_globals import SECTION_PREFIX
 from novxlib.novx_globals import _
 from novxlib.novx_globals import intersection
 from novxlib.novx_globals import norm_path
@@ -230,6 +237,11 @@ class NovxFile(File):
             ET.SubElement(xmlWc, 'Count').text = self.wcLog[wc][0]
             ET.SubElement(xmlWc, 'WithUnused').text = self.wcLog[wc][1]
 
+    def _check_id(self, elemId, elemPrefix):
+        """Raise an exception if elemId does not start with the correct prefix."""
+        if not elemId.startswith(elemPrefix):
+            raise Error(f"bad ID: '{elemId}'")
+
     def _check_xml(self, xmlRoot):
         """Raise an exception if the xmlRoot element is not compatible with the supported DTD."""
         if xmlRoot.tag != 'novx':
@@ -300,12 +312,14 @@ class NovxFile(File):
 
         for xmlChapter in xmlChapters.iterfind('CHAPTER'):
             chId = xmlChapter.attrib['id']
+            self._check_id(chId, CHAPTER_PREFIX)
             self.novel.chapters[chId] = Chapter(on_element_change=self.on_element_change)
             self.novel.chapters[chId].from_xml(xmlChapter)
             self.novel.tree.append(CH_ROOT, chId)
 
             for xmlSection in xmlChapter.iterfind('SECTION'):
                 scId = xmlSection.attrib['id']
+                self._check_id(scId, SECTION_PREFIX)
                 self._read_section(xmlSection, scId)
                 self.novel.tree.append(chId, scId)
 
@@ -317,6 +331,7 @@ class NovxFile(File):
 
         for xmlCharacter in xmlCharacters.iterfind('CHARACTER'):
             crId = xmlCharacter.attrib['id']
+            self._check_id(crId, CHARACTER_PREFIX)
             self.novel.characters[crId] = Character(on_element_change=self.on_element_change)
             self.novel.characters[crId].from_xml(xmlCharacter)
             self.novel.tree.append(CR_ROOT, crId)
@@ -329,6 +344,7 @@ class NovxFile(File):
 
         for xmlItem in xmlItems.iterfind('ITEM'):
             itId = xmlItem.attrib['id']
+            self._check_id(itId, ITEM_PREFIX)
             self.novel.items[itId] = WorldElement(on_element_change=self.on_element_change)
             self.novel.items[itId].from_xml(xmlItem)
             self.novel.tree.append(IT_ROOT, itId)
@@ -341,6 +357,7 @@ class NovxFile(File):
 
         for xmlLocation in xmlLocations.iterfind('LOCATION'):
             lcId = xmlLocation.attrib['id']
+            self._check_id(lcId, LOCATION_PREFIX)
             self.novel.locations[lcId] = WorldElement(on_element_change=self.on_element_change)
             self.novel.locations[lcId].from_xml(xmlLocation)
             self.novel.tree.append(LC_ROOT, lcId)
@@ -353,6 +370,7 @@ class NovxFile(File):
 
         for xmlPlotLine in xmlPlotLines.iterfind('ARC'):
             plId = xmlPlotLine.attrib['id']
+            self._check_id(plId, PLOT_LINE_PREFIX)
             self.novel.plotLines[plId] = PlotLine(on_element_change=self.on_element_change)
             self.novel.plotLines[plId].from_xml(xmlPlotLine)
             self.novel.tree.append(PL_ROOT, plId)
@@ -366,6 +384,7 @@ class NovxFile(File):
 
             for xmlPlotPoint in xmlPlotLine.iterfind('POINT'):
                 ppId = xmlPlotPoint.attrib['id']
+                self._check_id(ppId, PLOT_POINT_PREFIX)
                 self._read_plot_point(xmlPlotPoint, ppId, plId)
                 self.novel.tree.append(plId, ppId)
 

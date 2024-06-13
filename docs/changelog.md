@@ -1,5 +1,10 @@
 # Changelog
 
+### v4.2.1
+
+Verify XML input:
+- Check whether IDs start with the correct prefix.
+
 ### v4.2.0
 
 Verify XML input:
