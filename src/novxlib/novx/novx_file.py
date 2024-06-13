@@ -28,6 +28,7 @@ from novxlib.novx_globals import PLOT_LINE_PREFIX
 from novxlib.novx_globals import PLOT_POINT_PREFIX
 from novxlib.novx_globals import PL_ROOT
 from novxlib.novx_globals import PN_ROOT
+from novxlib.novx_globals import PRJ_NOTE_PREFIX
 from novxlib.novx_globals import SECTION_PREFIX
 from novxlib.novx_globals import _
 from novxlib.novx_globals import intersection
@@ -416,6 +417,7 @@ class NovxFile(File):
 
         for xmlProjectNote in xmlProjectNotes.iterfind('PROJECTNOTE'):
             pnId = xmlProjectNote.attrib['id']
+            self._check_id(pnId, PRJ_NOTE_PREFIX)
             self.novel.projectNotes[pnId] = BasicElement()
             self.novel.projectNotes[pnId].from_xml(xmlProjectNote)
             self.novel.tree.append(PN_ROOT, pnId)
