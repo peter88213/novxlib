@@ -1,5 +1,12 @@
 # Changelog
 
+### v4.2.0
+
+Verify XML input:
+- ISO-formatted date
+- ISO-formatted time
+- Strings representing numbers
+
 ### v4.1.0
 
 - Add novxService class.
