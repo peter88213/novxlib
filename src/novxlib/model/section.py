@@ -414,9 +414,9 @@ class Section(BasicElementTags):
 
         if not self.scene:
             # looking for deprecated attribute from DTD 1.3
-            scPacing = xmlElement.get('pacing', None)
-            if scPacing in ('1', '2'):
-                self.scene = int(scPacing) + 1
+            sceneKind = xmlElement.get('pacing', None)
+            if sceneKind in ('1', '2'):
+                self.scene = int(sceneKind) + 1
 
         self.appendToPrev = xmlElement.get('append', None) == '1'
 
