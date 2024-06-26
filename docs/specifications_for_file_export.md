@@ -51,16 +51,8 @@ There are two options:
 ### "Project template" placeholders
 
 - **$Title** - Project title
-- **$Desc** - Project description, html-formatted
+- **$Desc** - Project description
 - **$AuthorName** - Author's name
-- **$AuthorBio** - Information about the author
-
-
-- **$FieldTitle1** - Rating names: field 1
-- **$FieldTitle2** - Rating names: field 2
-- **$FieldTitle3** - Rating names: field 3
-- **$FieldTitle4** - Rating names: field 4
-
 - **$Language** - Language code acc. to ISO 639-1
 - **$Country** - Country code acc. to ISO 3166-2
 
@@ -68,93 +60,113 @@ There are two options:
 
 - **$ID** - Chapter ID,
 - **$ChapterNumber** - Chapter number (in sort order),
-
 - **$Title** - Chapter title
-- **$Desc** - Chapter description, html-formatted
-
+- **$Desc** - Chapter description
+- **$Notes** - Chapter notes
+- **$ProjectName** - URL-coded file name without suffix and extension
+- **$ProjectPath** - URL-coded fpath to the project directory
 - **$Language** - Language code acc. to ISO 639-1
 - **$Country** - Country code acc. to ISO 3166-2
+- **$ManuscriptSuffix** - File name suffix of the manuscript
 
 ### "Section template" placeholders
 
 - **$ID** - Section ID,
 - **$SectionNumber** - Section number (in sort order),
-
 - **$Title** - Section title
-- **$Desc** - Section description, html-formatted
-
+- **$Desc** - Section description
 - **$WordCount** - Section word count
 - **$WordsTotal** - Accumulated word count including the current section
-
-- **$Status** - Section completion status (Outline, Draft etc.)
+- **$Status** - Section status (Outline, Draft etc.)
 - **$SectionContent** - Section content
-
 - **$Date** - Specific section date (yyyy-mm-dd)
 - **$Time** - Time section begins: (hh:mm)
 - **$OdsTime** - Time section begins: (PThhHmmMssS)
-- **$Day** - Day section begins 
- 
+- **$Day** - Day section begins
 - **$ScDate** - Date or day (localized)
-
 - **$DateYear** - Year
-- **$DateMonth** - Month (number) 
+- **$DateMonth** - Month (number)
 - **$DateDay** - Day (number)
 - **$DateWeekday** - Day of the week (name)
 - **$MonthName** - Month (name)
-
 - **$LastsDays** - Amount of time section lasts: days
 - **$LastsHours** - Amount of time section lasts: hours
 - **$LastsMinutes** - Amount of time section lasts: minutes
-
 - **Duration** - Combination of days and hours and minutes
-
-- **$Scene** - N/A or A(ction) or R(eaction) or C(ustom)
-- **$Goal** - The section protagonist's goal, html-formatted
-- **$Conflict** - The section conflict, html-formatted
-- **$Outcome** - The section outcome, html-formatted
+- **$Scene** - The sections's kind of scene, if any
+- **$Goal** - The section protagonist's goal
+- **$Conflict** - The section conflict
+- **$Outcome** - The section outcome
 - **$Tags** - Comma-separated list of section tags
-
 - **$Characters** - Comma-separated list of characters assigned to the section
 - **$Viewpoint** - Viewpoint character
 - **$Locations** - Comma-separated list of locations assigned to the section
 - **$Items** - Comma-separated list of items assigned to the section
-
 - **$Notes** - Section notes
-
+- **$ProjectName** - URL-coded file name without suffix and extension
+- **$ProjectPath** - URL-coded fpath to the project directory
 - **$Language** - Language code acc. to ISO 639-1
 - **$Country** - Country code acc. to ISO 3166-2
+- **$ManuscriptSuffix** - File name suffix of the manuscript
+- **$SectionsSuffix** - File name suffix of the section descriptions
 
 
 ### "Character template" placeholders
 
 - **$ID** - Character ID
-
 - **$Title** - Character's name
-- **$FullName** - Character's full name)
-- **$AKA** - Alternative name
-
-- **$Status** - Major/minor character
-- **$Tags** - Character tags
-
 - **$Desc** - Character description
+- **$Tags** - Character tags
+- **$AKA** - Alternative name
+- **$Notes** - Character notes
 - **$Bio** - The character's biography
 - **$Goals** - The character's goals in the story
-- **$Notes** - Character notes)
+- **$FullName** - Character's full name)
+- **$Status** - Major/minor character
+- **$ProjectName** - URL-coded file name without suffix and extension
+- **$ProjectPath** - URL-coded fpath to the project directory
+- **$CharactersSuffix** - File name suffix of the character descriptions
 
 ### "Location template" placeholders
 
 - **$ID** - Location ID
-
 - **$Title** - Location's name
-- **$AKA** - Alternative name
 - **$Desc** - Location description
+- **$Notes** - location notes
 - **$Tags** - Location tags
+- **$AKA** - Alternative name
+- **$ProjectName** - URL-coded file name without suffix and extension
+- **$ProjectPath** - URL-coded fpath to the project directory
+- **$LocationsSuffix** - File name suffix of the character descriptions
 
 ### "Item template" placeholders
 
 - **$ID** - Item ID
-
 - **$Title** - Item's name
-- **$AKA** - Alternative name
 - **$Desc** - Item description
+- **$Notes** - Item notes
 - **$Tags** - Item tags
+- **$AKA** - Alternative name
+- **$ProjectName** - URL-coded file name without suffix and extension
+- **$ProjectPath** - URL-coded fpath to the project directory
+- **$ItemsSuffix** - File name suffix of the character descriptions
+
+
+### "Plot line" placeholders
+
+- **$ID** - Plot line ID,
+- **$Title** - Plot line title
+- **$Desc** - Plot line description
+- **$Notes** - Plot line notes
+- **$ProjectName** - URL-coded file name without suffix and extension
+- **$ProjectPath** - URL-coded fpath to the project directory
+- **$Language** - Language code acc. to ISO 639-1
+- **$Country** - Country code acc. to ISO 3166-2
+
+### "Project notes" placeholders
+
+- **$ID** - Project notes ID,
+- **$Title** - Project notes title
+- **$Desc** - Project notes content
+- **$ProjectName** - URL-coded file name without suffix and extension
+- **$ProjectPath** - URL-coded fpath to the project directory
