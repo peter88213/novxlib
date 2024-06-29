@@ -44,6 +44,7 @@
   "Ambiguous novelibre character \\\"{}\\\".": "Figur \\\"{}\\\" mehrfach in novelibre.",
   "Ambiguous novelibre item \\\"{}\\\".": "Gegenstand \\\"{}\\\" mehrfach in novelibre.",
   "Ambiguous novelibre location \\\"{}\\\".": "Schauplatz \\\"{}\\\" mehrfach in novelibre.",
+  "Ambiguous novelibre plot line \\\"{}\\\".": "Plotlinie \\\"{}\\\" mehrfach in novelibre.",
   "Ambiguous novelibre section title \\\"{}\\\".": "Abschnittstitel \\\"{}\\\" mehrfach in novelibre.",
   "An update is available for": "Ein Update ist verfügbar für",
   "Append to previous section": "An den vorherigen Abschnitt anhängen",
