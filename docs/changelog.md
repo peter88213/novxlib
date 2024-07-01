@@ -1,5 +1,11 @@
 # Changelog
 
+### v4.3.0
+
+- Provide a moonphase module.
+- Provide new helper functions for date calculation.
+- Refactor.
+
 ### v4.2.2
 
 Verify XML input:

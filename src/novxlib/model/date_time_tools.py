@@ -5,7 +5,9 @@ For further information see https://github.com/peter88213/
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
 from calendar import isleap
+from datetime import date
 from datetime import datetime
+from datetime import timedelta
 
 
 def difference_in_years(startDate, endDate):
@@ -45,4 +47,28 @@ def get_age(nowIso, birthDateIso, deathDateIso):
     birthDate = datetime.fromisoformat(birthDateIso)
     years = difference_in_years(birthDate, now)
     return years
+
+
+def get_specific_date(dayStr, refIso):
+    """Return the ISO-formatted date.
+    
+    Positional arguments:
+        dayStr:str -- Day
+        refIso:str -- Reference date/time, formatted acc. to ISO 8601
+    """
+    # Calculate the section date from day and reference date.
+    refDate = date.fromisoformat(refIso)
+    return date.isoformat(refDate + timedelta(days=int(dayStr)))
+
+
+def get_unspecific_date(dateIso, refIso):
+    """Return the ISO-formatted date.
+    
+    Positional arguments:
+        dateIso:str -- Date/time, formatted acc. to ISO 8601
+        refIso:str -- Reference date/time, formatted acc. to ISO 8601
+    """
+    # Calculate the section day from date and reference date.
+    refDate = date.fromisoformat(refIso)
+    return str((date.fromisoformat(dateIso) - refDate).days)
 

@@ -4,13 +4,15 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
-from datetime import datetime
 from datetime import date
-from datetime import timedelta
+from datetime import datetime
 from datetime import time
+from datetime import timedelta
 import re
 
 from novxlib.model.basic_element_tags import BasicElementTags
+from novxlib.model.date_time_tools import get_specific_date
+from novxlib.model.date_time_tools import get_unspecific_date
 from novxlib.novx_globals import _
 from novxlib.novx_globals import string_to_list
 from novxlib.novx_globals import verified_date
@@ -361,17 +363,17 @@ class Section(BasicElementTags):
 
         On success, return True. Otherwise return False. 
         """
-        if not self._date:
-            try:
-                deltaDays = timedelta(days=int(self._day))
-                refDate = date.fromisoformat(referenceDate)
-                self.date = date.isoformat(refDate + deltaDays)
-                self._day = None
-            except:
-                self.date = None
-                return False
+        if self._date:
+            return True
 
-        return True
+        try:
+            self.date = get_specific_date(self._day, referenceDate)
+            self._day = None
+            return True
+
+        except:
+            self.date = None
+            return False
 
     def date_to_day(self, referenceDate):
         """Convert specific date to day.
@@ -381,17 +383,17 @@ class Section(BasicElementTags):
         
         On success, return True. Otherwise return False. 
         """
-        if not self._day:
-            try:
-                sectionDate = date.fromisoformat(self._date)
-                referenceDate = date.fromisoformat(referenceDate)
-                self._day = str((sectionDate - referenceDate).days)
-                self.date = None
-            except:
-                self._day = None
-                return False
+        if self._day:
+            return True
 
-        return True
+        try:
+            self._day = get_unspecific_date(self._date, referenceDate)
+            self.date = None
+            return True
+
+        except:
+            self._day = None
+            return False
 
     def from_xml(self, xmlElement):
         super().from_xml(xmlElement)
