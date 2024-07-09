@@ -75,10 +75,10 @@ class OdsWCharList(OdsWriter):
       <text:p>{_("Description")}</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>{_("Bio")}</text:p>
+      <text:p>$CustomChrBio</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>{_("Goals")}</text:p>
+      <text:p>$CustomChrGoals</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>{_("Importance")}</text:p>

@@ -27,11 +27,11 @@ class OdtWCharacters(OdtWriter):
 <text:section text:style-name="Sect1" text:name="desc:$ID">
 $Desc
 </text:section>
-<text:h text:style-name="Heading_20_3" text:outline-level="3">$BioTitle</text:h>
+<text:h text:style-name="Heading_20_3" text:outline-level="3">$CustomChrBio</text:h>
 <text:section text:style-name="Sect1" text:name="bio:$ID">
 $Bio
 </text:section>
-<text:h text:style-name="Heading_20_3" text:outline-level="3">$GoalsTitle</text:h>
+<text:h text:style-name="Heading_20_3" text:outline-level="3">$CustomChrGoals</text:h>
 <text:section text:style-name="Sect1" text:name="goals:$ID">
 $Goals
 </text:section>
@@ -58,13 +58,5 @@ $Notes
             characterMapping['AKA'] = f' ("{self.novel.characters[crId].aka}")'
         if self.novel.characters[crId].fullName:
             characterMapping['FullName'] = f'/{self.novel.characters[crId].fullName}'
-        if self.novel.customChrBio:
-            characterMapping['BioTitle'] = self.novel.customChrBio
-        else:
-            characterMapping['BioTitle'] = _('Bio')
-        if self.novel.customChrGoals:
-            characterMapping['GoalsTitle'] = self.novel.customChrGoals
-        else:
-            characterMapping['GoalsTitle'] = _('Goals')
 
         return characterMapping

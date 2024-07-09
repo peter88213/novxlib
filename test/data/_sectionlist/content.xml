@@ -177,13 +177,13 @@
       <text:p>Scene</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>Goal</text:p>
+      <text:p>Plot progress / Goal / Reaction / Opening</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>Conflict</text:p>
+      <text:p>Characterization / Conflict / Dilemma / Peak em. moment</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>Outcome</text:p>
+      <text:p>World building / Outcome / Choice / Ending</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>Status</text:p>

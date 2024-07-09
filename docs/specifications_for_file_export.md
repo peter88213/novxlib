@@ -55,6 +55,14 @@ There are two options:
 - **$AuthorName** - Author's name
 - **$Language** - Language code acc. to ISO 639-1
 - **$Country** - Country code acc. to ISO 3166-2
+- **$CustomPlotProgress** - Custom "Plot progress" field title
+- **$CustomCharacterization** - Custom "Characterization" field title
+- **$CustomWorldBuilding** - Custom "World building" field title
+- **$CustomGoal** - Custom "Goal" field title
+- **$CustomConflict** - Custom "Conflict" field title
+- **$CustomOutcome** - Custom "Outcome" field title
+- **$CustomChrBio** - Custom character "Bio" field title
+- **$CustomChrGoals** - Custom character "Goals" field title
 
 ### "Chapter template" placeholders
 
@@ -109,6 +117,12 @@ There are two options:
 - **$Country** - Country code acc. to ISO 3166-2
 - **$ManuscriptSuffix** - File name suffix of the manuscript
 - **$SectionsSuffix** - File name suffix of the section descriptions
+- **$CustomPlotProgress** - Custom "Plot progress" field title
+- **$CustomCharacterization** - Custom "Characterization" field title
+- **$CustomWorldBuilding** - Custom "World building" field title
+- **$CustomGoal** - Custom "Goal" field title
+- **$CustomConflict** - Custom "Conflict" field title
+- **$CustomOutcome** - Custom "Outcome" field title
 
 
 ### "Character template" placeholders
@@ -126,6 +140,8 @@ There are two options:
 - **$ProjectName** - URL-coded file name without suffix and extension
 - **$ProjectPath** - URL-coded fpath to the project directory
 - **$CharactersSuffix** - File name suffix of the character descriptions
+- **$CustomChrBio** - Custom character "Bio" field title
+- **$CustomChrGoals** - Custom character "Goals" field title
 
 ### "Location template" placeholders
 

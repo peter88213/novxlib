@@ -1,5 +1,9 @@
 # Changelog
 
+### v4.4.0
+
+- Use the customized field titles for document export.
+
 ### v4.3.0
 
 - Provide a moonphase module.

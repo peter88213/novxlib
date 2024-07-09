@@ -28,8 +28,8 @@ class HtmlCharacters(HtmlReport):
 <td>{_('AKA')}</td>
 <td>{_('Tags')}</td>
 <td>{_('Description')}</td>
-<td>{_('Bio')}</td>
-<td>{_('Goals')}</td>
+<td>$CustomChrBio</td>
+<td>$CustomChrGoals</td>
 <td>{_('Notes')}</td>
 </tr>
 '''

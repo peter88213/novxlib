@@ -250,6 +250,8 @@ class FileExport(File):
         else:
             characterStatus = Character.MINOR_MARKER
 
+        __, __, __, __, __, __, chrBio, chrGls = self._get_renamings()
+
         characterMapping = dict(
             ID=crId,
             Title=self._convert_from_novx(self.novel.characters[crId].title, quick=True),
@@ -264,6 +266,8 @@ class FileExport(File):
             ProjectName=self._convert_from_novx(self.projectName, quick=True),
             ProjectPath=self.projectPath,
             CharactersSuffix=CHARACTERS_SUFFIX,
+            CustomChrBio=chrBio,
+            CustomChrGoals=chrGls
         )
         return characterMapping
 
@@ -323,6 +327,8 @@ class FileExport(File):
                 filters = self._convert_from_novx('\n'.join(filterMessages))
             else:
                 filters = ''
+            pltPrgs, chrczn, wrldbld, goal, cflct, outcm, chrBio, chrGls = self._get_renamings()
+
         fileHeaderMapping = dict(
             Title=self._convert_from_novx(self.novel.title, quick=True),
             Filters=filters,
@@ -330,6 +336,14 @@ class FileExport(File):
             AuthorName=self._convert_from_novx(self.novel.authorName, quick=True),
             Language=self.novel.languageCode,
             Country=self.novel.countryCode,
+            CustomPlotProgress=pltPrgs,
+            CustomCharacterization=chrczn,
+            CustomWorldBuilding=wrldbld,
+            CustomGoal=goal,
+            CustomConflict=cflct,
+            CustomOutcome=outcm,
+            CustomChrBio=chrBio,
+            CustomChrGoals=chrGls
         )
         return fileHeaderMapping
 
@@ -422,6 +436,41 @@ class FileExport(File):
             if self.locationFilter.accept(self, lcId):
                 lines.append(template.safe_substitute(self._get_locationMapping(lcId)))
         return lines
+
+    def _get_renamings(self):
+        if self.novel.customPlotProgress:
+            pltPrgs = self.novel.customPlotProgress
+        else:
+            pltPrgs = _('Plot progress')
+        if self.novel.customCharacterization:
+            chrczn = self.novel.customCharacterization
+        else:
+            chrczn = _('Characterization')
+        if self.novel.customWorldBuilding:
+            wrldbld = self.novel.customWorldBuilding
+        else:
+            wrldbld = _('World building')
+        if self.novel.customGoal:
+            goal = self.novel.customGoal
+        else:
+            goal = _('Opening')
+        if self.novel.customConflict:
+            cflct = self.novel.customConflict
+        else:
+            cflct = _('Peak em. moment')
+        if self.novel.customOutcome:
+            outcm = self.novel.customOutcome
+        else:
+            outcm = _('Ending')
+        if self.novel.customChrBio:
+            chrBio = self.novel.customChrBio
+        else:
+            chrBio = _('Bio')
+        if self.novel.customChrGoals:
+            chrGls = self.novel.customChrGoals
+        else:
+            chrGls = _('Goals')
+        return pltPrgs, chrczn, wrldbld, goal, cflct, outcm, chrBio, chrGls
 
     def _get_sectionMapping(self, scId, sectionNumber, wordsTotal):
         """Return a mapping dictionary for a section section.
@@ -531,6 +580,8 @@ class FileExport(File):
 
         duration = f'{days}{hours}{minutes}'
 
+        pltPrgs, chrczn, wrldbld, goal, cflct, outcm, __, __ = self._get_renamings()
+
         sectionMapping = dict(
             ID=scId,
             SectionNumber=sectionNumber,
@@ -570,6 +621,12 @@ class FileExport(File):
             Country=self.novel.countryCode,
             ManuscriptSuffix=MANUSCRIPT_SUFFIX,
             SectionsSuffix=SECTIONS_SUFFIX,
+            CustomPlotProgress=pltPrgs,
+            CustomCharacterization=chrczn,
+            CustomWorldBuilding=wrldbld,
+            CustomGoal=goal,
+            CustomConflict=cflct,
+            CustomOutcome=outcm
         )
         return sectionMapping
 

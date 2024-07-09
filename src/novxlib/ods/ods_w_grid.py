@@ -137,13 +137,13 @@ $ArcTitleCells
       <text:p>{_("Scene")}</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>{_("Goal")} / {_("Reaction")}$CustomGoal</text:p>
+      <text:p>$CustomPlotProgress / {_("Goal")} / {_("Reaction")} / $CustomGoal</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>{_("Conflict")} / {_("Dilemma")}$CustomConflict</text:p>
+      <text:p>$CustomCharacterization / {_("Conflict")} / {_("Dilemma")} / $CustomConflict</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
-      <text:p>{_("Outcome")} / {_("Choice")}$CustomOutcome</text:p>
+      <text:p>$CustomWorldBuilding / {_("Outcome")} / {_("Choice")} / $CustomOutcome</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="Heading" office:value-type="string">
       <text:p>{_("Notes")}</text:p>
@@ -243,20 +243,6 @@ $ArcNoteCells
         fileHeaderMapping['ArcColumns'] = '\n'.join(arcColumns)
         fileHeaderMapping['ArcIdCells'] = '\n'.join(arcIdCells)
         fileHeaderMapping['ArcTitleCells'] = '\n'.join(arcTitleCells)
-
-        #--- Custom goal/conflict/outcome titles.
-        if self.novel.customGoal:
-            fileHeaderMapping['CustomGoal'] = f' / {self.novel.customGoal}'
-        else:
-            fileHeaderMapping['CustomGoal'] = ''
-        if self.novel.customConflict:
-            fileHeaderMapping['CustomConflict'] = f' / {self.novel.customConflict}'
-        else:
-            fileHeaderMapping['CustomConflict'] = ''
-        if self.novel.customOutcome:
-            fileHeaderMapping['CustomOutcome'] = f' / {self.novel.customOutcome}'
-        else:
-            fileHeaderMapping['CustomOutcome'] = ''
 
         return fileHeaderMapping
 
