@@ -24,7 +24,7 @@ class PlotLine(BasicElementNotes):
 
     @property
     def shortName(self):
-        # str -- name of the plot line
+        # str: name of the plot line
         return self._shortName
 
     @shortName.setter
@@ -35,7 +35,7 @@ class PlotLine(BasicElementNotes):
 
     @property
     def sections(self):
-        # List of str -- IDs of the sections associated with the plot line.
+        # List of str: IDs of the sections associated with the plot line.
         try:
             return self._sections[:]
         except TypeError:

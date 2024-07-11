@@ -22,11 +22,11 @@ class BasicElementTags(BasicElementNotes):
 
     @property
     def tags(self):
+        # str: semicolon-separated tags
         return self._tags
 
     @tags.setter
     def tags(self, newVal):
-        # str: semicolon-separated tags
         if self._tags != newVal:
             self._tags = newVal
             self.on_element_change()

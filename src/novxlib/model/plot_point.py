@@ -18,10 +18,10 @@ class PlotPoint(BasicElementNotes):
         super().__init__(**kwargs)
 
         self._sectionAssoc = sectionAssoc
-        # str -- ID of the associated section
 
     @property
     def sectionAssoc(self):
+        # str: ID of the associated section
         return self._sectionAssoc
 
     @sectionAssoc.setter
