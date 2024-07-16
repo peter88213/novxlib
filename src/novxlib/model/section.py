@@ -505,11 +505,10 @@ class Section(BasicElementTags):
             self.sectionContent = '<p></p>'
 
     def get_end_date_time(self):
-        """Return the section end (date, time, day) tuple calculated from start and duration."""
+        """Return the end (date, time, day) tuple calculated from start and duration."""
         endDate = None
         endTime = None
         endDay = None
-        # Calculate end date from section section duration.
         if self.lastsDays:
             lastsDays = int(self.lastsDays)
         else:
