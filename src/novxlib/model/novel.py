@@ -95,7 +95,7 @@ class Novel(BasicElement):
         try:
             self.referenceWeekDay = date.fromisoformat(referenceDate).weekday()
             self._referenceDate = referenceDate
-            # yyyy-mm-dd
+            # YYYY-MM-DD
         except:
             self.referenceWeekDay = None
             self._referenceDate = None

@@ -11,7 +11,7 @@ def get_moon_phase_day(isoDate):
     """Return the phase day for the given ISO-formatted date.
     
     The phase day is 0 to 29, where 0=new moon, 15=full etc.
-    Date format is 'yyyy-mm-dd'.
+    Date format is 'YYYY-MM-DD'.
     This is based on a 'do it in your head' algorithm by John Conway. 
     In its current form, it's only valid for the 20th and 21st centuries.
     """

@@ -225,7 +225,7 @@ class Section(BasicElementTags):
 
     @property
     def date(self):
-        # yyyy-mm-dd
+        # YYYY-MM-DD
         return self._date
 
     @date.setter
