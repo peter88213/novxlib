@@ -371,6 +371,7 @@ class Novel(BasicElement):
             if not newVal:
                 self._referenceDate = None
                 self.referenceWeekDay = None
+                self.on_element_change()
             else:
                 try:
                     self.referenceWeekDay = date.fromisoformat(newVal).weekday()

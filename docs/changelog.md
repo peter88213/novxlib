@@ -1,5 +1,9 @@
 # Changelog
 
+### v4.4.1
+
+- Fix a bug where on_element_change() is not called when Novel.referenceDate is set to None.
+
 ### v4.4.0
 
 - Use the customized field titles for document export.
