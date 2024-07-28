@@ -1,5 +1,9 @@
 # Changelog
 
+### v4.4.2
+
+- Prevent overwriting an existing localization when importing novx_globals.
+
 ### v4.4.1
 
 - Fix a bug where on_element_change() is not called when Novel.referenceDate is set to None.
