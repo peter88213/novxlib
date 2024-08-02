@@ -5,13 +5,19 @@ For further information see https://github.com/peter88213/
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
 import os
+from shutil import copy2
 from shutil import make_archive
 import zipapp
 
 import inliner
 import pgettext
 
-I18_DIR = '../i18n'
+
+def collect_dist_files(distFiles):
+    for file, targetDir in distFiles:
+        os.makedirs(targetDir, exist_ok=True)
+        print(f'Copying "{file}" to "{targetDir}" ...')
+        copy2(file, targetDir)
 
 
 def inline_modules(source, target):
@@ -38,6 +44,7 @@ def insert_version_number(source, version='unknown'):
 
 def make_pot(sourcefile, app='', version='unknown'):
     """Generate a pot file for translations from the source file."""
+    I18_DIR = '../i18n'
     POT_FILE = f'{I18_DIR}/messages.pot'
     os.makedirs(I18_DIR, exist_ok=True)
     if os.path.isfile(POT_FILE):
@@ -59,18 +66,21 @@ def make_pot(sourcefile, app='', version='unknown'):
         return False
 
 
-def make_pyz(source, target):
-    target = f'{target}.pyzw'
-    print(f'Writing "{target}" ...')
+def make_pyz(sourceDir, targetDir, release):
+    targetFile = f'{targetDir}/{release}.pyzw'
+    print(f'Writing "{targetFile}" ...')
     zipapp.create_archive(
-        source,
-        target,
+        sourceDir,
+        targetFile,
         main='setuplib:main',
         compressed=True
         )
 
 
-def make_zip(source, target):
+def make_zip(sourceDir, targetDir, release):
+    copy2('../src/setup.pyw', sourceDir)
+    copy2('../docs/usage.md', f'{sourceDir}/README.md')
+    target = f'{targetDir}/{release}'
     print(f'Writing "{target}.zip" ...')
-    make_archive(target, 'zip', source)
+    make_archive(target, 'zip', sourceDir)
 
