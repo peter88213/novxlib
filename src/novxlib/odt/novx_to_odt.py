@@ -6,6 +6,8 @@ License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
 from xml import sax
 
+from novxlib.novx_globals import _
+
 
 class NovxToOdt(sax.ContentHandler):
     """A parser to convert novx markup to odt markup."""
@@ -18,16 +20,18 @@ class NovxToOdt(sax.ContentHandler):
         self._note = None
         self._comment = None
 
-    def feed(self, xmlString, languages, append):
+    def feed(self, xmlString, languages, append, firstInChapter):
         """Feed a string file to the parser.
         
         Positional arguments:
             xmlString: str -- content as XML string.
             languages: list[str] -- Ordered list of the document#s languages.
             append: boolean -- indent the first paragraph, if True.
+            firstInChapter: boolean -- apply the "Chapter beginning" paragraph style, if True.
             
         """
         self._languages = languages
+        self._firstParagraphInChapter = firstInChapter
         self._indentParagraph = append
         self._note = None
         self._comment = False
@@ -105,10 +109,13 @@ class NovxToOdt(sax.ContentHandler):
                 self.odtLines.append(f'<text:p text:style-name="{self._note.title()}">')
             elif self._comment:
                 self.odtLines.append('<text:p>')
+            elif self._firstParagraphInChapter:
+                self.odtLines.append(f'<text:p text:style-name="{_("Chapter_20_beginning")}">')
             elif self._indentParagraph:
                 self.odtLines.append('<text:p text:style-name="First_20_line_20_indent">')
             else:
                 self.odtLines.append('<text:p text:style-name="Text_20_body">')
+            self._firstParagraphInChapter = False
             self._indentParagraph = False
             return
 

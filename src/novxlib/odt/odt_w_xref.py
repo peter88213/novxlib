@@ -21,11 +21,11 @@ class OdtWXref(OdtWriter):
     _fileHeader = f'''{OdtWriter._CONTENT_XML_HEADER}<text:p text:style-name="Title">$Title</text:p>
 <text:p text:style-name="Subtitle">$AuthorName</text:p>
 '''
-    _sectionTemplate = '''<text:p text:style-name="section_20_mark">
+    _sectionTemplate = f'''<text:p text:style-name="{_('Section_20_mark')}">
 <text:a xlink:href="../$ProjectName$ManuscriptSuffix.odt#$ID%7Cregion">$SectionNumber</text:a> (Ch $Chapter) $Title
 </text:p>
 '''
-    _unusedSectionTemplate = '''<text:p text:style-name="section_20_mark_20_unused">
+    _unusedSectionTemplate = f'''<text:p text:style-name="{_('Section_20_mark_20_unused')}">
 $SectionNumber (Ch $Chapter) $Title (Unused)
 </text:p>
 '''
@@ -152,7 +152,7 @@ $SectionNumber (Ch $Chapter) $Title (Unused)
                     lines.append(template.safe_substitute(self._get_locationMapping(lcId)))
         return lines
 
-    def _get_sectionMapping(self, scId):
+    def _get_sectionMapping(self, scId, **kwargs):
         """Return a mapping dictionary for a section section.
 
         Positional arguments:
@@ -161,7 +161,7 @@ $SectionNumber (Ch $Chapter) $Title (Unused)
         Extends the superclass template method.
         """
         sectionNumber = self._xr.srtSections.index(scId) + 1
-        sectionMapping = super()._get_sectionMapping(scId, sectionNumber, 0)
+        sectionMapping = super()._get_sectionMapping(scId, sectionNumber, 0, **kwargs)
         chapterNumber = self.novel.tree.get_children(CH_ROOT).index(self._xr.chpPerScn[scId]) + 1
         sectionMapping['Chapter'] = str(chapterNumber)
         return sectionMapping

@@ -1,5 +1,10 @@
 # Changelog
 
+### v4.5.0
+
+- Add a "Chapter beginning" paragraph style for export.
+- Translate the custom ODT style names.
+
 ### v4.4.2
 
 - Prevent overwriting an existing localization when importing novx_globals.

@@ -29,7 +29,7 @@ class OdtWSectionDesc(OdtWriter):
 <text:h text:style-name="Heading_20_2" text:outline-level="2"><text:a xlink:href="../$ProjectName$ManuscriptSuffix.odt#$Title|outline">$Title</text:a></text:h>
 '''
 
-    _sectionTemplate = '''<text:h text:style-name="Invisible_20_Heading_20_3" text:outline-level="3">$Title</text:h>
+    _sectionTemplate = f'''<text:h text:style-name="{_('Heading_20_3_20_invisible')}" text:outline-level="3">$Title</text:h>
 <text:section text:style-name="Sect1" text:name="$ID">
 $Desc
 </text:section>
@@ -43,7 +43,7 @@ $Desc
 
     _fileFooter = OdtWriter._CONTENT_XML_FOOTER
 
-    def _get_sectionMapping(self, scId, sectionNumber, wordsTotal):
+    def _get_sectionMapping(self, scId, sectionNumber, wordsTotal, **kwargs):
         """Return a mapping dictionary for a section section.
         
         Positional arguments:
@@ -53,6 +53,6 @@ $Desc
         
         Extends the superclass method.
         """
-        sectionMapping = super()._get_sectionMapping(scId, sectionNumber, wordsTotal)
+        sectionMapping = super()._get_sectionMapping(scId, sectionNumber, wordsTotal, **kwargs)
         sectionMapping['Manuscript'] = _('Manuscript')
         return sectionMapping

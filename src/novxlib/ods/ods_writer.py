@@ -289,16 +289,13 @@ class OdsWriter(OdfFile):
 '''
     _MIMETYPE = 'application/vnd.oasis.opendocument.spreadsheet'
 
-    def _convert_from_novx(self, text, quick=False, append=False, xml=False, isLink=False):
+    def _convert_from_novx(self, text, isLink=False, **kwargs):
         """Return text, converted from novelibre markup to target format.
         
         Positional arguments:
             text -- string to convert.
         
         Optional arguments:
-            quick: bool -- if True, apply a conversion mode for one-liners without formatting.
-            append: bool -- if True, indent the first paragraph.
-            xml: bool -- if True, parse XML content. 
             isLink: bool -- if True, avoid double quotes in the returned text. 
         
         Overrides the superclass method.

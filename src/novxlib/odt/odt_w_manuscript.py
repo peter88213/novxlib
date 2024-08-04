@@ -27,7 +27,7 @@ class OdtWManuscript(OdtWFormatted):
     _chapterTemplate = '''<text:h text:style-name="Heading_20_2" text:outline-level="2">$Title</text:h>
 '''
 
-    _sectionTemplate = '''<text:h text:style-name="Invisible_20_Heading_20_3" text:outline-level="3">$Title</text:h>
+    _sectionTemplate = f'''<text:h text:style-name="{_('Heading_20_3_20_invisible')}" text:outline-level="3">$Title</text:h>
 <text:section text:style-name="Sect1" text:name="$ID">
 $SectionContent
 </text:section>

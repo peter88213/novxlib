@@ -246,7 +246,7 @@ $ArcNoteCells
 
         return fileHeaderMapping
 
-    def _get_sectionMapping(self, scId, sectionNumber, wordsTotal):
+    def _get_sectionMapping(self, scId, sectionNumber, wordsTotal, **kwargs):
         """Return a mapping dictionary for a section section.
         
         Positional arguments:

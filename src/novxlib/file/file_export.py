@@ -106,14 +106,19 @@ class FileExport(File):
                 os.replace(f'{self.filePath}.bak', self.filePath)
             raise Error(f'{_("Cannot write file")}: "{norm_path(self.filePath)}".')
 
-    def _convert_from_novx(self, text, quick=False, append=False, xml=False):
-        """Return text, converted from novelibre markup to target format.
+    def _convert_from_novx(self, text, **kwargs):
+        """Return text without markup, converted to target format.
         
         Positional arguments:
             text -- string to convert.
         
         Optional arguments:
-            quick: bool -- if True, apply a conversion mode for one-liners without formatting.        
+            quick: bool -- if True, apply a conversion mode for one-liners without formatting.
+            append: bool -- if True, indent the first paragraph.
+            firstInChapter: bool: -- if True, the section begins a chapter.
+            xml: bool -- if True, parse XML content. 
+        
+        Overrides the superclass method.
         """
         if text is None:
             text = ''
@@ -472,13 +477,15 @@ class FileExport(File):
             chrGls = _('Goals')
         return pltPrgs, chrczn, wrldbld, goal, cflct, outcm, chrBio, chrGls
 
-    def _get_sectionMapping(self, scId, sectionNumber, wordsTotal):
+    def _get_sectionMapping(self, scId, sectionNumber, wordsTotal, firstInChapter=False):
         """Return a mapping dictionary for a section section.
         
         Positional arguments:
             scId: str -- section ID.
             sectionNumber: int -- section number to be displayed.
             wordsTotal: int -- accumulated wordcount.
+        Optional arguments:
+            firstInChapter: bool: -- if True, the section begins a chapter.
         
         This is a template method that can be extended or overridden by subclasses.
         """
@@ -581,16 +588,26 @@ class FileExport(File):
         duration = f'{days}{hours}{minutes}'
 
         pltPrgs, chrczn, wrldbld, goal, cflct, outcm, __, __ = self._get_renamings()
-
         sectionMapping = dict(
             ID=scId,
             SectionNumber=sectionNumber,
-            Title=self._convert_from_novx(self.novel.sections[scId].title, quick=True),
-            Desc=self._convert_from_novx(self.novel.sections[scId].desc, append=self.novel.sections[scId].appendToPrev),
+            Title=self._convert_from_novx(
+                self.novel.sections[scId].title,
+                quick=True
+                ),
+            Desc=self._convert_from_novx(
+                self.novel.sections[scId].desc,
+                append=self.novel.sections[scId].appendToPrev
+                ),
             WordCount=str(self.novel.sections[scId].wordCount),
             WordsTotal=wordsTotal,
             Status=int(self.novel.sections[scId].status),
-            SectionContent=self._convert_from_novx(self.novel.sections[scId].sectionContent, append=self.novel.sections[scId].appendToPrev, xml=True),
+            SectionContent=self._convert_from_novx(
+                        self.novel.sections[scId].sectionContent,
+                        append=self.novel.sections[scId].appendToPrev,
+                        firstInChapter=firstInChapter,
+                        xml=True
+                        ),
             Date=isoDate,
             Time=scTime,
             OdsTime=odsTime,
@@ -689,7 +706,15 @@ class FileExport(File):
             if not (firstSectionInChapter or self.novel.sections[scId].appendToPrev or self.novel.sections[scId].scType > 1):
                 lines.append(self._sectionDivider)
             if template is not None:
-                lines.append(template.safe_substitute(self._get_sectionMapping(scId, dispNumber, wordsTotal)))
+                lines.append(
+                    template.safe_substitute(
+                        self._get_sectionMapping(
+                            scId, dispNumber,
+                            wordsTotal,
+                            firstInChapter=firstSectionInChapter,
+                            )
+                        )
+                    )
             if self.novel.sections[scId].scType < 2:
                 firstSectionInChapter = False
         return lines, sectionNumber, wordsTotal
