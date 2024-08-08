@@ -1,5 +1,9 @@
 # Changelog
 
+### v4.5.1
+
+- Prevent overwriting novx files with incomplete XML structures in case of conversion errors. 
+
 ### v4.5.0
 
 - Add a "Chapter beginning" paragraph style for export.
