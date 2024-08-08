@@ -23,6 +23,8 @@ class BasicElementNotes(BasicElement):
 
     @notes.setter
     def notes(self, newVal):
+        if newVal is not None:
+            assert type(newVal) == str
         if self._notes != newVal:
             self._notes = newVal
             self.on_element_change()

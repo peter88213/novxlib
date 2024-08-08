@@ -1,5 +1,9 @@
 # Changelog
 
+### v4.5.2
+
+- Validating model object property types.
+
 ### v4.5.1
 
 - Prevent overwriting novx files with incomplete XML structures in case of conversion errors. 

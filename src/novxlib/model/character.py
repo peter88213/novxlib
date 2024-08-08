@@ -37,6 +37,8 @@ class Character(WorldElement):
 
     @bio.setter
     def bio(self, newVal):
+        if newVal is not None:
+            assert type(newVal) == str
         if self._bio != newVal:
             self._bio = newVal
             self.on_element_change()
@@ -47,6 +49,8 @@ class Character(WorldElement):
 
     @goals.setter
     def goals(self, newVal):
+        if newVal is not None:
+            assert type(newVal) == str
         if self._goals != newVal:
             self._goals = newVal
             self.on_element_change()
@@ -57,6 +61,8 @@ class Character(WorldElement):
 
     @fullName.setter
     def fullName(self, newVal):
+        if newVal is not None:
+            assert type(newVal) == str
         if self._fullName != newVal:
             self._fullName = newVal
             self.on_element_change()
@@ -69,6 +75,8 @@ class Character(WorldElement):
 
     @isMajor.setter
     def isMajor(self, newVal):
+        if newVal is not None:
+            assert type(newVal) == bool
         if self._isMajor != newVal:
             self._isMajor = newVal
             self.on_element_change()
@@ -79,6 +87,8 @@ class Character(WorldElement):
 
     @birthDate.setter
     def birthDate(self, newVal):
+        if newVal is not None:
+            assert type(newVal) == str
         if self._birthDate != newVal:
             self._birthDate = newVal
             self.on_element_change()
@@ -89,6 +99,8 @@ class Character(WorldElement):
 
     @deathDate.setter
     def deathDate(self, newVal):
+        if newVal is not None:
+            assert type(newVal) == str
         if self._deathDate != newVal:
             self._deathDate = newVal
             self.on_element_change()
