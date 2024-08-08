@@ -475,7 +475,7 @@ class NovxFile(File):
                 backedUp = True
         try:
             xmlProject.xmlTree.write(xmlProject.filePath, xml_declaration=False, encoding='utf-8')
-        except Error:
+        except:
             if backedUp:
                 os.replace(f'{xmlProject.filePath}.bak', xmlProject.filePath)
             raise Error(f'{_("Cannot write file")}: "{norm_path(xmlProject.filePath)}".')
