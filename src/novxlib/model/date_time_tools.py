@@ -62,7 +62,7 @@ def get_specific_date(dayStr, refIso):
 
 
 def get_unspecific_date(dateIso, refIso):
-    """Return the ISO-formatted date.
+    """Return the day as a string.
     
     Positional arguments:
         dateIso:str -- Date/time, formatted acc. to ISO 8601
