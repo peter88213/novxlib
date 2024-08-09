@@ -237,7 +237,9 @@ class Section(BasicElementTags):
     def plotlineNotes(self, newVal):
         if newVal is not None:
             for elem in newVal:
-                assert type(newVal[elem]) == str
+                val = newVal[elem]
+                if val is not None:
+                    assert type(val) == str
         if self._plotlineNotes != newVal:
             self._plotlineNotes = newVal
             self.on_element_change()
@@ -356,7 +358,8 @@ class Section(BasicElementTags):
     def characters(self, newVal):
         if newVal is not None:
             for elem in newVal:
-                assert type(elem) == str
+                if elem is not None:
+                    assert type(elem) == str
         if self._characters != newVal:
             self._characters = newVal
             self.on_element_change()
@@ -373,7 +376,8 @@ class Section(BasicElementTags):
     def locations(self, newVal):
         if newVal is not None:
             for elem in newVal:
-                assert type(elem) == str
+                if elem is not None:
+                    assert type(elem) == str
         if self._locations != newVal:
             self._locations = newVal
             self.on_element_change()
@@ -390,7 +394,8 @@ class Section(BasicElementTags):
     def items(self, newVal):
         if newVal is not None:
             for elem in newVal:
-                assert type(elem) == str
+                if elem is not None:
+                    assert type(elem) == str
         if self._items != newVal:
             self._items = newVal
             self.on_element_change()

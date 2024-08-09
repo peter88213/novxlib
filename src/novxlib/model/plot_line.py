@@ -47,7 +47,8 @@ class PlotLine(BasicElementNotes):
     def sections(self, newVal):
         if newVal is not None:
             for elem in newVal:
-                assert type(elem) == str
+                if elem is not None:
+                    assert type(elem) == str
         if self._sections != newVal:
             self._sections = newVal
             self.on_element_change()

@@ -76,7 +76,9 @@ class BasicElement:
     def links(self, newVal):
         if newVal is not None:
             for elem in newVal:
-                assert type(newVal[elem]) == str
+                val = newVal[elem]
+                if val is not None:
+                    assert type(val) == str
         if self._links != newVal:
             self._links = newVal
             self.on_element_change()

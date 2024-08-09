@@ -29,7 +29,8 @@ class BasicElementTags(BasicElementNotes):
     def tags(self, newVal):
         if newVal is not None:
             for elem in newVal:
-                assert type(elem) == str
+                if elem is not None:
+                    assert type(elem) == str
         if self._tags != newVal:
             self._tags = newVal
             self.on_element_change()
