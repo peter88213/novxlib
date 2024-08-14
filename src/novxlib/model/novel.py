@@ -12,7 +12,7 @@ from novxlib.novx_globals import verified_date
 from novxlib.model.basic_element import BasicElement
 import xml.etree.ElementTree as ET
 
-LANGUAGE_TAG = re.compile('\<span xml\:lang=\"(.*?)\"\>')
+LANGUAGE_TAG = re.compile(r'\<span xml\:lang=\"(.*?)\"\>')
 
 
 class Novel(BasicElement):

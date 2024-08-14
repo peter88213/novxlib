@@ -1,5 +1,9 @@
 # Changelog
 
+### v4.5.4
+
+- Use raw strings for regular expressions.
+
 ### v4.5.3
 
 - Fix a regression from v4.5.2 where "None" values in dictionary type properties may raise exceptions.

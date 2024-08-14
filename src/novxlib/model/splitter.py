@@ -138,7 +138,7 @@ class Splitter:
 
                 # Search section content for dividers.
                 for line in lines:
-                    plainLine = re.sub('\<.*?\>', '', line)
+                    plainLine = re.sub(r'\<.*?\>', '', line)
 
                     if '#' in plainLine:
                         heading = plainLine.strip('# ').split(self.DESC_SEPARATOR)
