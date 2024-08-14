@@ -528,9 +528,10 @@ class Section(BasicElementTags):
         self.items = scItems
 
         # Content.
-        if xmlElement.find('Content'):
+        xmlContent = xmlElement.find('Content')
+        if xmlContent is not None:
             xmlStr = ET.tostring(
-                xmlElement.find('Content'),
+                xmlContent,
                 encoding='utf-8',
                 short_empty_elements=False
                 ).decode('utf-8')

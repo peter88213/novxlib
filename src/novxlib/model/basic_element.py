@@ -159,7 +159,7 @@ class BasicElement:
         Each <p> subelement of xmlElement creates a line. Formatting is discarded.
         """
         lines = []
-        if xmlElement:
+        if xmlElement is not None:
             for paragraph in xmlElement.iterfind('p'):
                 lines.append(''.join(t for t in paragraph.itertext()))
         return '\n'.join(lines)

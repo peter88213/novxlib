@@ -1,5 +1,9 @@
 # Changelog
 
+### v4.5.7
+
+- Avoid DeprecationWarnings by Python 3.12.
+
 ### v4.5.6
 
 - Adjust separators in File.filePath.
