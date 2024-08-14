@@ -1,5 +1,9 @@
 # Changelog
 
+### v4.5.6
+
+- Adjust separators in File.filePath.
+
 ### v4.5.5
 
 - Handle novx XML parser error.
