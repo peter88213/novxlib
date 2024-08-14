@@ -103,6 +103,6 @@ class OdtReader(OdfReader, ABC):
         parser = OdtParser(self)
         try:
             parser.feed_file(self.filePath)
-        except:
-            raise Error(f'{_("Cannot parse File")}: {norm_path(self.filePath)}')
+        except Exception as ex:
+            raise Error(f'{_("Cannot parse File")}: {norm_path(self.filePath)} - {str(ex)}')
 

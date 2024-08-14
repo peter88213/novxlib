@@ -103,6 +103,7 @@
   "Cannot open link": "Kann Link nicht öffnen",
   "Cannot overwrite file": "Kann Datei nicht überschreiben",
   "Cannot parse File": "Kann Datei nicht parsen",
+  "Cannot process file": "Kann Datei nicht verarbeiten",
   "Cannot read file": "Kann Datei nicht lesen",
   "Cannot read timeline data": "Kann Zeitstrahldaten nicht einlesen",
   "Cannot remove book": "Kann Buch nicht entfernen",

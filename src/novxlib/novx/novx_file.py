@@ -123,7 +123,10 @@ class NovxFile(File):
         
         Overrides the superclass method.
         """
-        self.xmlTree = ET.parse(self.filePath)
+        try:
+            self.xmlTree = ET.parse(self.filePath)
+        except Exception as ex:
+            raise Error(f'{_("Cannot process file")}: "{norm_path(self.filePath)}" - {str(ex)}')
         xmlRoot = self.xmlTree.getroot()
         self._check_xml(xmlRoot)
         try:

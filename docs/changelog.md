@@ -1,5 +1,9 @@
 # Changelog
 
+### v4.5.5
+
+- Handle novx XML parser error.
+
 ### v4.5.4
 
 - Use raw strings for regular expressions.
