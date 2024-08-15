@@ -59,7 +59,7 @@ class OdsParser:
                 if odfDate:
                     cells.append(odfDate)
                 elif odfTime:
-                    t = re.search('PT(..)H(..)M(..)S', odfTime)
+                    t = re.search(r'PT(..)H(..)M(..)S', odfTime)
                     cells.append(f'{t.group(1)}:{t.group(2)}:{t.group(3)}')
                 elif cell.find('text:p', namespaces) is not None:
                     lines = []
