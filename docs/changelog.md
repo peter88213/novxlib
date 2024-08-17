@@ -1,5 +1,9 @@
 # Changelog
 
+### Version 4.5.9
+
+- Refactor for future Python versions: No longer test truth value of xml.etree.ElementTree.Element.
+
 ### Version 4.5.8
 
 - Use raw strings for regular expressions.
