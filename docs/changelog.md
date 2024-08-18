@@ -1,5 +1,9 @@
 # Changelog
 
+### Version 4.6.3
+
+- Rejecting malformed .novx files.
+
 ### Version 4.6.2
 
 - Add missing import to the xml_open module.
