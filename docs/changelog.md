@@ -1,5 +1,9 @@
 # Changelog
 
+### Version 4.6.2
+
+- Add missing import to the xml_open module.
+
 ### Version 4.6.1
 
 - Stripping illegal xml characters during post-processing.
