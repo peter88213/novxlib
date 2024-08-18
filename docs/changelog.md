@@ -1,5 +1,9 @@
 # Changelog
 
+### Version 4.6.0
+
+- Provide routines for safe XML reading. 
+
 ### Version 4.5.9
 
 - Refactor for future Python versions: No longer test truth value of xml.etree.ElementTree.Element.

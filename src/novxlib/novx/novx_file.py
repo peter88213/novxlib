@@ -36,6 +36,7 @@ from novxlib.novx_globals import norm_path
 from novxlib.novx_globals import verified_date
 from novxlib.novx_globals import verified_int_string
 from novxlib.xml.xml_indent import indent
+from novxlib.xml.xml_open import get_xml_root
 import xml.etree.ElementTree as ET
 
 
@@ -123,12 +124,8 @@ class NovxFile(File):
         
         Overrides the superclass method.
         """
-        try:
-            self.xmlTree = ET.parse(self.filePath)
-        except Exception as ex:
-            raise Error(f'{_("Cannot process file")}: "{norm_path(self.filePath)}" - {str(ex)}')
-        xmlRoot = self.xmlTree.getroot()
-        self._check_xml(xmlRoot)
+        xmlRoot = get_xml_root(self.filePath)
+        self._check_version(xmlRoot)
         try:
             locale = xmlRoot.attrib['{http://www.w3.org/XML/1998/namespace}lang']
             self.novel.languageCode, self.novel.countryCode = locale.split('-')
@@ -246,7 +243,7 @@ class NovxFile(File):
         if not elemId.startswith(elemPrefix):
             raise Error(f"bad ID: '{elemId}'")
 
-    def _check_xml(self, xmlRoot):
+    def _check_version(self, xmlRoot):
         """Raise an exception if the xmlRoot element is not compatible with the supported DTD."""
         if xmlRoot.tag != 'novx':
             raise Error(f'{_("No valid xml root element found in file")}: "{norm_path(self.filePath)}".')
