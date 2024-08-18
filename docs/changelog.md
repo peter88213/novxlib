@@ -1,5 +1,9 @@
 # Changelog
 
+### Version 4.6.1
+
+- Stripping illegal xml characters during post-processing.
+
 ### Version 4.6.0
 
 - Provide routines for safe XML reading. 

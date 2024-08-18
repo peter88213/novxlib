@@ -35,6 +35,7 @@ from novxlib.novx_globals import intersection
 from novxlib.novx_globals import norm_path
 from novxlib.novx_globals import verified_date
 from novxlib.novx_globals import verified_int_string
+from novxlib.xml.xml_filter import strip_illegal_characters
 from novxlib.xml.xml_indent import indent
 from novxlib.xml.xml_open import get_xml_root
 import xml.etree.ElementTree as ET
@@ -299,6 +300,7 @@ class NovxFile(File):
         """
         with open(filePath, 'r', encoding='utf-8') as f:
             text = f.read()
+            text = strip_illegal_characters(text)
         try:
             with open(filePath, 'w', encoding='utf-8') as f:
                 f.write(f'{self.XML_HEADER}{text}')
