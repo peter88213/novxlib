@@ -28,7 +28,7 @@ class PackageBuilder(ABC):
 version = {self.version}
 download_link = https://github.com/peter88213/{self.PRJ_NAME}/raw/main/dist/{self.PRJ_NAME}_v{self.version}.pyzw
 '''
-        self.versionIniPath = '../version'
+        self.versionIniPath = '../VERSION'
         self.landingPage = '../README.md'
         self.landingPageTemplate = '../docs/template/README.md'
 
