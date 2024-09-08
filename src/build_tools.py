@@ -33,12 +33,9 @@ def inline_modules(source, target):
 def insert_version_number(source, version='unknown'):
     """Write the actual version string and make sure that Unix EOL is used."""
     with open(source, 'r', encoding='utf_8') as f:
-        lines = f.read()
-    newlines = []
-    for line in lines.split('\n'):
-        newlines.append(line.replace('@release', version))
+        text = f.read().replace('@release', version)
     with open(source, 'w', encoding='utf_8', newline='\n') as f:
-        f.write('\n'.join(newlines))
+        f.write(text)
     print(f'Version {version} set.')
 
 
