@@ -33,8 +33,8 @@ class MainTk(Ui):
         fileMenu -- "File" submenu in main menu. 
     """
     _KEY_RESTORE_STATUS = ('<Escape>', 'Esc')
-    _KEY_OPEN_PROJECT = ('<Control-o>', 'Ctrl-O')
-    _KEY_QUIT_PROGRAM = ('<Control-q>', 'Ctrl-Q')
+    _KEY_OPEN_PROJECT = ('<Control-o>', f'{_("Ctrl")}-O')
+    _KEY_QUIT_PROGRAM = ('<Control-q>', f'{_("Ctrl")}-Q')
     _NOVX_CLASS = NovxFile
 
     def __init__(self, title, **kwargs):
@@ -61,7 +61,7 @@ class MainTk(Ui):
         self.title = title
         self._statusText = ''
         self.kwargs = kwargs
-        self.model = None
+        self.prjFile = None
         self.novel = None
         self.root = tk.Tk()
         self.root.protocol("WM_DELETE_WINDOW", self.on_quit)
@@ -107,7 +107,7 @@ class MainTk(Ui):
         
         To be extended by subclasses.
         """
-        self.model = None
+        self.prjFile = None
         self.root.title(self.title)
         self.show_status('')
         self.show_path('')
@@ -132,7 +132,7 @@ class MainTk(Ui):
         self.kwargs['root_geometry'] = self.root.winfo_geometry()
         self.root.quit()
 
-    def open_project(self, fileName, tree=None):
+    def open_project(self, filePath=None, tree=None):
         """Create a novelibre project instance and read the file.
 
         Positional arguments:
@@ -143,26 +143,26 @@ class MainTk(Ui):
         To be extended by subclasses.
         """
         self.restore_status()
-        fileName = self.select_project(fileName)
+        fileName = self.select_project(filePath)
         if not fileName:
             return False
 
-        if self.model is not None:
+        if self.prjFile is not None:
             self.close_project()
         self.kwargs['last_open'] = fileName
-        self.model = self._NOVX_CLASS(fileName)
+        self.prjFile = self._NOVX_CLASS(fileName)
         if tree is None:
             tree = NvTree()
         self.novel = Novel(tree=tree)
-        self.model.novel = self.novel
+        self.prjFile.novel = self.novel
         try:
-            self.model.read()
+            self.prjFile.read()
         except Error as ex:
             self.close_project()
             self.set_status(f'!{str(ex)}')
             return False
 
-        self.show_path(f'{norm_path(self.model.filePath)}')
+        self.show_path(f'{norm_path(self.prjFile.filePath)}')
         self.set_title()
         self.enable_menu()
         return True
