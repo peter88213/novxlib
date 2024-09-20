@@ -442,6 +442,7 @@ class Section(BasicElementTags):
 
     def from_xml(self, xmlElement):
         super().from_xml(xmlElement)
+
         # Attributes.
         typeStr = xmlElement.get('type', '0')
         if typeStr in ('0', '1', '2', '3'):
@@ -547,7 +548,8 @@ class Section(BasicElementTags):
                 self.sectionContent = xmlStr
             else:
                 self.sectionContent = '<p></p>'
-        else:
+        elif self.scType < 2:
+            # normal or unused section; not a stage
             self.sectionContent = '<p></p>'
 
     def get_end_date_time(self):

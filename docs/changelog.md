@@ -1,5 +1,9 @@
 # Changelog
 
+### Version 4.6.5
+
+- No longer initializing "stage" contents with empty paragraphs. 
+
 ### Version 4.6.4
 
 - Update the main_tk module used for mockups.
