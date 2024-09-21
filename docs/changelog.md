@@ -1,5 +1,10 @@
 # Changelog
 
+
+### Version 4.6.7
+
+- Escape/unescape headings when converting to/from ODT.
+
 ### Version 4.6.6
 
 - When importing a work in progress or an outline, remove formatting from headings.

@@ -13,6 +13,7 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
+from xml.sax.saxutils import unescape
 import re
 
 from novxlib.model.chapter import Chapter
@@ -94,7 +95,7 @@ class OdtRImport(OdtRFormatted):
             return
 
         if tag in ('h1', 'h2'):
-            self.novel.chapters[self._chId].title = re.sub('<.*?>', '', ''.join(self._lines))
+            self.novel.chapters[self._chId].title = unescape(re.sub('<.*?>', '', ''.join(self._lines)))
             self._lines = []
             return
 

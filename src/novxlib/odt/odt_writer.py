@@ -6,6 +6,8 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
+from xml.sax.saxutils import escape
+
 from novxlib.novx_globals import Error
 from novxlib.novx_globals import _
 from novxlib.odf.odf_file import OdfFile
@@ -403,7 +405,7 @@ class OdtWriter(OdfFile):
             return ''
 
         if quick:
-            return text
+            return escape(text)
 
         if xml:
             self._contentParser.feed(text, self.novel.languages, append, firstInChapter)
