@@ -1,5 +1,9 @@
 # Changelog
 
+### Version 4.6.6
+
+- When importing a work in progress or an outline, remove formatting from headings.
+
 ### Version 4.6.5
 
 - No longer initializing "stage" contents with empty paragraphs. 
