@@ -12,7 +12,7 @@ from novxlib.odt.odt_writer import OdtWriter
 class OdtWStages(OdtWriter):
     """ODT story structure file representation.
 
-    Export a plot description with story structure and arcs.
+    Export a story structure description with the stages.
     """
     DESCRIPTION = _('Story structure')
     SUFFIX = STAGES_SUFFIX
