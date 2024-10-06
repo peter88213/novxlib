@@ -295,6 +295,23 @@ class FileExport(File):
                 lines.append(template.safe_substitute(self._get_characterMapping(crId)))
         return lines
 
+    def _get_fileFooter(self):
+        """Process the file footer.
+        
+        Apply the file footer template, substituting placeholders 
+        according to the file footer mapping dictionary.
+        Return a list of strings.
+        
+        This is a template method that can be extended or overridden by subclasses.
+        """
+        lines = []
+        template = Template(self._fileFooter)
+        lines.append(template.safe_substitute(self._get_fileFooterMapping()))
+        return lines
+
+    def _get_fileFooterMapping(self):
+        return []
+
     def _get_fileHeader(self):
         """Process the file header.
         
@@ -765,6 +782,6 @@ class FileExport(File):
         lines.extend(self._get_items())
         lines.extend(self._get_arcs())
         lines.extend(self._get_projectNotes())
-        lines.append(self._fileFooter)
+        lines.extend(self._get_fileFooter())
         return ''.join(lines)
 

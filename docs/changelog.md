@@ -1,5 +1,9 @@
 # Changelog
 
+### Version 4.7.0
+
+- Processing the file footer.
+- Refactor HTML escaping.
 
 ### Version 4.6.7
 
