@@ -4,6 +4,7 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/novxlib
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
+from html import escape
 from novxlib.file.file_export import FileExport
 
 
@@ -35,7 +36,7 @@ td.chtitle {font-weight: bold}
 '''
 
     def _convert_from_novx(self, text, **kwargs):
-        """Return text, converted from *novelibre* markup to target format.
+        """Return text, converted from *mdnovel* markup to target format.
         
         Positional arguments:
             text -- string to convert.
@@ -45,16 +46,9 @@ td.chtitle {font-weight: bold}
         if not text:
             return ''
 
-        text = text.rstrip()
-        HTML_REPLACEMENTS = [
-            ('&', '&amp;'),  # must be first!
-            ('"', '&quot;'),
-            ("'", '&apos;'),
-            ('>', '&gt;'),
-            ('<', '&lt;'),
-            ('\n', '<p />'),
-        ]
-        for nv, htm in HTML_REPLACEMENTS:
-            text = text.replace(nv, htm)
-        return text
+        text = escape(text.rstrip())
+        newlines = []
+        for line in text.split('\n'):
+            newlines.append(f'<p>{line}</p>')
+        return '\n'.join(newlines)
 
