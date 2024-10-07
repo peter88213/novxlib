@@ -1,5 +1,11 @@
 # Changelog
 
+### Version 4.7.1
+
+Refactor due to defensive programming: 
+
+- Make sure that BasicElement.links is not None.
+
 ### Version 4.7.0
 
 - Processing the file footer.

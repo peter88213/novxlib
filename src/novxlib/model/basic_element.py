@@ -38,7 +38,10 @@ class BasicElement:
             self.on_element_change = on_element_change
         self._title = title
         self._desc = desc
-        self._links = links
+        if links is None:
+            self._links = {}
+        else:
+            self._links = links
 
     @property
     def title(self):
