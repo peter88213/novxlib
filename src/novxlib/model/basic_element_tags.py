@@ -22,7 +22,7 @@ class BasicElementTags(BasicElementNotes):
 
     @property
     def tags(self):
-        # str: semicolon-separated tags
+        # list of str
         return self._tags
 
     @tags.setter
