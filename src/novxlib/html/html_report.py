@@ -36,10 +36,13 @@ td.chtitle {font-weight: bold}
 '''
 
     def _convert_from_novx(self, text, quick=False, **kwargs):
-        """Return text, converted from *mdnovel* markup to target format.
+        """Return text, converted from *novelibre* markup to target format.
         
         Positional arguments:
             text -- string to convert.
+        
+        Optional arguments:
+            quick: bool -- if True, apply a conversion mode for one-liners without formatting.
         
         Overrides the superclass method.
         """
