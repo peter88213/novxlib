@@ -1,5 +1,10 @@
 # Changelog
 
+
+### Version 4.7.2
+
+- Fix HTML report title display.
+
 ### Version 4.7.1
 
 Refactor due to defensive programming: 
