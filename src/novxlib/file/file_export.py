@@ -747,7 +747,7 @@ class FileExport(File):
         noteMapping = dict(
             ID=pnId,
             Title=self._convert_from_novx(self.novel.projectNotes[pnId].title, quick=True),
-            Desc=self._convert_from_novx(self.novel.projectNotes[pnId].desc, quick=True),
+            Desc=self._convert_from_novx(self.novel.projectNotes[pnId].desc),
             ProjectName=self._convert_from_novx(self.projectName, quick=True),
             ProjectPath=self.projectPath,
         )

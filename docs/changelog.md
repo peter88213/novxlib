@@ -1,6 +1,14 @@
 # Changelog
 
 
+### Version 4.7.3
+
+- Exporting project notes with linebreaks.
+
+### Version 4.7.2
+
+- Fix HTML report title display.
+
 ### Version 4.7.2
 
 - Fix HTML report title display.
