@@ -13,6 +13,7 @@ from novxlib.file.doc_open import open_document
 from novxlib.model.novel import Novel
 from novxlib.model.nv_tree import NvTree
 from novxlib.novx_globals import Error
+from novxlib.novx_globals import Notification
 from novxlib.novx_globals import _
 from novxlib.novx_globals import norm_path
 from novxlib.ui.ui import Ui
@@ -187,5 +188,5 @@ class Converter:
             raise Error(f'{_("File type is not supported")}.')
 
         if os.path.isfile(target.filePath) and not self._confirm_overwrite(target.filePath):
-            raise Error(f'{_("Action canceled by user")}.')
+            raise Notification(f'{_("Action canceled by user")}.')
 

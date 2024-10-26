@@ -59,6 +59,10 @@ class Error(Exception):
     pass
 
 
+class Notification(Error):
+    pass
+
+
 #--- Initialize localization.
 try:
     # Check whether the importing module is already localized.

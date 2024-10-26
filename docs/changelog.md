@@ -1,5 +1,10 @@
 # Changelog
 
+### Version 4.8.0
+
+- Add a "Notification" exception class.
+- Raise "Notification" instead of "Error" if a conversion is canceled by the user.
+- Provide a specific error message if an odt import document contains an unknown model element.
 
 ### Version 4.7.3
 
