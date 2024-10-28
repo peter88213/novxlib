@@ -37,6 +37,14 @@ class Ui:
         """
         return True
 
+    def set_info(self, message):
+        """Show what the converter is going to do.
+        
+        Positional arguments:
+            message -- message to be buffered. 
+        """
+        self.infoWhatText = message
+
     def set_status(self, message):
         """Show how the converter is doing.
         
@@ -49,14 +57,6 @@ class Ui:
             message = f'FAIL: {message.split("!", maxsplit=1)[1].strip()}'
             sys.stderr.write(message)
         self.infoHowText = message
-
-    def set_info(self, message):
-        """Show what the converter is going to do.
-        
-        Positional arguments:
-            message -- message to be buffered. 
-        """
-        self.infoWhatText = message
 
     def show_warning(self, message):
         """Stub for displaying a warning message.
