@@ -1,5 +1,10 @@
 # Changelog
 
+### Version 5.0.0
+
+- Link the source code to the new "apptk" GUI library.
+- Move the set_icon_tk module to the apptk library.
+
 ### Version 4.8.0
 
 - Add a "Notification" exception class.
