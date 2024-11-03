@@ -3,15 +3,15 @@
 Import standard test routines used for Regression test.
 
 Copyright (c) 2024 Peter Triesberger
-For further information see https://github.com/peter88213/novxlib
+For further information see https://github.com/peter88213/novelibre
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
 import os
 from shutil import copyfile
 
-from novxlib.converter.novx_converter import NovxConverter
-from novxlib.novx_globals import _
-from novxlib.novx_globals import norm_path
+from nvlib.model.converter.novx_converter import NovxConverter
+from nvlib.novx_globals import _
+from nvlib.novx_globals import norm_path
 from novxlib.test.helper import read_file
 
 UPDATE = False

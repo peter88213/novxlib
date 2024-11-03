@@ -6,13 +6,13 @@ Convert html with invisible chapter and section tags to novelibre format.
 This is a novxlib sample application.
 
 Copyright (c) 2024 Peter Triesberger
-For further information see https://github.com/peter88213/novxlib
+For further information see https://github.com/peter88213/novelibre
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
 import sys
 
-from novxlib.converter.novx_converter import NovxConverter
-from novxlib.novx_globals import SECTIONS_SUFFIX
+from nvlib.model.converter.novx_converter import NovxConverter
+from nvlib.novx_globals import SECTIONS_SUFFIX
 from novxlib.ui.ui_tk import UiTk
 
 SUFFIX = SECTIONS_SUFFIX

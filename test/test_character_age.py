@@ -5,7 +5,7 @@ For further information see https://github.com/peter88213/novelibre
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
 import unittest
-from novxlib.model.date_time_tools import get_age
+from nvlib.model.data.date_time_tools import get_age
 
 
 class NrmOpr(unittest.TestCase):

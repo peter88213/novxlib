@@ -2,10 +2,10 @@
 
 Test the odt brief synopsis.
 
-For further information see https://github.com/peter88213/novxlib
+For further information see https://github.com/peter88213/novelibre
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
-from novxlib.odt.odt_w_brief_synopsis import OdtWBriefSynopsis
+from nvlib.model.odt.odt_w_brief_synopsis import OdtWBriefSynopsis
 from novxlib.test.export_test import ExportTest
 import unittest
 

@@ -2,10 +2,10 @@
 
 Test the cross reference generation.
 
-For further information see https://github.com/peter88213/novxlib
+For further information see https://github.com/peter88213/novelibre
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
-from novxlib.odt.odt_w_xref import OdtWXref
+from nvlib.model.odt.odt_w_xref import OdtWXref
 from novxlib.test.export_test import ExportTest
 import unittest
 

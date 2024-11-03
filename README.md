@@ -1,8 +1,8 @@
-# novxlib: Read, write, and process novx files with Python
+# novxlib: Convert novx files with Python
 
 The *novxlib* library provides Python classes to read and write [novelibre](https://github.com/peter88213/novelibre) projects and convert the project data to and from several file formats such as ODT and ODS.
 
-This repository contains a DTD, a css stylesheet, and several XSL stylesheets for the *.novx* file format.
+This repository contains converter modules and several XSL stylesheets for the *.novx* file format.
 
 ## Requirements
 
@@ -14,7 +14,7 @@ This repository contains a DTD, a css stylesheet, and several XSL stylesheets fo
 
 ### Conventions
 
-See https://github.com/peter88213/novxlib/blob/main/docs/conventions.md
+See https://github.com/peter88213/novelibre/blob/main/docs/conventions.md
 
 ## Development tools
 

@@ -2,11 +2,11 @@
 
 Test the conversion of the character list.
 
-For further information see https://github.com/peter88213/novxlib
+For further information see https://github.com/peter88213/novelibre
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
-from novxlib.ods.ods_r_charlist import OdsRCharList
-from novxlib.ods.ods_w_charlist import OdsWCharList
+from nvlib.model.ods.ods_r_charlist import OdsRCharList
+from nvlib.model.ods.ods_w_charlist import OdsWCharList
 from novxlib.test.import_export_test import ImportExportTest
 import unittest
 

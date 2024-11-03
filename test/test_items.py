@@ -2,11 +2,11 @@
 
 Test the conversion of the item descriptions.
 
-For further information see https://github.com/peter88213/novxlib
+For further information see https://github.com/peter88213/novelibre
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
-from novxlib.odt.odt_r_items import OdtRItems
-from novxlib.odt.odt_w_items import OdtWItems
+from nvlib.model.odt.odt_r_items import OdtRItems
+from nvlib.model.odt.odt_w_items import OdtWItems
 from novxlib.test.import_export_test import ImportExportTest
 import unittest
 

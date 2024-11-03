@@ -2,11 +2,11 @@
 
 Test the conversion of the item list.
 
-For further information see https://github.com/peter88213/novxlib
+For further information see https://github.com/peter88213/novelibre
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
-from novxlib.ods.ods_r_itemlist import OdsRItemList
-from novxlib.ods.ods_w_itemlist import OdsWItemList
+from nvlib.model.ods.ods_r_itemlist import OdsRItemList
+from nvlib.model.ods.ods_w_itemlist import OdsWItemList
 from novxlib.test.import_export_test import ImportExportTest
 import unittest
 

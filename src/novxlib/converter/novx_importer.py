@@ -1,26 +1,26 @@
 """Provide a converter class for novelibre universal import.
 
 Copyright (c) 2024 Peter Triesberger
-For further information see https://github.com/peter88213/novxlib
+For further information see https://github.com/peter88213/novelibre
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
-from novxlib.converter.converter_ff import ConverterFf
-from novxlib.converter.new_project_factory import NewProjectFactory
-from novxlib.novx.novx_file import NovxFile
-from novxlib.ods.ods_r_charlist import OdsRCharList
-from novxlib.ods.ods_r_grid import OdsRGrid
-from novxlib.ods.ods_r_itemlist import OdsRItemList
-from novxlib.ods.ods_r_loclist import OdsRLocList
-from novxlib.odt.odt_r_chapterdesc import OdtRChapterDesc
-from novxlib.odt.odt_r_characters import OdtRCharacters
-from novxlib.odt.odt_r_items import OdtRItems
-from novxlib.odt.odt_r_locations import OdtRLocations
-from novxlib.odt.odt_r_manuscript import OdtRManuscript
-from novxlib.odt.odt_r_partdesc import OdtRPartDesc
-from novxlib.odt.odt_r_plotlines import OdtRPlotlines
-from novxlib.odt.odt_r_proof import OdtRProof
-from novxlib.odt.odt_r_sectiondesc import OdtRSectionDesc
-from novxlib.odt.odt_r_stages import OdtRStages
+from nvlib.model.converter.converter_ff import ConverterFf
+from nvlib.model.converter.new_project_factory import NewProjectFactory
+from nvlib.model.novx.novx_file import NovxFile
+from nvlib.model.ods.ods_r_charlist import OdsRCharList
+from nvlib.model.ods.ods_r_grid import OdsRGrid
+from nvlib.model.ods.ods_r_itemlist import OdsRItemList
+from nvlib.model.ods.ods_r_loclist import OdsRLocList
+from nvlib.model.odt.odt_r_chapterdesc import OdtRChapterDesc
+from nvlib.model.odt.odt_r_characters import OdtRCharacters
+from nvlib.model.odt.odt_r_items import OdtRItems
+from nvlib.model.odt.odt_r_locations import OdtRLocations
+from nvlib.model.odt.odt_r_manuscript import OdtRManuscript
+from nvlib.model.odt.odt_r_partdesc import OdtRPartDesc
+from nvlib.model.odt.odt_r_plotlines import OdtRPlotlines
+from nvlib.model.odt.odt_r_proof import OdtRProof
+from nvlib.model.odt.odt_r_sectiondesc import OdtRSectionDesc
+from nvlib.model.odt.odt_r_stages import OdtRStages
 
 
 class NovxImporter(ConverterFf):

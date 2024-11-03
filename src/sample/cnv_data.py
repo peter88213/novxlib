@@ -3,15 +3,15 @@
 This is a novxlib sample application.
 
 Copyright (c) 2024 Peter Triesberger
-For further information see https://github.com/peter88213/novxlib
+For further information see https://github.com/peter88213/novelibre
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
 import sys
 
 from novxlib.converter.novx_exporter import NovxExporter
-from novxlib.novx.data_writer import DataWriter
-from novxlib.novx_globals import DATA_SUFFIX
 from novxlib.ui.ui_tk import UiTk
+from nvlib.model.novx.data_writer import DataWriter
+from nvlib.novx_globals import DATA_SUFFIX
 
 SUFFIX = DATA_SUFFIX
 

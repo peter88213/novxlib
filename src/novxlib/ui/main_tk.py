@@ -1,20 +1,20 @@
 """Provide a tkinter GUI framework with main menu and main window.
 
 Copyright (c) 2024 Peter Triesberger
-For further information see https://github.com/peter88213/novxlib
+For further information see https://github.com/peter88213/novelibre
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
 import os
 from tkinter import filedialog
 from tkinter import messagebox
 
-from novxlib.model.novel import Novel
-from novxlib.model.nv_tree import NvTree
-from novxlib.novx.novx_file import NovxFile
-from novxlib.novx_globals import Error
-from novxlib.novx_globals import _
-from novxlib.novx_globals import norm_path
-from novxlib.ui.ui import Ui
+from nvlib.model.data.novel import Novel
+from nvlib.model.data.nv_tree import NvTree
+from nvlib.model.novx.novx_file import NovxFile
+from nvlib.novx_globals import Error
+from nvlib.novx_globals import _
+from nvlib.novx_globals import norm_path
+from mvclib.view.ui import Ui
 import tkinter as tk
 
 

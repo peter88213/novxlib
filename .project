@@ -3,6 +3,7 @@
 	<name>novxlib</name>
 	<comment></comment>
 	<projects>
+		<project>novelibre</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

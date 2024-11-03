@@ -7,9 +7,9 @@ License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 import sys
 import os
 from novxlib.yw.yw7_file import Yw7File
-from novxlib.novx.novx_file import NovxFile
-from novxlib.model.novel import Novel
-from novxlib.model.nv_tree import NvTree
+from nvlib.model.novx.novx_file import NovxFile
+from nvlib.model.data.novel import Novel
+from nvlib.model.data.nv_tree import NvTree
 SUFFIX = ''
 
 

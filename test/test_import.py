@@ -2,10 +2,10 @@
 
 Test the import of a work in progress.
 
-For further information see https://github.com/peter88213/novxlib
+For further information see https://github.com/peter88213/novelibre
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
-from novxlib.odt.odt_r_import import OdtRImport
+from nvlib.model.odt.odt_r_import import OdtRImport
 from novxlib.test.import_test import ImportTest
 import unittest
 
