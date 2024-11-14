@@ -7,14 +7,15 @@ License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 import os
 from tkinter import filedialog
 from tkinter import messagebox
+from tkinter import ttk
 
+from mvclib.view.ui import Ui
 from nvlib.model.data.novel import Novel
 from nvlib.model.data.nv_tree import NvTree
 from nvlib.model.novx.novx_file import NovxFile
 from nvlib.novx_globals import Error
 from nvlib.novx_globals import _
 from nvlib.novx_globals import norm_path
-from mvclib.view.ui import Ui
 import tkinter as tk
 
 
@@ -74,7 +75,7 @@ class MainTk(Ui):
         # Hook for subclasses
 
         self.root.config(menu=self.mainMenu)
-        self.mainWindow = tk.Frame()
+        self.mainWindow = ttk.Frame()
         self.mainWindow.pack(expand=True, fill='both')
         self.statusBar = tk.Label(self.root, text='', anchor='w', padx=5, pady=2)
         self.statusBar.pack(expand=False, fill='both')
