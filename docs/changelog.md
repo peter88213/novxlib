@@ -1,5 +1,14 @@
 # Changelog
 
+### Version 6.0.0
+
+Abandon the *novxlib* library. Now, all the code is integrated with *novelibre*. 
+
+Move files to the novelibre repository:
+- tests
+- XSLT
+- ui helper modules
+
 ### Version 5.0.0
 
 - Link the source code to the new "apptk" GUI library.

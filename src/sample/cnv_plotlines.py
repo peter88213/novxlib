@@ -10,7 +10,7 @@ import sys
 
 from nvlib.model.converter.novx_converter import NovxConverter
 from nvlib.novx_globals import PLOTLINES_SUFFIX
-from novxlib.ui.ui_tk import UiTk
+from mvclib.user_interface.ui_tk import UiTk
 
 SUFFIX = PLOTLINES_SUFFIX
 

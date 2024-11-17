@@ -7,7 +7,7 @@ For further information see https://github.com/peter88213/novelibre
 License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 """
 import sys
-from novxlib.ui.ui_tk import UiTk
+from mvclib.user_interface.ui_tk import UiTk
 from nvlib.model.converter.novx_converter import NovxConverter
 SUFFIX = ''
 

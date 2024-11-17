@@ -9,7 +9,7 @@ License: GNU LGPLv3 (https://www.gnu.org/licenses/lgpl-3.0.en.html)
 import sys
 
 from novxlib.converter.novx_exporter import NovxExporter
-from novxlib.ui.ui_tk import UiTk
+from mvclib.user_interface.ui_tk import UiTk
 from nvlib.novx_globals import XREF_SUFFIX
 
 SUFFIX = XREF_SUFFIX
